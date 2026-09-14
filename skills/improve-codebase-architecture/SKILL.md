@@ -34,6 +34,9 @@ Read the glossary, ADRs, typed notes, and verification features in the area firs
 - caller list and blast radius
 - related project knowledge and ADRs
 - existing verification and characterization gaps
+- reuse of an existing helper or project pattern
+- native/stdlib capability that already satisfies the semantics
+- unnecessary layer: wrapper that only delegates, speculative flexibility, or a dependency the platform already covers
 
 Classify:
 
@@ -41,6 +44,8 @@ Classify:
 - **deepen** — earns a seam but the interface is still too wide, leaky, or hard to test
 - **preserve** — already deep; high churn is not a reason to rewrite it
 - **reject** — quiet speculative cleanup, or a one-adapter hypothetical seam
+
+Reuse, native-capability, and unnecessary-layer notes feed those four classes. Rank by justified benefit and risk, not by deleted lines. A justified contract or test seam is not a delete candidate. See [simplicity](../../references/simplicity.md).
 
 Do not edit source during the survey.
 

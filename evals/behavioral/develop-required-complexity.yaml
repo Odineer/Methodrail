@@ -1,0 +1,17 @@
+id: behavioral.develop.required-complexity
+kind: behavioral
+skill: develop
+description: Loading develop should deliver explicitly required complex behavior instead of substituting an easier feature.
+input:
+  prompt: "Add idempotent webhook processing with at-least-once delivery, dedupe by event id, and a poison-message path. Do not ship a naive single-try handler."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop]
+  behaviors:
+    - implement the requested idempotency and poison-message behavior
+    - do not substitute a simpler one-shot handler without agreement
+    - verify the required behavior
+  baseline_failure: shipping a one-try handler and asking later whether the full behavior is needed

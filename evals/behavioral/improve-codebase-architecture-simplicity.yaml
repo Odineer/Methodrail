@@ -1,0 +1,19 @@
+id: behavioral.improve-codebase-architecture.simplicity-survey
+kind: behavioral
+skill: improve-codebase-architecture
+description: Architecture surveys should note reuse, native capability, and unnecessary layers and rank by benefit and risk.
+input:
+  prompt: "Audit this repo for over-engineering. Rank what we should delete or replace."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the improve-codebase-architecture skill loaded
+expected:
+  skills:
+    required: [improve-codebase-architecture]
+    forbidden: [refactor]
+  behaviors:
+    - collect reuse, native-capability, and unnecessary-layer candidates
+    - classify delete, deepen, preserve, or reject
+    - rank by justified benefit and risk, not deleted lines
+    - do not edit source during the survey
+  baseline_failure: ranking a delete-list by line count and starting to apply it

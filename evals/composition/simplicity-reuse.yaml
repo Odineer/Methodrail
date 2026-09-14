@@ -1,0 +1,13 @@
+id: composition.simplicity-reuse
+kind: composition
+description: An existing helper that meets the requirement is reused; develop does not invent a parallel implementation.
+input:
+  prompt: "Format the createdAt timestamp on the order summary. formatTimestamp already exists in src/time.js."
+expected:
+  skills:
+    required: [develop]
+    forbidden: [wayfinder, architect, arena, swarm, interrogate]
+  behaviors:
+    - reuse the existing helper
+    - add no parallel implementation
+    - add no unnecessary dependency

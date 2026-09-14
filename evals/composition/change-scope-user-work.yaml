@@ -1,0 +1,14 @@
+id: composition.change-scope-user-work
+kind: composition
+description: Final scope check inspects only this agent's delta and preserves an unrelated user edit.
+input:
+  prompt: "Replace invoice.js local date formatting with formatDate. The working tree already has an unrelated uncommitted edit in preview.js that renames a local variable."
+expected:
+  skills:
+    required: [develop]
+    forbidden: [wayfinder, architect, arena, swarm, interrogate]
+  behaviors:
+    - complete the requested formatter replacement
+    - preserve the user's unrelated preview.js edit
+    - inspect only this task's delta for cleanup and scope
+  baseline_failure: reverting the user's edit during the final scope check

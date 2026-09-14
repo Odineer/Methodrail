@@ -1,0 +1,14 @@
+name: DietrichGebert/ponytail
+repository: https://github.com/DietrichGebert/ponytail
+license: MIT
+copyright: Copyright (c) 2026 DietrichGebert
+last_reviewed_commit: 356918eba965ee1eac64bd3a7f0dd02108350de5
+last_reviewed_at: 2026-09-13
+notes: >
+  Inspected ponytail, ponytail-review, and ponytail-audit at this SHA, which
+  was upstream HEAD on the review date (docs-only logo rename). COMPOSE into
+  existing Methodrail owners via references/simplicity.md. Skip ponytail-debt,
+  ponytail-gain, ponytail-help, intensity modes, hooks, host routers, Caveman,
+  Graphify, and ponytail: source markers. Do not ship a Ponytail skill or
+  command. Do not replace project testing with Ponytail's one-check rule.
+  Comparison: docs/internal/ponytail-upstream-comparison.md.

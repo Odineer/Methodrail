@@ -1,0 +1,17 @@
+id: behavioral.develop.reversible-assumption
+kind: behavioral
+skill: develop
+description: Loading develop should follow a clear local convention without asking approval for a reversible choice.
+input:
+  prompt: "Add a helper next to the other invoice formatters. Existing helpers in that folder are named formatX in camelCase."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop]
+  behaviors:
+    - follow the established naming convention
+    - implement the bounded helper
+    - do not ask permission for the routine naming choice
+  baseline_failure: blocking on an approval interview for a reversible local convention

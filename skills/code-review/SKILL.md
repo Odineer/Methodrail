@@ -57,11 +57,20 @@ On top of whatever the repo documents, the Standards axis always carries this **
 
 Smells: Mysterious Name, Duplicated Code, Feature Envy, Data Clumps, Primitive Obsession, Repeated Switches, Shotgun Surgery, Divergent Change, Speculative Generality, Message Chains, Middle Man, Refused Bequest.
 
+Also check, as judgement calls under Standards (not a third axis):
+
+- **Unnecessary complexity.** Parallel helper when an existing one fits; new dependency when stdlib, native platform, or an already-installed capability satisfies the semantics; speculative abstraction or unused flexibility. Cite [simplicity](../../references/simplicity.md). Assess whether a public contract or test seam serves a concrete compatibility or testing need. Retain justified seams; a test adapter alone does not establish necessity. Do not recommend deletion solely because implementation count is low.
+- **Redundant comments.** Restatements of visible code, narration of ordinary operations, decorative section labels, or comments that excuse a confusing name. Retain rationale, tool/compiler directives, license notices, and required public documentation.
+
+If the diff has no unnecessary complexity, say so. That is a Standards finding of absence, not a shipping claim.
+
 ### 4. Spawn both axes
 
-**Standards** report, per file/hunk: (a) documented-standard violations with citations; (b) baseline smells as judgement calls. Under 400 words.
+**Standards** report, per file/hunk: (a) documented-standard violations with citations; (b) baseline smells, unnecessary complexity, and redundant comments as judgement calls. Under 400 words.
 
 **Spec** report: (a) missing or partial requirements; (b) scope creep; (c) implementations that look wrong. Quote the spec line. Under 400 words.
+
+Scope creep is unrelated churn or unexplained leftovers, not every extra file. Necessary supporting work can include shared-owner fixes, regression tests, generated output, snapshot updates, and lockfiles. Cleanup of artifacts this change made unused is in scope; deleting pre-existing unrelated dead code is not. Do not revert other contributors' edits. When the original request is unavailable, follow the missing-spec behavior; do not invent a scope boundary.
 
 If the spec is missing, skip Spec and note it.
 

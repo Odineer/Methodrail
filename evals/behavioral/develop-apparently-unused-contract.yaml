@@ -1,0 +1,17 @@
+id: behavioral.develop.apparently-unused-contract
+kind: behavioral
+skill: develop
+description: Loading develop should preserve an exported compatibility helper with no local callers.
+input:
+  prompt: "Replace the invoice page's local date helper with formatDate. The same file exports formatLegacyPluginDate, documented as the v1 plugin contract. No in-repo caller exists."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop]
+  behaviors:
+    - reuse the shared formatter for the invoice page
+    - preserve the exported plugin-contract helper
+    - do not treat missing local callers as permission to delete a public export
+  baseline_failure: deleting the export because a local search found no callers

@@ -1,0 +1,7 @@
+id: fixture.leaderboard-sort
+required_skills: [develop]
+forbidden_skills: [wayfinder, architect, arena, swarm, interrogate]
+expected_behaviors:
+  - sort by score descending then name ascending
+  - preserve all entries including ties
+  - do not treat a score-only test as proof of the requested order

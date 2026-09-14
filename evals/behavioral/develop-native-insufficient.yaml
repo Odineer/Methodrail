@@ -1,0 +1,17 @@
+id: behavioral.develop.native-insufficient
+kind: behavioral
+skill: develop
+description: Loading develop should keep a required semantic when stdlib or native APIs are insufficient.
+input:
+  prompt: "Parse calendar dates in the user's timezone. Date.parse is wrong here because it drops the zone."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop]
+  behaviors:
+    - keep the timezone requirement
+    - choose an implementation that preserves that semantic
+    - do not force a stdlib call that drops the zone
+  baseline_failure: using Date.parse anyway because it is shorter

@@ -61,6 +61,16 @@ Examples:
 
 Downstream questions stay in fog until their prerequisites move into Known.
 
+## Consequential assumptions
+
+Identify interpretations that materially alter observable behavior, scope, data exposure, public contracts, or acceptance criteria.
+
+Resolve implementation facts through source, tests, configuration, or runtime evidence before asking. If a consequential preference or policy remains unresolved, present the meaningful alternatives with a recommendation and ask before implementing dependent behavior. Continue independent investigation or implementation that does not depend on the missing choice.
+
+For a low-impact reversible choice supported by context, state the material assumption briefly and proceed. Do not list obvious assumptions or ask permission to follow established conventions. If new evidence contradicts an assumption, revise the affected plan rather than silently preserving it.
+
+Do not stop all useful work because something is unclear. Do not auto-trigger `grill-with-docs`, `wayfinder`, `architect`, or `prototype` for ordinary ambiguity.
+
 A frontier choice that is hard to reverse, surprising without context, and a real trade-off may be offered as an ADR after approval. Reversible operational choices stay in the TSV trail. See [decision-record](protocols/decision-record.md).
 
 Do not implement this as a graph engine. The native agent can reason with this model. `develop`, `architect`, `prototype`, and `domain-modeling` should use it when planning work.

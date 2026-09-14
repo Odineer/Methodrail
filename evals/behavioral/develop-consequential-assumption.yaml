@@ -1,0 +1,18 @@
+id: behavioral.develop.consequential-assumption
+kind: behavioral
+skill: develop
+description: Loading develop should clarify unresolved export scope before implementing dependent behavior.
+input:
+  prompt: "Add an export of customer data. The repo has no policy for whether that is profile fields only or profile plus invoices plus payment methods."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop]
+  behaviors:
+    - inspect existing export and data-exposure rules first
+    - present the material scope alternatives with a recommendation
+    - ask before implementing the export
+    - continue safe independent inspection that does not depend on the missing choice
+  baseline_failure: silently exporting all fields, or stopping all useful work

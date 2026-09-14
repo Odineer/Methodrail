@@ -1,0 +1,13 @@
+id: fidelity.simplicity.native-insufficient
+kind: fidelity
+skill: develop
+description: Simplicity composition still preserves required semantics when a native or stdlib option is insufficient.
+input:
+  prompt: "Validate emails according to the project's existing RFC-style helper. A single '@' check would be shorter but would reject valid addresses we already accept."
+expected:
+  skills:
+    required: [develop]
+  behaviors:
+    - preserve the existing validation semantic
+    - choose the sufficient implementation
+    - do not replace it with a shorter check that misses the requirement

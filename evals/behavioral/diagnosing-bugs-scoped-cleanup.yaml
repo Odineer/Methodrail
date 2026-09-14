@@ -1,0 +1,18 @@
+id: behavioral.diagnosing-bugs.scoped-cleanup
+kind: behavioral
+skill: diagnosing-bugs
+description: After a shared-owner fix, remove only leftovers the fix created.
+input:
+  prompt: "Checkout rejects empty carts. validateCart in cart.js is also used by preview.js. The buggy branch used a private formatEmptyCart helper that the correct shared fix no longer calls. Neighboring unused formatOldSku predates the bug."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the diagnosing-bugs skill loaded
+expected:
+  skills:
+    required: [diagnosing-bugs]
+  behaviors:
+    - fix the shared owner rather than patching one caller
+    - remove only the helper the fix made unused
+    - leave the unrelated pre-existing unused helper
+    - verify the shared contract
+  baseline_failure: patching the named caller by count or sweeping neighboring dead code

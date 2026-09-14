@@ -1,0 +1,17 @@
+id: behavioral.develop.side-effect-import
+kind: behavioral
+skill: develop
+description: Loading develop should preserve a binding-free import that registers handlers.
+input:
+  prompt: "Replace the local date helper on the dashboard with formatDate. index.js has import './handlers.js' with no imported binding; that module registers startup listeners."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop]
+  behaviors:
+    - replace the local helper
+    - preserve the side-effect import that registers handlers
+    - verify startup registration still occurs
+  baseline_failure: removing the binding-free import as unused

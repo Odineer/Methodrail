@@ -1,0 +1,12 @@
+id: routing.simplicity-request
+kind: routing
+description: YAGNI and simplest-solution requests route to existing owners, not a new Ponytail skill or architecture survey.
+input:
+  prompt: "ponytail this. Be lazy. Simplest solution. Don't over-engineer. Add a due-date label on the invoice page."
+expected:
+  skills:
+    required: [develop]
+    forbidden: [wayfinder, architect, arena, swarm, interrogate, improve-codebase-architecture]
+  behaviors:
+    - use develop for the bounded feature
+    - do not start a Ponytail workflow, intensity mode, or repo-wide audit

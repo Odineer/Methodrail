@@ -1,0 +1,17 @@
+id: behavioral.develop.reuse-helper
+kind: behavioral
+skill: develop
+description: Loading develop should reuse an existing helper that already meets the requirement.
+input:
+  prompt: "Add date formatting on the invoice due date. src/dates.js already exports formatDate."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop]
+  behaviors:
+    - inspect the existing helper before writing a new one
+    - reuse the helper that already satisfies the semantics
+    - do not add a parallel formatter or a new date library
+  baseline_failure: implementing a second date formatter or adding a dependency

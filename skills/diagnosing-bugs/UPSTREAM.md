@@ -12,3 +12,5 @@ Methodrail changes:
 - project knowledge / control lookup
 - Methodrail verification via verify-change and tdd
 - added Methodrail behavioral evals
+- Ponytail composed: fix the owner of the violated contract regardless of caller count (DietrichGebert/ponytail `356918eba965ee1eac64bd3a7f0dd02108350de5`). Diagnosis loop remains Matt/Superpowers; Ponytail's one-check testing rule is not imported.
+- Karpathy-inspired guidelines composed: after a verified fix, remove only artifacts that fix made unused; do not sweep unrelated dead code (multica-ai/andrej-karpathy-skills `2c606141936f1eeef17fa3043a72095b4765b9c2`)

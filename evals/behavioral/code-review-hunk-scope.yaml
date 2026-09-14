@@ -1,0 +1,17 @@
+id: behavioral.code-review.hunk-scope
+kind: behavioral
+skill: code-review
+description: Spec scope-creep should flag unrelated churn and allow necessary supporting work.
+input:
+  prompt: "Review this branch against 'fix empty-cart rejection in validateCart'. The diff includes the shared-owner fix, a regression test, a regenerated client snapshot, and unrelated quote-style churn in README.md."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the code-review skill loaded
+expected:
+  skills:
+    required: [code-review]
+  behaviors:
+    - keep Standards and Spec as separate axes
+    - treat the shared-owner fix, regression test, and generated snapshot as justified supporting work
+    - flag only the unrelated quote-style churn as scope creep
+  baseline_failure: flagging every extra file or excusing arbitrary cleanup

@@ -1,0 +1,19 @@
+id: behavioral.develop.tiny-skips-simplicity
+kind: behavioral
+skill: develop
+description: Loading develop for a mechanical edit should not load the simplicity reference.
+input:
+  prompt: "Change the button label from Save to Create."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop]
+    forbidden: [wayfinder, architect, arena, swarm, interrogate, improve-codebase-architecture]
+  behaviors:
+    - inspect then edit then a cheap check
+    - do not load references/simplicity.md
+    - skip extra workflows
+    - do not open an assumption ledger or lengthy plan
+  baseline_failure: opening a simplicity, assumption, or architecture pass for a label change

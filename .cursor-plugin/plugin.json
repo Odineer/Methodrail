@@ -1,12 +1,12 @@
 {
   "name": "methodrail",
   "displayName": "Methodrail",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Unified, evidence-driven engineering environment for AI coding agents.",
   "author": {
-    "name": "MonsterousDev"
+    "name": "Odineer"
   },
-  "repository": "https://github.com/MonsterousDev/Methodrail",
+  "repository": "https://github.com/Odineer/Methodrail",
   "license": "MIT",
   "skills": "./skills/",
   "rules": "./rules/",

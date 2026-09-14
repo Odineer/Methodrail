@@ -1,0 +1,14 @@
+id: composition.plan-outcome-verification
+kind: composition
+description: A small multi-outcome feature maps outcomes to shared proof without extra workflow phases.
+input:
+  prompt: "Add locale-aware invoice dates using the shared formatter, and show them on the invoice page and the receipt email. Existing invoice tests can cover both surfaces with one integration case plus the differing locale case."
+expected:
+  skills:
+    required: [develop]
+    forbidden: [wayfinder, architect, arena, swarm, interrogate]
+  behaviors:
+    - name the meaningful outcomes with the evidence that will verify them
+    - reuse one relevant check across surfaces where it applies
+    - do not open a separate test or approval phase per step
+  baseline_failure: turning each step into another workflow

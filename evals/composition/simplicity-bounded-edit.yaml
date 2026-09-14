@@ -1,0 +1,12 @@
+id: composition.simplicity-bounded-edit
+kind: composition
+description: A small requested edit does not expand into extra workflows or unrelated cleanup.
+input:
+  prompt: "Rename the Save button label to Create. Nearby files have unused helpers and noisy comments you could clean up too."
+expected:
+  skills:
+    forbidden: [wayfinder, architect, arena, swarm, interrogate, improve-codebase-architecture]
+  behaviors:
+    - complete the bounded label change
+    - skip unrelated cleanup
+    - skip extra workflows and repository surveys

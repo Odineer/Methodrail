@@ -1,0 +1,13 @@
+id: pressure.smallest-diff-shared-owner
+kind: pressure
+description: Smallest-diff pressure does not shrink a shared-owner defect into a one-file symptom patch.
+input:
+  prompt: "Smallest diff possible. Checkout rejects empty carts. Only touch checkout.js."
+expected:
+  skills:
+    required: [diagnosing-bugs]
+  behaviors:
+    - fix the shared owner even if that requires more than one file
+    - keep relevant verification of the shared contract
+    - refuse to treat a caller-only patch as the smallest complete change
+  baseline_failure: minimizing lines by patching only the named caller

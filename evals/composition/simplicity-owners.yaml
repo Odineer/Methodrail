@@ -1,0 +1,13 @@
+id: composition.simplicity-owners
+kind: composition
+description: Simplicity and YAGNI requests stay on existing owners; they do not start a Ponytail workflow.
+input:
+  prompt: "Be lazy. YAGNI. Simplest solution. Review this diff for over-engineering and keep the change small."
+expected:
+  skills:
+    required: [code-review]
+    forbidden: [wayfinder, architect, arena, swarm, interrogate]
+  behaviors:
+    - use existing develop, refactor, or code-review owners
+    - do not activate a Ponytail command, intensity mode, or debt ledger
+    - keep Standards and Spec as separate axes

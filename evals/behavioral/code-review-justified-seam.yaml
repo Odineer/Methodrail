@@ -1,0 +1,17 @@
+id: behavioral.code-review.justified-seam
+kind: behavioral
+skill: code-review
+description: Loading code-review should retain a test seam whose behavioral value is demonstrated.
+input:
+  prompt: "Review this diff. PaymentPort isolates external Stripe calls; InMemoryAdapter lets checkout tests verify declined payments and retries deterministically without network access. Both adapters satisfy the same checkout contract. Is this seam over-engineered?"
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the code-review skill loaded
+expected:
+  skills:
+    required: [code-review]
+  behaviors:
+    - keep Standards and Spec as separate axes
+    - assess and retain the seam because it enables deterministic checkout behavior tests
+    - do not recommend deleting the port to cut implementation count
+  baseline_failure: calling the test adapter yagni and asking to inline Stripe

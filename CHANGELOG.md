@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.9.2 — 2026-09-13
+
+Compose Ponytail simplicity and Karpathy-inspired guidelines into existing Methodrail skills. No public Ponytail or `karpathy-guidelines` skill, command, or intensity mode. Constructed evals added. No paired live-agent improvement claim. Repository identity is [Odineer/Methodrail](https://github.com/Odineer/Methodrail).
+
+Ponytail:
+
+- Add `references/simplicity.md` as the shared smallest-complete-change procedure, including the comment rule
+- Point `develop`, `codebase-design`, `refactor`, `diagnosing-bugs`, `code-review`, and `improve-codebase-architecture` at that reference
+- Mechanical edits skip the simplicity procedure while retaining comment discipline; bug fixes follow contract ownership; test seams require concrete justification
+- Record DietrichGebert/ponytail `356918eba965ee1eac64bd3a7f0dd02108350de5` as COMPOSE with explicit fidelity deviations
+- Keep Caveman, Graphify, `ponytail:` markers, and Ponytail's one-check testing rule out of Methodrail
+
+Karpathy-inspired guidelines:
+
+- Distinguish artifacts this change made unused from unrelated pre-existing dead code
+- Check that the task delta is requested work, necessary support, required verification, or change-created cleanup
+- Surface consequential assumptions on the decision frontier; continue independent work; do not stop for reversible local conventions
+- Pair multi-step implementation outcomes with shared verification when a plan is already warranted
+- Record multica-ai/andrej-karpathy-skills `2c606141936f1eeef17fa3043a72095b4765b9c2` as COMPOSE with declared-MIT evidence and no invented copyright notice
+
+Repository:
+
+- Point package, plugin, and clone URLs at https://github.com/Odineer/Methodrail after the GitHub username change
+
 ## 0.9.1 — 2026-09-02
 
 Split codebase-wide architecture survey from selected-target refactor execution.

@@ -18,6 +18,10 @@ Constructed pairs must never be quoted as `helped`. Current Codex pilot JSON is 
 
 `evals/pilot-v0.9-project-artifact-interoperability.yaml` is the executable v0.9 live-pilot manifest. Rubric: [v0.9-project-artifact-interoperability-protocol.md](./v0.9-project-artifact-interoperability-protocol.md). The default integrity gate rescores it.
 
+[v0.9.2-ponytail-simplicity-pilot-results.md](./v0.9.2-ponytail-simplicity-pilot-results.md) records that the Ponytail composition paired live battery was unavailable. It is not an integrity-gated manifest.
+
+[karpathy-guidelines-pilot-results.md](./karpathy-guidelines-pilot-results.md) records that the Karpathy-inspired guidelines paired live battery was unavailable. It is not an integrity-gated manifest and is separate from the Ponytail results.
+
 Layers:
 
 - **Outcome** — derived from the resulting tree, patch/overlay, tests, and final answer

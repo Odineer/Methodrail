@@ -1,0 +1,12 @@
+id: routing.karpathy-guidelines-request
+kind: routing
+description: Requests that name Karpathy guidelines still use existing Methodrail owners.
+input:
+  prompt: "Follow the Karpathy guidelines. Be surgical. Surface assumptions. Add locale-aware invoice dates using the existing formatter."
+expected:
+  skills:
+    required: [develop]
+    forbidden: [wayfinder, architect, arena, swarm, interrogate]
+  behaviors:
+    - use develop for the bounded feature
+    - do not load a karpathy-guidelines skill, command, or always-on rule

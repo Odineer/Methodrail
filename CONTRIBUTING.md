@@ -71,7 +71,7 @@ Do not add Methodrail-specific metadata when native skill metadata expresses the
 
 Methodrail defines good engineering behavior. Cursor, Claude Code, Codex, and other Agent Skills-compatible harnesses own context, tool execution, planning, task state, and subagents.
 
-Do not add a router, workflow engine, agent protocol, daemon, database, mandatory CLI, or generated copies of canonical skills. Host-specific adapters must remain thin projections. Do not install `poteto-mode`, `ask-matt`, or `using-superpowers` as additional operating systems.
+Do not add a router, workflow engine, agent protocol, daemon, database, mandatory CLI, or generated copies of canonical skills. Host-specific adapters must remain thin projections. Do not install `poteto-mode`, `ask-matt`, `using-superpowers`, or Ponytail commands/hooks as additional operating systems.
 
 Shared methodology belongs in `references/`. Skills should stay short and link to it. Project harness artifacts use `.methodrail/PROJECT.md` as a concise index and must preserve existing AI instructions.
 

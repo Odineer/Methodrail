@@ -3,7 +3,7 @@
 - Understand the existing system before changing it.
 - Prefer direct evidence to plausible assumptions.
 - State uncertainty instead of hiding it.
-- Make the smallest change that fully meets the intent.
+- Make the smallest change that fully meets the intent. Procedure: [simplicity](simplicity.md).
 - Match investigation and validation effort to risk.
 - Turn recurring failures into durable safeguards such as tests, types, checks, or clearer interfaces.
 
@@ -34,5 +34,6 @@ Progressive disclosure:
 - [project harness](project-harness.md)
 - [agent-friendly codebase](agent-friendly-codebase.md)
 - [structural enforcement](structural-enforcement.md)
+- [simplicity](simplicity.md)
 - [capability map](capability-map.md)
 - [host capabilities](host-capabilities.md)

@@ -1,0 +1,13 @@
+id: composition.simplicity-root-cause
+kind: composition
+description: A bug shared by several callers is fixed at the owner and verified on the affected paths.
+input:
+  prompt: "Refunds fail on zero-quantity lines. The report names refunds.js. The same helper is used by credits.js and adjustments.js."
+expected:
+  skills:
+    required: [debug, diagnosing-bugs, verify-change]
+    forbidden: [wayfinder, architect, arena, swarm, interrogate]
+  behaviors:
+    - fix the shared cause
+    - verify affected callers
+    - avoid a symptom-only patch on the named file

@@ -8,3 +8,4 @@ Methodrail changes:
 - portable frontmatter
 - glossary lookup is project-native
 - DESIGN-IT-TWICE / DEEPENING kept as references
+- Ponytail composed: reuse and necessity checks beside the deletion test; justified contract/test seams are retained (DietrichGebert/ponytail `356918eba965ee1eac64bd3a7f0dd02108350de5`). Not a Ponytail skill.

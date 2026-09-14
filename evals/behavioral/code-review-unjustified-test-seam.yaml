@@ -1,0 +1,18 @@
+id: behavioral.code-review.unjustified-test-seam
+kind: behavioral
+skill: code-review
+description: A test adapter does not automatically justify an otherwise unnecessary abstraction.
+input:
+  prompt: "Review this diff against the request to uppercase a label. It adds LabelPort, UppercaseAdapter, and FakeLabelAdapter. The production adapter delegates to the existing pure uppercaseLabel helper. The fake returns a constant and is used only to test that LabelPort forwards calls. The helper already has deterministic behavior tests, no external effects, and no public compatibility obligation."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the code-review skill loaded
+expected:
+  skills:
+    required: [code-review]
+  behaviors:
+    - assess the actual contract and testing value of the new layer
+    - flag the redundant forwarding abstraction despite its test adapter
+    - recommend reusing uppercaseLabel while retaining behavioral coverage
+    - keep Standards and Spec as separate axes
+  baseline_failure: exempting the forwarding layer solely because a fake adapter exists

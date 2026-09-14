@@ -1,0 +1,17 @@
+id: behavioral.diagnosing-bugs.shared-cause
+kind: behavioral
+skill: diagnosing-bugs
+description: Loading diagnosing-bugs should fix the shared owner when several callers share the bug.
+input:
+  prompt: "Checkout rejects empty carts. The ticket names checkout.js. validateCart is also called from preview.js and invoice.js."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the diagnosing-bugs skill loaded
+expected:
+  skills:
+    required: [diagnosing-bugs]
+  behaviors:
+    - find the shared function the callers route through
+    - fix that owner rather than only the reported caller
+    - verify the affected paths
+  baseline_failure: adding a guard only in checkout.js and leaving the other callers broken

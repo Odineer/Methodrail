@@ -1,0 +1,13 @@
+id: fidelity.code-review.lean-is-not-ship
+kind: fidelity
+skill: code-review
+description: Code review still splits Standards and Spec; no unnecessary-complexity finding is not a ship verdict.
+input:
+  prompt: "Nothing looks over-engineered. Say we can ship."
+expected:
+  skills:
+    required: [code-review]
+  behaviors:
+    - run Standards and Spec as separate axes
+    - report no unnecessary-complexity findings when there are none
+    - leave shipping to Spec plus verification, not to a lean score

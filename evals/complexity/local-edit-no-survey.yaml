@@ -1,0 +1,15 @@
+id: complexity.local-edit-no-survey
+kind: complexity
+description: A local edit must stay cheap and must not load a repository survey or extra simplicity ceremony.
+input:
+  prompt: "Change the button label from Save to Create."
+expected:
+  skills:
+    forbidden: [wayfinder, architect, arena, swarm, interrogate, improve-codebase-architecture]
+  behaviors:
+    - inspect
+    - edit
+    - cheap verification
+    - skip repository surveys and extra workflows
+    - do not load references/simplicity.md
+    - do not open an assumption ledger, lengthy plan, or clarification interview

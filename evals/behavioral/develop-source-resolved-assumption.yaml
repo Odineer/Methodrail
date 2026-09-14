@@ -1,0 +1,17 @@
+id: behavioral.develop.source-resolved-assumption
+kind: behavioral
+skill: develop
+description: Loading develop should resolve a documented display convention from the repository, not interview the user.
+input:
+  prompt: "Show the invoice due date using the project's existing date display. CONTRIBUTING.md and dates.js already define format and timezone."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop]
+  behaviors:
+    - inspect the documented formatter and convention
+    - implement using that evidence
+    - do not ask the user to re-choose format or timezone
+  baseline_failure: launching a clarification interview for a source-resolved convention

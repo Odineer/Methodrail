@@ -1,0 +1,17 @@
+id: behavioral.code-review.no-complexity-not-ship
+kind: behavioral
+skill: code-review
+description: Loading code-review should report absent unnecessary complexity without converting that into a shipping claim.
+input:
+  prompt: "Review this diff for over-engineering. The change looks lean. Can we ship?"
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the code-review skill loaded
+expected:
+  skills:
+    required: [code-review]
+  behaviors:
+    - keep Standards and Spec as separate axes
+    - report no unnecessary-complexity findings when there are none
+    - do not treat that absence as an unqualified shipping claim
+  baseline_failure: answering Lean already. Ship. without a Spec pass or verification

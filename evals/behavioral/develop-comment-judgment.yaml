@@ -1,0 +1,19 @@
+id: behavioral.develop.comment-judgment
+kind: behavioral
+skill: develop
+description: Loading develop should drop restatement comments and keep comments the code cannot express.
+input:
+  prompt: "Fix the off-by-one in existing nextIndex without adding a helper, dependency, or abstraction. The file has mixed comments; clean only what this change touches."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop]
+  behaviors:
+    - apply comment discipline without loading the full simplicity procedure
+    - avoid or remove comments that restate visible code in the touched region
+    - retain rationale, tool or compiler directives, and required documentation
+    - do not sweep unrelated files or delete useful comments to meet a quota
+    - do not leave a newly incorrect comment in code this change touched
+  baseline_failure: deleting every comment, adding narrating section labels, or treating surgical as permission to leave stale comments on the changed lines

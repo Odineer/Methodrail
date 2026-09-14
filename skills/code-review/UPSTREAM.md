@@ -10,3 +10,5 @@ Methodrail changes:
 - Methodrail review-packet integration
 - subagents optional per host capabilities
 - WIP review captures staged, unstaged, and untracked work, not only `<base>...HEAD`
+- Ponytail composed: unnecessary-complexity and redundant-comment checks on Standards only; no third axis; no "Lean already. Ship." verdict (DietrichGebert/ponytail `356918eba965ee1eac64bd3a7f0dd02108350de5`)
+- Karpathy-inspired guidelines composed: Spec scope-creep allows necessary supporting work and change-created cleanup; unrelated churn remains out of scope (multica-ai/andrej-karpathy-skills `2c606141936f1eeef17fa3043a72095b4765b9c2`)

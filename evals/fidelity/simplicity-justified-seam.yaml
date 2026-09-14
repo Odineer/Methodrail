@@ -1,0 +1,13 @@
+id: fidelity.simplicity.justified-seam
+kind: fidelity
+skill: codebase-design
+description: Simplicity composition does not delete a justified contract or test seam to cut implementation count.
+input:
+  prompt: "PaymentPort has StripeAdapter and InMemoryAdapter; the latter supports deterministic checkout tests for retries and declines without network access. Is having only one production implementation a sufficient reason to delete this port?"
+expected:
+  skills:
+    required: [codebase-design]
+  behaviors:
+    - recognize deterministic checkout testing as the concrete justification for the seam
+    - retain the justified port
+    - do not treat implementation count as a delete metric

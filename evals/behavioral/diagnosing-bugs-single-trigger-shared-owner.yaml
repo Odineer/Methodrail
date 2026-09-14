@@ -1,0 +1,18 @@
+id: behavioral.diagnosing-bugs.single-trigger-shared-owner
+kind: behavioral
+skill: diagnosing-bugs
+description: One triggering caller does not move a shared implementation defect to that caller.
+input:
+  prompt: "validateAmount promises to accept all nonnegative integers, but uses if (!amount) to reject missing values. Checkout alone currently submits zero; preview and invoice submit positive amounts. Fix the rejection of a free checkout."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the diagnosing-bugs skill loaded
+expected:
+  skills:
+    required: [diagnosing-bugs]
+  behaviors:
+    - identify validateAmount as violating its own contract
+    - fix the shared validator even though only checkout triggers the defect
+    - verify zero and positive values as well as rejection of invalid inputs
+    - do not bypass validation or special-case zero in checkout
+  baseline_failure: patching checkout while leaving the validator contract broken

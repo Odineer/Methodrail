@@ -122,6 +122,7 @@ const REQUIRED_REFERENCES = [
   "references/protocols/decision-record.md",
   "references/project-harness.md",
   "references/principles.md",
+  "references/simplicity.md",
   "references/capability-map.md",
   "references/upstream-skill-matrix.md",
   "references/host-capabilities.md",
@@ -458,6 +459,8 @@ function validateMethodrailStructure(root: string, skillPaths: string[]): Valida
     "upstreams/matt-pocock.yaml",
     "upstreams/pstack.yaml",
     "upstreams/superpowers.yaml",
+    "upstreams/ponytail.yaml",
+    "upstreams/karpathy-guidelines.yaml",
   ]) {
     const path = join(root, relativePath);
     if (!existsSync(path)) {
@@ -490,9 +493,9 @@ function validateMethodrailStructure(root: string, skillPaths: string[]): Valida
   if (
     isRecord(packageJson.repository) &&
     typeof packageJson.repository.url === "string" &&
-    !packageJson.repository.url.includes("github.com/MonsterousDev/Methodrail")
+    !packageJson.repository.url.includes("github.com/Odineer/Methodrail")
   ) {
-    issues.push(issue(packagePath, "package.json repository URL must point at MonsterousDev/Methodrail"));
+    issues.push(issue(packagePath, "package.json repository URL must point at Odineer/Methodrail"));
   }
 
   return issues;

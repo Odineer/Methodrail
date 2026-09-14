@@ -1,0 +1,17 @@
+id: behavioral.codebase-design.justified-seam
+kind: behavioral
+skill: codebase-design
+description: Loading codebase-design should retain an abstraction that is a real contract or test seam.
+input:
+  prompt: "PaymentPort isolates external Stripe calls. Its test adapter enables deterministic checkout tests for retries and declined payments without network access. Should we delete the port just because it has one production adapter?"
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the codebase-design skill loaded
+expected:
+  skills:
+    required: [codebase-design]
+  behaviors:
+    - establish the concrete deterministic-testing need for the seam
+    - retain the justified contract
+    - do not delete the port just because production has one adapter
+  baseline_failure: inlining Stripe because implementation count looks low

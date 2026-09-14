@@ -1,0 +1,17 @@
+id: behavioral.diagnosing-bugs.local-caller
+kind: behavioral
+skill: diagnosing-bugs
+description: Loading diagnosing-bugs should fix caller misuse at the caller.
+input:
+  prompt: "checkout.js passes undefined to validateCart, whose documented contract accepts a string and uses the empty string for no coupon. preview.js and invoice.js correctly normalize missing coupons to the empty string. Fix checkout without changing the helper contract."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the diagnosing-bugs skill loaded
+expected:
+  skills:
+    required: [diagnosing-bugs]
+  behaviors:
+    - keep the fix at the one broken caller
+    - do not rewrite the healthy shared helper
+    - verify the reported path
+  baseline_failure: changing validateCart and breaking preview and invoice

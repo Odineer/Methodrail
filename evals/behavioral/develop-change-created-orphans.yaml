@@ -1,0 +1,18 @@
+id: behavioral.develop.change-created-orphans
+kind: behavioral
+skill: develop
+description: Loading develop should remove leftovers this change made unused and leave unrelated dead code.
+input:
+  prompt: "Invoice due dates currently use a local formatDue helper in invoice.js. Replace it with the existing shared formatDate from dates.js. leftoverTaxLabel in the same file has no callers and predates this task."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop]
+  behaviors:
+    - reuse the shared formatter
+    - remove the local helper and any import this replacement made unused
+    - retain the unrelated pre-existing unused helper
+    - preserve date-formatting behavior
+  baseline_failure: keeping the new orphan or deleting every unused helper in the file
