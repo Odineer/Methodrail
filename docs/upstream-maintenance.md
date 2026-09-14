@@ -2,25 +2,29 @@
 
 Adapted skills must not drift silently, and they must not be overwritten blindly.
 
+Maintainer operator: [sync-upstream](../maintainer/skills/sync-upstream/SKILL.md). Policy stays here and in [CONTRIBUTING.md](../CONTRIBUTING.md).
+
 ```text
-upstream skill changed
+named upstream
+↓
+deterministic preflight JSON
 ↓
 inspect upstream diff
 ↓
-understand behavioral reason
+one worker per mapped Methodrail skill
 ↓
-apply relevant changes manually
+apply relevant tailored changes
 ↓
 preserve Methodrail integration
 ↓
-run Methodrail behavioral evals
+run Methodrail checks and relevant evals
 ↓
-update recorded upstream SHA
+update recorded upstream SHA only when mapped items are resolved
 ↓
-record noteworthy change
+stop before commit
 ```
 
-Never automatically overwrite Methodrail adaptations.
+Never automatically overwrite Methodrail adaptations. New, SKIP, and COMPOSE upstream skills are report-only during a sync.
 
 ## Records
 
@@ -32,11 +36,19 @@ Never automatically overwrite Methodrail adaptations.
 
 ## Checking for upstream changes
 
+Human summary of every recorded source:
+
 ```bash
 npm run check-upstreams
 ```
 
-The script reads recorded repositories and commits, queries current upstream HEAD when the network is available, and reports `current` or `changed`. It never writes skills.
+Structured preflight for one source (used by `sync-upstream`):
+
+```bash
+node scripts/check-upstreams.mjs --upstream matt-pocock --format json
+```
+
+The script reads recorded repositories and commits, queries current upstream HEAD when the network is available, and reports `current`, `changed`, or `unreachable`. JSON mode also lists changed paths, maps them onto Methodrail skills from `UPSTREAM.md` origins, and classifies unmapped skill paths against the matrix as discoveries. It never writes skills and never bumps a SHA.
 
 ## Import rules
 

@@ -20,6 +20,7 @@ Methodrail is a Cursor plugin and portable Agent Skills family. It is methodolog
 - Validate only: `npm run validate`
 - Eval fixtures and recorded examples: `npm run eval`
 - Upstream drift: `npm run check-upstreams`
+- One-source JSON preflight: `node scripts/check-upstreams.mjs --upstream <name> --format json`
 - Refresh host projections: `npm run project-hosts`
 
 ## Verification
@@ -29,6 +30,7 @@ This repository has no user-facing runtime, so there is no project-local verify 
 - Skill, rule, reference, or `src/` change: `npm test` and `npm run validate`; `npm run check` before claiming the slice done
 - Family invariant change: `npm run project-hosts`, then `npm run check`
 - Upstream records: `npm run check-upstreams`
+- Incorporate one drifted source: [sync-upstream](../maintainer/skills/sync-upstream/SKILL.md)
 
 ## Architecture pointers
 
@@ -40,6 +42,7 @@ This repository has no user-facing runtime, so there is no project-local verify 
 - [eval runner](../evals/README.md)
 - [family integration](../docs/family-integration.md)
 - [upstream maintenance](../docs/upstream-maintenance.md)
+- [sync-upstream](../maintainer/skills/sync-upstream/SKILL.md)
 
 ## Important constraints
 

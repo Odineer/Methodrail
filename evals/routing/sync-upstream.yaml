@@ -1,0 +1,10 @@
+id: routing.sync-upstream
+kind: routing
+skill: sync-upstream
+description: An explicit request to incorporate upstream skill updates should route to sync-upstream.
+input:
+  prompt: "Sync upstream matt-pocock into Methodrail. Inspect recent upstream diffs and incorporate what belongs here."
+expected:
+  skills:
+    required: [sync-upstream]
+    forbidden: [develop, wayfinder, architect]

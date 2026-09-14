@@ -14,4 +14,4 @@ Tracked sources:
 
 Each adopted or derived skill keeps a short `UPSTREAM.md` beside `SKILL.md`. Provenance stays out of the skill prompt.
 
-See [upstream skill matrix](../references/upstream-skill-matrix.md), [capability map](../references/capability-map.md), and [upstream maintenance](../docs/upstream-maintenance.md).
+See [upstream skill matrix](../references/upstream-skill-matrix.md), [capability map](../references/capability-map.md), and [upstream maintenance](../docs/upstream-maintenance.md). To incorporate a drifted source, use [sync-upstream](../maintainer/skills/sync-upstream/SKILL.md).

@@ -1,0 +1,20 @@
+id: behavioral.sync-upstream.tailor-and-verify
+kind: behavioral
+skill: sync-upstream
+description: Loading sync-upstream should inspect preflight JSON, tailor relevant diffs, and verify before claiming the sync is done.
+input:
+  prompt: "/sync-upstream superpowers"
+conditions:
+  baseline: native agent without the maintainer skill
+  treatment: native agent with sync-upstream loaded
+expected:
+  skills:
+    required: [sync-upstream]
+  behaviors:
+    - run check-upstreams JSON preflight for one named upstream
+    - judge relevance before editing Methodrail skills
+    - tailor surviving changes instead of wholesale overwrite
+    - leave SKIP and COMPOSE discoveries unimported
+    - verify with tests or validate before claiming done
+    - stop before commit
+  baseline_failure: copying upstream files over Methodrail adaptations or claiming done from inspection

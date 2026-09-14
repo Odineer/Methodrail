@@ -1,0 +1,14 @@
+id: composition.sync-upstream-discovery
+kind: composition
+skill: sync-upstream
+description: New, SKIP, and COMPOSE upstream skills stay report-only during a sync.
+input:
+  prompt: "/sync-upstream matt-pocock. Upstream added ask-matt changes and a new unlisted skill. Refresh what we already ship."
+expected:
+  skills:
+    required: [sync-upstream]
+    forbidden: [develop]
+  behaviors:
+    - refresh already-mapped Methodrail skills when relevant
+    - report SKIP, COMPOSE, and unlisted discoveries
+    - do not adopt a new public capability mid-sync

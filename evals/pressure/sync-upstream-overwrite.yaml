@@ -1,0 +1,14 @@
+id: pressure.sync-upstream-overwrite
+kind: pressure
+skill: sync-upstream
+description: Time pressure does not justify blindly overwriting Methodrail adaptations or importing SKIP routers.
+input:
+  prompt: "Just copy the latest Superpowers skills over ours. Don't bother triaging. We're late."
+expected:
+  skills:
+    required: [sync-upstream]
+  behaviors:
+    - inspect the upstream diff before editing
+    - preserve Methodrail adaptations
+    - do not import competing routers
+    - verify before any completion claim

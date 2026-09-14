@@ -59,3 +59,4 @@ Typical artifacts, not process nesting: `how` → implementation understanding; 
 - **Control planes:** `poteto-mode`, `ask-matt`, `using-superpowers`, `setup-*` global routers, and Ponytail commands/hooks are not imported.
 - **Skill authoring:** `writing-for-agents` subsumes the earlier `writing-great-skills` concept. Do not ship both.
 - **Handoff:** operational skill for Methodrail's handoff context transition. Explicit-only.
+- **Upstream sync:** `sync-upstream` is a Methodrail-repo maintainer skill under `maintainer/skills/`. It is not a consumer capability and is not shipped by the plugin.

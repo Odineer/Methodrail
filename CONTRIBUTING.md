@@ -49,7 +49,7 @@ New skills must justify:
 - non-routing behavior
 - eval strategy
 
-When adopting upstream work: inspect the current license and commit, record them, preserve notices, keep provenance out of the prompt, and do not import competing global routers. See [upstream maintenance](docs/upstream-maintenance.md) and [capability map](references/capability-map.md).
+When adopting upstream work: inspect the current license and commit, record them, preserve notices, keep provenance out of the prompt, and do not import competing global routers. The maintainer operator is [sync-upstream](maintainer/skills/sync-upstream/SKILL.md). See [upstream maintenance](docs/upstream-maintenance.md) and [capability map](references/capability-map.md).
 
 When adopting or modifying a skill, use the [family integration](docs/family-integration.md) checklist.
 

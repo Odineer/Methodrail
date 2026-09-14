@@ -1,0 +1,9 @@
+id: routing.sync-upstream-negative
+kind: routing
+skill: sync-upstream
+description: Mixed-intent application coding must not discover the maintainer sync-upstream skill.
+input:
+  prompt: "Add a retry around the billing HTTP client and cover it with a test."
+expected:
+  skills:
+    forbidden: [sync-upstream]
