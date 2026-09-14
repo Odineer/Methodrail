@@ -1,0 +1,1 @@
+Due dates use formatDate without asking format. Agent asked export scope; owner answered profile-only. exportCustomerData returns {id,name,email} and omits invoices/paymentMethods (runtime-checked). npm test 3/3. Complete.

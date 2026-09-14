@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checks": {
+    "dueUsesConvention": true,
+    "askedExportScope": true,
+    "runtimeOk": true,
+    "hasProfile": true,
+    "exportedPayments": false,
+    "exportedInvoices": false,
+    "tests": true
+  },
+  "testOutput": "\n> test\n> node --test src/*.test.js\n\n✔ customer export includes profile fields only (1.333792ms)\n✔ customer export omits invoices and payment methods (0.080334ms)\n✔ invoice summary keeps id and amount (1.911958ms)\n✔ invoice summary shows due date as UTC YYYY-MM-DD (0.091041ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 78.217041\n"
+}

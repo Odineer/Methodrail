@@ -1,0 +1,12 @@
+[
+  {
+    "command": "npm test",
+    "exit_status": 0,
+    "phase": "verify"
+  },
+  {
+    "command": "node evals/fixtures/leaderboard-sort/hidden-grader.mjs (operator, against run repo/src/leaderboard.js)",
+    "exit_status": 0,
+    "phase": "verify"
+  }
+]

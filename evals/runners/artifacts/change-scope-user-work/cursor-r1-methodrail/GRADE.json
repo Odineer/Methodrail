@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "checks": {
+    "usesShared": true,
+    "localGone": true,
+    "leftoverKept": true,
+    "tests": true,
+    "preservedUserEdit": true
+  },
+  "testOutput": "\n> test\n> node --test src/invoice.test.js src/preview.test.js\n\n✔ invoice due label uses YYYY-MM-DD (1.2475ms)\n✔ preview line uses the renamed local (0.652916ms)\nℹ tests 2\nℹ suites 0\nℹ pass 2\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 80.337042\n"
+}

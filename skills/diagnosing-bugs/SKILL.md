@@ -93,18 +93,17 @@ Write the regression test **before the fix** when a correct seam exists. Use `td
 3. Apply the minimal fix at the owner of the violated contract. Fix caller misuse at the caller; fix a defective shared implementation there even if only one caller exposes it. Verify the reported path and relevant shared behavior.
 4. Watch it pass
 5. Re-run the Phase 1 loop against the original scenario
-6. Use `verify-change` before claiming the bug is fixed
-7. Remove imports, variables, and private helpers this fix made unused. Leave unrelated dead code. Do not start another diagnosis cycle. See [change-created cleanup](../../references/simplicity.md#change-created-cleanup) when the remaining-use check is not obvious.
+6. Remove imports, variables, and private helpers this fix made unused. Leave unrelated dead code. Do not start another diagnosis cycle. See [change-created cleanup](../../references/simplicity.md#change-created-cleanup) when the remaining-use check is not obvious.
+7. Complete the cleanup and final verification below before claiming the bug is fixed.
 
 Do not shotgun-edit. No bundled refactoring. See [defense-in-depth.md](references/defense-in-depth.md) after the root cause is known, and [condition-based-waiting.md](references/condition-based-waiting.md) when the bug was a race against a timeout.
 
-## Phase 6: Cleanup
+## Phase 6: Cleanup and final verification
 
-- Original repro no longer reproduces
-- Regression test passes (or missing seam is documented)
-- All `[DEBUG-...]` instrumentation removed
-- Throwaway prototypes deleted
-- The correct hypothesis is stated in the commit / PR message
+- Remove all `[DEBUG-...]` instrumentation and throwaway prototypes.
+- Use `verify-change` against the final tree: the original repro no longer reproduces and the regression test passes (or the missing seam is documented).
+- If later edits change relevant state, rerun the affected verification before claiming completion.
+- State the correct hypothesis in the commit / PR message.
 
 ## Pressure resistance
 

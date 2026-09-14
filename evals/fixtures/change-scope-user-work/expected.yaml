@@ -1,0 +1,6 @@
+id: fixture.change-scope-user-work
+required_skills: [develop]
+forbidden_skills: [wayfinder, architect, arena, swarm, interrogate]
+expected_behaviors:
+  - replace invoice local date formatting
+  - preserve preview.js displayTotal rename

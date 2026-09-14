@@ -2,7 +2,7 @@
 
 ## 0.9.2 — 2026-09-13
 
-Compose Ponytail simplicity and Karpathy-inspired guidelines into existing Methodrail skills. No public Ponytail or `karpathy-guidelines` skill, command, or intensity mode. Constructed evals added. No paired live-agent improvement claim. Repository identity is [Odineer/Methodrail](https://github.com/Odineer/Methodrail).
+Compose Ponytail simplicity and Karpathy-inspired guidelines into existing Methodrail skills. No public Ponytail or `karpathy-guidelines` skill, command, or intensity mode. Constructed evals added. Karpathy paired live battery (Cursor / grok-4.6, n=1): 4 empirical-neutral, 0 helped, 0 harmed; not a general improvement claim. Ponytail paired live battery remains unavailable. Repository identity is [Odineer/Methodrail](https://github.com/Odineer/Methodrail).
 
 Ponytail:
 

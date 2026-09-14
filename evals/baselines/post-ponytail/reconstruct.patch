@@ -1,0 +1,187 @@
+--- a/references/simplicity.md
++++ b/references/simplicity.md
+@@ -2,7 +2,7 @@
+ 
+ Make the smallest complete change that meets the user's intent and preserves required behavior. Minimize unnecessary complexity. Fewer files, lines, dependencies, and abstractions can help; they are not success metrics by themselves.
+ 
+-Load the procedure when considering a helper, dependency, or abstraction, assessing existing complexity, or deciding whether this change made something unused. Mechanical edits can skip the procedure; the comment rule still applies to new and materially changed code. Change-created cleanup still applies after a replacement or deletion. Use the procedure after understanding the affected flow and acceptance criteria.
++Load the procedure when considering a helper, dependency, or abstraction, or assessing existing complexity. Mechanical edits can skip the procedure; the comment rule still applies to new and materially changed code. Use the procedure after understanding the affected flow and acceptance criteria.
+ 
+ ```text
+ explicit requirements, no speculative extras
+@@ -27,12 +27,6 @@
+ 5. **Owner.** Locate the violated contract and fix its owner, regardless of how many callers expose the defect. Fix caller misuse at the caller; fix a shared implementation that violates its contract there, even if only one caller triggers it. Verify the reported path and relevant shared behavior.
+ 6. **Stop.** Run relevant verification and stop when acceptance is met. Do not open extra workflows or unrelated cleanup.
+ 
+-## Change-created cleanup
+-
+-Remove imports, variables, and private helpers that this change makes unused, after checking remaining uses and effects. Leave pre-existing unrelated dead code alone. Absence of local callers does not prove that an export, registration, or side-effectful import is unused. Prefer compiler or linter evidence when it decides the case; inspect source and contracts when it cannot.
+-
+-Do not scan the repository for dead code, impose a removal quota, or delete another contributor's uncommitted work.
+-
+ ## Preserve
+ 
+ Keep security, accessibility, error handling, public contracts, justified extension seams, and testability. Follow the project's testing approach. Do not replace it with a one-check or no-framework rule.
+@@ -53,4 +47,4 @@
+ 
+ ## Done when
+ 
+-Acceptance criteria are met, required safeguards remain, comments in the diff carry information the code cannot, artifacts this change made unused are removed, and the change does not include unrelated cleanup or a parallel implementation.
++Acceptance criteria are met, required safeguards remain, comments in the diff carry information the code cannot, and the change does not include extra cleanup or a parallel implementation.
+--- a/references/decision-frontier.md
++++ b/references/decision-frontier.md
+@@ -61,16 +61,6 @@
+ 
+ Downstream questions stay in fog until their prerequisites move into Known.
+ 
+-## Consequential assumptions
+-
+-Identify interpretations that materially alter observable behavior, scope, data exposure, public contracts, or acceptance criteria.
+-
+-Resolve implementation facts through source, tests, configuration, or runtime evidence before asking. If a consequential preference or policy remains unresolved, present the meaningful alternatives with a recommendation and ask before implementing dependent behavior. Continue independent investigation or implementation that does not depend on the missing choice.
+-
+-For a low-impact reversible choice supported by context, state the material assumption briefly and proceed. Do not list obvious assumptions or ask permission to follow established conventions. If new evidence contradicts an assumption, revise the affected plan rather than silently preserving it.
+-
+-Do not stop all useful work because something is unclear. Do not auto-trigger `grill-with-docs`, `wayfinder`, `architect`, or `prototype` for ordinary ambiguity.
+-
+ A frontier choice that is hard to reverse, surprising without context, and a real trade-off may be offered as an ADR after approval. Reversible operational choices stay in the TSV trail. See [decision-record](protocols/decision-record.md).
+ 
+ Do not implement this as a graph engine. The native agent can reason with this model. `develop`, `architect`, `prototype`, and `domain-modeling` should use it when planning work.
+--- a/references/skill-composition.md
++++ b/references/skill-composition.md
+@@ -17,7 +17,7 @@
+ 
+ ## One workflow owner at a time
+ 
+-`/develop` owns the feature lifecycle. Inside it, `wayfinder`, `architect`, `prototype`, and `tdd` are bounded operators. They must not independently restart another full development lifecycle. [Simplicity](simplicity.md) is a shared reference those owners load when considering a helper, dependency, or abstraction, assessing complexity, or deciding whether this change made something unused. Mechanical edits skip the procedure while retaining comment discipline and change-created cleanup. It is not a workflow, command, or extra review axis.
++`/develop` owns the feature lifecycle. Inside it, `wayfinder`, `architect`, `prototype`, and `tdd` are bounded operators. They must not independently restart another full development lifecycle. [Simplicity](simplicity.md) is a shared reference those owners load when considering a helper, dependency, or abstraction, or assessing complexity. Mechanical edits skip the procedure while retaining comment discipline. It is not a workflow, command, or extra review axis.
+ 
+ `/debug` owns debugging. `diagnosing-bugs` owns the diagnosis procedure inside it. `runtime-forensics` is an escalation operator. `verify-change` is an evidence gate.
+ 
+--- a/references/capability-map.md
++++ b/references/capability-map.md
+@@ -6,9 +6,9 @@
+ |---|---|---|---|---|---|
+ | Project harness init | `methodrail-init` | Methodrail-native | explicit | `create-verification-skill` | humans |
+ | Existing-system investigation | `investigate` | Methodrail-native | explicit | `how`, `why`, `observe`, `research`, `prototype`, `blast-radius` | humans |
+-| Feature delivery | `develop` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `grill-with-docs`, `domain-modeling`, `wayfinder`, `architect`, `prototype`, `tdd`, `code-review`, `verify-change`, `blast-radius` | humans |
++| Feature delivery | `develop` | Methodrail-native + Ponytail composed | explicit | `grill-with-docs`, `domain-modeling`, `wayfinder`, `architect`, `prototype`, `tdd`, `code-review`, `verify-change`, `blast-radius` | humans |
+ | Failure diagnosis and fix | `debug` | Methodrail-native | explicit | `diagnosing-bugs`, `observe`, `runtime-forensics`, `trace-forensics`, `performance`, `hillclimb`, `tdd`, `verify-change` | humans |
+-| Behavior-preserving restructure of a selected target | `refactor` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `how`, `codebase-design`, `blast-radius`, `code-review`, `verify-change` | humans |
++| Behavior-preserving restructure of a selected target | `refactor` | Methodrail-native + Ponytail composed | explicit | `how`, `codebase-design`, `blast-radius`, `code-review`, `verify-change` | humans |
+ | Change review workflow | `review` | Methodrail-native | explicit | `code-review`, `blast-radius`, `verify-change` | humans |
+ | Current codebase understanding | `how` | pstack | model-invoked | `observe` | `investigate`, `develop`, `refactor`, `architect` |
+ | Historical motivation | `why` | pstack | model-invoked | — | `investigate`, `architect` |
+@@ -23,9 +23,9 @@
+ | Deep-module design vocabulary | `codebase-design` | Matt Pocock + Ponytail composed | model-invoked | `architect` when a decision exists | `tdd`, `refactor`, `improve-codebase-architecture` |
+ | Codebase-wide architecture survey and candidate selection | `improve-codebase-architecture` | Matt Pocock + Ponytail composed | explicit | `grill-with-docs`, `codebase-design` | humans |
+ | Test-first implementation | `tdd` | Matt Pocock | model-invoked | `codebase-design`, `verify-change` | `develop`, `debug` |
+-| Baseline bug diagnosis | `diagnosing-bugs` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model/workflow invoked | `runtime-forensics`, `trace-forensics`, `performance` | `debug` |
++| Baseline bug diagnosis | `diagnosing-bugs` | Matt Pocock + Ponytail composed | model/workflow invoked | `runtime-forensics`, `trace-forensics`, `performance` | `debug` |
+ | Completion verification | `verify-change` | Superpowers-derived | model/workflow invoked | `observe`, project verify skill | all workflows |
+-| Two-axis diff review | `code-review` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model-invoked | — | `review`, `develop` |
++| Two-axis diff review | `code-review` | Matt Pocock + Ponytail composed | model-invoked | — | `review`, `develop` |
+ | Adversarial independent review | `interrogate` | pstack | explicit / high rigor | — | `review` (suggested only) |
+ | Competing candidates | `arena` | pstack | explicit | `verify-change` | `architect`, `blast-radius` |
+ | Partitioned parallel coverage | `swarm` | pstack | explicit | — | humans, large investigations |
+@@ -53,8 +53,7 @@
+ - **Invocation:** `explicit` means host discovery is off (`disable-model-invocation: true`). Workflows and other parent skills may still load that skill when their procedure's conditions match. `interrogate` is suggest-only: name it and wait. Canonical rules: [SKILL-MECHANICS](../skills/writing-for-agents/SKILL-MECHANICS.md).
+ - **Review:** `/review` is the workflow; `code-review` is the two-axis leaf. `interrogate` is suggest-only.
+ - **Implement:** Matt `implement` is not shipped. `/develop` owns the lifecycle and reuses `tdd` / `code-review` / `verify-change`.
+-- **Simplicity:** `references/simplicity.md` is the shared procedure, including change-created cleanup. There is no public Ponytail or karpathy-guidelines skill, command, or review axis. Compose into `develop`, `codebase-design`, `refactor`, `diagnosing-bugs`, `code-review`, and `improve-codebase-architecture`.
+-- **Assumptions:** `references/decision-frontier.md` owns uncertainty resolution, including consequential assumptions. Do not add an assumption ledger or a public clarification skill.
++- **Simplicity:** `references/simplicity.md` is the shared procedure. There is no public Ponytail skill, command, or review axis. Compose into `develop`, `codebase-design`, `refactor`, `diagnosing-bugs`, `code-review`, and `improve-codebase-architecture`.
+ - **Architecture maintenance:** `improve-codebase-architecture` owns codebase-wide discovery and selection. `/refactor` executes one selected behavior-preserving change. A survey-shaped `/refactor` request routes to `improve-codebase-architecture` without starting implementation.
+ - **Control planes:** `poteto-mode`, `ask-matt`, `using-superpowers`, `setup-*` global routers, and Ponytail commands/hooks are not imported.
+ - **Skill authoring:** `writing-for-agents` subsumes the earlier `writing-great-skills` concept. Do not ship both.
+--- a/references/upstream-skill-matrix.md
++++ b/references/upstream-skill-matrix.md
+@@ -2,7 +2,7 @@
+ 
+ Classification of considered upstream skills. Decisions: **ADOPT** (substantially intact), **ADAPT** (meaningful Methodrail integration), **COMPOSE** (reused inside another canonical skill), **HOST-SPECIFIC** (not portable enough), **SKIP**.
+ 
+-Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.yaml](../upstreams/pstack.yaml), [superpowers.yaml](../upstreams/superpowers.yaml), [ponytail.yaml](../upstreams/ponytail.yaml), [karpathy-guidelines.yaml](../upstreams/karpathy-guidelines.yaml).
++Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.yaml](../upstreams/pstack.yaml), [superpowers.yaml](../upstreams/superpowers.yaml), [ponytail.yaml](../upstreams/ponytail.yaml).
+ 
+ ## mattpocock/skills
+ 
+@@ -85,12 +85,3 @@
+ | intensity modes / hooks / host routers | Always-on `/ponytail` activation | SKIP | Methodrail workflows | Competing control plane | host-specific |
+ 
+ Fidelity deviations for the composed skills: no intensity modes; no `ponytail:` markers; no one-check/no-framework testing rule; no "ship the lazy subset" substitution; no "Lean already. Ship." verdict; retain justified contract and test seams. Comparison: [ponytail-upstream-comparison.md](../docs/internal/ponytail-upstream-comparison.md). pstack `no-comments` remains SKIP; Methodrail's comment rule is a separate composition.
+-
+-## multica-ai/andrej-karpathy-skills
+-
+-| Skill | Purpose | Decision | Canonical Methodrail capability | Reason | Host requirements |
+-|---|---|---|---|---|---|
+-| karpathy-guidelines | Surgical edits, assumptions, verifiable goals | COMPOSE | `references/simplicity.md` and `references/decision-frontier.md` via `develop`, `refactor`, `diagnosing-bugs`, `code-review` | Incremental cleanup, hunk-scope, and assumption handling without a competing workflow | portable |
+-| CLAUDE.md / CURSOR.md / always-on Cursor rule / plugin marketplace | Host installation and global activation | SKIP | Methodrail workflows | Competing control plane | host-specific |
+-
+-Fidelity deviations: no stop-when-unclear; no single-use-abstraction ban; no 200-to-50 rewrite metric; no skip of "impossible" failure paths; no assumption ledger; `verify-change` stays stronger than compact success-loop examples. Comparison: [karpathy-upstream-comparison.md](../docs/internal/karpathy-upstream-comparison.md).
+--- a/skills/develop/SKILL.md
++++ b/skills/develop/SKILL.md
+@@ -51,13 +51,12 @@
+ ## Workflow
+ 
+ 1. Read `.methodrail/PROJECT.md` if present. Follow pointers only when relevant. Before relying on a stored note, follow [knowledge reuse](../../references/knowledge/reuse.md).
+-2. Classify uncertainty with the [decision frontier](../../references/decision-frontier.md), including [consequential assumptions](../../references/decision-frontier.md#consequential-assumptions). Resolve only currently actionable questions. Use the cheapest reliable method: deterministic tool, source/`how`, `observe`, `why`, `research`, `prototype`, `domain-modeling`, or a human.
+-3. Define observable success and a verification strategy before editing. Ask only when a missing choice is product/taste/preference and the repository cannot answer it. When a multi-step implementation plan is warranted, pair each meaningful outcome with the evidence that will verify it. Reuse a check across steps where appropriate; do not introduce a separate test or approval for every step.
+-4. Load the [simplicity procedure](../../references/simplicity.md) when considering a helper, dependency, or abstraction, or when deciding whether this change made something unused. Rename, label, copy, and other mechanical edits stay inspect → edit → check and do not load that reference. After a replacement or deletion, remove artifacts this change made unused; leave unrelated dead code.
++2. Classify uncertainty with the [decision frontier](../../references/decision-frontier.md). Resolve only currently actionable questions. Use the cheapest reliable method: deterministic tool, source/`how`, `observe`, `why`, `research`, `prototype`, `domain-modeling`, or a human.
++3. Define observable success and a verification strategy before editing. Ask only when a missing choice is product/taste/preference and the repository cannot answer it.
++4. Load the [simplicity procedure](../../references/simplicity.md) when considering a helper, dependency, or abstraction. Rename, label, copy, and other mechanical edits stay inspect → edit → check and do not load that reference.
+ 5. Implement in focused increments with `tdd` at agreed seams when that is the honest strategy. Follow established project patterns. Use `refactor` when the request is structural rather than a feature.
+ 6. Use `observe` and the project verification skill when the claim is behavioral. Finish with `verify-change`. Use `/review` only when the user requests a separate review or rigor requires it.
+-7. Before reporting complete, inspect this task's delta. Each hunk should support the requested outcome, necessary supporting work, required verification or metadata, or [change-created cleanup](../../references/simplicity.md#change-created-cleanup). Remove only this agent's unrelated edits; do not revert other contributors' work.
+-8. Summarize changed behavior, files, verification evidence, residual risk, and any durable knowledge worth proposing. Do not persist ordinary summaries.
++7. Summarize changed behavior, files, verification evidence, residual risk, and any durable knowledge worth proposing. Do not persist ordinary summaries.
+ 
+ Matt's `implement` skill is not a public Methodrail skill. `/develop` owns the lifecycle.
+ 
+@@ -73,7 +72,7 @@
+ 
+ ## Done when
+ 
+-Acceptance criteria are met, the task delta is scoped to the request and necessary supporting work, change-created leftovers are removed, and each completion claim has fresh relevant evidence or a clearly reported verification gap.
++Acceptance criteria are met, the diff is scoped, and each completion claim has fresh relevant evidence or a clearly reported verification gap.
+ 
+ ## Neighbors
+ 
+--- a/skills/refactor/SKILL.md
++++ b/skills/refactor/SKILL.md
+@@ -29,12 +29,11 @@
+ 1. Confirm the selected friction and target. Accept a named structural problem or a refactor brief. If the request is to scan, rank, or choose opportunities across the codebase, route directly to `improve-codebase-architecture` and do not begin implementation.
+ 2. Read `.methodrail/PROJECT.md` if present. If a knowledge pointer is relevant, follow [knowledge reuse](../../references/knowledge/reuse.md). Use `how` to understand current structure and `codebase-design` for depth/seam vocabulary.
+ 3. Establish a behavioral baseline with existing tests or `observe` when behavior is not already characterized.
+-4. Validate that the proposed change addresses the named friction. Stop if the target is quiet, unused, unrelated to current work, or supported only by speculative cleanup claims. Apply [simplicity](../../references/simplicity.md) to that target only, including the comment rule and [change-created cleanup](../../references/simplicity.md#change-created-cleanup); do not expand into adjacent cleanup.
++4. Validate that the proposed change addresses the named friction. Stop if the target is quiet, unused, unrelated to current work, or supported only by speculative cleanup claims. Apply [simplicity](../../references/simplicity.md) to that target only, including the comment rule; do not expand into adjacent cleanup.
+ 5. Add characterization coverage when existing checks would not catch an accidental behavior change.
+ 6. Change structure in small increments. Preserve public contracts unless the request explicitly includes a contract change. Retain a justified contract or test seam.
+ 7. Re-run the baseline after each increment. Use `verify-change` before claiming success.
+-8. Inspect this task's delta before claiming done. Each hunk should support the selected structural change, necessary supporting work, required verification, or cleanup of artifacts this change made unused. Remove only this agent's unrelated edits.
+-9. Use `blast-radius` for shared contracts or cross-boundary moves, then `code-review` when rigor or scope justifies it.
++8. Use `blast-radius` for shared contracts or cross-boundary moves, then `code-review` when rigor or scope justifies it.
+ 
+ ## Constraints
+ 
+--- a/skills/diagnosing-bugs/SKILL.md
++++ b/skills/diagnosing-bugs/SKILL.md
+@@ -94,7 +94,6 @@
+ 4. Watch it pass
+ 5. Re-run the Phase 1 loop against the original scenario
+ 6. Use `verify-change` before claiming the bug is fixed
+-7. Remove imports, variables, and private helpers this fix made unused. Leave unrelated dead code. Do not start another diagnosis cycle. See [change-created cleanup](../../references/simplicity.md#change-created-cleanup) when the remaining-use check is not obvious.
+ 
+ Do not shotgun-edit. No bundled refactoring. See [defense-in-depth.md](references/defense-in-depth.md) after the root cause is known, and [condition-based-waiting.md](references/condition-based-waiting.md) when the bug was a race against a timeout.
+ 
+--- a/skills/code-review/SKILL.md
++++ b/skills/code-review/SKILL.md
+@@ -70,8 +70,6 @@
+ 
+ **Spec** report: (a) missing or partial requirements; (b) scope creep; (c) implementations that look wrong. Quote the spec line. Under 400 words.
+ 
+-Scope creep is unrelated churn or unexplained leftovers, not every extra file. Necessary supporting work can include shared-owner fixes, regression tests, generated output, snapshot updates, and lockfiles. Cleanup of artifacts this change made unused is in scope; deleting pre-existing unrelated dead code is not. Do not revert other contributors' edits. When the original request is unavailable, follow the missing-spec behavior; do not invent a scope boundary.
+-
+ If the spec is missing, skip Spec and note it.
+ 
+ ### 5. Aggregate

@@ -1,0 +1,71 @@
+{
+  "saved_pilot_hashes": {
+    "baseline": {
+      "references/context-economics.md": "85a793aa2282af5bf4f7ced74d930326aeda214cbd24213d3ea6c39ebc5f0c43",
+      "references/context-management.md": "661080bc9c8240c243b21cada6ea9fdc51d6542f0ea59774b42ecfe2f60d78d7",
+      "references/decision-frontier.md": "11d238683735c52169edd6621db28bdb5497eec724a91a0d402e19e6f63ecb87",
+      "references/knowledge/reuse.md": "9b550769782c51761357c5a2605f88c773221eca4e87021c3e07242bceeb7f67",
+      "references/principles.md": "a0aab196ff4b62c1dab19276ffa734cfebf7a39acdf0e44623843952d6498dcb",
+      "references/rigor.md": "14b0dd24ef9e685e592e3377244a60d50b4c54420d316dbdae74df9356f5d28c",
+      "references/simplicity.md": "373edc7559cc713d5def2f9224c16486957994aa4c8fbea7b3e2c44168f2649c",
+      "references/skill-composition.md": "ca961d9d8a46820911edc1c58c74a6601bcb01931781f445cbf938441cacaeb6",
+      "skills/code-review/SKILL.md": "f6269e6bebd8097ad6d48d9844db2128731665b95f2e476188d5c2ffeb85a2fa",
+      "skills/develop/SKILL.md": "3ea9d0af75ddca2ba293d4f494c46c49f4d9e309ac7cf0e7af4e29ccf908fd8d",
+      "skills/diagnosing-bugs/SKILL.md": "16429ac05bb7c1e5b3a78801dba328790e29238cb551fe0dc09437b8822af5af",
+      "skills/refactor/SKILL.md": "0495a61b30eef5b88bd988133dfe60ad4e806c31cc0ae8ad67e259b35e893193",
+      "skills/tdd/SKILL.md": "87bffd05848501269557935e93d00fb921df9258549bc374999ce3a8df533491",
+      "skills/verify-change/SKILL.md": "e4e4546b66421fc0e3aad2060992acd41f768f1aa396951762bc828d6635a023"
+    },
+    "treatment": {
+      "references/context-economics.md": "85a793aa2282af5bf4f7ced74d930326aeda214cbd24213d3ea6c39ebc5f0c43",
+      "references/context-management.md": "661080bc9c8240c243b21cada6ea9fdc51d6542f0ea59774b42ecfe2f60d78d7",
+      "references/decision-frontier.md": "7d0b9e85646637cd2b231c48cdfb27d36e11979ebde24b174caa5f603622a054",
+      "references/knowledge/reuse.md": "9b550769782c51761357c5a2605f88c773221eca4e87021c3e07242bceeb7f67",
+      "references/principles.md": "a0aab196ff4b62c1dab19276ffa734cfebf7a39acdf0e44623843952d6498dcb",
+      "references/rigor.md": "14b0dd24ef9e685e592e3377244a60d50b4c54420d316dbdae74df9356f5d28c",
+      "references/simplicity.md": "25cca69aa2debe0807e8c5f88385cb6412ce5b37ef5ac503c0d7a84395187080",
+      "references/skill-composition.md": "634d7d37b71dd81114a83f382e956f4625691ecab67f9318be6c458b15936a24",
+      "skills/code-review/SKILL.md": "f6269e6bebd8097ad6d48d9844db2128731665b95f2e476188d5c2ffeb85a2fa",
+      "skills/develop/SKILL.md": "3ea9d0af75ddca2ba293d4f494c46c49f4d9e309ac7cf0e7af4e29ccf908fd8d",
+      "skills/diagnosing-bugs/SKILL.md": "16429ac05bb7c1e5b3a78801dba328790e29238cb551fe0dc09437b8822af5af",
+      "skills/refactor/SKILL.md": "0495a61b30eef5b88bd988133dfe60ad4e806c31cc0ae8ad67e259b35e893193",
+      "skills/tdd/SKILL.md": "87bffd05848501269557935e93d00fb921df9258549bc374999ce3a8df533491",
+      "skills/verify-change/SKILL.md": "e4e4546b66421fc0e3aad2060992acd41f768f1aa396951762bc828d6635a023"
+    }
+  },
+  "recovered_file_hashes": {
+    "baseline": {
+      "references/context-economics.md": "85a793aa2282af5bf4f7ced74d930326aeda214cbd24213d3ea6c39ebc5f0c43",
+      "references/context-management.md": "661080bc9c8240c243b21cada6ea9fdc51d6542f0ea59774b42ecfe2f60d78d7",
+      "references/decision-frontier.md": "2ead38dbad58331d73cdfc31a56e732410b5ba1a81ca9eadfc431a1342eba08a",
+      "references/knowledge/reuse.md": "9b550769782c51761357c5a2605f88c773221eca4e87021c3e07242bceeb7f67",
+      "references/principles.md": "a0aab196ff4b62c1dab19276ffa734cfebf7a39acdf0e44623843952d6498dcb",
+      "references/rigor.md": "14b0dd24ef9e685e592e3377244a60d50b4c54420d316dbdae74df9356f5d28c",
+      "references/simplicity.md": "373edc7559cc713d5def2f9224c16486957994aa4c8fbea7b3e2c44168f2649c",
+      "references/skill-composition.md": "ca961d9d8a46820911edc1c58c74a6601bcb01931781f445cbf938441cacaeb6",
+      "skills/code-review/SKILL.md": "bdedc24c8e427e082e942dd40929a5a8f6750e49df39952b403e03807f6b0a56",
+      "skills/develop/SKILL.md": "3094d354fcf6a8484b874f4df4c9fd24983dcac8938b2b12de7178c9161bee06",
+      "skills/diagnosing-bugs/SKILL.md": "31c2f5e87f5f15df3b19042874e7405c05b3fa3623a7a8c763dbf2046ae4f4b2",
+      "skills/refactor/SKILL.md": "c95efcd6f13b1fac60f3d7fb756f0dc7797b5b1571f6a977856e8e6b212addb4",
+      "skills/tdd/SKILL.md": "87bffd05848501269557935e93d00fb921df9258549bc374999ce3a8df533491",
+      "skills/verify-change/SKILL.md": "e4e4546b66421fc0e3aad2060992acd41f768f1aa396951762bc828d6635a023"
+    },
+    "treatment": {
+      "references/context-economics.md": "85a793aa2282af5bf4f7ced74d930326aeda214cbd24213d3ea6c39ebc5f0c43",
+      "references/context-management.md": "661080bc9c8240c243b21cada6ea9fdc51d6542f0ea59774b42ecfe2f60d78d7",
+      "references/decision-frontier.md": "7d0b9e85646637cd2b231c48cdfb27d36e11979ebde24b174caa5f603622a054",
+      "references/knowledge/reuse.md": "9b550769782c51761357c5a2605f88c773221eca4e87021c3e07242bceeb7f67",
+      "references/principles.md": "a0aab196ff4b62c1dab19276ffa734cfebf7a39acdf0e44623843952d6498dcb",
+      "references/rigor.md": "14b0dd24ef9e685e592e3377244a60d50b4c54420d316dbdae74df9356f5d28c",
+      "references/simplicity.md": "25cca69aa2debe0807e8c5f88385cb6412ce5b37ef5ac503c0d7a84395187080",
+      "references/skill-composition.md": "634d7d37b71dd81114a83f382e956f4625691ecab67f9318be6c458b15936a24",
+      "skills/code-review/SKILL.md": "f6269e6bebd8097ad6d48d9844db2128731665b95f2e476188d5c2ffeb85a2fa",
+      "skills/develop/SKILL.md": "3ea9d0af75ddca2ba293d4f494c46c49f4d9e309ac7cf0e7af4e29ccf908fd8d",
+      "skills/diagnosing-bugs/SKILL.md": "16429ac05bb7c1e5b3a78801dba328790e29238cb551fe0dc09437b8822af5af",
+      "skills/refactor/SKILL.md": "0495a61b30eef5b88bd988133dfe60ad4e806c31cc0ae8ad67e259b35e893193",
+      "skills/tdd/SKILL.md": "87bffd05848501269557935e93d00fb921df9258549bc374999ce3a8df533491",
+      "skills/verify-change/SKILL.md": "e4e4546b66421fc0e3aad2060992acd41f768f1aa396951762bc828d6635a023"
+    }
+  },
+  "note": "Saved hashes and recovered baseline bytes disagree. This audit cannot establish which input bytes were present during the historical agent runs."
+}

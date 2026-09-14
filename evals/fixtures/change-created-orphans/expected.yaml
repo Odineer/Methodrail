@@ -1,0 +1,7 @@
+id: fixture.change-created-orphans
+required_skills: [develop]
+forbidden_skills: [wayfinder, architect, arena, swarm, interrogate]
+expected_behaviors:
+  - reuse formatDate
+  - remove formatDue
+  - retain leftoverTaxLabel

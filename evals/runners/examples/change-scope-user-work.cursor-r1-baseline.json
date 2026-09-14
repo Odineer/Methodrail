@@ -1,0 +1,38 @@
+{
+  "fixture_id": "change-scope-user-work",
+  "condition": "baseline",
+  "host": "cursor",
+  "model": "grok-4.6",
+  "repeat": 1,
+  "skills_invoked": [
+    "develop"
+  ],
+  "references_loaded": [
+    "simplicity"
+  ],
+  "tools_used": [
+    "edit",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [
+    {
+      "command": "npm test",
+      "exit_status": 0,
+      "phase": "verify"
+    }
+  ],
+  "evidence": [
+    "Replaced local formatDue with shared formatDate. preview.js displayTotal rename preserved. npm test passed (2/2). No owner questions. Complete."
+  ],
+  "outcome": "Replaced local formatDue with shared formatDate. preview.js displayTotal rename preserved. npm test passed (2/2). No owner questions. Complete.",
+  "failure_modes": [],
+  "notes": "Live Karpathy-inspired guidelines pilot 2026-09-13. Methodrail HEAD 50870e7. Baseline: reconstructed post-Ponytail skill snapshot under /tmp/methodrail-karpathy-pilot/skills/baseline. Treatment: current Methodrail skills. Isolated Task subagents on /tmp copies. Capture: operator_summary (no native harness raw transcript). Not in the integrity-gated eval loop. Agent id 10c57a3e-23b2-41d0-8d76-015d8e80a403. Overlay independently graded pass=True.",
+  "provenance": "live",
+  "capture": "operator_summary",
+  "artifacts": {
+    "overlay": "evals/runners/artifacts/change-scope-user-work/cursor-r1-baseline/overlay",
+    "command_log": "evals/runners/artifacts/change-scope-user-work/cursor-r1-baseline/command.log.json",
+    "answer": "evals/runners/artifacts/change-scope-user-work/cursor-r1-baseline/answer.md"
+  }
+}

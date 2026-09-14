@@ -1,0 +1,6 @@
+id: fixture.karpathy-assumptions
+required_skills: [develop]
+forbidden_skills: [wayfinder, architect, arena, swarm, interrogate]
+expected_behaviors:
+  - use documented formatDate without asking format
+  - clarify export scope before exporting invoices or payment methods

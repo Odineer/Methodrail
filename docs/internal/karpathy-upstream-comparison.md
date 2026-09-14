@@ -26,6 +26,8 @@ Do not invent a copyright holder or year. Do not claim a LICENSE file was inspec
 
 ## Baseline for this composition
 
+A reconstructible baseline is now stored in [evals/baselines/post-ponytail](../../evals/baselines/post-ponytail/README.md): an immutable base commit, reconstruction patch, and full skill/reference hash manifest. Reconstruction verifies all ten original hashes below. This is separate from the later pilot, whose saved and recovered input hashes disagree; see the [hash audit](../../evals/baselines/karpathy-pilot-capture/README.md).
+
 Post-Ponytail Methodrail working tree on 2026-09-13, including uncommitted Ponytail review fixes. HEAD alone is not the baseline. SHA-256 of the files this composition edits (pre-edit):
 
 | Path | sha256 |

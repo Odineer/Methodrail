@@ -1,0 +1,8 @@
+{
+  "name": "change-scope-user-work",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test src/invoice.test.js src/preview.test.js"
+  }
+}

@@ -36,3 +36,21 @@ test("hidden grader fails an implementation that drops tied names", async () => 
   assert.equal(result.passed, false);
   assert.equal(result.preserved, false);
 });
+
+test("hidden grader rejects correct IDs with corrupted records", async () => {
+  const result = await gradeLeaderboardModule(join(fixture, "cases/corrupt-records.js"));
+  assert.deepEqual(result.ids, ["ada", "cora", "zane", "mira"]);
+  assert.equal(result.preserved, false);
+  assert.equal(result.passed, false);
+});
+
+test("candidate mutation cannot change the oracle or later grading input", async () => {
+  const corrupt = await gradeLeaderboardModule(join(fixture, "cases/mutate-records.js"));
+  assert.equal(corrupt.preserved, false);
+  assert.equal(corrupt.passed, false);
+  const correct = await gradeLeaderboardModule(join(fixture, "cases/correct.js"));
+  assert.equal(correct.passed, true);
+  const broken = await gradeLeaderboardModule(join(repo, "src/leaderboard.js"));
+  assert.deepEqual(broken.ids, ["zane", "cora", "ada", "mira"]);
+  assert.equal(broken.passed, false);
+});

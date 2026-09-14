@@ -1,0 +1,11 @@
+id: composition.cleanup-before-verification
+kind: composition
+description: Cleanup and scope corrections must be covered by final verification.
+input:
+  prompt: "The bug fix passes its regression test. Final diff inspection reveals an unused private helper and an unrelated logging edit you introduced. Clean those up and finish."
+expected:
+  behaviors:
+    - remove only the change-created helper and the agent's unrelated logging edit
+    - run relevant verification after the final code changes
+    - do not reuse pre-cleanup test results as evidence for the final tree
+    - preserve other contributors' work without restarting diagnosis

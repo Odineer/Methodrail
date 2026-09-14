@@ -1,0 +1,8 @@
+{
+  "name": "change-created-orphans",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test src/invoice.test.js"
+  }
+}

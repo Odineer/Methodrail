@@ -1,0 +1,43 @@
+{
+  "fixture_id": "leaderboard-sort",
+  "condition": "baseline",
+  "host": "cursor",
+  "model": "grok-4.6",
+  "repeat": 1,
+  "skills_invoked": [
+    "develop"
+  ],
+  "references_loaded": [
+    "simplicity"
+  ],
+  "tools_used": [
+    "edit",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [
+    {
+      "command": "npm test",
+      "exit_status": 0,
+      "phase": "verify"
+    },
+    {
+      "command": "node evals/fixtures/leaderboard-sort/hidden-grader.mjs (operator, against run repo/src/leaderboard.js)",
+      "exit_status": 0,
+      "phase": "verify"
+    }
+  ],
+  "evidence": [
+    "Sorted by score descending then name ascending; all ties kept. Hidden grader ids: ada, cora, zane, mira. npm test passed (2/2). No owner questions. Complete."
+  ],
+  "outcome": "Sorted by score descending then name ascending; all ties kept. Hidden grader ids: ada, cora, zane, mira. npm test passed (2/2). No owner questions. Complete.",
+  "failure_modes": [],
+  "notes": "Live Karpathy-inspired guidelines pilot 2026-09-13. Methodrail HEAD 50870e7. Baseline: reconstructed post-Ponytail skill snapshot under /tmp/methodrail-karpathy-pilot/skills/baseline. Treatment: current Methodrail skills. Isolated Task subagents on /tmp copies. Capture: operator_summary (no native harness raw transcript). Not in the integrity-gated eval loop. Agent id 7134409b-fe37-450b-8c91-c9262881547e. Overlay independently graded pass=True.",
+  "provenance": "live",
+  "capture": "operator_summary",
+  "artifacts": {
+    "overlay": "evals/runners/artifacts/leaderboard-sort/cursor-r1-baseline/overlay",
+    "command_log": "evals/runners/artifacts/leaderboard-sort/cursor-r1-baseline/command.log.json",
+    "answer": "evals/runners/artifacts/leaderboard-sort/cursor-r1-baseline/answer.md"
+  }
+}

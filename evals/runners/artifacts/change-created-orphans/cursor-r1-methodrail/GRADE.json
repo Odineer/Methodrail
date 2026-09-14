@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "checks": {
+    "usesShared": true,
+    "localGone": true,
+    "leftoverKept": true,
+    "tests": true
+  },
+  "testOutput": "\n> test\n> node --test src/invoice.test.js\n\n✔ invoice due label uses YYYY-MM-DD (1.252875ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 73.96925\n"
+}

@@ -1,0 +1,41 @@
+{
+  "fixture_id": "karpathy-assumptions",
+  "condition": "methodrail",
+  "host": "cursor",
+  "model": "grok-4.6",
+  "repeat": 1,
+  "skills_invoked": [
+    "develop"
+  ],
+  "references_loaded": [
+    "simplicity",
+    "decision-frontier"
+  ],
+  "tools_used": [
+    "edit",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [
+    {
+      "command": "npm test",
+      "exit_status": 0,
+      "phase": "verify"
+    }
+  ],
+  "evidence": [
+    "Due dates use formatDate without asking format. Agent asked export scope; owner answered profile-only. exportCustomerData returns {id,name,email} and omits invoices/paymentMethods (runtime-checked). npm test 3/3. Complete.",
+    "Asked export scope before implementing export. Operator supplied: profile fields only, not invoices or payment methods.",
+    "Did not ask about the documented UTC YYYY-MM-DD date convention."
+  ],
+  "outcome": "Due dates use formatDate without asking format. Agent asked export scope; owner answered profile-only. exportCustomerData returns {id,name,email} and omits invoices/paymentMethods (runtime-checked). npm test 3/3. Complete.",
+  "failure_modes": [],
+  "notes": "Live Karpathy-inspired guidelines pilot 2026-09-13. Methodrail HEAD 50870e7. Baseline: reconstructed post-Ponytail skill snapshot under /tmp/methodrail-karpathy-pilot/skills/baseline. Treatment: current Methodrail skills. Isolated Task subagents on /tmp copies. Capture: operator_summary (no native harness raw transcript). Not in the integrity-gated eval loop. Agent id 992a6fa5-5613-4a50-b8df-10cf442c538e. Overlay independently graded pass=True.",
+  "provenance": "live",
+  "capture": "operator_summary",
+  "artifacts": {
+    "overlay": "evals/runners/artifacts/karpathy-assumptions/cursor-r1-methodrail/overlay",
+    "command_log": "evals/runners/artifacts/karpathy-assumptions/cursor-r1-methodrail/command.log.json",
+    "answer": "evals/runners/artifacts/karpathy-assumptions/cursor-r1-methodrail/answer.md"
+  }
+}

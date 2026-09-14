@@ -32,9 +32,10 @@ blast-radius/review proportional to risk
 4. Validate that the proposed change addresses the named friction. Stop if the target is quiet, unused, unrelated to current work, or supported only by speculative cleanup claims. Apply [simplicity](../../references/simplicity.md) to that target only, including the comment rule and [change-created cleanup](../../references/simplicity.md#change-created-cleanup); do not expand into adjacent cleanup.
 5. Add characterization coverage when existing checks would not catch an accidental behavior change.
 6. Change structure in small increments. Preserve public contracts unless the request explicitly includes a contract change. Retain a justified contract or test seam.
-7. Re-run the baseline after each increment. Use `verify-change` before claiming success.
+7. Re-run the baseline after each increment.
 8. Inspect this task's delta before claiming done. Each hunk should support the selected structural change, necessary supporting work, required verification, or cleanup of artifacts this change made unused. Remove only this agent's unrelated edits.
 9. Use `blast-radius` for shared contracts or cross-boundary moves, then `code-review` when rigor or scope justifies it.
+10. After all cleanup and review-driven edits, use `verify-change` before claiming success. If later edits change relevant state, rerun the affected verification.
 
 ## Constraints
 

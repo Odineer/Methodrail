@@ -20,7 +20,7 @@ Constructed pairs must never be quoted as `helped`. Current Codex pilot JSON is 
 
 [v0.9.2-ponytail-simplicity-pilot-results.md](./v0.9.2-ponytail-simplicity-pilot-results.md) records that the Ponytail composition paired live battery was unavailable. It is not an integrity-gated manifest.
 
-[karpathy-guidelines-pilot-results.md](./karpathy-guidelines-pilot-results.md) records that the Karpathy-inspired guidelines paired live battery was unavailable. It is not an integrity-gated manifest and is separate from the Ponytail results.
+[karpathy-guidelines-pilot-results.md](./karpathy-guidelines-pilot-results.md) records the Karpathy-inspired guidelines paired live battery (Cursor / grok-4.6, 4/4 empirical-neutral). It is not an integrity-gated manifest and is separate from the Ponytail results.
 
 Layers:
 
