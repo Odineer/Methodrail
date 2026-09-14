@@ -2,10 +2,12 @@ name: mattpocock/skills
 repository: https://github.com/mattpocock/skills
 license: MIT
 copyright: Copyright (c) 2026 Matt Pocock
-last_reviewed_commit: 6654f6b60cd9d5be8b54c6fafe44346dabeb3b76
-last_reviewed_at: 2026-08-24
+last_reviewed_commit: 3cca18b368ae95cdbdebbff572ccafa662551015
+last_reviewed_at: 2026-09-13
 notes: >
   Inspected current engineering skills plus productivity/writing-for-agents
   and productivity/handoff. writing-for-agents subsumes writing-great-skills;
   do not ship both. Do not import ask-matt, setup-matt-pocock-skills, or
   remaining productivity/in-progress/misc skills as competing control planes.
+  3cca18b is host-install only (CLAUDE.md and link-skills.sh skip misc/); no
+  adopted Methodrail skill body changed.

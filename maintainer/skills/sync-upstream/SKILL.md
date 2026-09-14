@@ -57,7 +57,7 @@ Build a table covering every `mapped` row and every `discoveries` row.
 
 Read [import rules](../../../docs/upstream-maintenance.md#import-rules) and the [upstream skill matrix](../../../references/upstream-skill-matrix.md) before incorporating. Fetch the upstream diffs for incorporate rows (commit range `imported`..`head`).
 
-If no row is `incorporate`, report discoveries and unmapped paths, leave the pin alone, and stop.
+If no row is `incorporate`, inspect remaining discoveries and unmapped paths, then continue to provenance. An empty mapped list is fully resolved.
 
 ## Phase C: Skill workers
 
@@ -83,7 +83,7 @@ If two incorporate skills would edit the same file, serialize those workers and 
 Apply remaining worker patches. Update:
 
 - each incorporated skill's `UPSTREAM.md` (revision, Methodrail-changes, fidelity if it changed)
-- `upstreams/<name>.yaml` `last_reviewed_commit` and `last_reviewed_at` **only when every mapped item is `PASS`, `SKIP`, or an explicit deferral**
+- `upstreams/<name>.yaml` `last_reviewed_commit` and `last_reviewed_at` **only when every mapped item is `PASS`, `SKIP`, or an explicit deferral**. An empty mapped list counts as resolved after unmapped paths and discoveries have been inspected.
 - `THIRD_PARTY_NOTICES.md` only when a notice actually changes
 - `references/upstream-skill-matrix.md` only when a mapped skill's classification actually changes
 

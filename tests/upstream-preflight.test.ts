@@ -143,6 +143,32 @@ test("pstack repo path prefix maps Origin how to pstack/how", () => {
   assert.deepEqual(result.unmapped_changes, ["pstack/LICENSE"]);
 });
 
+test("pstack skills/ layout maps Origin how and playbook files", () => {
+  const result = classifyChangedPaths({
+    changedPaths: [
+      "pstack/skills/how/SKILL.md",
+      "pstack/skills/architect/SKILL.md",
+      "pstack/skills/poteto-mode/playbooks/visual-parity.md",
+      "pstack/LICENSE",
+    ],
+    skills: [
+      skillOrigin("how", "Origin: pstack / how\nUpstream revision: 4612556\n"),
+      skillOrigin(
+        "visual-parity",
+        "Origin: pstack / poteto-mode/playbooks/visual-parity.md\nUpstream revision: 4612556\n",
+      ),
+    ],
+    record: pstackRecord,
+    matrixRows: parseMatrix("| Skill | Decision |\n| how | ADAPT |\n| visual-parity playbook | ADAPT |\n"),
+  });
+  const names = result.mapped.map((row) => row.methodrail_skill).sort();
+  assert.deepEqual(names, ["how", "visual-parity"]);
+  assert.deepEqual(result.mapped.find((row) => row.methodrail_skill === "how")?.changed_paths, [
+    "pstack/skills/how/SKILL.md",
+  ]);
+  assert.deepEqual(result.unmapped_changes, ["pstack/LICENSE"]);
+});
+
 test("buildPreflight does not invent path lists when current or unreachable", () => {
   const current = buildPreflight({
     record: mattRecord,

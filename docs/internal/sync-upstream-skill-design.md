@@ -124,7 +124,7 @@ When two mapped skills would edit the same file, usually a shared reference, the
 2. After all workers: `npm test` and `npm run validate`.
 3. For behavioral or compositional changes: exercise the relevant eval fixtures or recorded examples, and report the gap explicitly when a live harness run is not available in-session.
 4. Walk `docs/family-integration.md` and mark each item.
-5. Advance `last_reviewed_commit` only when every mapped item is resolved. If any item is `ISSUES` or `BLOCKED`, leave the pin alone by default; a partial-review bump requires an explicit note.
+5. Advance `last_reviewed_commit` only when every mapped item is resolved. An empty mapped list counts as resolved after unmapped paths and discoveries have been inspected. If any item is `ISSUES` or `BLOCKED`, leave the pin alone by default; a partial-review bump requires an explicit note.
 
 ## 7. Packaging and documentation
 

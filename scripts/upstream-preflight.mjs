@@ -210,8 +210,11 @@ function posixJoin(left, right) {
 }
 
 function pathMatchesOrigin(changed, originPath, repoPath) {
-  const prefixes = [originPath];
-  if (repoPath) prefixes.push(posixJoin(repoPath, originPath));
+  const prefixes = [originPath, posixJoin("skills", originPath)];
+  if (repoPath) {
+    prefixes.push(posixJoin(repoPath, originPath));
+    prefixes.push(posixJoin(posixJoin(repoPath, "skills"), originPath));
+  }
   return prefixes.some((prefix) => changed === prefix || changed.startsWith(`${prefix}/`));
 }
 
