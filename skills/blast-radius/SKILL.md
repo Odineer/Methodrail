@@ -25,18 +25,18 @@ For each fact the change's safety depends on, get it as far down this list as is
 4. You ran it. A script or test that calls the real code and fails loud if you're wrong.
 5. You reproduced it in the running app.
 
-Any safety fact you can't get to step 4, say so out loud. Don't write it up as settled.
+Any safety fact you can't get to step 4, say so. Don't write it up as settled.
 
 ## Steps
 
 1. Read the change. The diff, the symbols it adds, changes, and deletes, and what it now does differently, including the part the diff doesn't spell out.
-2. Find the one fact it's safe because of. Most changes that look scary are safe because of a single fact. If it holds, most of the scary cases die at once.
+2. Find the one fact it's safe because of. Most changes that look risky are safe because of a single fact. If it holds, most risky cases are cleared at once.
 3. Look where grep stops. Read the source of the library you call, and check its pinned version and any local patch. Follow what a symbol search misses: the JSON an API returns, a DB column, a wire format, another language reading the same bytes, a feature flag, code three hops downstream.
 4. Be honest about each risk. Give it a real chance of happening and a real cost if it does. Cite a real `file:line`. A search that finds nothing is still an answer. Never make up a caller or an API.
 5. Prove the one fact.
    - **Read-only parent** (`/review`, `/investigate`, or the user said not to edit): run an existing test or script first. If you need a new probe, run it from a temp file outside the repository (or an equivalent one-shot command) and leave the worktree unchanged. Do not add tests, scripts, or product files.
    - **Write parent** (`/develop`, `/debug`, `/refactor`, or a direct request that may edit): prefer a real test or script in the repo that calls the real code and fails loud if you're wrong.
-   If you can't prove it cheaply, mark it unproven.
+   If you can't prove it cheaply, mark it unproven. Don't overstate.
 6. For a big or wide change, run `arena` only when the parent may edit and the host supports competing candidates. Under a read-only parent, obtain a second independent pass in this context or state the limitation. See [host capabilities](../../references/host-capabilities.md).
 
 ## What to hand back

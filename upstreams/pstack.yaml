@@ -3,14 +3,17 @@ repository: https://github.com/cursor/plugins
 path: pstack/
 license: MIT
 copyright: Copyright (c) 2026 Lauren Tan
-last_reviewed_commit: b9ddc83c32972210b8a94d389130713e8eed346e
-last_reviewed_at: 2026-09-01
+last_reviewed_commit: 5bf2b1544db739998121a306340631963c2ff3de
+last_reviewed_at: 2026-09-13
 notes: >
-  License verified from pstack/LICENSE and plugin.json. HEAD after
-  4612556 adds make-bot-ui and poteto-mode plan tooling only; adopted
-  skills including show-me-your-work and verification generators are
-  unchanged. Per-skill UPSTREAM.md revisions remain 4612556. Do not
-  import poteto-mode, setup-pstack, principle-* skills as a second
-  operating system, Graphite/GitHub shipping playbooks, or Cursor-only
-  automations. Host-specific model slugs are isolated in
+  License verified from pstack/LICENSE and plugin.json. Reviewed
+  b9ddc83..5bf2b15. Incorporated matching wording in how/why
+  references, blast-radius SKILL, architect rationale-template, and
+  interrogate rubric. Did not take disable-model-invocation on
+  how/why, host model slugs, principle-* skill loads, deletion of
+  how critique, or collapse of why's cheap path. Per-skill
+  UPSTREAM.md for SKIP-mapped skills remains 4612556. Do not import
+  poteto-mode, setup-pstack, principle-* skills as a second
+  operating system, Graphite/GitHub shipping playbooks, or
+  Cursor-only automations. Host-specific model slugs are isolated in
   references/host-capabilities.md.
