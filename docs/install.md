@@ -43,6 +43,10 @@ Reusable skills stay compatible with Agent Skills-oriented hosts. Do not copy sk
 
 Change `references/methodrail-family-invariant.md` and run `npm run project-hosts` rather than editing those copies by hand.
 
+## Session ledger
+
+The Cursor plugin ships an observational hook that appends a session ledger under `~/.local/state/methodrail/sessions` only in repositories that already have a `.methodrail/` harness. It never writes inside the repository. The ledger records skill and reference paths, shell commands with exit codes, and final responses. Disable it with `METHODRAIL_LEDGER=0`, or relocate it with `METHODRAIL_LEDGER_DIR`.
+
 ## Marketplace submission checklist
 
 Maintainer-only. Do not treat this list as a live listing.

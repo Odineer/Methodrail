@@ -63,6 +63,8 @@ Methodrail then appears in **Cursor Customize**. If you develop Methodrail itsel
 
 Cursor, Claude Code, Codex, and other native harnesses execute tools, manage context, and run agents. Methodrail defines how those agents should work.
 
+The Cursor plugin ships an observational hook that appends a session ledger under `~/.local/state/methodrail/sessions` only in repositories that already have a `.methodrail/` harness. It never writes inside the repository. The ledger records skill and reference paths, shell commands with exit codes, and final responses. Disable it with `METHODRAIL_LEDGER=0`, or relocate it with `METHODRAIL_LEDGER_DIR`.
+
 ## Two layers
 
 **Global plugin:** portable Agent Skills, one small rule, reusable methodology references, and `/methodrail-init`.
