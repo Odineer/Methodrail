@@ -24,6 +24,8 @@ Instead it **selects**, **adapts**, **composes**, **verifies**, and **maintains*
 
 Install it once. Run `/methodrail-init` in a repository. Methodrail inspects the project and creates a lightweight, project-specific AI harness for future agents.
 
+Supported installs (marketplace once listed, local symlink, Claude Code / Codex): [docs/install.md](docs/install.md).
+
 ## Start in under a minute
 
 1. Install this repository as a Cursor Plugin.
