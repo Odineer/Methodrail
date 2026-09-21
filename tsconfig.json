@@ -16,6 +16,6 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts", "evals/runners/**/*.ts", "skills/methodrail-init/scripts/harness-manifest.d.mts", "evals/fixtures/leaderboard-sort/hidden-grader.d.mts", "scripts/upstream-preflight.d.mts", "scripts/check-upstreams.d.mts"],
+  "include": ["src/**/*.ts", "tests/**/*.ts", "evals/runners/**/*.ts", "skills/methodrail-init/scripts/harness-manifest.d.mts", "evals/fixtures/leaderboard-sort/hidden-grader.d.mts", "scripts/upstream-preflight.d.mts", "scripts/check-upstreams.d.mts", "scripts/hooks/session-ledger.d.mts"],
   "exclude": ["dist", "node_modules"]
 }

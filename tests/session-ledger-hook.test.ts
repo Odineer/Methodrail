@@ -23,7 +23,7 @@ function fire(event: string, payload: Record<string, unknown>, env: Record<strin
   const result = spawnSync(process.execPath, [script], {
     input,
     encoding: "utf8",
-    env: { ...process.env, ...env },
+    env: { ...process.env, METHODRAIL_LEDGER: "", ...env },
   });
   assert.equal(result.status, 0, result.stderr);
   assert.equal(result.stdout.trim(), "{}");
