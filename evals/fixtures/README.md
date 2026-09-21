@@ -12,4 +12,4 @@ Use fixtures in a native-harness evaluation:
 2. Make the candidate skill available, then run the same prompt in a fresh context.
 3. Record overlay/patch, command log, and the final answer. Graders inspect those artifacts, not `behaviors_observed`.
 4. Record provenance (`live` | `constructed` | `synthetic`) and capture quality. `runner_captured` requires a raw transcript plus answer, command log, and reproducible overlay/patch; `hook_captured` requires the session ledger plus answer, command log, and overlay/patch; it is stronger than `operator_summary` and weaker than `runner_captured` because it does not include the model's reasoning; otherwise use `operator_summary`.
-5. List repeated live pairs in an executable pilot manifest so the integrity gate rescores them instead of trusting a hand-maintained table.
+5. List repeated live pairs in an executable pilot manifest so the integrity gate rescores them instead of trusting a hand-maintained table. Cursor pilot runs from v0.10 on are `hook_captured`.
