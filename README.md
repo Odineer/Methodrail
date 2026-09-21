@@ -24,6 +24,8 @@ Instead it **selects**, **adapts**, **composes**, **verifies**, and **maintains*
 
 Install it once. Run `/methodrail-init` in a repository. Methodrail inspects the project and creates a lightweight, project-specific AI harness for future agents.
 
+Supported installs (marketplace once listed, local symlink, Claude Code / Codex): [docs/install.md](docs/install.md).
+
 ## Start in under a minute
 
 1. Install this repository as a Cursor Plugin.
@@ -38,7 +40,7 @@ git clone https://github.com/Odineer/Methodrail.git \
   ~/.cursor/plugins/local/methodrail
 ```
 
-Methodrail then appears in **Cursor Customize**. Consuming projects do not install an npm dependency, run a daemon, or use a Methodrail CLI.
+Methodrail then appears in **Cursor Customize**. If you develop Methodrail itself, symlink your checkout there instead of cloning so Cursor always runs HEAD, and run `npm run doctor` to confirm the installed plugin matches the repository before recording any live observation. Consuming projects do not install an npm dependency, run a daemon, or use a Methodrail CLI.
 
 ## How it works
 
@@ -60,6 +62,8 @@ Methodrail then appears in **Cursor Customize**. Consuming projects do not insta
 ```
 
 Cursor, Claude Code, Codex, and other native harnesses execute tools, manage context, and run agents. Methodrail defines how those agents should work.
+
+The Cursor plugin ships an observational hook that appends a session ledger under `~/.local/state/methodrail/sessions` only in repositories that already have a `.methodrail/` harness. It never writes inside the repository. The ledger records skill and reference paths, shell commands with exit codes, and final responses. Disable it with `METHODRAIL_LEDGER=0`, or relocate it with `METHODRAIL_LEDGER_DIR`.
 
 ## Two layers
 
@@ -133,6 +137,7 @@ npm test
 npm run validate
 npm run eval
 npm run check-upstreams
+npm run doctor
 ```
 
 Validation checks plugin metadata, native skill frontmatter, methodology references, maintainer evals, permanent-context size, provenance files, host invariant projections, and the realistic initialized-project fixture.

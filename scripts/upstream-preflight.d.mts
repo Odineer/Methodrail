@@ -80,8 +80,23 @@ export function buildPreflight(input: {
   }[];
   discoveries: { upstream_path: string; matrix_decision: string; note: string }[];
   unmapped_changes: string[];
+  relevance?: "mapped" | "discoveries-only" | "unrelated";
   diff_error?: string;
 };
+
+export function relevanceOf(classified: {
+  mapped: unknown[];
+  discoveries: unknown[];
+}): "mapped" | "discoveries-only" | "unrelated";
+
+export function describeRelevance(payload: {
+  status: string;
+  relevance?: string;
+  diff_error?: string;
+  mapped: { methodrail_skill: string }[];
+  discoveries: unknown[];
+  unmapped_changes: string[];
+}): string;
 
 export function resolveRecord<T extends { stem: string; name: string; repository: string }>(
   records: T[],

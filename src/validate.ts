@@ -365,6 +365,69 @@ function validatePlugin(root: string): ValidationIssue[] {
   }
 }
 
+const OBSERVATIONAL_HOOK_EVENTS = new Set([
+  "sessionStart",
+  "sessionEnd",
+  "postToolUse",
+  "postToolUseFailure",
+  "subagentStop",
+  "afterShellExecution",
+  "afterMCPExecution",
+  "afterFileEdit",
+  "afterAgentResponse",
+  "afterAgentThought",
+  "preCompact",
+  "stop",
+]);
+
+function validateHooks(root: string): ValidationIssue[] {
+  const manifestPath = join(root, ".cursor-plugin", "plugin.json");
+  if (!existsSync(manifestPath)) return [];
+  let hooksRel: unknown;
+  try {
+    hooksRel = (JSON.parse(readFileSync(manifestPath, "utf8")) as Record<string, unknown>).hooks;
+  } catch {
+    return [];
+  }
+  if (hooksRel === undefined) return [];
+  if (typeof hooksRel !== "string") return [issue(manifestPath, "plugin.json hooks must be a path string")];
+  const hooksPath = join(root, hooksRel);
+  if (!existsSync(hooksPath)) return [issue(hooksPath, "hooks config referenced by plugin.json does not exist")];
+  const issues: ValidationIssue[] = [];
+  let config: Record<string, unknown>;
+  try {
+    config = JSON.parse(readFileSync(hooksPath, "utf8")) as Record<string, unknown>;
+  } catch {
+    return [issue(hooksPath, "hooks.json is not valid JSON")];
+  }
+  const hooks = config.hooks;
+  if (hooks === null || typeof hooks !== "object") return [issue(hooksPath, "hooks.json requires a hooks object")];
+  for (const [event, entries] of Object.entries(hooks as Record<string, unknown>)) {
+    if (!OBSERVATIONAL_HOOK_EVENTS.has(event)) {
+      issues.push(
+        issue(hooksPath, `${event} is not an observational hook event; Methodrail hooks must stay observational`),
+      );
+    }
+    if (!Array.isArray(entries)) {
+      issues.push(issue(hooksPath, `${event} must be an array of hook entries`));
+      continue;
+    }
+    for (const entry of entries) {
+      const record = isRecord(entry) ? entry : {};
+      const command = record.command;
+      if (typeof command !== "string") {
+        issues.push(issue(hooksPath, `${event} entry requires a command string`));
+        continue;
+      }
+      const script = command.split(/\s+/)[0] ?? "";
+      if (!existsSync(join(root, script))) issues.push(issue(hooksPath, `${event} command ${script} does not exist`));
+      if (record.timeout === undefined) issues.push(issue(hooksPath, `${event} entry must declare a timeout`));
+      if (record.failClosed === true) issues.push(issue(hooksPath, `${event} entry must not fail closed`));
+    }
+  }
+  return issues;
+}
+
 function validateMethodrailStructure(root: string, skillPaths: string[]): ValidationIssue[] {
   const packagePath = join(root, "package.json");
   if (!existsSync(packagePath)) return [];
@@ -753,6 +816,7 @@ export function validateRepository(root: string): ValidationResult {
   }
 
   issues.push(...validatePlugin(absoluteRoot));
+  issues.push(...validateHooks(absoluteRoot));
   issues.push(...validateGlobalRules(absoluteRoot));
   issues.push(...validateMethodrailStructure(absoluteRoot, skillPaths));
   issues.push(...validateEvalIds(absoluteRoot));

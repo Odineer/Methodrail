@@ -1,0 +1,12 @@
+id: composition.completion-report
+kind: composition
+description: A medium task may emit a completion report; a tiny change may omit it.
+input:
+  prompt: "Finish a medium change and a tiny label change."
+expected:
+  skills:
+    forbidden: [wayfinder, architect, arena, swarm, interrogate]
+  behaviors:
+    - proportional completion report
+    - artifacts remain the source of truth
+  notes: The block is a claim. Graders still inspect overlay, command log, and answer artifacts.

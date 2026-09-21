@@ -48,7 +48,7 @@ Structured preflight for one source (used by `sync-upstream`):
 node scripts/check-upstreams.mjs --upstream matt-pocock --format json
 ```
 
-The script reads recorded repositories and commits, queries current upstream HEAD when the network is available, and reports `current`, `changed`, or `unreachable`. JSON mode also lists changed paths, maps them onto Methodrail skills from `UPSTREAM.md` origins, and classifies unmapped skill paths against the matrix as discoveries. It never writes skills and never bumps a SHA.
+The script reads recorded repositories and commits, queries current upstream HEAD when the network is available, and reports `current`, `changed`, or `unreachable`. For a `changed` upstream it lists the changed paths, maps them onto Methodrail skills from `UPSTREAM.md` origins, classifies unmapped skill paths against the matrix as discoveries, and reports `relevance`: `mapped` (an adapted skill's upstream path changed; review), `discoveries-only` (only other upstream skills changed; report), or `unrelated` (no skill paths changed). Only `mapped` is review-relevant drift. It never writes skills and never bumps a SHA.
 
 ## Import rules
 

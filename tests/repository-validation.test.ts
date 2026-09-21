@@ -144,3 +144,37 @@ test("validator reports native skill, link, legacy file, plugin, and rule errors
   assert.ok(messages.some((message) => message.includes("Missing required Methodrail skill")));
   assert.ok(messages.some((message) => message.includes("Package lock and package versions must agree")));
 });
+
+test("validator rejects permission hooks and missing hook scripts", (t) => {
+  const root = mkdtempSync(join(tmpdir(), "methodrail-hooks-"));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  mkdirSync(join(root, ".cursor-plugin"));
+  writeFileSync(
+    join(root, ".cursor-plugin/plugin.json"),
+    JSON.stringify({ name: "x", version: "1.0.0", description: "d", hooks: "./hooks/hooks.json" }),
+  );
+  mkdirSync(join(root, "hooks"));
+  writeFileSync(
+    join(root, "hooks/hooks.json"),
+    JSON.stringify({
+      version: 1,
+      hooks: {
+        beforeShellExecution: [{ command: "./scripts/hooks/gate.sh" }],
+        postToolUse: [{ command: "./scripts/hooks/missing.sh" }],
+        stop: [{ command: "./scripts/hooks/ok.sh", timeout: 5 }],
+      },
+    }),
+  );
+  mkdirSync(join(root, "scripts/hooks"), { recursive: true });
+  writeFileSync(join(root, "scripts/hooks/ok.sh"), "#!/bin/sh\nprintf '{}'\n");
+  const messages = validateRepository(root).issues.map((i) => i.message);
+  assert.ok(
+    messages.some((m) => /beforeShellExecution.*observational/.test(m)),
+    messages.join("\n"),
+  );
+  assert.ok(
+    messages.some((m) => /missing\.sh.*does not exist/.test(m)),
+    messages.join("\n"),
+  );
+  assert.ok(!messages.some((m) => /stop/.test(m) && /observational/.test(m)));
+});

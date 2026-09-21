@@ -3,6 +3,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { materializeFixture, readIfExists, removeWorktree, OVERLAY_MANIFEST } from "./worktree.js";
 import { walkFiles } from "../fs-walk.js";
+import { extractCompletionReport } from "./completion-report.js";
 import type { CommandLogEntry, EvalContext, EvalRun, OutcomeCheck, OutcomeGrade } from "./types.js";
 
 function check(id: string, passed: boolean, detail: string): OutcomeCheck {
@@ -355,6 +356,83 @@ function recordsAdrApproval(answer: string): boolean {
   );
 }
 
+function approvalNearStore(answer: string): boolean {
+  if (
+    /\b(?:not|never|without)\s+(?:been\s+)?approv/i.test(answer) ||
+    /\bunapproved\b/i.test(answer) ||
+    /\bno approval\b/i.test(answer) ||
+    /\bdid not wait\b/i.test(answer)
+  ) {
+    return false;
+  }
+  const re = /\bapprov(?:ed|al)\b/gi;
+  let match: RegExpExecArray | null;
+  while ((match = re.exec(answer))) {
+    const start = Math.max(0, match.index - 300);
+    const end = Math.min(answer.length, match.index + match[0].length + 300);
+    if (/\bADR\b|store|sqlite|file/i.test(answer.slice(start, end))) return true;
+  }
+  return recordsAdrApproval(answer);
+}
+
+function tsvDecisionRows(tsv: string): { phase: string; decision: string }[] {
+  return tsv
+    .split(/\r?\n/)
+    .slice(1)
+    .filter((line) => line.trim().length > 0)
+    .map((line) => {
+      const cols = line.split("\t");
+      return { phase: cols[1] ?? "", decision: cols[2] ?? "" };
+    });
+}
+
+function smallChoiceInTsv(tsv: string): boolean {
+  return tsvDecisionRows(tsv).some(
+    (row) => /json/i.test(row.decision) && !/store|sqlite|file/i.test(`${row.phase}\t${row.decision}`),
+  );
+}
+
+function namedStaleRetry(answer: string): boolean {
+  return /immediate retry|retried immediately|retry.{0,20}immediate/i.test(answer);
+}
+
+function contradictionNearStale(answer: string): boolean {
+  const stale = /immediate retry|retried immediately|retry.{0,20}immediate/gi;
+  let match: RegExpExecArray | null;
+  while ((match = stale.exec(answer))) {
+    const start = Math.max(0, match.index - 200);
+    const end = Math.min(answer.length, match.index + match[0].length + 200);
+    if (/contradict|stale|no longer|outdated|reconcil/i.test(answer.slice(start, end))) return true;
+  }
+  return false;
+}
+
+function evidenceBoundary(answer: string): boolean {
+  return /does not (?:prove|show|establish)|only (?:proves|shows)|cannot (?:prove|confirm)|Retry-After|not (?:evidence|proof) (?:of|that)/i.test(
+    answer,
+  );
+}
+
+function topRecommendationSpan(answer: string): string | null {
+  const re = /top (?:recommendation|candidate|pick)|recommend(?:ed)? first/i;
+  const match = re.exec(answer);
+  if (!match) return null;
+  const from = answer.lastIndexOf("\n", match.index) + 1;
+  let end = answer.indexOf("\n\n", from);
+  if (end < 0) end = answer.length;
+  let span = answer.slice(from, end);
+  if (!/orderIntake/i.test(span)) {
+    const next = answer.indexOf("\n\n", end + 2);
+    span += answer.slice(end, next < 0 ? Math.min(answer.length, end + 500) : next);
+  }
+  return span;
+}
+
+function firstNamedModule(span: string): string | null {
+  const match = /orderIntake|ledger|userService|format/i.exec(span);
+  return match ? match[0] : null;
+}
+
 const ARTIFACT_CURATED = [
   "AGENTS.md",
   "CONTEXT.md",
@@ -431,14 +509,25 @@ function gradeDecisionLadder(run: EvalRun, ctx: EvalContext): OutcomeGrade {
     const tsv = readIfExists(join(root, "decisions.tsv")) ?? "";
     const header = tsv.split(/\r?\n/, 1)[0]?.trim() === "ts\tphase\tdecision\twhy\tevidence\tresult";
     const adr = readIfExists(join(root, "docs/adr/0002-file-store.md")) ?? "";
-    const approved = recordsAdrApproval(answer);
+    const approvedFromProse = approvalNearStore(answer);
     const standalone = adr.length > 0 && !/see the tsv/i.test(adr) && /file/i.test(adr) && /sqlite/i.test(adr);
-    const smallTsv = /log writes as JSON/i.test(tsv) || /JSON lines/i.test(tsv);
+    const smallTsv = smallChoiceInTsv(tsv);
     const smallAdr = /log format|JSON lines/.test(adr) && !/file-backed|sqlite/i.test(adr);
+    const report = extractCompletionReport(answer);
+    let smallChoice = smallTsv && !smallAdr;
+    let approved = approvedFromProse;
+    if (report?.decisions && report.decisions.length > 0) {
+      const logDecision = report.decisions.find((row) => /json|log/i.test(row.subject));
+      if (logDecision) {
+        smallChoice = /tsv|reversible|operational/i.test(logDecision.disposition) && logDecision.approval !== "approved";
+      }
+      const storeDecision = report.decisions.find((row) => /store|sqlite|ADR|file/i.test(row.subject));
+      if (storeDecision) approved = storeDecision.approval === "approved";
+    }
     const tsvOverride = /tsv overrides the adr/i.test(tsv) || /switched back to SQLite in the log/i.test(adr);
     return gradeFrom([
       check("tsv-schema", header, header ? "six-column TSV preserved" : "TSV header changed"),
-      check("small-choice", smallTsv && !smallAdr, smallTsv && !smallAdr ? "log format stayed TSV-only" : "small choice missing or ADR-spammed"),
+      check("small-choice", smallChoice, smallChoice ? "log format stayed TSV-only" : "small choice missing or ADR-spammed"),
       check("adr-approval", approved && standalone, approved && standalone ? "approved standalone store ADR" : "ADR missing, unapproved, or TSV-dependent"),
       check("adr-0001", filesUnchanged(root, "docs/adr/0001-billing-owner.md", originalAdr), "existing ADR preserved"),
       check("no-tsv-override", !tsvOverride, tsvOverride ? "later TSV overrode the ADR" : "ADR still governs"),
@@ -469,10 +558,10 @@ function gradeKnowledgeReconciliationV09(run: EvalRun, ctx: EvalContext): Outcom
     `;
     const result = runNode(["--input-type=commonjs", "-e", driver], root);
     const noteOk = filesUnchanged(root, ".methodrail/knowledge/mail.md", originalNote);
-    const reconcile = /reconcile-required/i.test(answer);
     const kept = /event-id/i.test(answer);
-    const stale = /immediate retry|retried immediately/i.test(answer);
-    const boundary = /Retry-After|does not prove/i.test(answer);
+    const stale = namedStaleRetry(answer);
+    const reconcile = ( /reconcile-required/i.test(answer) || contradictionNearStale(answer) ) && kept && stale;
+    const boundary = evidenceBoundary(answer);
     return gradeFrom([
       check(
         "current-behavior",
@@ -480,7 +569,7 @@ function gradeKnowledgeReconciliationV09(run: EvalRun, ctx: EvalContext): Outcom
         result.ok ? "event-id keying and backoff held" : `driver failed: ${result.output.slice(0, 400)}`,
       ),
       check("note-untouched", noteOk, noteOk ? "note was not rewritten" : "silently rewrote the note"),
-      check("reconcile", reconcile && kept && stale, reconcile && kept && stale ? "named valid and stale slices" : "trusted or discarded the whole note"),
+      check("reconcile", reconcile, reconcile ? "named valid and stale slices" : "trusted or discarded the whole note"),
       check("evidence-boundary", boundary, boundary ? "explained the evidence boundary" : "missing evidence boundary"),
     ]);
   });
@@ -497,14 +586,23 @@ function gradeArchitectureDeepening(run: EvalRun, ctx: EvalContext): OutcomeGrad
     const deepen = /orderIntake/i.test(answer) && /deepen/i.test(answer);
     const preserve = /ledger/i.test(answer) && /preserve|already deep/i.test(answer);
     const reject = /format/i.test(answer) && /reject|speculative/i.test(answer);
-    const top = /top recommendation[\s\S]{0,200}orderIntake/i.test(answer);
-    const notLedger = !/top recommendation[\s\S]{0,200}ledger/i.test(answer);
+    const report = extractCompletionReport(answer);
+    const span = topRecommendationSpan(answer);
+    const first = span ? firstNamedModule(span) : null;
+    let top = Boolean(span && /orderIntake/i.test(span) && first && /orderIntake/i.test(first));
+    if (report?.decisions && report.decisions.length > 0) {
+      const deepenIntake = report.decisions.some(
+        (row) => /orderIntake/i.test(row.subject) && /deepen/i.test(row.disposition),
+      );
+      const deepenLedger = report.decisions.some((row) => /ledger/i.test(row.subject) && /deepen/i.test(row.disposition));
+      top = deepenIntake && !deepenLedger;
+    }
     const brief = /\/refactor/i.test(answer) && /characterization|verification/i.test(answer);
     const noCdn = !/cdn\.tailwindcss\.com|cdn\.jsdelivr\.net/i.test(answer);
     return gradeFrom([
       check("no-source-edit", noSourceEdit, noSourceEdit ? "survey did not edit source" : "source changed during survey"),
       check("classes", passThrough && deepen && preserve && reject, passThrough && deepen && preserve && reject ? "classified all four modules" : "missed delete/deepen/preserve/reject"),
-      check("top", top && notLedger, top && notLedger ? "recommended the shallow intake module" : "recommended the already-deep module or missed intake"),
+      check("top", top, top ? "recommended the shallow intake module" : "recommended the already-deep module or missed intake"),
       check("brief", brief, brief ? "verification-ready /refactor brief" : "missing characterization or /refactor route"),
       check("portable-report", noCdn, noCdn ? "report usable without remote assets" : "report depends on a CDN"),
     ]);

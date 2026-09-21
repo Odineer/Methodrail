@@ -10,6 +10,8 @@
   "license": "MIT",
   "skills": "./skills/",
   "rules": "./rules/",
+  "hooks": "./hooks/hooks.json",
+  "logo": "assets/logo.svg",
   "keywords": [
     "engineering",
     "evidence",

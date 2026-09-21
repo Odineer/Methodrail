@@ -67,7 +67,7 @@ Do not call source reading observed behavior.
 
 ## Done when
 
-The original question has a direct evidence-backed answer, or the blocker and remaining uncertainty are explicit.
+The original question has a direct evidence-backed answer, or the blocker and remaining uncertainty are explicit. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
 
 ## Neighbors
 

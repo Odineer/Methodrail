@@ -70,14 +70,14 @@ test("live v0.9 project-artifact-interoperability pilot is complete and rescored
   const results = Object.fromEntries(
     grade.pairs.map((pair) => [`${pair.fixture}:${pair.host}:r${pair.repeat}`, pair.report.empirical]),
   );
-  assert.equal(results["decision-ladder:cursor:r1"], "incomplete");
-  assert.equal(results["decision-ladder:cursor:r2"], "incomplete");
+  assert.equal(results["decision-ladder:cursor:r1"], "helped");
+  assert.equal(results["decision-ladder:cursor:r2"], "helped");
   assert.equal(results["decision-ladder:codex:r1"], "incomplete");
   assert.equal(results["knowledge-reconciliation-v0.9:cursor:r1"], "incomplete");
   assert.equal(results["knowledge-reconciliation-v0.9:cursor:r2"], "incomplete");
   assert.equal(results["knowledge-reconciliation-v0.9:codex:r1"], "incomplete");
   assert.equal(results["architecture-deepening:cursor:r1"], "helped");
-  assert.equal(results["architecture-deepening:cursor:r2"], "incomplete");
-  assert.equal(results["architecture-deepening:codex:r1"], "incomplete");
+  assert.equal(results["architecture-deepening:cursor:r2"], "helped");
+  assert.equal(results["architecture-deepening:codex:r1"], "helped");
   assert.equal(grade.pairs.some((pair) => pair.report.empirical === "harmed"), false);
 });

@@ -8,7 +8,7 @@ export const EXPENSIVE_SKILLS = [
 
 export type EvalCondition = "baseline" | "methodrail";
 export type Provenance = "live" | "constructed" | "synthetic";
-export type CaptureQuality = "runner_captured" | "operator_summary";
+export type CaptureQuality = "runner_captured" | "hook_captured" | "operator_summary";
 export type RoutingAssessment = "appropriate" | "miss" | "violation";
 export type OperationalQuality = "clean" | "wasteful" | "violating";
 export type EmpiricalResult = "helped" | "neutral" | "harmed" | "incomplete";
@@ -32,6 +32,7 @@ export interface RunArtifacts {
   answer?: string;
   overlay?: string;
   worktree?: string;
+  ledger?: string;
 }
 
 export interface CommandLogEntry {

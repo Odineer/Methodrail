@@ -45,7 +45,9 @@ Read the JSON. Do not guess SHAs or changed paths when the script answered.
 | `current` | Report current. No workers. Stop. |
 | `unreachable` | Report the failure. No edits. Stop. |
 | `changed` with `diff_error` | Report that the diff could not be listed. No edits. Stop. |
-| `changed` | Continue to triage. |
+| `changed`, `relevance: unrelated` | Report that HEAD moved without touching adapted paths. No workers. Bump `last_reviewed_commit` only if the user asks; record the note. Stop. |
+| `changed`, `relevance: discoveries-only` | Report the discoveries. No workers, no imports. Stop unless the user asks to adopt a discovery. |
+| `changed`, `relevance: mapped` | Continue to triage. |
 
 ## Phase B: Triage
 

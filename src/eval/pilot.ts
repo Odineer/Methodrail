@@ -70,6 +70,12 @@ function artifactErrors(run: EvalRun, repoRoot: string): string[] {
       errors.push(`${label}: runner_captured requires a transcript artifact`);
     }
   }
+  if (run.capture === "hook_captured") {
+    const ledger = artifacts.ledger;
+    if (!ledger || !existsSync(join(repoRoot, ledger))) {
+      errors.push(`${label}: hook_captured requires a ledger artifact`);
+    }
+  }
   return errors;
 }
 
