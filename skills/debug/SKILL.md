@@ -53,7 +53,7 @@ Do not automatically profile or trace every bug.
 
 ## Done when
 
-The failure is reproduced or bounded, its cause is supported by evidence, and the fix is verified against the reproduction plus proportionate regression checks.
+The failure is reproduced or bounded, its cause is supported by evidence, and the fix is verified against the reproduction plus proportionate regression checks. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
 
 ## Neighbors
 

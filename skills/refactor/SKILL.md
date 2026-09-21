@@ -48,7 +48,7 @@ blast-radius/review proportional to risk
 
 ## Done when
 
-The selected friction is reduced, relevant observable behavior is preserved with fresh evidence, and any intentional behavior change is explicit.
+The selected friction is reduced, relevant observable behavior is preserved with fresh evidence, and any intentional behavior change is explicit. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
 
 ## Neighbors
 

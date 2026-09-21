@@ -124,4 +124,4 @@ Performance claim             → performance
 Visual claim                  → visual-parity
 ```
 
-This skill is a leaf gate, not a workflow. Prefer the project-local verify skill when present. Do not weaken this gate to save tokens. Evidence method should be proportional to the claim.
+This skill is a leaf gate, not a workflow. Prefer the project-local verify skill when present. Do not weaken this gate to save tokens. Evidence method should be proportional to the claim. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.

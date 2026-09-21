@@ -73,7 +73,7 @@ Matt's `implement` skill is not a public Methodrail skill. `/develop` owns the l
 
 ## Done when
 
-Acceptance criteria are met, the task delta is scoped to the request and necessary supporting work, change-created leftovers are removed, and each completion claim has fresh relevant evidence or a clearly reported verification gap.
+Acceptance criteria are met, the task delta is scoped to the request and necessary supporting work, change-created leftovers are removed, and each completion claim has fresh relevant evidence or a clearly reported verification gap. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
 
 ## Neighbors
 

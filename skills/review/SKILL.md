@@ -44,7 +44,7 @@ Do not run multiple expensive reviewers for trivial changes. Give the reviewer a
 
 ## Done when
 
-The requested change range was inspected in context, findings are evidence-backed and prioritized, and verification gaps are explicit.
+The requested change range was inspected in context, findings are evidence-backed and prioritized, and verification gaps are explicit. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
 
 ## Neighbors
 

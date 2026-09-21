@@ -3,6 +3,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { materializeFixture, readIfExists, removeWorktree, OVERLAY_MANIFEST } from "./worktree.js";
 import { walkFiles } from "../fs-walk.js";
+import { extractCompletionReport } from "./completion-report.js";
 import type { CommandLogEntry, EvalContext, EvalRun, OutcomeCheck, OutcomeGrade } from "./types.js";
 
 function check(id: string, passed: boolean, detail: string): OutcomeCheck {
@@ -508,14 +509,25 @@ function gradeDecisionLadder(run: EvalRun, ctx: EvalContext): OutcomeGrade {
     const tsv = readIfExists(join(root, "decisions.tsv")) ?? "";
     const header = tsv.split(/\r?\n/, 1)[0]?.trim() === "ts\tphase\tdecision\twhy\tevidence\tresult";
     const adr = readIfExists(join(root, "docs/adr/0002-file-store.md")) ?? "";
-    const approved = approvalNearStore(answer);
+    const approvedFromProse = approvalNearStore(answer);
     const standalone = adr.length > 0 && !/see the tsv/i.test(adr) && /file/i.test(adr) && /sqlite/i.test(adr);
     const smallTsv = smallChoiceInTsv(tsv);
     const smallAdr = /log format|JSON lines/.test(adr) && !/file-backed|sqlite/i.test(adr);
+    const report = extractCompletionReport(answer);
+    let smallChoice = smallTsv && !smallAdr;
+    let approved = approvedFromProse;
+    if (report?.decisions && report.decisions.length > 0) {
+      const logDecision = report.decisions.find((row) => /json|log/i.test(row.subject));
+      if (logDecision) {
+        smallChoice = /tsv|reversible|operational/i.test(logDecision.disposition) && logDecision.approval !== "approved";
+      }
+      const storeDecision = report.decisions.find((row) => /store|sqlite|ADR|file/i.test(row.subject));
+      if (storeDecision) approved = storeDecision.approval === "approved";
+    }
     const tsvOverride = /tsv overrides the adr/i.test(tsv) || /switched back to SQLite in the log/i.test(adr);
     return gradeFrom([
       check("tsv-schema", header, header ? "six-column TSV preserved" : "TSV header changed"),
-      check("small-choice", smallTsv && !smallAdr, smallTsv && !smallAdr ? "log format stayed TSV-only" : "small choice missing or ADR-spammed"),
+      check("small-choice", smallChoice, smallChoice ? "log format stayed TSV-only" : "small choice missing or ADR-spammed"),
       check("adr-approval", approved && standalone, approved && standalone ? "approved standalone store ADR" : "ADR missing, unapproved, or TSV-dependent"),
       check("adr-0001", filesUnchanged(root, "docs/adr/0001-billing-owner.md", originalAdr), "existing ADR preserved"),
       check("no-tsv-override", !tsvOverride, tsvOverride ? "later TSV overrode the ADR" : "ADR still governs"),
@@ -574,9 +586,17 @@ function gradeArchitectureDeepening(run: EvalRun, ctx: EvalContext): OutcomeGrad
     const deepen = /orderIntake/i.test(answer) && /deepen/i.test(answer);
     const preserve = /ledger/i.test(answer) && /preserve|already deep/i.test(answer);
     const reject = /format/i.test(answer) && /reject|speculative/i.test(answer);
+    const report = extractCompletionReport(answer);
     const span = topRecommendationSpan(answer);
     const first = span ? firstNamedModule(span) : null;
-    const top = Boolean(span && /orderIntake/i.test(span) && first && /orderIntake/i.test(first));
+    let top = Boolean(span && /orderIntake/i.test(span) && first && /orderIntake/i.test(first));
+    if (report?.decisions && report.decisions.length > 0) {
+      const deepenIntake = report.decisions.some(
+        (row) => /orderIntake/i.test(row.subject) && /deepen/i.test(row.disposition),
+      );
+      const deepenLedger = report.decisions.some((row) => /ledger/i.test(row.subject) && /deepen/i.test(row.disposition));
+      top = deepenIntake && !deepenLedger;
+    }
     const brief = /\/refactor/i.test(answer) && /characterization|verification/i.test(answer);
     const noCdn = !/cdn\.tailwindcss\.com|cdn\.jsdelivr\.net/i.test(answer);
     return gradeFrom([
