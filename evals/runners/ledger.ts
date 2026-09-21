@@ -1,14 +1,32 @@
 #!/usr/bin/env node
-import { cpSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
+import { homedir } from "node:os";
 import { pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
 import { parseLedger } from "../../src/ledger/parse.js";
-import { ledgerToRun } from "../../src/ledger/to-run.js";
+import { formatSummary, summarizeLedgers } from "../../src/ledger/summarize.js";
+import { ledgerToRun, type LedgerRunOptions } from "../../src/ledger/to-run.js";
 
 function fail(message: string): never {
   console.error(message);
   process.exit(1);
+}
+
+function defaultLedgerRoot(): string {
+  if (process.env.METHODRAIL_LEDGER_DIR) return resolve(process.env.METHODRAIL_LEDGER_DIR);
+  const state = process.env.XDG_STATE_HOME || join(homedir(), ".local", "state");
+  return join(state, "methodrail", "sessions");
+}
+
+function listJsonl(root: string, current = root, out: string[] = []): string[] {
+  if (!existsSync(current)) return out;
+  for (const name of readdirSync(current)) {
+    const path = join(current, name);
+    if (statSync(path).isDirectory()) listJsonl(root, path, out);
+    else if (name.endsWith(".jsonl")) out.push(path);
+  }
+  return out;
 }
 
 function toRun(argv: string[]): void {
@@ -41,7 +59,7 @@ function toRun(argv: string[]): void {
   const first = events[0];
   const workspaceRoot = values["workspace-root"] ?? first?.workspace_root;
   if (!workspaceRoot) fail("--workspace-root is required when the ledger has no events");
-  const options: import("../../src/ledger/to-run.js").LedgerRunOptions = {
+  const options: LedgerRunOptions = {
     fixtureId,
     condition,
     host,
@@ -75,12 +93,24 @@ function toRun(argv: string[]): void {
   }
 }
 
+function summarize(argv: string[]): void {
+  const { values, positionals } = parseArgs({
+    args: argv,
+    options: { "plugin-root": { type: "string" } },
+    allowPositionals: true,
+  });
+  const dir = resolve(positionals[0] ?? defaultLedgerRoot());
+  const files = listJsonl(dir).map((path) => ({ path, text: readFileSync(path, "utf8") }));
+  const summary = summarizeLedgers(files, values["plugin-root"] ?? process.cwd());
+  console.log(formatSummary(summary));
+}
+
 function main(): void {
   const argv = process.argv.slice(2);
   const command = argv[0] === "to-run" || argv[0] === "summarize" ? argv[0] : "to-run";
   const rest = argv[0] === command ? argv.slice(1) : argv;
-  if (command === "summarize") fail("summarize is not implemented yet; use to-run");
-  toRun(rest);
+  if (command === "summarize") summarize(rest);
+  else toRun(rest);
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
