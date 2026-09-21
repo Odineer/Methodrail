@@ -91,6 +91,9 @@ npm test
 npm run validate
 npm run eval
 npm run check-upstreams
+npm run doctor
 ```
+
+`check-upstreams` reports `relevance` for a moved upstream HEAD; only `mapped` means an adapted skill's source changed. `doctor` fails when the locally installed Cursor plugin is a stale copy of this repository; live observations recorded against a stale install do not describe HEAD.
 
 Before submitting, inspect the diff for obsolete runtime concepts, duplicated instructions, broken references, invalid plugin metadata, unexplained copied content, and excessive permanent context.

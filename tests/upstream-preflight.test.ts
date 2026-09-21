@@ -8,6 +8,7 @@ import { run } from "../scripts/check-upstreams.mjs";
 import {
   buildPreflight,
   classifyChangedPaths,
+  describeRelevance,
   loadMatrixRows,
   loadSkillOrigins,
   originBelongsToRecord,
@@ -210,6 +211,79 @@ test("buildPreflight emits the named upstream payload when changed", () => {
   assert.equal(payload.status, "changed");
   assert.equal(payload.mapped[0]?.methodrail_skill, "tdd");
   assert.deepEqual(payload.unmapped_changes, ["README.md"]);
+  assert.equal(payload.relevance, "mapped");
+});
+
+test("buildPreflight scopes relevance to adapted paths", () => {
+  const tdd = skillOrigin("tdd", "Origin: mattpocock/skills / skills/engineering/tdd\nUpstream revision: abcdef0\n");
+  const unrelated = buildPreflight({
+    record: mattRecord,
+    head: "zzz999",
+    changedPaths: ["README.md", "docs/blog/post.md"],
+    skills: [tdd],
+    matrixRows: parseMatrix(matrixSource),
+  });
+  assert.equal(unrelated.status, "changed");
+  assert.equal(unrelated.relevance, "unrelated");
+  assert.match(describeRelevance(unrelated), /^unrelated \(2 path/);
+
+  const discoveries = buildPreflight({
+    record: mattRecord,
+    head: "zzz999",
+    changedPaths: ["skills/brand-new/SKILL.md"],
+    skills: [tdd],
+    matrixRows: parseMatrix(matrixSource),
+  });
+  assert.equal(discoveries.relevance, "discoveries-only");
+  assert.match(describeRelevance(discoveries), /^discoveries-only \(1 upstream/);
+
+  const mapped = buildPreflight({
+    record: mattRecord,
+    head: "zzz999",
+    changedPaths: ["skills/engineering/tdd/SKILL.md"],
+    skills: [tdd],
+    matrixRows: parseMatrix(matrixSource),
+  });
+  assert.equal(describeRelevance(mapped), "mapped (tdd)");
+
+  const current = buildPreflight({ record: mattRecord, head: "aaa111", changedPaths: [], skills: [tdd], matrixRows: [] });
+  assert.equal(current.relevance, undefined);
+  assert.equal(describeRelevance(current), "");
+
+  const failed = buildPreflight({
+    record: mattRecord,
+    head: "zzz999",
+    changedPaths: [],
+    skills: [tdd],
+    matrixRows: [],
+    diffError: "could not list changed paths",
+  });
+  assert.equal(failed.relevance, undefined);
+  assert.match(describeRelevance(failed), /^diff unavailable/);
+});
+
+test("text mode reports relevance per upstream without touching git when injected", () => {
+  const logs: string[] = [];
+  const original = console.log;
+  console.log = (line) => logs.push(String(line));
+  try {
+    run([], {
+      loadRecords: () => [mattRecord, pstackRecord],
+      loadSkillOrigins: () => [
+        skillOrigin("tdd", "Origin: mattpocock/skills / skills/engineering/tdd\nUpstream revision: abcdef0\n"),
+        skillOrigin("how", "Origin: pstack / how\nUpstream revision: 1111111\n"),
+      ],
+      loadMatrixRows: () => parseMatrix(matrixSource),
+      gitLsRemote: () => "zzz999",
+      listChangedPaths: (repository) =>
+        repository === pstackRecord.repository ? ["pstack/skills/how/SKILL.md"] : ["README.md"],
+    });
+  } finally {
+    console.log = original;
+  }
+  const text = logs.join("\n");
+  assert.match(text, /mattpocock\/skills:\n(?:.*\n){2}  status: changed\n  relevance: unrelated \(1 path/);
+  assert.match(text, /pstack:\n(?:.*\n){2}  status: changed\n  relevance: mapped \(how\)/);
 });
 
 test("parseCliArgs requires --upstream with json format and defaults to text", () => {

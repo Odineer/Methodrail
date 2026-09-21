@@ -19,7 +19,8 @@ Methodrail is a Cursor plugin and portable Agent Skills family. It is methodolog
 - Typecheck, tests, validate, and eval: `npm run check`
 - Validate only: `npm run validate`
 - Eval fixtures and recorded examples: `npm run eval`
-- Upstream drift: `npm run check-upstreams`
+- Upstream drift (scoped to adapted paths via `relevance`): `npm run check-upstreams`
+- Installed local plugin matches HEAD: `npm run doctor` (before any live observation)
 - One-source JSON preflight: `node scripts/check-upstreams.mjs --upstream <name> --format json`
 - Refresh host projections: `npm run project-hosts`
 

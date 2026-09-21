@@ -7,6 +7,7 @@ import { tmpdir } from "node:os";
 import { parse } from "yaml";
 import {
   buildPreflight,
+  describeRelevance,
   loadMatrixRows,
   loadSkillOrigins,
   parseCliArgs,
@@ -76,14 +77,29 @@ function fetchCommit(dir, repository, sha) {
   });
 }
 
-function printText(records, skills) {
+function preflightFor(record, skills, matrixRows, deps) {
+  const gitLs = deps.gitLsRemote ?? gitLsRemote;
+  const listPaths = deps.listChangedPaths ?? listChangedPaths;
+  const head = record.repository ? gitLs(record.repository) : "";
+  let changedPaths = [];
+  let diffError;
+  if (head && head !== record.imported) {
+    const listed = listPaths(record.repository, record.imported, head);
+    if (listed == null) diffError = "could not list changed paths";
+    else changedPaths = listed;
+  }
+  return buildPreflight({ record, head, changedPaths, skills, matrixRows, diffError });
+}
+
+function printText(records, skills, matrixRows, deps) {
   for (const record of records) {
-    const head = record.repository ? gitLsRemote(record.repository) : "";
-    const status = !head ? "unreachable" : head === record.imported ? "current" : "changed";
+    const payload = preflightFor(record, skills, matrixRows, deps);
     console.log(`${record.name}:`);
     console.log(`  imported: ${record.imported || "(missing)"}`);
-    console.log(`  upstream: ${head || "(network unavailable)"}`);
-    console.log(`  status: ${status}`);
+    console.log(`  upstream: ${payload.head || "(network unavailable)"}`);
+    console.log(`  status: ${payload.status}`);
+    const relevance = describeRelevance(payload);
+    if (relevance) console.log(`  relevance: ${relevance}`);
     console.log("");
   }
 
@@ -105,30 +121,14 @@ export function run(argv = process.argv.slice(2), deps = {}) {
     throw new Error(`Unknown upstream: ${args.upstream}`);
   }
 
+  const matrixRows = (deps.loadMatrixRows ?? loadMatrixRows)(root);
+
   if (args.format === "text") {
-    printText(selected, skills);
+    printText(selected, skills, matrixRows, deps);
     return;
   }
 
-  const record = selected[0];
-  const gitLs = deps.gitLsRemote ?? gitLsRemote;
-  const listPaths = deps.listChangedPaths ?? listChangedPaths;
-  const head = record.repository ? gitLs(record.repository) : "";
-  let changedPaths = [];
-  let diffError;
-  if (head && head !== record.imported) {
-    const listed = listPaths(record.repository, record.imported, head);
-    if (listed == null) diffError = "could not list changed paths";
-    else changedPaths = listed;
-  }
-  const payload = buildPreflight({
-    record,
-    head,
-    changedPaths,
-    skills,
-    matrixRows: (deps.loadMatrixRows ?? loadMatrixRows)(root),
-    diffError,
-  });
+  const payload = preflightFor(selected[0], skills, matrixRows, deps);
   console.log(JSON.stringify(payload, null, 2));
 }
 

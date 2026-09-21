@@ -38,7 +38,7 @@ git clone https://github.com/Odineer/Methodrail.git \
   ~/.cursor/plugins/local/methodrail
 ```
 
-Methodrail then appears in **Cursor Customize**. Consuming projects do not install an npm dependency, run a daemon, or use a Methodrail CLI.
+Methodrail then appears in **Cursor Customize**. If you develop Methodrail itself, symlink your checkout there instead of cloning so Cursor always runs HEAD, and run `npm run doctor` to confirm the installed plugin matches the repository before recording any live observation. Consuming projects do not install an npm dependency, run a daemon, or use a Methodrail CLI.
 
 ## How it works
 
@@ -133,6 +133,7 @@ npm test
 npm run validate
 npm run eval
 npm run check-upstreams
+npm run doctor
 ```
 
 Validation checks plugin metadata, native skill frontmatter, methodology references, maintainer evals, permanent-context size, provenance files, host invariant projections, and the realistic initialized-project fixture.

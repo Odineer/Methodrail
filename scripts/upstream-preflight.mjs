@@ -179,7 +179,28 @@ export function buildPreflight({ record, head, changedPaths, skills, matrixRows,
   payload.mapped = classified.mapped;
   payload.discoveries = classified.discoveries;
   payload.unmapped_changes = classified.unmapped_changes;
+  payload.relevance = relevanceOf(classified);
   return payload;
+}
+
+// A moved upstream HEAD is only review-relevant when it touched paths Methodrail adapted.
+export function relevanceOf({ mapped, discoveries }) {
+  if (mapped.length > 0) return "mapped";
+  if (discoveries.length > 0) return "discoveries-only";
+  return "unrelated";
+}
+
+export function describeRelevance(payload) {
+  if (payload.status !== "changed") return "";
+  if (payload.diff_error) return `diff unavailable (${payload.diff_error})`;
+  switch (payload.relevance) {
+    case "mapped":
+      return `mapped (${payload.mapped.map((row) => row.methodrail_skill).join(", ")})`;
+    case "discoveries-only":
+      return `discoveries-only (${payload.discoveries.length} upstream skill path(s), no adapted skill changed)`;
+    default:
+      return `unrelated (${payload.unmapped_changes.length} path(s) outside adapted skills)`;
+  }
 }
 
 export function resolveRecord(records, name) {
