@@ -17,6 +17,9 @@ function captureQuality(baseline: ScoreResult, methodrail: ScoreResult): Capture
   if (baseline.capture === "operator_summary" || methodrail.capture === "operator_summary") {
     return "operator_summary";
   }
+  if (baseline.capture === "hook_captured" || methodrail.capture === "hook_captured") {
+    return "hook_captured";
+  }
   return "runner_captured";
 }
 

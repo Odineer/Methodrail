@@ -14,7 +14,8 @@
     "eval": "tsx evals/runners/cli.ts",
     "project-hosts": "tsx src/project-family-invariant.ts",
     "check": "tsc --noEmit && npm test && npm run validate && npm run eval",
-    "check-upstreams": "node scripts/check-upstreams.mjs"
+    "check-upstreams": "node scripts/check-upstreams.mjs",
+    "ledger": "tsx evals/runners/ledger-to-run.ts"
   },
   "repository": {
     "type": "git",

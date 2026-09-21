@@ -22,9 +22,11 @@ function inferProvenance(value: Record<string, unknown>): Provenance {
   return "constructed";
 }
 
-function inferCapture(value: Record<string, unknown>, provenance: Provenance): CaptureQuality {
-  if (value.capture === "runner_captured" || value.capture === "operator_summary") return value.capture;
-  return provenance === "live" ? "operator_summary" : "operator_summary";
+function inferCapture(value: Record<string, unknown>): CaptureQuality {
+  if (value.capture === "runner_captured" || value.capture === "hook_captured" || value.capture === "operator_summary") {
+    return value.capture;
+  }
+  return "operator_summary";
 }
 
 function parseVerification(value: unknown): VerificationStep[] {
@@ -59,6 +61,7 @@ function parseArtifacts(value: unknown): RunArtifacts | undefined {
   if (typeof value.answer === "string") artifacts.answer = value.answer;
   if (typeof value.overlay === "string") artifacts.overlay = value.overlay;
   if (typeof value.worktree === "string") artifacts.worktree = value.worktree;
+  if (typeof value.ledger === "string") artifacts.ledger = value.ledger;
   return artifacts;
 }
 
@@ -93,7 +96,7 @@ export function parseRun(value: unknown): EvalRun {
     fixture_id: value.fixture_id,
     condition: value.condition,
     provenance,
-    capture: inferCapture(value, provenance),
+    capture: inferCapture(value),
     skills_invoked: strings(value.skills_invoked),
     references_loaded: strings(value.references_loaded),
     tools_used: strings(value.tools_used),
