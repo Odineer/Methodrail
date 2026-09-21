@@ -275,3 +275,113 @@ test("missing artifacts cannot pass a v0.9 grader", () => {
   );
   assert.equal(missing.passed, false);
 });
+
+test("v0.9 graders fail adversarial wording without supporting artifacts", () => {
+  const decision = loadExpectationFile(join(root, "evals/fixtures/decision-ladder/expected.yaml"));
+  const knowledge = loadExpectationFile(join(root, "evals/fixtures/knowledge-reconciliation-v0.9/expected.yaml"));
+  const architecture = loadExpectationFile(join(root, "evals/fixtures/architecture-deepening/expected.yaml"));
+
+  const approvalNoAdr = scoreRun(
+    synthetic("decision-ladder", {
+      outcome: "approval without adr",
+      overlay: "evals/runners/artifacts/decision-ladder/guardrail-unapproved/overlay",
+      command_log: "evals/runners/artifacts/decision-ladder/guardrail-unapproved/command.log.json",
+      answer: "evals/runners/artifacts/decision-ladder/guardrail-approval-without-adr/answer.md",
+    }),
+    decision,
+    ctx,
+  );
+  assert.equal(approvalNoAdr.passed, false);
+  assert.ok(approvalNoAdr.outcome.failures.some((line) => /adr-approval/i.test(line)));
+
+  const adrNoApproval = scoreRun(
+    synthetic("decision-ladder", {
+      outcome: "adr without approval",
+      overlay: "evals/runners/artifacts/decision-ladder/methodrail/overlay",
+      command_log: "evals/runners/artifacts/decision-ladder/methodrail/command.log.json",
+      answer: "evals/runners/artifacts/decision-ladder/guardrail-adr-without-approval/answer.md",
+    }),
+    decision,
+    ctx,
+  );
+  assert.equal(adrNoApproval.passed, false);
+  assert.ok(adrNoApproval.outcome.failures.some((line) => /adr-approval/i.test(line)));
+
+  const storeOnly = scoreRun(
+    synthetic("decision-ladder", {
+      outcome: "store only",
+      overlay: "evals/runners/artifacts/decision-ladder/codex-r1-baseline/overlay",
+      command_log: "evals/runners/artifacts/decision-ladder/baseline/command.log.json",
+      answer: "evals/runners/artifacts/decision-ladder/methodrail/answer.md",
+    }),
+    decision,
+    ctx,
+  );
+  assert.equal(storeOnly.passed, false);
+  assert.ok(storeOnly.outcome.failures.some((line) => /small-choice/i.test(line)));
+
+  const trustWhole = scoreRun(
+    synthetic("knowledge-reconciliation-v0.9", {
+      outcome: "trusted note",
+      overlay: "evals/runners/artifacts/knowledge-reconciliation-v0.9/methodrail/overlay",
+      command_log: "evals/runners/artifacts/knowledge-reconciliation-v0.9/methodrail/command.log.json",
+      answer: "evals/runners/artifacts/knowledge-reconciliation-v0.9/guardrail-trust-whole/answer.md",
+    }),
+    knowledge,
+    ctx,
+  );
+  assert.equal(trustWhole.passed, false);
+  assert.ok(trustWhole.outcome.failures.some((line) => /reconcile/i.test(line)));
+
+  const rewrite = scoreRun(
+    synthetic("knowledge-reconciliation-v0.9", {
+      outcome: "rewrote",
+      overlay: "evals/runners/artifacts/knowledge-reconciliation-v0.9/guardrail-rewrite/overlay",
+      command_log: "evals/runners/artifacts/knowledge-reconciliation-v0.9/guardrail-rewrite/command.log.json",
+      answer: "evals/runners/artifacts/knowledge-reconciliation-v0.9/cursor-r1-methodrail/answer.md",
+    }),
+    knowledge,
+    ctx,
+  );
+  assert.equal(rewrite.passed, false);
+  assert.ok(rewrite.outcome.failures.some((line) => /note-untouched/i.test(line)));
+
+  const noBoundary = scoreRun(
+    synthetic("knowledge-reconciliation-v0.9", {
+      outcome: "no hedge",
+      overlay: "evals/runners/artifacts/knowledge-reconciliation-v0.9/methodrail/overlay",
+      command_log: "evals/runners/artifacts/knowledge-reconciliation-v0.9/methodrail/command.log.json",
+      answer: "evals/runners/artifacts/knowledge-reconciliation-v0.9/guardrail-no-boundary/answer.md",
+    }),
+    knowledge,
+    ctx,
+  );
+  assert.equal(noBoundary.passed, false);
+  assert.ok(noBoundary.outcome.failures.some((line) => /evidence-boundary/i.test(line)));
+
+  const topLedger = scoreRun(
+    synthetic("architecture-deepening", {
+      outcome: "ledger first",
+      overlay: "evals/runners/artifacts/architecture-deepening/methodrail/overlay",
+      command_log: "evals/runners/artifacts/architecture-deepening/methodrail/command.log.json",
+      answer: "evals/runners/artifacts/architecture-deepening/guardrail-top-ledger/answer.md",
+    }),
+    architecture,
+    ctx,
+  );
+  assert.equal(topLedger.passed, false);
+  assert.ok(topLedger.outcome.failures.some((line) => /top/i.test(line)));
+
+  const noTop = scoreRun(
+    synthetic("architecture-deepening", {
+      outcome: "no top marker",
+      overlay: "evals/runners/artifacts/architecture-deepening/methodrail/overlay",
+      command_log: "evals/runners/artifacts/architecture-deepening/methodrail/command.log.json",
+      answer: "evals/runners/artifacts/architecture-deepening/guardrail-no-top/answer.md",
+    }),
+    architecture,
+    ctx,
+  );
+  assert.equal(noTop.passed, false);
+  assert.ok(noTop.outcome.failures.some((line) => /^top:/i.test(line) || /: recommended the already-deep/.test(line) || line.startsWith("top:")));
+});
