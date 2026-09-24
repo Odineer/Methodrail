@@ -34,29 +34,36 @@ discover artifact roles (content + layout)
 ↓
 resolve harness placement (directory vs linked external storage)
 ↓
+discover verification requirements without writing
+↓
 preview create | update | adopt | unchanged | conflict | unavailable
 ↓
 confirm non-empty writes
 ↓
 apply only the confirmed plan
 ↓
-verify an immediate refresh is a no-op
+prove generated verification, or report the partial state
+↓
+validate paths, integration, and refresh idempotency
+↓
+report created, adopted, unchanged, blocked, and skipped
 ```
 
 1. Interview the repository before asking the user. Load [repository interview](references/repository-interview.md) and [artifact interoperability](references/artifact-interoperability.md). Inspect the canonical `.methodrail` path at the git root, including whether it is a linked external harness. Classify each recognized artifact as create, update, adopt, unchanged, conflict, or unavailable. A conflict stops that role before any pointer is written.
-2. If a harness already exists, refresh it through that canonical path rather than recreate or move it. Load [control maintenance](references/control-maintenance.md).
+2. If a harness already exists, refresh it through that canonical path rather than recreate or move it. Load [control maintenance](references/control-maintenance.md). Collect drift findings and proposed edits. Do not invoke `maintain-verification-skill` before confirmation.
 3. If none exists, resolve [harness location](references/harness-location.md) before writing files. Ask whether Methodrail knowledge should live in the repository or in repository-bound external storage. Honor a preference already stated in the request. This choice decides git/PR visibility.
 4. Resolve only remaining choices the repository cannot answer. Ask a focused question only when the answer materially changes the generated files.
 5. Plan proportionally using [information ROI](references/information-roi.md) and [optional artifacts](references/optional-artifacts.md):
    - always consider `.methodrail/PROJECT.md` as a short index pointing at canonical sources (glossary, ADRs, specs/plans, operational TSV, verification, `AGENTS.md`) rather than copying them;
    - index existing knowledge; add control or a project-local skill only when it removes real recurring uncertainty; do not create files under `.methodrail/knowledge/`;
    - in a monorepo, document shared conventions once and add package-specific detail only where commands or constraints differ.
-6. Investigate control/verification explicitly when the project has a runnable surface. Load [control investigation](references/control-investigation.md). Record whether an in-repository verification skill or a linked-external control procedure is warranted, and include that in the preview. Do not invoke `create-verification-skill` during investigation. Do not write verification skills, control files, or feature maps in this step. If the checkout does not build or start, report that and skip verification-skill generation; do not repair product code. If the surface is not meaningful, plan static verification and do not invent runtime infrastructure.
-7. Preview the full plan. Inspection is read-only. A non-empty write waits for explicit confirmation. "Inspect Methodrail setup" is not confirmation. If the repository changes after preview, recompute the plan. A no-op refresh reports `unchanged` without a ceremonial question.
-8. Apply only confirmed targets through the git root's canonical `.methodrail/` path using [merge semantics](references/merge-semantics.md). Prefer templates in `templates/project/` as skeletons to fill from evidence, not as files to copy blindly. The link routes external writes to sibling storage. Adopt existing artifacts by pointer; leave their bytes unchanged. When the confirmed plan includes an in-repository verification skill, invoke `create-verification-skill` in generate mode. When the confirmed plan uses linked external storage, write the verified procedure under `.methodrail/control/` instead; do not claim a host-native skill outside the host's discovery root.
+6. Investigate control/verification explicitly when the project has a runnable surface. Load [control investigation](references/control-investigation.md). Invoke `create-verification-skill` in discovery mode and include the proposed artifacts in the preview. Do not invoke `create-verification-skill` in generate mode during investigation. Do not write verification skills, control files, or feature maps in this step. If the checkout does not build or start, report that and skip verification-skill generation; do not repair product code. If the surface is not meaningful, plan static verification and do not invent runtime infrastructure.
+7. Preview the full plan, including proposed verification artifacts. Inspection is read-only. A non-empty write waits for explicit confirmation. "Inspect Methodrail setup" is not confirmation. If the repository changes after preview, recompute the plan. A no-op refresh reports `unchanged` without a ceremonial question and does not regenerate a working verification skill.
+8. Apply only confirmed targets through the git root's canonical `.methodrail/` path using [merge semantics](references/merge-semantics.md). Prefer templates in `templates/project/` as skeletons to fill from evidence, not as files to copy blindly. The link routes external writes to sibling storage. Adopt existing artifacts by pointer; leave their bytes unchanged. When the confirmed plan includes new in-repository verification, invoke `create-verification-skill` in application phase (generate mode). When the confirmed plan uses linked external storage, write the verified procedure under `.methodrail/control/` and do not add a tracked native skill. On refresh, preserve curated verification content and invoke `maintain-verification-skill` in task-scoped mode only when evidence shows affected drift. Do not regenerate a working verification skill blindly.
 9. Install exactly one thin, supported integration described in [integrations](references/integrations.md). A linked external harness relies on the globally installed Methodrail integration plus the canonical repository-root link; do not edit tracked instruction files merely to advertise it. If a supported integration already exists, update only the Methodrail-owned pointer or leave it intact.
-10. Validate paths, commands, frontmatter, links, and idempotency. Report knowledge health with the freshness caveat in [artifact interoperability](references/artifact-interoperability.md). A second run with unchanged inputs must produce no diff.
-11. Report the harness location and every preview classification. Name created, adopted, preserved, skipped, conflicted, unavailable, and still-human items.
+10. After application, prove a newly generated verification procedure end to end. If that proof fails, report the partial state and a blocked verification result. Do not claim initialization is fully verified.
+11. Validate paths, commands, frontmatter, links, and idempotency. Report knowledge health with the freshness caveat in [artifact interoperability](references/artifact-interoperability.md). A second run with unchanged inputs must produce no diff.
+12. Report the harness location and every preview classification. Name created, adopted, unchanged, preserved, skipped, blocked, conflicted, unavailable, and still-human items.
 
 ## Output constraints
 
@@ -100,4 +107,4 @@ Do not copy global Methodrail operators into the project.
 
 ## Completion
 
-Initialization or refresh is complete when harness location is resolved, the preview was confirmed or was a no-op, generated guidance reflects observed repository facts, existing artifacts remain byte-identical unless an owned Methodrail block was approved, control procedures were investigated when applicable, verification is discoverable in the supported location for that placement, one supported integration exposes Methodrail without tracked changes when external storage was chosen, binding validation passes, knowledge health was reported with the freshness caveat, and another unchanged run would be a no-op.
+Initialization or refresh is complete when harness location is resolved, the preview was confirmed or was a no-op, generated guidance reflects observed repository facts, existing artifacts remain byte-identical unless an owned Methodrail block was approved, control procedures were investigated when applicable, verification is discoverable in the supported location for that placement, a newly generated procedure was proved or the partial state was reported as blocked, one supported integration exposes Methodrail without tracked changes when external storage was chosen, binding validation passes, knowledge health was reported with the freshness caveat, and another unchanged run would be a no-op.

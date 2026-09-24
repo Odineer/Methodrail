@@ -43,8 +43,8 @@ Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.
 | arena | Compete on the same artifact | ADAPT | `arena` | Not a generic spawn-agents skill | subagent-required for full fidelity; degrades |
 | swarm | Partition independent slices | ADAPT | `swarm` | Distinct from arena | cloud-optional; local subagents degrade |
 | interrogate | Independent multi-reviewer verdict | ADAPT | `interrogate` | Replaces Methodrail reimplementation | multi-model-optional |
-| create-verification-skill | Interview repo, generate verify skill | ADAPT | `create-verification-skill` | Highest-value init output | runtime-tool when generating live drive |
-| maintain-verification-skill | Source + live coverage of feature map | ADAPT | `maintain-verification-skill` | Harness maintenance | runtime-tool; subagent-optional |
+| create-verification-skill | Interview repo, generate verify skill | ADAPT | `create-verification-skill` | Discovery and application are caller-scoped; init still confirms before writes | runtime-tool when generating live drive |
+| maintain-verification-skill | Source + live coverage of feature map | ADAPT | `maintain-verification-skill` | Full audit preserved; task-scoped mode does not ship a PR | runtime-tool; subagent-optional |
 | show-me-your-work | Decision/evidence TSV | ADAPT | `show-me-your-work` | Transcript ≠ decision log | portable |
 | reflect | Mine session for skill edits | ADAPT | `reflect` | Candidates only, no auto-rules | subagent/multi-model-optional |
 | runtime-forensics playbook | Live instrumentation | ADAPT | `runtime-forensics` | Escalation operator | runtime-tool-required |

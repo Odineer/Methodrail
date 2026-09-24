@@ -6,9 +6,9 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 |---|---|---|---|---|---|
 | Project harness init | `methodrail-init` | Methodrail-native | explicit | `create-verification-skill` | humans |
 | Existing-system investigation | `investigate` | Methodrail-native | explicit | `how`, `why`, `observe`, `research`, `prototype`, `blast-radius` | humans |
-| Feature delivery | `develop` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `grill-with-docs`, `domain-modeling`, `wayfinder`, `architect`, `prototype`, `tdd`, `code-review`, `verify-change`, `blast-radius` | humans |
-| Failure diagnosis and fix | `debug` | Methodrail-native | explicit | `diagnosing-bugs`, `observe`, `runtime-forensics`, `trace-forensics`, `performance`, `hillclimb`, `tdd`, `verify-change` | humans |
-| Behavior-preserving restructure of a selected target | `refactor` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `how`, `codebase-design`, `blast-radius`, `code-review`, `verify-change` | humans |
+| Feature delivery | `develop` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `grill-with-docs`, `domain-modeling`, `wayfinder`, `architect`, `prototype`, `tdd`, `code-review`, `verify-change`, `blast-radius`, `create-verification-skill`, `maintain-verification-skill` | humans |
+| Failure diagnosis and fix | `debug` | Methodrail-native | explicit | `diagnosing-bugs`, `observe`, `runtime-forensics`, `trace-forensics`, `performance`, `hillclimb`, `tdd`, `verify-change`, `create-verification-skill`, `maintain-verification-skill` | humans |
+| Behavior-preserving restructure of a selected target | `refactor` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `how`, `codebase-design`, `blast-radius`, `code-review`, `verify-change`, `maintain-verification-skill` | humans |
 | Change review workflow | `review` | Methodrail-native | explicit | `code-review`, `blast-radius`, `verify-change` | humans |
 | Current codebase understanding | `how` | pstack | model-invoked | `observe` | `investigate`, `develop`, `refactor`, `architect` |
 | Historical motivation | `why` | pstack | model-invoked | — | `investigate`, `architect` |
@@ -36,8 +36,8 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 | Measured perf investigation | `performance` | pstack playbook | explicit | `hillclimb`, `architect` | `debug` |
 | Iterative metric optimization | `hillclimb` | pstack playbook | explicit | `show-me-your-work` | `debug` |
 | Rendered visual equivalence | `visual-parity` | pstack playbook | explicit | — | humans |
-| Project verify skill generation | `create-verification-skill` | pstack | explicit | `maintain-verification-skill` | `methodrail-init` |
-| Verify-skill upkeep | `maintain-verification-skill` | pstack | explicit | `create-verification-skill` if missing | humans |
+| Project verify skill generation | `create-verification-skill` | pstack | explicit | `maintain-verification-skill` | `methodrail-init`, `develop`, `debug` |
+| Verify-skill upkeep | `maintain-verification-skill` | pstack | explicit | `create-verification-skill` if missing | `develop`, `debug`, `refactor`; humans for a full audit |
 | Compact decision trail | `show-me-your-work` | pstack | explicit | — | `hillclimb`, long runs |
 | Session lessons as candidates | `reflect` | pstack | explicit | knowledge / skill / structural-enforcement candidates | humans |
 | Cross-session continuity | `handoff` | Matt Pocock | explicit | — | humans, long sessions, `prototype` round-trips |

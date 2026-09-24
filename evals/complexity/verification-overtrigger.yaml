@@ -1,0 +1,12 @@
+id: complexity.verification-overtrigger
+kind: complexity
+description: A label change with an adequate check must not bootstrap verification infrastructure.
+input:
+  prompt: "Change button text from Save to Create. The component test already covers the label."
+expected:
+  skills:
+    forbidden: [create-verification-skill, maintain-verification-skill, wayfinder, architect, arena, swarm]
+  behaviors:
+    - inspect
+    - edit
+    - deterministic verification

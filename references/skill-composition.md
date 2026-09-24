@@ -37,6 +37,8 @@ wayfinder              → decision map/tickets
 architect              → architecture decision
 tdd                    → executable behavioral evidence
 verify-change          → fresh verification evidence
+create-verification-skill → proposed or proved project verification
+maintain-verification-skill → task-scoped or full-audit corrections
 code-review            → findings
 show-me-your-work      → operational TSV trail; ADR only via the three-part gate
 reflect                → learning candidates; sole writer of typed notes after approval
@@ -139,6 +141,7 @@ rename → inspect → edit → deterministic verification
 
 ```text
 develop → relevant understanding → acceptance criteria → tdd → verify
+(create or task-scoped maintenance only when the verification lifecycle selects them)
 ```
 
 ### Runtime bug
@@ -164,6 +167,8 @@ Operational TSV rows and durable ADRs are one ladder, not two competing stores. 
 ## Knowledge and verification
 
 Feature maps may link canonical project knowledge. They do not copy claims and they do not write notes. Fresh verification evidence may feed `reflect`; it never crosses the durable knowledge boundary automatically.
+
+Create, maintain, and verify are separate bounded operations. Decisions live in [verification lifecycle](verification-lifecycle.md). Owning workflows select them. `verify-change` does not start creation or an audit. Review and investigate report gaps and stay read-only.
 
 ## Control planes
 

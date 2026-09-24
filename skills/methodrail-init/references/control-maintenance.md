@@ -30,6 +30,8 @@ documentation/control drift  ≠  actual product regression
 
 Update generated control text when the repository's supported procedure changed. Report suspected product regressions instead of “fixing” the harness to match a broken system.
 
+Before confirmation, collect drift findings and proposed edits only. Do not invoke `maintain-verification-skill` during investigation or preview. Writing maintenance waits for init's confirmed apply phase. Do not regenerate a working verification skill on refresh. Preserve its curated content. An unchanged refresh produces no file changes. A full audit runs only when the user asks for one.
+
 ## Preserve curated content
 
 Human-authored knowledge, decisions, and unmarked prose stay. Report disputed, retired, malformed, unbounded, and dependency-stale notes; do not resolve or migrate them. Update only Methodrail-owned generated blocks. Follow [merge semantics](merge-semantics.md). Adopt newly discovered canonical artifacts by pointer when the user confirms.
