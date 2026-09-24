@@ -29,14 +29,14 @@ Do not run multiple expensive reviewers for trivial changes. Give the reviewer a
 1. Establish the review target, base revision, request, acceptance criteria, and repository guidance. Read `.methodrail/PROJECT.md` if present. If a knowledge pointer is relevant, follow [knowledge reuse](../../references/knowledge/reuse.md). Assemble the packet. Consume existing verification evidence rather than rerunning unrelated exploration.
 2. Invoke `code-review` for Standards vs Spec on the complete requested range, including staged, unstaged, and untracked work when the worktree is dirty.
 3. Use `blast-radius` when boundaries, schemas, or public contracts changed, or when a small diff is untrusted. Keep it read-only: existing checks or temp probes, not repository writes.
-4. Do not substitute review for verification. Note verification gaps; run or request `verify-change` when claims of correctness lack fresh evidence.
+4. Do not substitute review for verification. Note verification gaps; run or request `verify-change` when claims of correctness lack fresh evidence. Follow [verification lifecycle](../../references/verification-lifecycle.md). Report stale or missing guidance. Do not invoke `create-verification-skill` or `maintain-verification-skill` unless the user asked for fixes.
 5. Classify findings: critical (data loss, security, unusable core behavior); important (likely incorrect behavior, serious regression, contract risk); minor (optional, non-blocking).
 6. Converge: critical → fix; important → fix or explicitly adjudicate; minor → record; the same disputed issue repeatedly → escalate rather than loop.
 7. Lead with findings, ordered by severity. Cite paths and lines. If there are no findings, say so and list material verification gaps.
 
 ## Constraints
 
-- Do not edit code unless explicitly asked to apply fixes. Nested `blast-radius` stays read-only with this workflow.
+- Do not edit code unless explicitly asked to apply fixes. Nested `blast-radius` stays read-only with this workflow. Creation and maintenance of verification artifacts stay uninvoked unless those fixes were requested.
 - Do not report style preferences as defects unless they violate an established standard.
 - Name `interrogate` and wait when rigor is high, architecture is consequential, review is contested, or failure cost is high. Do not load it from this workflow.
 - Avoid infinite review loops.

@@ -129,6 +129,7 @@ const REQUIRED_REFERENCES = [
   "references/methodrail-skill-substrate.md",
   "references/context-economics.md",
   "references/skill-composition.md",
+  "references/verification-lifecycle.md",
   "references/methodrail-family-invariant.md",
 ];
 const REQUIRED_BEHAVIORAL_SKILLS = [

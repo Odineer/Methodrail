@@ -1,0 +1,8 @@
+[
+  {
+    "command": "node export.js",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "export-ok"
+  }
+]

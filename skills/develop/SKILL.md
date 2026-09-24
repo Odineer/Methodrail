@@ -40,9 +40,9 @@ retain valuable learning
 
 Match effort to [rigor](../../references/rigor.md). Do not activate the whole stack.
 
-**Tiny bounded change:** inspect → edit → deterministic check → done.
+**Tiny bounded change:** inspect → edit → deterministic check → done. An adequate existing check does not invoke `create-verification-skill` or a full `maintain-verification-skill` audit.
 
-**Normal feature:** `how` if needed → acceptance criteria → `tdd` / implementation → `verify-change` → `code-review` if warranted.
+**Normal feature:** `how` if needed → acceptance criteria → `tdd` / implementation → `verify-change` → `code-review` if warranted. Create or task-scoped maintenance only when [verification lifecycle](../../references/verification-lifecycle.md) selects them.
 
 **Large uncertain redesign:** `wayfinder` → `domain-modeling` → `how` → `architect` (design only: alternatives, recommendation, and unresolved questions; it must not implement) → `prototype` only for empirical claims → decision → implementation → `blast-radius` → `code-review` → `verify-change`. If rigor is high, name `interrogate` and wait for the user to invoke it.
 
@@ -52,11 +52,11 @@ Do not load `wayfinder`, `architect`, `prototype`, `arena`, or `swarm` for routi
 
 1. Read `.methodrail/PROJECT.md` if present. Follow pointers only when relevant. Before relying on a stored note, follow [knowledge reuse](../../references/knowledge/reuse.md).
 2. Classify uncertainty with the [decision frontier](../../references/decision-frontier.md), including [consequential assumptions](../../references/decision-frontier.md#consequential-assumptions). Resolve only currently actionable questions. Use the cheapest reliable method: deterministic tool, source/`how`, `observe`, `why`, `research`, `prototype`, `domain-modeling`, or a human.
-3. Define observable success and a verification strategy before editing. Ask only when a missing choice is product/taste/preference and the repository cannot answer it. When a multi-step implementation plan is warranted, pair each meaningful outcome with the evidence that will verify it. Reuse a check across steps where appropriate; do not introduce a separate test or approval for every step.
+3. Define observable success and a verification strategy before editing. Apply [Verification](#verification). Ask only when a missing choice is product/taste/preference and the repository cannot answer it. When a multi-step implementation plan is warranted, pair each meaningful outcome with the evidence that will verify it. Reuse a check across steps where appropriate; do not introduce a separate test or approval for every step.
 4. Load the [simplicity procedure](../../references/simplicity.md) when considering a helper, dependency, or abstraction, or when deciding whether this change made something unused. Rename, label, copy, and other mechanical edits stay inspect → edit → check and do not load that reference. After a replacement or deletion, remove artifacts this change made unused; leave unrelated dead code.
 5. Implement in focused increments with `tdd` at agreed seams when that is the honest strategy. Follow established project patterns. Use `refactor` when the request is structural rather than a feature.
 6. Before reporting complete, inspect this task's delta. Each hunk should support the requested outcome, necessary supporting work, required verification or metadata, or [change-created cleanup](../../references/simplicity.md#change-created-cleanup). Remove only this agent's unrelated edits; do not revert other contributors' work.
-7. Use `observe` and the project verification skill when the claim is behavioral. Finish with `verify-change`. Use `/review` only when the user requests a separate review or rigor requires it. If later edits change relevant state, rerun the affected verification before claiming completion.
+7. Use `observe` and the project verification skill when the claim is behavioral. If the task adds, changes, or removes user-facing behavior that an existing feature map represents or should represent, including a behavior the map does not yet list, invoke `maintain-verification-skill` in task-scoped mode. Update the index and the affected entries. Do not start a full audit. Then finish with `verify-change`. Use `/review` only when the user requests a separate review or rigor requires it. If later edits, including maintenance, change relevant state, rerun the affected verification before claiming completion.
 8. Summarize changed behavior, files, verification evidence, residual risk, and any durable knowledge worth proposing. Do not persist ordinary summaries.
 
 Matt's `implement` skill is not a public Methodrail skill. `/develop` owns the lifecycle.
@@ -71,6 +71,16 @@ Matt's `implement` skill is not a public Methodrail skill. `/develop` owns the l
 - Prefer [isolate or handoff](../../references/context-management.md) over stuffing an oversized conversation.
 - See [skill composition](../../references/skill-composition.md) and [context economics](../../references/context-economics.md).
 
+## Verification
+
+Follow [verification lifecycle](../../references/verification-lifecycle.md).
+
+- Reuse adequate verification, tests, scripts, or control docs. Do not invoke `create-verification-skill` when those already prove the change.
+- Invoke `create-verification-skill` in application phase only for decision `missing-path`, inside this task's authorized scope. Discovery-only requests do not write files.
+- Invoke `maintain-verification-skill` in task-scoped mode for decision `mapped-change`, including a new user-facing behavior the map does not yet list. Update the index and the affected entries. Do not start a full audit from this workflow.
+- A product defect found while creating or maintaining verification returns here. Do not change expected behavior to make it pass.
+- Finish with `verify-change` after the last relevant edit.
+
 ## Done when
 
 Acceptance criteria are met, the task delta is scoped to the request and necessary supporting work, change-created leftovers are removed, and each completion claim has fresh relevant evidence or a clearly reported verification gap. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
@@ -80,6 +90,6 @@ Acceptance criteria are met, the task delta is scoped to the request and necessa
 ```text
 Usually follows:              investigate
 Often produces:               implementation; tdd cycle; verify-change
-Escalate to:                  how, architect, prototype, wayfinder
+Escalate to:                  how, architect, prototype, wayfinder, create-verification-skill, maintain-verification-skill
 Avoid combining automatically with: arena, swarm, interrogate
 ```
