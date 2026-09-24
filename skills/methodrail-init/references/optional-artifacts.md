@@ -45,7 +45,7 @@ For an in-repository harness, place a new skill in the repository's established 
 
 ## verify-project
 
-When the project has a meaningful executable surface, prefer `create-verification-skill` over hand-writing a stub. That path interviews the repository and produces launch/doctor/drive/evidence/cleanup plus a feature map.
+When the project has a meaningful executable surface, plan a verification skill rather than a hand-written stub. Generation waits for the confirmed apply phase and produces launch/doctor/drive/evidence/cleanup plus a feature map.
 
 Create `.agents/skills/verify-project/SKILL.md` (or the established native skill location) only for an in-repository harness when project verification requires a reusable decision tree that agents cannot infer cheaply. A static command map is enough when there is no user-facing runtime. Linked external placement uses `.methodrail/control/` instead.
 

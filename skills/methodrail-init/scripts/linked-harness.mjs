@@ -8,7 +8,9 @@ import {
   readFileSync,
   readdirSync,
   realpathSync,
+  rmSync,
   symlinkSync,
+  unlinkSync,
   writeFileSync,
 } from "node:fs";
 import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
@@ -34,6 +36,32 @@ function canonicalRepository(path) {
 
 function inside(parent, child) {
   return child === parent || child.startsWith(parent + sep);
+}
+
+function resolveWriteTarget(path) {
+  const missing = [];
+  let cursor = resolve(path);
+  while (true) {
+    let stat;
+    try {
+      stat = lstatSync(cursor);
+    } catch (error) {
+      if (error?.code !== "ENOENT") throw error;
+      const parent = dirname(cursor);
+      if (parent === cursor) throw new Error(`Cannot resolve storage path: ${path}`);
+      missing.unshift(basename(cursor));
+      cursor = parent;
+      continue;
+    }
+    if (stat.isSymbolicLink()) {
+      try {
+        return join(realpathSync(cursor), ...missing);
+      } catch {
+        throw new Error("External harness storage must be outside the repository");
+      }
+    }
+    return join(realpathSync(cursor), ...missing);
+  }
 }
 
 function canonicalFuturePath(path) {
@@ -67,12 +95,19 @@ function excludePath(repositoryRoot) {
 function ensureExcluded(repositoryRoot) {
   const path = excludePath(repositoryRoot);
   mkdirSync(dirname(path), { recursive: true });
-  const source = existsSync(path) ? readFileSync(path, "utf8") : "";
+  const existed = existsSync(path);
+  const source = existed ? readFileSync(path, "utf8") : "";
   const lines = source.split(/\r?\n/).map((line) => line.trim());
-  if (lines.includes(EXCLUDE_PATTERN)) return path;
+  if (lines.includes(EXCLUDE_PATTERN)) return { path, undo: null };
   const prefix = source.length === 0 || source.endsWith("\n") ? "" : "\n";
   appendFileSync(path, `${prefix}# Local Methodrail linked harness\n${EXCLUDE_PATTERN}\n`);
-  return path;
+  return {
+    path,
+    undo: () => {
+      if (!existed) rmSync(path, { force: true });
+      else writeFileSync(path, source);
+    },
+  };
 }
 
 function linkTarget(repositoryRoot, storageHarnessRoot) {
@@ -112,7 +147,10 @@ export function createLinkedHarness(repositoryPath, storagePath) {
     );
     storageHarnessRoot = join(storageRoot, ".methodrail");
   }
-  if (inside(repositoryRoot, storageRoot)) throw new Error("External harness storage must be outside the repository");
+  const resolvedHarness = resolveWriteTarget(storageHarnessRoot);
+  if (inside(repositoryRoot, storageRoot) || inside(repositoryRoot, resolvedHarness)) {
+    throw new Error("External harness storage must be outside the repository");
+  }
   const manifestPath = join(storageHarnessRoot, "HARNESS.yaml");
 
   if (logicalExists) {
@@ -129,25 +167,46 @@ export function createLinkedHarness(repositoryPath, storagePath) {
         throw new Error(`Refusing to adopt nonempty harness storage without HARNESS.yaml: ${storageHarnessRoot}`);
       }
     }
-    mkdirSync(storageHarnessRoot, { recursive: true });
-    if (existsSync(manifestPath)) {
-      const bound = resolveBoundRepository(manifestPath);
-      if (bound !== realpathSync(repositoryRoot)) throw new Error("Existing HARNESS.yaml is bound to a different repository");
-    } else {
-      writeFileSync(manifestPath, manifestSource(storageHarnessRoot, repositoryRoot), { flag: "wx" });
+    const undo = [];
+    try {
+      const harnessExisted = existsSync(storageHarnessRoot);
+      mkdirSync(storageHarnessRoot, { recursive: true });
+      if (!harnessExisted) undo.push(() => rmSync(storageHarnessRoot, { recursive: true, force: true }));
+      if (existsSync(manifestPath)) {
+        const bound = resolveBoundRepository(manifestPath);
+        if (bound !== realpathSync(repositoryRoot)) throw new Error("Existing HARNESS.yaml is bound to a different repository");
+      } else {
+        writeFileSync(manifestPath, manifestSource(storageHarnessRoot, repositoryRoot), { flag: "wx" });
+        undo.push(() => rmSync(manifestPath, { force: true }));
+      }
+      const boundRepository = resolveBoundRepository(manifestPath);
+      if (boundRepository !== realpathSync(repositoryRoot)) throw new Error("HARNESS.yaml binding does not match the repository");
+      const exclude = ensureExcluded(repositoryRoot);
+      if (exclude.undo) undo.push(exclude.undo);
+      try {
+        git(repositoryRoot, ["check-ignore", "-q", "--", ".methodrail"]);
+      } catch {
+        throw new Error(`Git does not ignore ${logicalHarnessRoot}; check ${exclude.path}`);
+      }
+      symlinkSync(linkTarget(repositoryRoot, storageHarnessRoot), logicalHarnessRoot, process.platform === "win32" ? "junction" : "dir");
+      undo.push(() => unlinkSync(logicalHarnessRoot));
+      return { repositoryRoot, storageRoot, storageHarnessRoot, logicalHarnessRoot, manifestPath, exclude: exclude.path };
+    } catch (error) {
+      for (const rollback of undo.reverse()) rollback();
+      throw error;
     }
-    symlinkSync(linkTarget(repositoryRoot, storageHarnessRoot), logicalHarnessRoot, process.platform === "win32" ? "junction" : "dir");
   }
 
   const boundRepository = resolveBoundRepository(manifestPath);
   if (boundRepository !== realpathSync(repositoryRoot)) throw new Error("HARNESS.yaml binding does not match the repository");
   const exclude = ensureExcluded(repositoryRoot);
   try {
-    git(repositoryRoot, ["check-ignore", "-q", ".methodrail"]);
+    git(repositoryRoot, ["check-ignore", "-q", "--", ".methodrail"]);
   } catch {
-    throw new Error(`Git does not ignore ${logicalHarnessRoot}; check ${exclude}`);
+    if (exclude.undo) exclude.undo();
+    throw new Error(`Git does not ignore ${logicalHarnessRoot}; check ${exclude.path}`);
   }
-  return { repositoryRoot, storageRoot, storageHarnessRoot, logicalHarnessRoot, manifestPath, exclude };
+  return { repositoryRoot, storageRoot, storageHarnessRoot, logicalHarnessRoot, manifestPath, exclude: exclude.path };
 }
 
 function readFileSafeDirectory(path) {

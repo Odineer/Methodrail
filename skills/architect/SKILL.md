@@ -1,6 +1,6 @@
 ---
 name: architect
-description: "Explicit architecture decision exercise. Ground in current implementation, sketch distinct alternatives, compare tradeoffs, then implement against the chosen sketch. Use only when a consequential architecture choice exists. Do not use for local mechanical changes."
+description: "Explicit architecture decision exercise. Ground in current implementation, sketch distinct alternatives, and compare tradeoffs. Return that design when composed under develop. Implement only when this skill was invoked directly and implementation was requested. Do not use for local mechanical changes."
 disable-model-invocation: true
 ---
 
@@ -40,11 +40,15 @@ Compare viable candidates on:
 - observability and testability
 - risks
 
-## Phase C: Agree (opt-in)
+## Phase C: Agree
 
-Default: proceed to implementation with the synthesized design. Opt in to a checkpoint when the invoker asks to stop and show the sketch first. For adversarial pressure before implementing, name `interrogate` and wait for the user to invoke it.
+When `develop` invoked this skill, stop here. Return the alternatives, the recommendation, and unresolved questions. Do not implement. The parent still owns prototyping, the decision, and implementation.
+
+Standalone implementation is opt-in. Proceed to Phase D only when the user invoked `architect` directly and standalone implementation was requested. For adversarial pressure before implementing, name `interrogate` and wait for the user to invoke it.
 
 ## Phase D: Implement against the sketch
+
+Run this phase only for requested standalone implementation. Do not run it when the parent is `develop`.
 
 Replace `not implemented` bodies with code. Deviations from the sketch are signal. Surface them; don't bolt them on.
 
@@ -76,6 +80,6 @@ Competing sketches            → arena
 Adversarial pressure          → name `interrogate` and wait
 ```
 
-Use existing ADRs, domain vocabulary, and current implementation. Do not invent architecture from scratch. Must not restart `/develop`.
+Use existing ADRs, domain vocabulary, and current implementation. Do not invent architecture from scratch. Must not restart `/develop`. When composed under `develop`, must not implement.
 
 Complexity alone is not a reason to invoke this skill. Crossing a function boundary is not by itself a reason.

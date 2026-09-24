@@ -17,7 +17,7 @@ That would be a failure.
 
 ## One workflow owner at a time
 
-`/develop` owns the feature lifecycle. Inside it, `wayfinder`, `architect`, `prototype`, and `tdd` are bounded operators. They must not independently restart another full development lifecycle. [Simplicity](simplicity.md) is a shared reference those owners load when considering a helper, dependency, or abstraction, assessing complexity, or deciding whether this change made something unused. Mechanical edits skip the procedure while retaining comment discipline and change-created cleanup. It is not a workflow, command, or extra review axis.
+`/develop` owns the feature lifecycle. Inside it, `wayfinder`, `architect`, `prototype`, and `tdd` are bounded operators. They must not independently restart another full development lifecycle. Under `develop`, `architect` returns alternatives, a recommendation, and unresolved questions; it does not implement. [Simplicity](simplicity.md) is a shared reference those owners load when considering a helper, dependency, or abstraction, assessing complexity, or deciding whether this change made something unused. Mechanical edits skip the procedure while retaining comment discipline and change-created cleanup. It is not a workflow, command, or extra review axis.
 
 `/debug` owns debugging. `diagnosing-bugs` owns the diagnosis procedure inside it. `runtime-forensics` is an escalation operator. `verify-change` is an evidence gate.
 

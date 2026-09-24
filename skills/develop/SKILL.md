@@ -44,7 +44,7 @@ Match effort to [rigor](../../references/rigor.md). Do not activate the whole st
 
 **Normal feature:** `how` if needed → acceptance criteria → `tdd` / implementation → `verify-change` → `code-review` if warranted.
 
-**Large uncertain redesign:** `wayfinder` → `domain-modeling` → `how` → `architect` → `prototype` only for empirical claims → decision → implementation → `blast-radius` → `code-review` → `verify-change`. If rigor is high, name `interrogate` and wait for the user to invoke it.
+**Large uncertain redesign:** `wayfinder` → `domain-modeling` → `how` → `architect` (design only: alternatives, recommendation, and unresolved questions; it must not implement) → `prototype` only for empirical claims → decision → implementation → `blast-radius` → `code-review` → `verify-change`. If rigor is high, name `interrogate` and wait for the user to invoke it.
 
 Do not load `wayfinder`, `architect`, `prototype`, `arena`, or `swarm` for routine work. Never load `interrogate` from this workflow.
 

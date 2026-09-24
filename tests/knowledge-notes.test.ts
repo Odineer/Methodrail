@@ -423,6 +423,36 @@ Do not reuse this note.
   }
 });
 
+test("ignored descendants of a declared directory are unknown rather than fresh", () => {
+  const dir = tempProject();
+  try {
+    execFileSync("git", ["init"], { cwd: dir, stdio: "ignore" });
+    execFileSync("git", ["config", "user.email", "eval@example.com"], { cwd: dir, stdio: "ignore" });
+    execFileSync("git", ["config", "user.name", "Eval"], { cwd: dir, stdio: "ignore" });
+    execFileSync("git", ["add", "."], { cwd: dir, stdio: "ignore" });
+    execFileSync("git", ["-c", "commit.gpgsign=false", "commit", "-m", "base"], { cwd: dir, stdio: "ignore" });
+    const sha = execFileSync("git", ["rev-parse", "HEAD"], { cwd: dir, encoding: "utf8" }).trim();
+    writeNote(
+      dir,
+      "webhooks.md",
+      TYPED.replace("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", sha).replace("src/webhooks.js", "src"),
+    );
+    execFileSync("git", ["add", ".methodrail"], { cwd: dir, stdio: "ignore" });
+    execFileSync("git", ["-c", "commit.gpgsign=false", "commit", "-m", "note"], { cwd: dir, stdio: "ignore" });
+    const note = loadKnowledgeNotes(dir)[0];
+    assert.ok(note);
+    assert.equal(evaluateFreshness(note, dir).state, "fresh");
+    writeFileSync(join(dir, ".gitignore"), "src/generated/\n");
+    mkdirSync(join(dir, "src", "generated"));
+    writeFileSync(join(dir, "src", "generated", "config.json"), "{}\n");
+    const freshness = evaluateFreshness(note, dir);
+    assert.equal(freshness.state, "unknown");
+    assert.match(freshness.evidence, /ignored/i);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test("an ignored relevant path is unknown rather than fresh", () => {
   const dir = tempProject();
   try {

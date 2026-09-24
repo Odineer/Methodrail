@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import {
+  existsSync,
   lstatSync,
   mkdirSync,
   mkdtempSync,
@@ -192,6 +193,30 @@ test("linked external creation refuses storage inside the repository", (t) => {
     () => create(item.repository, join(item.repository, "private-methodrail")),
     /outside the repository/i,
   );
+});
+
+test("linked external creation refuses a storage .methodrail symlink into the repository", (t) => {
+  const item = fixture();
+  t.after(() => rmSync(item.base, { recursive: true, force: true }));
+  const escaped = join(item.repository, "escaped-harness");
+  mkdirSync(escaped);
+  mkdirSync(item.storage);
+  symlinkSync(escaped, join(item.storage, ".methodrail"));
+  assert.throws(() => create(item.repository, item.storage), /outside the repository/i);
+  assert.equal(existsSync(join(escaped, "HARNESS.yaml")), false);
+  assert.equal(existsSync(join(item.repository, ".methodrail")), false);
+});
+
+test("failed private harness setup does not leave a Git-visible .methodrail link", (t) => {
+  const item = fixture();
+  t.after(() => rmSync(item.base, { recursive: true, force: true }));
+  writeFileSync(join(item.repository, ".gitignore"), "!.methodrail\n");
+  git(item.repository, ["add", ".gitignore"]);
+  git(item.repository, ["-c", "commit.gpgsign=false", "commit", "-m", "unignore methodrail"]);
+  assert.throws(() => create(item.repository, item.storage), /ignore/i);
+  assert.equal(existsSync(join(item.repository, ".methodrail")), false);
+  assert.equal(existsSync(join(item.storage, ".methodrail")), false);
+  assert.equal(git(item.repository, ["status", "--short"]), "");
 });
 
 const MANIFESTS = {
