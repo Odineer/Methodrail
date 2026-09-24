@@ -1,6 +1,6 @@
 ---
 name: create-verification-skill
-description: "Generate a project-local verification skill that drives the app the way a user does. Interview the repository, not the user. Use when explicitly requested or when methodrail-init finds a meaningful executable surface. Do not use on libraries with no runnable surface."
+description: "Generate a project-local verification skill that drives the app the way a user does. Interview the repository, not the user. Use when explicitly requested, or in generate mode during methodrail-init's confirmed apply phase. Do not use on libraries with no runnable surface."
 disable-model-invocation: true
 ---
 
@@ -9,6 +9,14 @@ disable-model-invocation: true
 Every serious runnable project needs a scripted way to drive the real app and prove behavior. This skill generates that as a **project-local** skill tailored to the repo. You write the generator's output for the next agent, not for a human: it will be read cold, mid-task, by an agent that has never seen the app. Write it with `writing-for-agents`.
 
 Do not copy global Methodrail skills into the project. This generates only project-specific verification.
+
+## Discover
+
+Answer the interview below from the repository. Return the surface, the proposed skill path, and the file list. Do not write the skill, control documentation, feature files, or execute them. When `methodrail-init` is investigating or previewing, stop at the end of this section.
+
+## Generate
+
+Run this section only during `methodrail-init`'s confirmed apply phase, or when the user invoked `create-verification-skill` directly. An unqualified request from `methodrail-init` before confirmation stays in Discover.
 
 ## 1. Interview the repo, not the user
 

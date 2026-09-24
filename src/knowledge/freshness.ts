@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { join } from "node:path";
 import { isGitSha } from "./validate.js";
@@ -36,6 +36,23 @@ export function evaluateFreshness(note: KnowledgeNote, projectRoot: string): Fre
       state: "unknown",
       evidence: `Relevant path is ignored by Git, so freshness cannot be proven: ${ignored.join(", ")}`,
     };
+  }
+  const directories = relevant_paths.filter((path) => {
+    try {
+      return statSync(join(projectRoot, path)).isDirectory();
+    } catch {
+      return false;
+    }
+  });
+  if (directories.length > 0) {
+    const hidden = git(projectRoot, ["ls-files", "--others", "-i", "--exclude-standard", "--", ...directories]);
+    const hiddenPaths = (hidden ?? "").split(/\r?\n/).filter(Boolean);
+    if (hidden === null || hiddenPaths.length > 0) {
+      return {
+        state: "unknown",
+        evidence: `Ignored descendants of a relevant path prevent freshness verification: ${hiddenPaths.join(", ") || directories.join(", ")}`,
+      };
+    }
   }
   const changedTracked = git(projectRoot, ["diff", "--name-only", validated_at, "--", ...relevant_paths]);
   const changedUntracked = git(projectRoot, ["ls-files", "--others", "--exclude-standard", "--", ...relevant_paths]);

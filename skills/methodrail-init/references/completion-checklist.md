@@ -12,7 +12,7 @@
 - Existing glossary, ADR, spec, plan, TSV, and host-instruction artifacts were adopted by pointer or left unchanged. Conflicts were reported, not guessed.
 - The preview used create/update/adopt/unchanged/conflict/unavailable. Non-empty writes waited for confirmation. An inspect-only request did not write. An unchanged second run produced no diff.
 - Control/verification questions were investigated when the project has a runnable surface.
-- `create-verification-skill` ran when the surface is meaningful; static verification was documented when it is not.
+- `create-verification-skill` ran in generate mode during confirmed apply when the surface is meaningful; static verification was documented when it is not. Investigation did not generate it.
 - Global Methodrail skills were not copied into the project.
 - Existing instructions and curated content are preserved.
 - Exactly one supported integration is installed or an existing one is retained.

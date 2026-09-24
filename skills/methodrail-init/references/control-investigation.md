@@ -12,9 +12,9 @@ How do I reset it?
 How do I stop it?
 ```
 
-If the project has a meaningful executable surface (UI, CLI, service, desktop app), invoke `create-verification-skill` after this interview. That skill generates a project-local verify skill and feature map by inspecting the repository. Do not force runtime verification infrastructure onto libraries, docs-only repos, or other projects where it is inappropriate.
+If the project has a meaningful executable surface (UI, CLI, service, desktop app), record that an in-repository verification skill is warranted. Generation waits for the confirmed apply phase. This investigation stays read-only. Do not force runtime verification infrastructure onto libraries, docs-only repos, or other projects where it is inappropriate.
 
-If those answers are obvious from a single package script, record the commands in `.methodrail/PROJECT.md` and skip `CONTROL.md` unless `create-verification-skill` still needs a home for non-obvious drive/evidence steps.
+If those answers are obvious from a single package script, plan to record the commands in `.methodrail/PROJECT.md` and skip `CONTROL.md` unless the confirmed verification skill still needs a home for non-obvious drive/evidence steps.
 
 If they are non-obvious, coordinated, or easy to get wrong, generate `.methodrail/control/CONTROL.md` using `templates/project/control/CONTROL.md` as a skeleton. The project-local verify skill remains the agent-facing procedure; `CONTROL.md` is the index of commands.
 

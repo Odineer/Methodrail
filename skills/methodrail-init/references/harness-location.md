@@ -51,13 +51,14 @@ The script:
 
 - requires `--repo` to be the Git root;
 - refuses an already tracked or non-linked `.methodrail` path;
-- refuses storage inside the repository;
+- refuses storage inside the repository, including a storage `.methodrail` link whose resolved target is inside the repository;
 - creates sibling `.methodrail/` storage and `HARNESS.yaml`;
 - binds that manifest to the repository with a relative path;
 - parses `HARNESS.yaml` through [harness-manifest.mjs](../scripts/harness-manifest.mjs), the same `repository.path` rules knowledge validation uses;
-- creates the repository-root link;
 - adds `/.methodrail` only to Git's local `info/exclude`;
-- verifies Git ignores the link;
+- verifies Git ignores the link before creating it;
+- creates the repository-root link only after that check;
+- rolls back artifacts from a failed attempt;
 - is idempotent when the binding already matches.
 
 After it succeeds, write PROJECT.md, knowledge, and control files through `<git-root>/.methodrail/`. Do not bypass the link by writing arbitrary sibling paths.
