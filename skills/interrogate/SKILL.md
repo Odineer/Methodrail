@@ -26,7 +26,7 @@ One clear paragraph: what this code is trying to accomplish. Reviewers challenge
 
 ## Step 3. Spawn reviewers
 
-Launch reviewers in a single message when the host supports parallel read-only subagents. Prefer diverse model families if the host can select models. If multi-model is unavailable, use independent agent contexts. If neither is available, say so and do not fake independence. See [host capabilities](../../references/host-capabilities.md).
+Launch three reviewers, A, B, and C, in a single message when the host supports parallel read-only subagents. Use the `interrogate reviewers` role in [host capabilities](../../references/host-capabilities.md) in that order, and follow its selection procedure, including a rejected slug. If multi-model is unavailable, use independent agent contexts. If neither is available, say so and do not fake independence. Omit `model` when the host cannot choose one.
 
 Fill [reviewer-prompt.md](references/reviewer-prompt.md) with:
 

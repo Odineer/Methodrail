@@ -25,7 +25,7 @@ Phases: Frame, Fan out, Aggregate, Report.
 1. State the done predicate and the report the swarm must return.
 2. Partition into independent slices. Each slice has its own scope that does not share a mutable artifact with the others.
 3. Set N from the number of slices, or from the user when they named the slices.
-4. Pick worker models if the host allows; otherwise use the host default. See [host capabilities](../../references/host-capabilities.md).
+4. Pick worker models from the `swarm workers` role in [host capabilities](../../references/host-capabilities.md) when the host allows, and follow its selection procedure, including a rejected slug. Otherwise use the host default. Omit `model` when the host cannot choose one. Local workers remain the default.
 5. Give each worker its own writable output when it writes. When workers verify or measure commits, each brief names the exact SHAs. A measurement brief also names the method (sample count, what one sample is, and order). The worker records both in its result.
 
 ## Phase B: Fan out

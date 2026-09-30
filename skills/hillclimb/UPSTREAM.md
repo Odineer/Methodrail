@@ -7,4 +7,4 @@ License: MIT (Copyright (c) 2026 Lauren Tan)
 Methodrail changes:
 - portable skill wrapper
 - decision log via show-me-your-work
-- host model slugs isolated
+- Cursor model roles centralized in references/host-capabilities.md as of 4b4d98e

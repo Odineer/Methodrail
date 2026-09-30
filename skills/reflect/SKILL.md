@@ -26,11 +26,11 @@ Prefer this conversation's artifacts, diffs, and decision log. If the host expos
 
 ### 2. Review from three lenses
 
-When the host supports parallel subagents, spawn judgment, tooling, and divergent reviewers using [judgment-reviewer.md](references/judgment-reviewer.md), [tooling-reviewer.md](references/tooling-reviewer.md), and [divergent-reviewer.md](references/divergent-reviewer.md). Prefer diverse models if selectable. Otherwise run the three lenses sequentially in this context. See [host capabilities](../../references/host-capabilities.md).
+When the host supports parallel subagents, spawn judgment, tooling, and divergent reviewers using [judgment-reviewer.md](references/judgment-reviewer.md), [tooling-reviewer.md](references/tooling-reviewer.md), and [divergent-reviewer.md](references/divergent-reviewer.md). Judgment uses the `reflect judgment` role, divergent uses `reflect divergent`, and tooling uses `reflect tooling`, each via [host capabilities](../../references/host-capabilities.md) and its selection procedure, including a rejected slug. Otherwise run the three lenses sequentially in this context. Omit `model` when the host cannot choose one.
 
 ### 3. Synthesize
 
-Use [synthesizer.md](references/synthesizer.md). Produce Accepted / Rejected / Backlog.
+Use [synthesizer.md](references/synthesizer.md). If the host can spawn the synthesizer, use the `reflect synthesizer` role in [host capabilities](../../references/host-capabilities.md) and follow its selection procedure, including a rejected slug. Otherwise synthesize here. Omit `model` when the host cannot choose one. Produce Accepted / Rejected / Backlog.
 
 ### 4. Route Accepted items
 

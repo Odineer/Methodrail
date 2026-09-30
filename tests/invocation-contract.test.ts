@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
@@ -35,6 +35,46 @@ test("parent skills name interrogate and wait instead of loading it", () => {
     assert.match(source, /[Nn]ame `interrogate`/, name);
     assert.doesNotMatch(source, /run `interrogate`/, name);
     assert.doesNotMatch(source, /(?<![Nn]ever |[Dd]o not )(?:invoke|load) `interrogate`/, name);
+  }
+});
+
+test("Cursor model roles stay in host-capabilities and out of skill bodies", () => {
+  const host = readFileSync(join(root, "references/host-capabilities.md"), "utf8");
+  const roles = [
+    "`arena runners`",
+    "`arena cross-judge`",
+    "`architect runners`",
+    "`how explorer`",
+    "`how explainer`",
+    "`why investigators`",
+    "`why synthesizer`",
+    "`interrogate reviewers`",
+    "`reflect judgment`",
+    "`reflect divergent`",
+    "`reflect synthesizer`",
+    "`reflect tooling`",
+    "`swarm workers`",
+    "`hillclimb`",
+    "`perf-issue`",
+  ];
+  for (const role of roles) assert.match(host, new RegExp(role.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(host, /claude-opus-5-5-max/);
+  assert.match(host, /gpt-5\.6-sol-max/);
+  assert.match(host, /grok-4\.7-xhigh-fast/);
+  assert.match(host, /`auto` and `inherit-parent` mean omit `model`/);
+
+  const forbidden = ["claude-opus-5-5-max", "grok-4.7-xhigh-fast", "pstack-models.mdc"];
+  for (const name of readdirSync(join(root, "skills"))) {
+    const skillPath = join(root, "skills", name, "SKILL.md");
+    let body: string;
+    try {
+      body = readFileSync(skillPath, "utf8");
+    } catch {
+      continue;
+    }
+    for (const slug of forbidden) {
+      assert.equal(body.includes(slug), false, `${name}/SKILL.md contains ${slug}`);
+    }
   }
 });
 

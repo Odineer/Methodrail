@@ -26,7 +26,7 @@ Skip Phase A only when the work is genuinely greenfield with no surrounding syst
 
 Produce at least two structurally distinct candidates before synthesis. Whole-shape alternatives, not point fixes inside one shape.
 
-If the host supports `arena`, run it with the design-sketch task and Phase A grounding. Each candidate produces a design package per [runner-prompt.md](references/runner-prompt.md) and [rationale-template.md](references/rationale-template.md). If not, sketch two alternatives in this context. See [host capabilities](../../references/host-capabilities.md).
+If the host supports `arena`, run it with the design-sketch task and Phase A grounding, and pass `architect runners` rather than `arena runners`. Follow the [host capabilities](../../references/host-capabilities.md) selection procedure, including a rejected slug. Each candidate produces a design package per [runner-prompt.md](references/runner-prompt.md) and [rationale-template.md](references/rationale-template.md). If not, sketch two alternatives in this context. Omit `model` when the host cannot choose one.
 
 Screen every candidate against [design-red-flags.md](references/design-red-flags.md). Reject shallow modules, information leakage, temporal decomposition, and pass-through methods.
 

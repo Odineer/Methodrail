@@ -23,4 +23,7 @@ notes: >
   interrogate, hillclimb, performance, and reflect. Did not take
   blast-radius dropping say-so / don't-overstate, or interrogate dropping
   nit and hypothetical bars. Did not import principle-* skills,
-  poteto-mode, or pstack tdd.
+  poteto-mode, or pstack tdd. 4b4d98e Cursor model roles for arena,
+  architect, how, why, interrogate, reflect, swarm, hillclimb, and
+  performance are centralized in references/host-capabilities.md.
+  Skills name roles. The optional pstack model rule is not shipped.

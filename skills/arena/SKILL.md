@@ -26,7 +26,7 @@ The N candidates receive the same prompt, so the prompt is the contract.
 
 1. State the artifact each candidate is producing.
 2. Derive a rubric: 3–6 concrete gradeable criteria. Concrete: `Adds a --dry-run flag that skips writes`. Vague: `code is correct`.
-3. Pick runners. If the host supports choosing models, prefer diverse families. Otherwise spawn independent contexts on the default model, or run sequential independent attempts. See [host capabilities](../../references/host-capabilities.md).
+3. Pick runners. If the host supports choosing models, use the `arena runners` role in [host capabilities](../../references/host-capabilities.md) and follow its selection procedure, including a rejected slug. Otherwise spawn independent contexts on the default model, or run sequential independent attempts. Omit `model` when the host cannot choose one.
 4. Assign output paths. Each candidate writes to its own location (git worktree where possible, otherwise a unique temp directory). N candidates writing to the same path is shared mutable state.
 
 ## Phase B: Fan out
@@ -35,7 +35,7 @@ Spawn all N in one message when the host allows parallel subagents. Each produce
 
 ## Phase C: Cross-judge
 
-After candidates complete, obtain one independent judge pass when possible, preferably a different model family. It sees the rubric and the candidates by path, scores each criterion, and recommends a base. Do not spawn the judge while candidates are still writing.
+After candidates complete, obtain one independent judge pass when possible. If the host can choose its model, use the `arena cross-judge` role in [host capabilities](../../references/host-capabilities.md) and follow its selection procedure, including a rejected slug. It sees the rubric and the candidates by path, scores each criterion, and recommends a base. Do not spawn the judge while candidates are still writing. Omit `model` when the host cannot choose one.
 
 ## Phase D: Pick a base
 

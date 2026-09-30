@@ -7,7 +7,7 @@ License: MIT (Copyright (c) 2026 Lauren Tan)
 Distinct from codebase-design (reusable design discipline). Explicit / high-cost. Arena and multi-model sketching degrade per host capabilities. pstack principle-skill names translated to plain language.
 
 Methodrail changes:
-- host model slugs isolated
+- Cursor model roles centralized in references/host-capabilities.md as of 4b4d98e
 - arena optional
 - Methodrail decision-frontier / rigor cross-links
 - previous Methodrail architect comparison axes preserved as evaluation criteria

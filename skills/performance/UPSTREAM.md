@@ -8,4 +8,4 @@ Methodrail changes:
 - portable skill wrapper named performance
 - measurement-first; hillclimb for iterative loops
 - architect only for public-contract / module-boundary / ownership changes, not any function hop
-- host model slugs isolated
+- Cursor model roles centralized in references/host-capabilities.md as of 4b4d98e
