@@ -26,19 +26,19 @@ Phases: Frame, Fan out, Aggregate, Report.
 2. Partition into independent slices. Each slice has its own scope that does not share a mutable artifact with the others.
 3. Set N from the number of slices, or from the user when they named the slices.
 4. Pick worker models if the host allows; otherwise use the host default. See [host capabilities](../../references/host-capabilities.md).
-5. Give each worker its own writable output when it writes.
+5. Give each worker its own writable output when it writes. When workers verify or measure commits, each brief names the exact SHAs. A measurement brief also names the method (sample count, what one sample is, and order). The worker records both in its result.
 
 ## Phase B: Fan out
 
 Spawn all N in one message when parallel subagents exist. Prefer local workers unless the work truly needs an isolated remote checkout. Cloud/remote workers are optional.
 
-Every brief stands alone: goal, exact slice, how to verify, what to report. Reports use `PASS`, `ISSUES`, or `BLOCKED` with evidence.
+Every brief stands alone: goal, exact slice, how to verify, what to report. Reports use `PASS`, `ISSUES`, or `BLOCKED` with evidence. A worker that can prove a defect reports `ISSUES` and lists every issue it can prove, not only the first.
 
 If a worker drops out, proceed with N-1 and note it. If the host cannot parallelize, run slices sequentially and say so.
 
 ## Phase C: Aggregate
 
-Every required slice needs a result. Do not paste raw worker dumps. Keep a compact result table, one-line evidenced issues, and explicit gaps.
+Drop a result that does not record the SHAs and method its brief required, and rerun that worker once. After a second miss, record a gap. A gap does not count as a pass. Every required slice needs a result. Do not paste raw worker dumps. Keep a compact result table, one-line evidenced issues, and explicit gaps.
 
 ## Phase D: Report
 

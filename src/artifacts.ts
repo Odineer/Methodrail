@@ -117,8 +117,9 @@ function classifyFile(rel: string, absolute: string): DiscoveredArtifact | null 
 
   const glossaryName =
     rel === "CONTEXT.md" ||
-    rel === "CONTEXT-MAP.md" ||
+    /^context-map\.md$/i.test(rel) ||
     /^glossary\.md$/i.test(rel) ||
+    /^glossary-map\.md$/i.test(rel) ||
     /^docs\/glossary\.md$/i.test(rel);
   const glossaryContent =
     hasHeading(source, /^#+\s+(glossary|ubiquitous language|domain vocabulary|context)\b/im) ||

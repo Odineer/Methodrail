@@ -142,7 +142,7 @@ npm run doctor
 
 Validation checks plugin metadata, native skill frontmatter, methodology references, maintainer evals, permanent-context size, provenance files, host invariant projections, and the realistic initialized-project fixture.
 
-See `references/` for the methodology and `adapters/` for thin host-specific installation guidance. Maintainer evals live in `evals/` and beside each skill. The eval runner scores recorded baseline vs Methodrail runs; it is not an agent runtime. Upstream update procedure: [docs/upstream-maintenance.md](docs/upstream-maintenance.md). Maintainer-only sync operator: [maintainer/skills/sync-upstream/SKILL.md](maintainer/skills/sync-upstream/SKILL.md) (not shipped as a plugin skill).
+See `references/` for the methodology and `adapters/` for thin host-specific installation guidance. Maintainer evals live in `evals/` and beside each skill. The eval runner scores recorded baseline vs Methodrail runs; it is not an agent runtime. Upstream update procedure: [docs/upstream-maintenance.md](docs/upstream-maintenance.md). Maintainer-only sync operator: [sync-upstream](.cursor/skills/sync-upstream/SKILL.md) (project skill; not shipped as a plugin skill).
 
 ## Status
 

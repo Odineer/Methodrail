@@ -3,8 +3,8 @@ repository: https://github.com/cursor/plugins
 path: pstack/
 license: MIT
 copyright: Copyright (c) 2026 Lauren Tan
-last_reviewed_commit: 5bf2b1544db739998121a306340631963c2ff3de
-last_reviewed_at: 2026-09-13
+last_reviewed_commit: 4b4d98e5e3b3c139f63dbc1ce4b538954c8f2f52
+last_reviewed_at: 2026-09-29
 notes: >
   License verified from pstack/LICENSE and plugin.json. Reviewed
   b9ddc83..5bf2b15. Incorporated matching wording in how/why
@@ -16,4 +16,11 @@ notes: >
   poteto-mode, setup-pstack, principle-* skills as a second
   operating system, Graphite/GitHub shipping playbooks, or
   Cursor-only automations. Host-specific model slugs are isolated in
-  references/host-capabilities.md.
+  references/host-capabilities.md. 4b4d98e (2026-09-29) incorporated
+  show-me-your-work run boundaries and the append-only log header, swarm
+  SHA and measurement-method briefs, and reflect reviewers listing each
+  learning. Skipped host model slugs in architect, arena, how, why,
+  interrogate, hillclimb, performance, and reflect. Did not take
+  blast-radius dropping say-so / don't-overstate, or interrogate dropping
+  nit and hypothetical bars. Did not import principle-* skills,
+  poteto-mode, or pstack tdd.

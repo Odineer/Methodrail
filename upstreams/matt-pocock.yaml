@@ -2,12 +2,17 @@ name: mattpocock/skills
 repository: https://github.com/mattpocock/skills
 license: MIT
 copyright: Copyright (c) 2026 Matt Pocock
-last_reviewed_commit: 3cca18b368ae95cdbdebbff572ccafa662551015
-last_reviewed_at: 2026-09-13
+last_reviewed_commit: d81f3a183412e71a5b1e84ca21bc1a35eea03a60
+last_reviewed_at: 2026-09-29
 notes: >
   Inspected current engineering skills plus productivity/writing-for-agents
   and productivity/handoff. writing-for-agents subsumes writing-great-skills;
   do not ship both. Do not import ask-matt, setup-matt-pocock-skills, or
   remaining productivity/in-progress/misc skills as competing control planes.
   3cca18b is host-install only (CLAUDE.md and link-skills.sh skip misc/); no
-  adopted Methodrail skill body changed.
+  adopted Methodrail skill body changed. d81f3a1 renames CONTEXT.md to
+  GLOSSARY.md. domain-modeling recognizes GLOSSARY.md and GLOSSARY-MAP.md
+  without forcing either name. codebase-design, diagnosing-bugs,
+  improve-codebase-architecture, and tdd already use the project-native
+  glossary, so those string replacements were skipped. Did not import
+  ask-matt, implement-spec, pr, retro, wait-what, triage, or setup skills.

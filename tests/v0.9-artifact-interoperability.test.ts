@@ -129,6 +129,27 @@ test("mixed pstack, Matt, and Superpowers artifacts are adopted by pointer", () 
   }
 });
 
+test("upstream GLOSSARY.md and GLOSSARY-MAP.md are glossary layout", () => {
+  const glossary = tempDir("methodrail-glossary-");
+  const map = tempDir("methodrail-glossary-map-");
+  try {
+    write(glossary, "GLOSSARY.md", "# Glossary\n\n**Order** is a paid checkout.\n");
+    const glossaryReport = discoverProjectArtifacts(glossary);
+    assert.ok(glossaryReport.artifacts.some((item) => item.path === "GLOSSARY.md" && item.role === "glossary"));
+
+    write(
+      map,
+      "GLOSSARY-MAP.md",
+      "# Glossary Map\n\n## Contexts\n\n- [Ordering](./src/ordering/GLOSSARY.md): orders\n",
+    );
+    const mapReport = discoverProjectArtifacts(map);
+    assert.ok(mapReport.artifacts.some((item) => item.path === "GLOSSARY-MAP.md" && item.role === "glossary"));
+  } finally {
+    rmSync(glossary, { recursive: true, force: true });
+    rmSync(map, { recursive: true, force: true });
+  }
+});
+
 test("two competing glossary roots are conflict, not a guessed winner", () => {
   const dir = mixedRepo({ harness: true, secondGlossary: true });
   try {

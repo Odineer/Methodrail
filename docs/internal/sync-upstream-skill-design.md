@@ -12,7 +12,7 @@ The skill inspects recent upstream changes, judges relevance to Methodrail, tail
 
 - **Depth**: inspect, judge relevance, apply tailored edits in-repo, update provenance, run checks and relevant evals, then stop before commit. No commit, push, or release step.
 - **Scope per invocation**: one upstream source (one `upstreams/*.yaml` record).
-- **Packaging**: maintainer-only. The skill lives outside the plugin skill tree so consumers never receive it. `.cursor-plugin/plugin.json` keeps pointing at `./skills/` only.
+- **Packaging**: project skill for this repository, at `.cursor/skills/sync-upstream/`, so Cursor discovers it when Methodrail is the workspace. `.cursor-plugin/plugin.json` keeps pointing at `./skills/` only, so consumer plugin installs do not receive it.
 - **Orchestration**: parent plus one subagent worker per changed Methodrail skill, in the Superpowers/`swarm` partition style. Subagents are host-optional with a sequential fallback.
 - **Discovery**: new upstream skills and existing `SKIP` / `COMPOSE` rows are reported only. The skill never adopts a new capability mid-sync.
 - Never blind-overwrite a Methodrail adaptation.
@@ -38,7 +38,7 @@ verify: tests, validate, relevant evals, family-integration checklist
 stop before commit; report for human review
 ```
 
-Skill location: `maintainer/skills/sync-upstream/SKILL.md`.
+Skill location: `.cursor/skills/sync-upstream/SKILL.md`.
 
 ## 4. Deterministic preflight
 
@@ -128,7 +128,7 @@ When two mapped skills would edit the same file, usually a shared reference, the
 
 ## 7. Packaging and documentation
 
-- `maintainer/skills/sync-upstream/` sits outside the plugin `skills/` tree and is not referenced by the plugin manifest.
+- `.cursor/skills/sync-upstream/` is a project skill. It sits outside the plugin `skills/` tree and is not referenced by the plugin manifest.
 - Point to it from `docs/upstream-maintenance.md` and from a maintainer pointer in `.methodrail/PROJECT.md`.
 - No consumer entry in `references/capability-map.md`; a maintainer-tools note is optional.
 - Update the `docs/upstream-maintenance.md` flow to preflight, skill workers, verify, stop.
