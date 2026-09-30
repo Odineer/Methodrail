@@ -2,7 +2,7 @@
 
 Adapted skills must not drift silently, and they must not be overwritten blindly.
 
-Maintainer operator: [sync-upstream](../maintainer/skills/sync-upstream/SKILL.md). Policy stays here and in [CONTRIBUTING.md](../CONTRIBUTING.md).
+Maintainer operator: [sync-upstream](../.cursor/skills/sync-upstream/SKILL.md). Policy stays here and in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ```text
 named upstream

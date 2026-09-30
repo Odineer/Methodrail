@@ -28,14 +28,14 @@ blast-radius/review proportional to risk
 
 1. Confirm the selected friction and target. Accept a named structural problem or a refactor brief. If the request is to scan, rank, or choose opportunities across the codebase, route directly to `improve-codebase-architecture` and do not begin implementation.
 2. Read `.methodrail/PROJECT.md` if present. If a knowledge pointer is relevant, follow [knowledge reuse](../../references/knowledge/reuse.md). Use `how` to understand current structure and `codebase-design` for depth/seam vocabulary.
-3. Establish a behavioral baseline with existing tests or `observe` when behavior is not already characterized.
+3. Establish a behavioral baseline with existing tests, the project verification skill, or `observe` when behavior is not already characterized. Follow [verification lifecycle](../../references/verification-lifecycle.md). Reuse adequate checks. Do not invoke `create-verification-skill` when those checks already characterize the target.
 4. Validate that the proposed change addresses the named friction. Stop if the target is quiet, unused, unrelated to current work, or supported only by speculative cleanup claims. Apply [simplicity](../../references/simplicity.md) to that target only, including the comment rule and [change-created cleanup](../../references/simplicity.md#change-created-cleanup); do not expand into adjacent cleanup.
 5. Add characterization coverage when existing checks would not catch an accidental behavior change.
 6. Change structure in small increments. Preserve public contracts unless the request explicitly includes a contract change. Retain a justified contract or test seam.
 7. Re-run the baseline after each increment.
 8. Inspect this task's delta before claiming done. Each hunk should support the selected structural change, necessary supporting work, required verification, or cleanup of artifacts this change made unused. Remove only this agent's unrelated edits.
 9. Use `blast-radius` for shared contracts or cross-boundary moves, then `code-review` when rigor or scope justifies it.
-10. After all cleanup and review-driven edits, use `verify-change` before claiming success. If later edits change relevant state, rerun the affected verification.
+10. If the refactor adds, changes, or removes user-facing behavior an existing map represents or should represent, or invalidates a shared verification helper, invoke `maintain-verification-skill` in task-scoped mode and exercise the affected entries plus dependent flows of a changed helper. Do not start a full audit. After all cleanup and review-driven edits, use `verify-change` before claiming success. If later edits change relevant state, rerun the affected verification.
 
 ## Constraints
 
@@ -56,6 +56,6 @@ The selected friction is reduced, relevant observable behavior is preserved with
 Usually follows:              a named structural problem or refactor brief
 Often produces:               structural change; verify-change
 Survey/choose opportunities:  improve-codebase-architecture
-Escalate execution depth to:  how, codebase-design, blast-radius, code-review
+Escalate execution depth to:  how, codebase-design, blast-radius, code-review, maintain-verification-skill
 Avoid combining automatically with: architect, prototype, develop-as-feature
 ```

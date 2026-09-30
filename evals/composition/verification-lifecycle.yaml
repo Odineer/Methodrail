@@ -1,0 +1,13 @@
+id: composition.verification-lifecycle
+kind: composition
+description: Ordinary development reuses checks. Creation and maintenance run only when the verification lifecycle selects them.
+input:
+  prompt: "Change the button label from Save to Create, and keep the existing test."
+expected:
+  skills:
+    required: [develop]
+    forbidden: [create-verification-skill, maintain-verification-skill, wayfinder, architect]
+  behaviors:
+    - reuse the existing check
+    - do not generate a verification skill
+    - do not audit the feature map

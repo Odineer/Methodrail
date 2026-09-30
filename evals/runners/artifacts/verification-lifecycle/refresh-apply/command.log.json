@@ -1,0 +1,8 @@
+[
+  {
+    "command": "node cli.js",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "checkout-ok"
+  }
+]

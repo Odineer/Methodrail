@@ -20,7 +20,7 @@ Interview the repository first. Then, for each role below, collect candidates fr
 | --- | --- | --- |
 | Methodrail index | git-root `.methodrail/PROJECT.md` (directory or linked harness) | pointer index |
 | Host instructions | `AGENTS.md`, `CLAUDE.md`, Cursor/Claude/Codex/Copilot files, unmanaged local skills | curated instruction prose |
-| Glossary / domain | `CONTEXT.md`, `CONTEXT-MAP.md`, `glossary.md`, established project equivalents | glossary, ubiquitous language, or domain vocabulary |
+| Glossary / domain | `CONTEXT.md`, `CONTEXT-MAP.md`, `GLOSSARY.md`, `GLOSSARY-MAP.md`, `glossary.md`, established project equivalents | glossary, ubiquitous language, or domain vocabulary |
 | ADR | `docs/adr/`, `.methodrail/knowledge/decisions/`, named project ADR home | a real decision record |
 | Specs | `docs/superpowers/specs/`, `docs/specs/`, `specs/` | intent for what should be built |
 | Plans / tickets / scratch | Superpowers plans, `docs/plans/`, tickets, `.scratch/` | planning or tracker artifacts |

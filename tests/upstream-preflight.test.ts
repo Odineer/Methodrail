@@ -356,9 +356,10 @@ test("json CLI requires --upstream and run() prints mapped preflight without tou
   assert.deepEqual(payload.unmapped_changes, ["README.md"]);
 });
 
-test("sync-upstream lives outside the plugin skill tree", () => {
+test("sync-upstream is a project skill outside the plugin skill tree", () => {
   const plugin = JSON.parse(readFileSync(join(root, ".cursor-plugin/plugin.json"), "utf8"));
   assert.equal(plugin.skills, "./skills/");
-  assert.equal(existsSync(join(root, "maintainer/skills/sync-upstream/SKILL.md")), true);
+  assert.equal(existsSync(join(root, ".cursor/skills/sync-upstream/SKILL.md")), true);
   assert.equal(existsSync(join(root, "skills/sync-upstream/SKILL.md")), false);
+  assert.equal(existsSync(join(root, "maintainer/skills/sync-upstream/SKILL.md")), false);
 });

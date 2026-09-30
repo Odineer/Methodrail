@@ -23,7 +23,7 @@ Methodrail already marks workflow entry skills and high-cost operators explicit.
 
 An already-active skill loads a named skill when **its own procedure** says to and the procedure's conditions match. That is **workflow-callable**, not host discovery. `disable-model-invocation` does not mean "only a human typing the name may ever cause this skill to run."
 
-A human-started workflow may therefore load listed explicit skills on the path that justifies them: `/develop` → `wayfinder` / `architect` / `prototype`; `/methodrail-init` → `create-verification-skill`.
+A human-started workflow may therefore load listed explicit skills on the path that justifies them: `/develop` → `wayfinder` / `architect` / `prototype`; `/methodrail-init` → `create-verification-skill` in discovery mode before confirmation and in application phase after it. `/develop`, `/debug`, and `/refactor` load `create-verification-skill` or task-scoped `maintain-verification-skill` only when [verification lifecycle](../../references/verification-lifecycle.md) selects them. Making a skill workflow-callable does not change `disable-model-invocation`.
 
 **Suggest-only** is a stricter explicit skill: the active skill names it and waits for the user to invoke it. `interrogate` is suggest-only.
 

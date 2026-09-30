@@ -1,0 +1,13 @@
+[
+  {
+    "command": "node scripts/drive.mjs checkout",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "checkout"
+  },
+  {
+    "command": "edit features/checkout.md",
+    "phase": "edit",
+    "exit_status": 0
+  }
+]

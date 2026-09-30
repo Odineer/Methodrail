@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Keep adapted Methodrail skills current with one named upstream. Inspect first. Never overwrite a Methodrail adaptation blindly. Discoveries are reports, not imports.
 
-This skill is maintainer-only. It is not a consumer plugin skill. Policy stays in [CONTRIBUTING.md](../../../CONTRIBUTING.md) and [upstream maintenance](../../../docs/upstream-maintenance.md).
+This skill is a project skill for the Methodrail repository. Cursor discovers it from `.cursor/skills/` when this repo is the workspace. It is not a plugin skill under `skills/`. Policy stays in [CONTRIBUTING.md](../../../CONTRIBUTING.md) and [upstream maintenance](../../../docs/upstream-maintenance.md).
 
 ```text
 named upstream

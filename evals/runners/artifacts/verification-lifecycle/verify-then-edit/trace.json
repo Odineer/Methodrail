@@ -1,0 +1,4 @@
+{
+  "phase": "apply",
+  "skills_invoked": ["develop", "verify-change", "maintain-verification-skill"]
+}

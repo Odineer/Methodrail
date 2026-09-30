@@ -34,7 +34,7 @@ optional durable learning
 deterministic fact     → git / compiler / package manager / test runner
 current implementation → how
 historical motivation  → why
-live behavior          → observe
+live behavior          → observe, reusing a project verification procedure when it drives the question
 external/reference     → research
 empirical experiment   → prototype
 change consequences    → blast-radius
@@ -60,7 +60,7 @@ Do not call source reading observed behavior.
 
 ## Constraints
 
-- Read-only unless the user explicitly authorizes a disposable prototype. `research` findings stay in chat unless the user asks to persist them. `blast-radius` uses existing checks or temp probes, not repository writes.
+- Read-only unless the user explicitly authorizes a disposable prototype. `research` findings stay in chat unless the user asks to persist them. `blast-radius` uses existing checks or temp probes, not repository writes. Follow [verification lifecycle](../../references/verification-lifecycle.md): reuse verification procedures for evidence, and report missing infrastructure. Do not invoke `create-verification-skill` or `maintain-verification-skill` from this workflow.
 - Ask only for information unavailable from the repository or environment.
 - Do not turn an investigation into implementation.
 - See [observation record](../../references/protocols/observation-record.md) and [skill composition](../../references/skill-composition.md).

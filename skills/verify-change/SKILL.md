@@ -50,6 +50,8 @@ If `.methodrail/PROJECT.md` exists, read it. Follow pointers to a project-local 
 
 If any of those exist, reuse them. Do not rediscover launch, readiness, drive, reset, or the local test workflow. Do not write a generic test-pyramid essay instead of running the check this repository already has.
 
+If the procedure is missing or broken, return that gap to the owning workflow. Do not invoke `create-verification-skill` or start a `maintain-verification-skill` audit from this gate. See [verification lifecycle](../../references/verification-lifecycle.md).
+
 Then apply the iron law to that reused path. Fresh evidence is still required. Reuse does not weaken the gate.
 
 ## What counts as evidence
