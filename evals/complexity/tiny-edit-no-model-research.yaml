@@ -1,0 +1,12 @@
+id: complexity.tiny-edit-no-model-research
+kind: complexity
+description: A tiny edit must not spawn an agent or research models.
+input:
+  prompt: "Change the button label from Save to Create."
+expected:
+  skills:
+    forbidden: [refresh-model-routing, wayfinder, architect, prototype, arena, swarm, interrogate, maintain-project]
+  behaviors:
+    - edit the label in the parent agent
+    - run the existing check
+    - leave model policy untouched

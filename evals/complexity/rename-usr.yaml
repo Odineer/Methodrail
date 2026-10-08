@@ -5,7 +5,7 @@ input:
   prompt: "Rename local variable `usr` to `user`."
 expected:
   skills:
-    forbidden: [wayfinder, architect, prototype, arena, swarm, interrogate]
+    forbidden: [wayfinder, architect, prototype, arena, swarm, interrogate, maintain-project]
   behaviors:
     - local inspection
     - edit

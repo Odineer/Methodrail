@@ -18,6 +18,7 @@ export const ARTIFACT_ROLES = [
   "control",
   "host-instruction",
   "methodrail-project",
+  "model-policy",
 ] as const;
 
 export type ArtifactRole = (typeof ARTIFACT_ROLES)[number];
@@ -77,6 +78,9 @@ function classifyFile(rel: string, absolute: string): DiscoveredArtifact | null 
 
   if (rel === ".methodrail/PROJECT.md") {
     return { path: rel, role: "methodrail-project", evidence: "canonical Methodrail index" };
+  }
+  if (rel === ".methodrail/MODELS.yaml") {
+    return { path: rel, role: "model-policy", evidence: "Methodrail task model policy" };
   }
 
   if (
@@ -316,6 +320,19 @@ export function discoverProjectArtifacts(projectRoot: string): DiscoveryReport {
                 ? "already indexed from PROJECT.md"
                 : "index existing Methodrail knowledge or control by pointer",
           methodrailOwned: artifact.role !== "host-instruction",
+          gitVisible: writeWouldBeGitVisible(harness, op),
+        });
+        continue;
+      }
+      if (artifact.role === "model-policy") {
+        const pointed = projectMdPointsAt(pointers, artifact.path);
+        const op: PreviewOp = pointed ? "unchanged" : "adopt";
+        preview.push({
+          path: artifact.path,
+          op,
+          role: artifact.role,
+          why: pointed ? "model policy already indexed" : "index the task model policy by pointer",
+          methodrailOwned: true,
           gitVisible: writeWouldBeGitVisible(harness, op),
         });
         continue;

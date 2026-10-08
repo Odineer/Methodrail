@@ -50,6 +50,16 @@ A procedure that was not executed is a draft. Failed or unexecuted output is blo
 
 ## Parents
 
-The caller names the phase and the scope. Standalone creation may run discovery and application when the user invoked it. Standalone “audit the verification skill” is a full audit. Parent workflows must explicitly select task-scoped maintenance. Do not open a pull request, commit, or release from create or maintain; return the result to the parent.
+The caller names the action and the coverage. Standalone creation may run discovery and application when the user invoked it. Do not open a pull request, commit, or release from create or maintain; return the result to the parent.
 
 Init keeps its preview contract: discovery proposes artifacts, and application waits for confirmation. Other workflows do not add an approval prompt for reversible verification support the task already authorizes.
+
+## Maintenance action
+
+`inspect` reconciles and reports. It writes no owned verification files. Actionable discrepancies are `findings`. Never report `changed` from inspection.
+
+`apply` corrects owned files inside the existing edit scope and proves changed driving procedures. Apply outcomes stay `clean`, `changed`, and `blocked`.
+
+Standalone “audit the verification skill” is full-audit application. `develop`, `debug`, and `refactor` keep task-scoped application when a decision above selects maintenance. `maintain-project` names both the action and the coverage. A read-only parent cannot escalate inspection into application. Broad project maintenance does not by itself request a full audit. A source-only sample is task-scoped coverage, not a full audit.
+
+When no verification skill exists, record that fact and assess existing scripts or control evidence. Do not generate one during discovery or inspection. Create only during an authorized repair when the decision is `missing-path`.

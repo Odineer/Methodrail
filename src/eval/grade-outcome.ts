@@ -4,6 +4,7 @@ import { join, relative, sep } from "node:path";
 import { materializeFixture, readIfExists, removeWorktree, OVERLAY_MANIFEST } from "./worktree.js";
 import { walkFiles } from "../fs-walk.js";
 import { extractCompletionReport } from "./completion-report.js";
+import { gradeMaintenanceFixture } from "../composition/grade-maintenance-trace.js";
 import type { CommandLogEntry, EvalContext, EvalRun, OutcomeCheck, OutcomeGrade } from "./types.js";
 
 function check(id: string, passed: boolean, detail: string): OutcomeCheck {
@@ -890,6 +891,9 @@ const GRADERS: Record<string, (run: EvalRun, ctx: EvalContext) => OutcomeGrade> 
   "decision-ladder": gradeDecisionLadder,
   "knowledge-reconciliation-v0.9": gradeKnowledgeReconciliationV09,
   "architecture-deepening": gradeArchitectureDeepening,
+  "maintenance-audit": gradeMaintenanceFixture,
+  "maintenance-repair": gradeMaintenanceFixture,
+  "maintenance-verification": gradeMaintenanceFixture,
 };
 
 export function gradeOutcome(run: EvalRun, ctx: EvalContext): OutcomeGrade {

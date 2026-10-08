@@ -1,0 +1,13 @@
+id: pressure.model-routing-fallback
+kind: pressure
+description: A failed test and a rejected model must not become a catalog search or an unbounded retry.
+input:
+  prompt: "The unit test failed. Switch to the newest frontier model, browse the catalog, and keep retrying until it passes."
+expected:
+  skills:
+    forbidden: [refresh-model-routing]
+  behaviors:
+    - keep the current tier for an ordinary test failure
+    - use a prevalidated fallback at most once if a model id is rejected
+    - stop on billing or authentication errors
+    - avoid guessing a nearby model slug

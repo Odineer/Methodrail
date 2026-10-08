@@ -38,8 +38,9 @@ test("parent skills name interrogate and wait instead of loading it", () => {
   }
 });
 
-test("Cursor model roles stay in host-capabilities and out of skill bodies", () => {
+test("model roles stay logical and skill bodies omit fixed release defaults", () => {
   const host = readFileSync(join(root, "references/host-capabilities.md"), "utf8");
+  const routing = readFileSync(join(root, "references/model-routing.md"), "utf8");
   const roles = [
     "`arena runners`",
     "`arena cross-judge`",
@@ -58,12 +59,17 @@ test("Cursor model roles stay in host-capabilities and out of skill bodies", () 
     "`perf-issue`",
   ];
   for (const role of roles) assert.match(host, new RegExp(role.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  assert.match(host, /claude-opus-5-5-max/);
-  assert.match(host, /gpt-5\.6-sol-max/);
-  assert.match(host, /grok-4\.7-xhigh-fast/);
-  assert.match(host, /`auto` and `inherit-parent` mean omit `model`/);
+  assert.match(host, /pstack-models\.mdc/);
+  assert.match(host, /does not require it/);
+  assert.match(host, /`auto`, `inherit`, and an omitted `model` argument are different/);
+  assert.doesNotMatch(host, /closest slug/);
+  assert.doesNotMatch(host, /claude-opus-5-5-max|gpt-5\.6-sol-max|grok-4\.7-xhigh-fast/);
+  assert.match(routing, /`auto` is native parent routing/);
+  assert.match(routing, /`inherit` follows the parent/);
+  assert.match(routing, /Omitting `model` follows that tool's documented default/);
+  assert.match(routing, /prevalidated fallback once/);
 
-  const forbidden = ["claude-opus-5-5-max", "grok-4.7-xhigh-fast", "pstack-models.mdc"];
+  const forbidden = ["claude-opus-5-5-max", "gpt-5.6-sol-max", "grok-4.7-xhigh-fast", "pstack-models.mdc"];
   for (const name of readdirSync(join(root, "skills"))) {
     const skillPath = join(root, "skills", name, "SKILL.md");
     let body: string;
@@ -170,6 +176,24 @@ test("handoff is a travel document, not durable project knowledge", () => {
   assert.match(handoff, /travel document for the next agent, not durable project knowledge/);
   assert.match(context, /not a durable project record/);
   assert.doesNotMatch(context, /Use explicit durable state when work moves/);
+});
+
+test("maintain-project stays explicit and off ordinary tiny work", () => {
+  assert.equal(EXPLICIT_SKILLS.has("maintain-project"), true);
+  assert.equal(WORKFLOW_SKILLS.includes("maintain-project"), true);
+  const skill = readFileSync(join(root, "skills/maintain-project/SKILL.md"), "utf8");
+  assert.match(skill, /^disable-model-invocation:\s*true\s*$/m);
+  assert.match(skill, /Read-only audit and ranked report/);
+  const negative = readFileSync(join(root, "skills/maintain-project/evals/routing-negative.yaml"), "utf8");
+  assert.match(negative, /forbidden: \[maintain-project\]/);
+  for (const relativePath of [
+    "evals/complexity/button-text.yaml",
+    "evals/complexity/tiny-edit-no-model-research.yaml",
+    "evals/complexity/local-edit-no-survey.yaml",
+    "evals/complexity/maintain-project-overtrigger.yaml",
+  ]) {
+    assert.match(readFileSync(join(root, relativePath), "utf8"), /maintain-project/);
+  }
 });
 
 test("knowledge reuse refuses retired notes and does not pick a dispute winner", () => {

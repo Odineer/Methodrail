@@ -20,29 +20,33 @@ When a skill mentions parallel work, independent review, or live driving, use wh
 | MCP servers | Query the mapped evidence category | Document the category as unsearched; do not invent findings |
 | Issue tracker CLI | Publish specs/tickets when the project already uses that tracker | Fall back to project-local markdown |
 
-## Cursor model roles
+## Model roles
 
-When the host can set a subagent `model`, use this procedure. `auto` and `inherit-parent` mean omit `model`. If `~/.cursor/rules/pstack-models.mdc` exists and defines the role, use that line. Methodrail does not ship that file and does not require it. Otherwise use the default in the table.
+When a skill names a role, resolve the tier and host binding through [model routing](model-routing.md). Project policy lives at `.methodrail/MODELS.yaml` when init or `/refresh-model-routing` created it. With no project policy, use the host's native parent routing or its documented default.
 
-| Role | Default |
-|---|---|
-| `arena runners` | `claude-opus-5-5-max`, `gpt-5.6-sol-max`, `grok-4.7-xhigh-fast` |
-| `arena cross-judge` | One of those three; prefer a different family from the parent when possible |
-| `architect runners` | The same three, used instead of `arena runners` |
-| `how explorer` | `grok-4.7-xhigh-fast` |
-| `how explainer` | `claude-opus-5-5-max` |
-| `why investigators` | `grok-4.7-xhigh-fast` |
-| `why synthesizer` | `claude-opus-5-5-max` |
-| `interrogate reviewers` | A: `claude-opus-5-5-max`; B: `gpt-5.6-sol-max`; C: `grok-4.7-xhigh-fast` |
-| `reflect judgment`, `reflect divergent`, `reflect synthesizer` | `claude-opus-5-5-max` |
-| `reflect tooling` | `gpt-5.6-sol-max` |
-| `swarm workers` | `grok-4.7-xhigh-fast` |
-| `hillclimb` | `grok-4.7-xhigh-fast` |
-| `perf-issue` | `grok-4.7-xhigh-fast` |
+`auto`, `inherit`, and an omitted `model` argument are different controls. `auto` is parent routing, not a subagent argument. `inherit` follows the parent. Omitting `model` follows that tool's documented default.
 
-If the Task tool rejects a slug, use the closest slug of that family from the error message and say which slug you selected. Families are `claude-*`, `gpt-*`, and `grok-*`. If the error lists no slug in that family, use the role's Claude default. If that default is also rejected, use the closest Claude slug from the error.
+If `~/.cursor/rules/pstack-models.mdc` exists and defines the role, that line overrides the project tier binding. Methodrail does not ship that file and does not require it.
 
-If the host cannot choose models, omit `model` and continue on the host default. Claude Code and Codex keep that fallback.
+| Role |
+|---|
+| `arena runners` |
+| `arena cross-judge` |
+| `architect runners` |
+| `how explorer` |
+| `how explainer` |
+| `why investigators` |
+| `why synthesizer` |
+| `interrogate reviewers` |
+| `reflect judgment` |
+| `reflect divergent` |
+| `reflect synthesizer` |
+| `reflect tooling` |
+| `swarm workers` |
+| `hillclimb` |
+| `perf-issue` |
+
+On an unavailable model, use the tier's prevalidated fallback once, then omit `model`. Do not guess a nearby slug. Do not retry billing or authentication failures. Report a material substitution. If the host cannot choose models, omit `model` and continue. Suggest `/refresh-model-routing` when a binding needs repair. Routine work does not browse model catalogs.
 
 ## Control planes
 

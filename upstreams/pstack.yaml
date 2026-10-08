@@ -10,10 +10,10 @@ notes: >
   b9ddc83..5bf2b15. Incorporated matching wording in how/why
   references, blast-radius SKILL, architect rationale-template, and
   interrogate rubric. Did not take disable-model-invocation on
-  how/why, host model slugs, principle-* skill loads, deletion of
+  how/why, host model slugs, separate principle-* skill loads, deletion of
   how critique, or collapse of why's cheap path. Per-skill
   UPSTREAM.md for SKIP-mapped skills remains 4612556. Do not import
-  poteto-mode, setup-pstack, principle-* skills as a second
+  poteto-mode or setup-pstack as a second
   operating system, Graphite/GitHub shipping playbooks, or
   Cursor-only automations. Host-specific model slugs are isolated in
   references/host-capabilities.md. 4b4d98e (2026-09-29) incorporated
@@ -23,7 +23,9 @@ notes: >
   interrogate, hillclimb, performance, and reflect. Did not take
   blast-radius dropping say-so / don't-overstate, or interrogate dropping
   nit and hypothetical bars. Did not import principle-* skills,
-  poteto-mode, or pstack tdd. 4b4d98e Cursor model roles for arena,
+  poteto-mode, or pstack tdd. The principle library is composed into
+  references/principles.md as task-triggered cues mapped to existing
+  Methodrail owners. 4b4d98e Cursor model roles for arena,
   architect, how, why, interrogate, reflect, swarm, hillclimb, and
   performance are centralized in references/host-capabilities.md.
   Skills name roles. The optional pstack model rule is not shipped.

@@ -1,0 +1,14 @@
+id: skill.maintain-project.routing-negative
+kind: routing
+skill: maintain-project
+description: A local label edit, ordinary debugging, and a standalone architecture or verification audit keep their existing owners.
+input:
+  prompt: "Change the button label from Save to Create. Separately, debug the empty-cart checkout error. Separately, survey architecture in src/billing, and audit the verification skill. Do not start a project-maintenance audit."
+expected:
+  skills:
+    forbidden: [maintain-project]
+  behaviors:
+    - a local label edit stays a local edit
+    - ordinary debugging stays with debug
+    - a standalone architecture survey stays with improve-codebase-architecture
+    - a standalone verification audit stays with maintain-verification-skill

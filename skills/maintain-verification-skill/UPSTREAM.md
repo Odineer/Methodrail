@@ -6,8 +6,9 @@ License: MIT (Copyright (c) 2026 Lauren Tan)
 
 Methodrail changes:
 - target discovery includes .agents/skills/verify-*, .methodrail/control/, and PROJECT.md pointers
-- task-scoped maintenance is a Methodrail mode for parent workflows; standalone audit stays a full audit
-- outcomes remain clean / changed / blocked and must name scope and coverage
+- task-scoped maintenance is a Methodrail mode for parent workflows; standalone audit stays full-audit application
+- action (`inspect` / `apply`) is separate from coverage (`task-scoped` / `full audit`); `inspect` writes nothing and never reports `changed`
+- outcomes remain clean / changed / blocked for apply; inspect adds `findings` and must name action and coverage
 - no product-code mutation; documentation drift, harness defect, and product defect stay distinct
 - does not open a pull request; the parent receives the result
 - compared with pstack @ 5bf2b1544db739998121a306340631963c2ff3de (maintain-verification-skill and docs/guide/06-verify-and-ship.md); full audit keeps source-plus-live coverage, and PR shipping was not imported

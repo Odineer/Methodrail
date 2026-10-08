@@ -1,0 +1,31 @@
+{
+  "fixture_id": "maintenance-verification",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": ["maintain-project", "maintain-verification-skill"],
+  "references_loaded": ["references/verification-lifecycle.md"],
+  "tools_used": ["shell", "edit"],
+  "subagents_used": 0,
+  "verification_steps": [
+    "node scripts/drive.mjs --flow checkout",
+    "node scripts/drive.mjs --flow refund",
+    "node scripts/product-oracle.mjs"
+  ],
+  "evidence": ["helper read --flow", "both flows passed after the edit", "product oracle still fails"],
+  "outcome": "Fixed the shared drive helper and the stale checkout recipe. Returned the refund product defect with its oracle unchanged.",
+  "failure_modes": [],
+  "behaviors_observed": [
+    "inspect writes no files and does not report changed",
+    "apply fixes only the owned helper and the stale recipe",
+    "exercise checkout and refund after a helper edit",
+    "preserve the failing product oracle and return that defect",
+    "block a full audit when tools/export-bin is missing"
+  ],
+  "notes": "constructed specification. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/maintenance-verification/methodrail/answer.md",
+    "command_log": "evals/runners/artifacts/maintenance-verification/methodrail/command.log.json",
+    "overlay": "evals/runners/artifacts/maintenance-verification/methodrail/overlay"
+  }
+}

@@ -1,0 +1,12 @@
+id: complexity.maintain-project-overtrigger
+kind: complexity
+description: A local label edit must not start project maintenance or a full verification audit.
+input:
+  prompt: "Change the button label from Save to Create."
+expected:
+  skills:
+    forbidden: [maintain-project, improve-codebase-architecture, maintain-verification-skill, create-verification-skill, wayfinder, architect, arena, swarm, interrogate]
+  behaviors:
+    - inspect
+    - edit
+    - cheap verification

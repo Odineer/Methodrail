@@ -1,0 +1,18 @@
+id: behavioral.maintain-project.audit-then-selected-repair
+kind: behavioral
+skill: maintain-project
+description: A bare audit ranks evidence and does not edit. A selected repair revalidates, fixes that batch, and reruns invalidated checks.
+input:
+  prompt: "Audit this project for architecture, verification, and tooling debt. After the ranking, fix only the broken canonical test command."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with maintain-project and the specialist it names
+expected:
+  skills:
+    required: [maintain-project]
+  behaviors:
+    - bare audit ranks findings and does not edit
+    - revalidate a selected finding before repair
+    - repair only the selected target and its supporting files
+    - rerun checks invalidated by the repair
+  baseline_failure: rewriting quiet modules and weakening a failing product oracle

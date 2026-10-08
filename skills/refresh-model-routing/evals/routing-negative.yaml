@@ -1,0 +1,9 @@
+id: skill.refresh-model-routing.routing-negative
+kind: routing
+skill: refresh-model-routing
+description: "Ordinary development and a vague mention of models do not refresh model routing."
+input:
+  prompt: "Add pagination to the users endpoint. The model should just implement it."
+expected:
+  skills:
+    forbidden: [refresh-model-routing]

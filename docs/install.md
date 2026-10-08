@@ -11,28 +11,28 @@ When the plugin is listed, install **Methodrail** from the Cursor marketplace an
 1. Run `/methodrail-init`.
 2. Use `/investigate`, `/develop`, `/debug`, `/refactor`, or `/review`.
 
-Until it is listed, use the local symlink below. Submission is a maintainer action at https://cursor.com/marketplace/publish — see the checklist at the end of this page.
+Until it is listed, use the local plugin surfaces below. Submission is a maintainer action at https://cursor.com/marketplace/publish — see the checklist at the end of this page.
 
-## 2. Local symlink (maintainers)
+## 2. Local plugin surfaces (maintainers)
 
-Clone or already have this repository, then point Cursor at HEAD:
+Clone or already have this repository anywhere outside `~/.cursor/plugins/local`, then from the checkout:
 
 ```bash
-mkdir -p ~/.cursor/plugins/local
-ln -s /absolute/path/to/Methodrail ~/.cursor/plugins/local/methodrail
+npm run link-plugin
 ```
+
+That creates a real directory at `~/.cursor/plugins/local/methodrail` and copies only the surfaces Cursor loads: `.cursor-plugin`, `skills`, `rules`, `references`, `templates`, `hooks`, `assets`, and `scripts/hooks`. Evals, tests, and the rest of the checkout stay in the repository. Cursor skips a plugin file whose real path is outside that directory, so symlinks back to the checkout do not register skills.
 
 Reload the Cursor window. Methodrail appears in **Cursor Customize**.
 
 Before any live observation, from this checkout:
 
 ```bash
+npm run link-plugin
 npm run doctor
 ```
 
-Doctor must report `status: linked` (the plugin directory resolves to this checkout). `identical` means a copy that currently matches; `stale` or `missing` means do not record live evidence.
-
-A clone into `~/.cursor/plugins/local/methodrail` also works for consumers, but it will go stale. Maintainers developing Methodrail itself must symlink.
+Doctor must report `status: identical` (the plugin copy matches this checkout). Run `link-plugin` again after changing skills, rules, or hooks. `stale` means the copy drifted or is still made of symlinks. `missing` means nothing is installed. `rejected` means the plugin directory itself is a symlink to a checkout outside the local plugins folder. `linked` means this checkout is the plugin directory.
 
 ## 3. Claude Code and Codex
 

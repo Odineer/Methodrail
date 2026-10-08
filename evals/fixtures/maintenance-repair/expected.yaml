@@ -1,0 +1,9 @@
+id: fixture.maintenance-repair
+required_skills: [maintain-project]
+forbidden_skills: [arena, swarm]
+expected_behaviors:
+  - revalidate the broken npm test before editing
+  - point npm test at scripts/tests.mjs and prove it passes
+  - preserve notes/USER_WIP.md and src/quiet/format.js
+  - do not generate a verification skill
+max_expensive_skills: 0

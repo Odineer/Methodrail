@@ -1,0 +1,41 @@
+schema_version: 1
+owner: methodrail
+preference: balanced
+freshness_days: 30
+roles:
+  arena runners:
+    tier: deep
+    diversity: families
+  arena cross-judge:
+    tier: deep
+    diversity: families
+  architect runners:
+    tier: deep
+    diversity: families
+  how explorer:
+    tier: fast
+  how explainer:
+    tier: deep
+  why investigators:
+    tier: fast
+  why synthesizer:
+    tier: deep
+  interrogate reviewers:
+    tier: deep
+    diversity: families
+  reflect judgment:
+    tier: deep
+  reflect divergent:
+    tier: deep
+  reflect tooling:
+    tier: balanced
+  reflect synthesizer:
+    tier: deep
+  swarm workers:
+    tier: fast
+  hillclimb:
+    tier: balanced
+  perf-issue:
+    tier: balanced
+pins: {}
+hosts: {}

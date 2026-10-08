@@ -148,6 +148,9 @@ export const REQUIRED_COMPOSITION_FIXTURES = [
   "decision-ladder",
   "knowledge-reconciliation-v0.9",
   "architecture-deepening",
+  "maintenance-audit",
+  "maintenance-repair",
+  "maintenance-verification",
 ] as const;
 
 /** Canonical example names: `<fixture>.baseline.json` / `<fixture>.methodrail.json` for required fixtures only. Host extras and Task A traces (e.g. `knowledge-accumulation-discover.methodrail.json`) are not loaded by `npm run eval`. */

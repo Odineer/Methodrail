@@ -28,6 +28,7 @@ Interview the repository first. Then, for each role below, collect candidates fr
 | Verification | `verify-*` skill with Launch, `features/` maps | user-facing recipes |
 | Typed / legacy knowledge | `.methodrail/knowledge/*.md` | note contract or legacy prose |
 | Control | `.methodrail/control/` | launch/drive/reset procedures |
+| Model policy | `.methodrail/MODELS.yaml` | Methodrail task model policy. Do not classify it as typed knowledge or as a generic plan. |
 
 Linked-external harnesses stay addressable at `<git-root>/.methodrail/`. Do not search arbitrary sibling folders.
 

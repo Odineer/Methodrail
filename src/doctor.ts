@@ -1,14 +1,15 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, realpathSync } from "node:fs";
+import { existsSync, lstatSync, readFileSync, realpathSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, relative, resolve, sep } from "node:path";
 import { pathToFileURL } from "node:url";
+import { PLUGIN_SURFACES } from "../scripts/link-cursor-plugin.mjs";
 import { walkFiles } from "./fs-walk.js";
 
-/** Trees Cursor loads from the installed plugin, plus the references skills link into. */
-export const SHIPPED_TREES = [".cursor-plugin", "skills", "rules", "references", "templates"] as const;
+/** Trees compared against the checkout. Cursor only reads real files inside the plugin directory. */
+export const SHIPPED_TREES = PLUGIN_SURFACES;
 
-export type InstallStatus = "linked" | "identical" | "stale" | "missing";
+export type InstallStatus = "linked" | "identical" | "stale" | "missing" | "rejected";
 
 export interface DoctorReport {
   repoRoot: string;
@@ -42,6 +43,20 @@ function pluginVersion(root: string): string | null {
   }
 }
 
+function pluginSymlinkEscapesLocalRoot(pluginDir: string): boolean {
+  let stat;
+  try {
+    stat = lstatSync(pluginDir);
+  } catch {
+    return false;
+  }
+  if (!stat.isSymbolicLink()) return false;
+  const real = realpathOrNull(pluginDir);
+  const localRoot = resolve(pluginDir, "..");
+  if (!real) return true;
+  return real !== localRoot && !real.startsWith(localRoot + sep);
+}
+
 function shippedHashes(root: string): Map<string, string> {
   const hashes = new Map<string, string>();
   for (const tree of SHIPPED_TREES) {
@@ -61,6 +76,9 @@ export function diagnoseInstall(repoRoot: string, pluginDir: string): DoctorRepo
   };
   if (!existsSync(pluginDir)) {
     return { ...base, status: "missing", installedVersion: null, differing: [] };
+  }
+  if (pluginSymlinkEscapesLocalRoot(pluginDir)) {
+    return { ...base, status: "rejected", installedVersion: pluginVersion(pluginDir), differing: [] };
   }
   const repoReal = realpathOrNull(repoRoot);
   const pluginReal = realpathOrNull(pluginDir);
@@ -87,13 +105,13 @@ export function formatDoctor(report: DoctorReport): string {
   ];
   switch (report.status) {
     case "linked":
-      lines.push("The installed plugin resolves to this checkout. Cursor runs HEAD after a window reload.");
+      lines.push("This checkout is the plugin directory. Cursor can read it. To keep the rest of the repository elsewhere, move the checkout and run npm run link-plugin.");
       break;
     case "identical":
       lines.push(
-        `Installed copy matches HEAD (version ${report.repoVersion ?? "unknown"}), but it is a copy and will drift on the next commit.`,
+        `Installed copy matches HEAD (version ${report.repoVersion ?? "unknown"}). Cursor reads these real files after a window reload.`,
       );
-      lines.push(`Prefer a link: rm -rf "${report.pluginDir}" && ln -s "${report.repoRoot}" "${report.pluginDir}"`);
+      lines.push("The copy drifts after the next edit. Refresh it with: npm run link-plugin");
       break;
     case "stale": {
       lines.push(
@@ -102,13 +120,17 @@ export function formatDoctor(report: DoctorReport): string {
       const shown = report.differing.slice(0, 15);
       for (const rel of shown) lines.push(`  - ${rel}`);
       if (report.differing.length > shown.length) lines.push(`  … ${report.differing.length - shown.length} more`);
-      lines.push("Observations made with this install do not reflect HEAD.");
-      lines.push(`Fix: mv "${report.pluginDir}" <backup> && ln -s "${report.repoRoot}" "${report.pluginDir}"`);
+      lines.push("Cursor skips plugin files that are symlinks to the checkout, so those skills do not appear.");
+      lines.push("Refresh the copy: npm run link-plugin");
       break;
     }
     case "missing":
       lines.push("Methodrail is not installed as a local Cursor plugin.");
-      lines.push(`Install: ln -s "${report.repoRoot}" "${report.pluginDir}"`);
+      lines.push("Install: npm run link-plugin");
+      break;
+    case "rejected":
+      lines.push("Cursor does not load a plugin directory that is a symlink to a checkout outside the local plugins folder.");
+      lines.push("Remove that symlink and run: npm run link-plugin");
       break;
   }
   return lines.join("\n");
@@ -118,7 +140,7 @@ function main(): void {
   const repoRoot = resolve(process.argv[2] ?? process.cwd());
   const report = diagnoseInstall(repoRoot, defaultPluginDir());
   console.log(formatDoctor(report));
-  if (report.status === "stale" || report.status === "missing") process.exitCode = 1;
+  if (report.status === "stale" || report.status === "missing" || report.status === "rejected") process.exitCode = 1;
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) main();

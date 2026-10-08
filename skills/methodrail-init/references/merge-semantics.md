@@ -22,6 +22,7 @@ See `.methodrail/PROJECT.md` for repository-specific working guidance.
 5. Do not place markers around an entire user-authored file.
 6. Preserve formatting, line endings, unrelated ordering, and symlinks.
 7. Before writing, compare the proposed result with the current content.
+8. Model-policy refresh preserves pins, preference, and unrelated settings. Identical material input, including a timestamp-only bump, produces no byte change.
 
 ## Idempotency check
 

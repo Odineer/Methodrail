@@ -55,8 +55,8 @@ Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.
 | prototype playbook | Specialized probes | COMPOSE | `prototype` reference | Not a second prototype skill | — |
 | tdd | pstack TDD | SKIP | `tdd` (Matt) | Duplicate TDD owner | — |
 | poteto-mode | Global router + playbooks | SKIP | Methodrail workflows | Competing control plane | Cursor-specific |
-| setup-pstack | Model-role assignment | SKIP | — | Host bootstrap | Cursor-specific |
-| principle-* | First-principles library | SKIP | Methodrail `references/` | Would duplicate composition language | — |
+| setup-pstack | Model-role assignment | SKIP | `refresh-model-routing` | Host bootstrap; Methodrail keeps task policy instead of importing setup-pstack | Cursor-specific |
+| principle-* | First-principles library | COMPOSE | [Methodrail principles](principles.md) and linked skill owners | Principle names and task triggers are indexed in the existing methodology; no parallel public skills or router | portable |
 | automate-me / unslop / bro / no-comments / teach / recall / figure-it-out / technical-writing / typescript-best-practices | Style, personal, or language-specific | SKIP | — | Not core Methodrail | mixed |
 | benny automations / Graphite shipping playbooks | Org release flows | SKIP | — | Host/org-specific | GitHub/Graphite |
 

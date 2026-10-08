@@ -21,6 +21,8 @@ That would be a failure.
 
 `/debug` owns debugging. `diagnosing-bugs` owns the diagnosis procedure inside it. `runtime-forensics` is an escalation operator. `verify-change` is an evidence gate.
 
+`/maintain-project` owns the maintenance portfolio: scope, cross-lane discovery, deduplication, ranking, and reconciliation. A bare invocation is a read-only audit. It does not edit product source, project guidance, verification infrastructure, or durable artifacts. While one selected item executes, that item's workflow owns the item lifecycle and then returns the ranked finding, the batch, and the verification evidence. The item workflow must not restart project-wide discovery. Architecture discovery uses `improve-codebase-architecture` in `survey-only` phase. Verification inspection returns `findings` and writes nothing. Application is a separate named action. Full verification coverage happens only when the caller names a full audit. Broad maintenance does not imply one. There is no debt ledger.
+
 Avoid process recursion such as develop → wayfinder → architect → full develop → review → another workflow.
 
 ## Communicate through artifacts
@@ -38,7 +40,8 @@ architect              → architecture decision
 tdd                    → executable behavioral evidence
 verify-change          → fresh verification evidence
 create-verification-skill → proposed or proved project verification
-maintain-verification-skill → task-scoped or full-audit corrections
+maintain-verification-skill → inspect findings, or task-scoped / full-audit corrections when apply is named
+maintain-project           → ranked audit; selected-repair evidence returned from the item owner
 code-review            → findings
 show-me-your-work      → operational TSV trail; ADR only via the three-part gate
 reflect                → learning candidates; sole writer of typed notes after approval

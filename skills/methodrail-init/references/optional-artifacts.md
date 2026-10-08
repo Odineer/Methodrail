@@ -16,6 +16,10 @@ Cite source paths or decisions, record a relevant revision when the claim is cod
 
 Do not mirror the README, issue tracker, or source tree.
 
+## Model policy
+
+Add `.methodrail/MODELS.yaml` when the user asks to configure models or when init is creating a harness and no authoritative model policy already exists. Use the skeleton in `templates/project/MODELS.yaml`. Compose `refresh-model-routing` in discovery mode to fill host bindings, then include the file and its PROJECT.md pointer in the same preview. Adopt an existing authoritative policy by pointer instead of writing a second file. Preserve pins and preference. Do not create specialist agent files, and do not install a second host integration, solely to project routing.
+
 ## Project control guidance
 
 Use `.methodrail/control/CONTROL.md` when starting, checking readiness, exercising, inspecting, capturing evidence from, resetting, or stopping the project requires non-obvious coordination. See [control investigation](control-investigation.md).

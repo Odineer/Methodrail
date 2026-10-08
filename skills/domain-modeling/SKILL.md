@@ -7,6 +7,8 @@ description: "Build and sharpen a project's domain model. Use when discussing co
 
 Actively build and sharpen the project's domain model. This is the *active* discipline: challenging terms, inventing edge-case scenarios, and writing the glossary and decisions down the moment they crystallise. Merely *reading* an existing glossary is not this skill.
 
+Use it not only to resolve ambiguity, but also when a feature, bug fix, or design change establishes or changes project-specific language, domain ownership, states/transitions, or invariants. A concept can be clear and still deserve a durable glossary entry. Do not document ordinary implementation details or generic programming terms.
+
 ## Where the glossary lives
 
 Do not force a filename. Prefer the project's established source of truth, in this order:
@@ -17,7 +19,7 @@ Do not force a filename. Prefer the project's established source of truth, in th
 
 If a `CONTEXT-MAP.md`, `GLOSSARY-MAP.md`, or equivalent exists, the repo has multiple contexts. Follow that map. System-wide decisions may live in `docs/adr/` or `.methodrail/knowledge/decisions/`; context-specific decisions stay with that context. Durable typed notes still go through `reflect` after approval.
 
-`PROJECT.md` should point at whichever glossary is canonical. Do not copy the glossary into Methodrail-only duplicates.
+If `.methodrail/PROJECT.md` exists, it should point at whichever glossary is canonical. Add or correct that pointer when creating or relocating the glossary; do not create a project harness just to hold a pointer, and do not copy the glossary into Methodrail-only duplicates. A later `methodrail-init` can adopt a project-native glossary that has no harness yet.
 
 The glossary should be devoid of implementation details. It is a vocabulary, not a spec, scratch pad, or repository for implementation decisions. Use the format in [CONTEXT-FORMAT.md](references/CONTEXT-FORMAT.md), adapted to the file you actually maintain.
 
@@ -41,7 +43,7 @@ When the user states how something works, check whether the code agrees. If you 
 
 ### Update the glossary inline
 
-When a term is resolved, update the canonical glossary right there. Don't batch these up. Record:
+When work establishes or changes a project-specific term or domain rule, update the canonical glossary in the same task. Don't batch these up. Read the existing definition first and change only what the new evidence supports. Record:
 
 - canonical term
 - definition
@@ -60,7 +62,7 @@ Only offer to create an ADR when all three are true:
 2. **Surprising without context**: a future reader will wonder why
 3. **The result of a real trade-off**: genuine alternatives, picked for specific reasons
 
-If any of the three is missing, skip the ADR. Do not write the file until the user approves the draft. Use [ADR-FORMAT.md](references/ADR-FORMAT.md). Write the ADR next to the project's existing decision records, or `.methodrail/knowledge/decisions/` if that is the home. See the [decision record](../../references/protocols/decision-record.md) promotion ladder and the [decision frontier](../../references/decision-frontier.md).
+If any of the three is missing, skip the ADR. When all three hold, surface the reason and offer a concise standalone draft; write it only after the user approves. Use [ADR-FORMAT.md](references/ADR-FORMAT.md). Write the ADR next to the project's existing decision records, or `.methodrail/knowledge/decisions/` if that is the home. Update an existing `.methodrail/PROJECT.md` pointer when adding the first ADR. See the [decision record](../../references/protocols/decision-record.md) promotion ladder and the [decision frontier](../../references/decision-frontier.md).
 
 Ask humans only for preference or intent the environment cannot resolve.
 

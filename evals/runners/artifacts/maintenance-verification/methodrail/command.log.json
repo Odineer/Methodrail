@@ -1,0 +1,44 @@
+[
+  {
+    "command": "node scripts/drive.mjs checkout",
+    "phase": "repro",
+    "exit_status": 1
+  },
+  {
+    "command": "node scripts/drive.mjs --flow refund",
+    "phase": "repro",
+    "exit_status": 1
+  },
+  {
+    "command": "node scripts/product-oracle.mjs",
+    "phase": "repro",
+    "exit_status": 1
+  },
+  {
+    "command": "edit scripts/drive.mjs",
+    "phase": "edit",
+    "exit_status": 0
+  },
+  {
+    "command": "edit features/checkout.md",
+    "phase": "edit",
+    "exit_status": 0
+  },
+  {
+    "command": "node scripts/drive.mjs --flow checkout",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "checkout ok"
+  },
+  {
+    "command": "node scripts/drive.mjs --flow refund",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "refund ok"
+  },
+  {
+    "command": "node scripts/product-oracle.mjs",
+    "phase": "verify",
+    "exit_status": 1
+  }
+]

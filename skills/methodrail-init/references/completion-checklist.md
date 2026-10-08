@@ -9,7 +9,8 @@
 - PROJECT.md is not a cloned README and not a generated repository summary.
 - Optional knowledge, control, and project-local skills have a stated recurring use.
 - Typed and legacy knowledge notes were recognized; typed notes are indexed; dependency-fresh, `review-required`, `unknown`, disputed, retired, malformed, unbounded, and broken-pointer notes were reported, not rewritten or migrated. The report said freshness is not semantic truth. No typed note was created during init.
-- Existing glossary, ADR, spec, plan, TSV, and host-instruction artifacts were adopted by pointer or left unchanged. Conflicts were reported, not guessed.
+- Existing glossary, ADR, spec, plan, TSV, host-instruction, and model-policy artifacts were adopted by pointer or left unchanged. Conflicts were reported, not guessed.
+- Model policy discovery wrote nothing. A confirmed policy is a balanced `MODELS.yaml` unless an existing preference or pin said otherwise. Pins and unrelated settings survived. Configured, recorded-observed, manual picker or session action, and unavailable are separate outcomes. An unchanged second run did not rewrite the file.
 - The preview used create/update/adopt/unchanged/conflict/unavailable. Non-empty writes waited for confirmation. An inspect-only request did not write. An unchanged second run produced no diff.
 - Control/verification questions were investigated when the project has a runnable surface.
 - Verification discovery returned a proposal before confirmation and did not write files. `create-verification-skill` ran in application phase during confirmed apply when new guidance was warranted; static verification was documented when it is not. A working skill was not regenerated blindly.

@@ -1,0 +1,26 @@
+[
+  {
+    "command": "npm test",
+    "phase": "repro",
+    "exit_status": 1,
+    "stderr": "Cannot find module scripts/run-tests.mjs"
+  },
+  {
+    "command": "node scripts/tests.mjs",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "product ok"
+  },
+  {
+    "command": "node scripts/drive.mjs checkout",
+    "phase": "repro",
+    "exit_status": 1,
+    "stderr": "usage: node scripts/drive.mjs --flow checkout"
+  },
+  {
+    "command": "node scripts/drive.mjs --flow checkout",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "checkout ok"
+  }
+]
