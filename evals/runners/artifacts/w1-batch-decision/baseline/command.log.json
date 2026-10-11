@@ -1,0 +1,7 @@
+[
+  {
+    "command": "edit repo/src/export.js",
+    "phase": "edit",
+    "exit_status": 0
+  }
+]

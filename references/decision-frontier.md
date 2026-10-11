@@ -65,9 +65,26 @@ Downstream questions stay in fog until their prerequisites move into Known.
 
 Identify interpretations that materially alter observable behavior, scope, data exposure, public contracts, or acceptance criteria.
 
-Resolve implementation facts through source, tests, configuration, or runtime evidence before asking. If a consequential preference or policy remains unresolved, present the meaningful alternatives with a recommendation and ask before implementing dependent behavior. Continue independent investigation or implementation that does not depend on the missing choice.
+Resolve implementation facts through source, tests, configuration, or runtime evidence before asking. A clarification is justified only when both conditions hold:
 
-For a low-impact reversible choice supported by context, state the material assumption briefly and proceed. Do not list obvious assumptions or ask permission to follow established conventions. If new evidence contradicts an assumption, revise the affected plan rather than silently preserving it.
+1. Human judgment is necessary. The choice is intent, preference, policy, or an intentional tradeoff, and it cannot be settled by the current request, prior answers, project guidance, source, tests, documentation, configuration, runtime evidence, or a suitable experiment.
+2. The answers would change the build. They change observable behavior, meaningful scope, permissions, data handling, public compatibility, or acceptance criteria.
+
+Several technical approaches do not satisfy either condition. Investigate those. An established convention or a supported low-impact reversible choice can be selected and stated. Do not list obvious assumptions or ask permission to follow established conventions. If new evidence contradicts an assumption, revise the affected plan rather than silently preserving it.
+
+## Batch the qualified frontier
+
+Before asking, gather evidence and drop any question that fails either condition. Ask the currently actionable, mutually independent qualifying questions in one round. Group related questions. Leave questions whose prerequisites are unanswered for a later round. Do not invent questions to fill a round. If none qualify, continue. If one qualifies, ask that one.
+
+Each asked question states the unresolved choice and known facts, the meaningful alternatives, what would be built differently, and a recommendation with its tradeoff.
+
+Pause only work that depends on an unanswered choice. Continue independent investigation or authorized work. Recompute the frontier after answers. Prior answers and prior authorization stay resolved across skills. Do not ask again because a different skill started. Do not treat silence or a timeout as approval.
+
+An export with unresolved field scope and output format can ask both in that round: scope changes data exposure, and format changes the interface. A question that depends on one of those answers waits. Helper names, a documented date convention, and a repository-supported test seam do not enter the round.
+
+This rule governs design clarification. It does not remove an existing approval boundary for ADRs, typed notes, harness placement or writes, or consequential external operations. Reuse approval already present in the session. When a necessary environment or redacted artifact is unavailable after reasonable attempts, report that blocker and request only the missing input or access. Do not turn the blocker into a requirements interview. Never ask the user to paste secrets.
+
+`develop`, `debug`, `refactor`, `investigate`, and authorized maintenance repairs use this rule where a build choice appears. `to-spec` chooses a supported test seam unless that seam itself encodes a qualifying decision. `to-tickets` chooses routine granularity and dependency edges. `grill-with-docs` keeps frontier rounds, recommendations, and fact-finding, and filters ordinary workflow questions through this rule. When the qualifying decisions are resolved, report the understanding and follow the caller's existing authority. Do not add another approval of those same decisions. A standalone interview still ends with its synthesis and does not by itself authorize implementation.
 
 Do not stop all useful work because something is unclear. Do not auto-trigger `grill-with-docs`, `wayfinder`, `architect`, or `prototype` for ordinary ambiguity.
 

@@ -1,0 +1,9 @@
+id: composition.w2-settled-policy
+kind: composition
+description: Project policy already approves name and email as CSV. Export a customer.
+fixture: evals/fixtures/w2-settled-policy
+input:
+  prompt: "Project policy already approves name and email as CSV. Export a customer."
+expected:
+  behaviors:
+    - see task.md

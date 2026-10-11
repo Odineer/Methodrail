@@ -1,0 +1,29 @@
+{
+  "fixture_id": "w3-weak-tests",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "develop",
+    "code-review"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Spec review caught the missing name. The greeting now includes it.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w3-weak-tests/methodrail/answer.md",
+    "command_log": "evals/runners/artifacts/w3-weak-tests/methodrail/command.log.json",
+    "overlay": "evals/runners/artifacts/w3-weak-tests/methodrail/overlay"
+  }
+}

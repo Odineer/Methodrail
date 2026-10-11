@@ -1,0 +1,26 @@
+{
+  "fixture_id": "w1-batch-decision",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Asked field scope and output format. Deferred column order. Continued reading export.js.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w1-batch-decision/methodrail/answer.md",
+    "command_log": "evals/runners/artifacts/w1-batch-decision/methodrail/command.log.json",
+    "overlay": "evals/runners/artifacts/w1-batch-decision/methodrail/overlay"
+  }
+}

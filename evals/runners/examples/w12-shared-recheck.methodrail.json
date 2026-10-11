@@ -1,0 +1,28 @@
+{
+  "fixture_id": "w12-shared-recheck",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "maintain-project"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Both repairs verified after the later edit.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w12-shared-recheck/methodrail/answer.md",
+    "command_log": "evals/runners/artifacts/w12-shared-recheck/methodrail/command.log.json",
+    "overlay": "evals/runners/artifacts/w12-shared-recheck/methodrail/overlay"
+  }
+}

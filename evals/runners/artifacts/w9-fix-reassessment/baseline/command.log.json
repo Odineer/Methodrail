@@ -1,0 +1,27 @@
+[
+  {
+    "command": "edit attempt 1",
+    "phase": "fix",
+    "exit_status": 1
+  },
+  {
+    "command": "edit attempt 2",
+    "phase": "fix",
+    "exit_status": 1
+  },
+  {
+    "command": "edit attempt 3",
+    "phase": "fix",
+    "exit_status": 1
+  },
+  {
+    "command": "edit attempt 4",
+    "phase": "fix",
+    "exit_status": 0
+  },
+  {
+    "command": "ask the user for a meeting",
+    "phase": "ask",
+    "exit_status": 0
+  }
+]

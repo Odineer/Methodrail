@@ -1,0 +1,45 @@
+[
+  {
+    "command": "node --test src/index.test.js",
+    "phase": "repro",
+    "exit_status": 1
+  },
+  {
+    "command": "edit attempt 1",
+    "phase": "fix",
+    "exit_status": 1
+  },
+  {
+    "command": "edit attempt 2",
+    "phase": "fix",
+    "exit_status": 1
+  },
+  {
+    "command": "edit attempt 3",
+    "phase": "fix",
+    "exit_status": 1
+  },
+  {
+    "command": "reassess reproduction and contract owner",
+    "phase": "reassess",
+    "exit_status": 0,
+    "stdout": "causal: first reads index 1 and skips the item at index 0"
+  },
+  {
+    "command": "node --input-type=module -e 'import { first } from \"./src/index.js\"; console.log(first([\"a\", \"b\"]));'",
+    "phase": "probe",
+    "exit_status": 0,
+    "stdout": "b"
+  },
+  {
+    "command": "edit attempt 4",
+    "phase": "fix",
+    "exit_status": 0,
+    "stdout": "causal: index starts at 0"
+  },
+  {
+    "command": "node --test src/index.test.js",
+    "phase": "verify",
+    "exit_status": 0
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "name": "w5",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test src/button.test.js"
+  }
+}

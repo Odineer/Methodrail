@@ -1,0 +1,11 @@
+id: complexity.mechanical-no-review
+kind: complexity
+description: A label change with an existing test does not load review, grilling, or a spec.
+input:
+  prompt: "Change the button label from Save to Create. The unit test already expects Create."
+expected:
+  skills:
+    forbidden: [code-review, wayfinder, architect, arena, swarm, interrogate, grill-with-docs, to-spec, create-verification-skill, maintain-project]
+  behaviors:
+    - edit the label
+    - run the existing test

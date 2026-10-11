@@ -1,0 +1,17 @@
+[
+  {
+    "command": "node check-a",
+    "phase": "verify",
+    "exit_status": 0
+  },
+  {
+    "command": "edit repo/src/b.js",
+    "phase": "edit",
+    "exit_status": 0
+  },
+  {
+    "command": "node check-b",
+    "phase": "verify",
+    "exit_status": 0
+  }
+]

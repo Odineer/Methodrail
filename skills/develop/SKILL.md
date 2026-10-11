@@ -29,36 +29,39 @@ plan proportionally
 ↓
 implement with canonical discipline
 ↓
-verify
+code-review when the change is substantive
 ↓
-blast-radius/review proportional to risk
+repair material findings
 ↓
-retain valuable learning
+verify the final relevant state
+↓
+one owner completion report
 ```
 
 ## Cheap path first
 
 Match effort to [rigor](../../references/rigor.md). Do not activate the whole stack.
 
-**Tiny bounded change:** inspect → edit → deterministic check → done. An adequate existing check does not invoke `create-verification-skill` or a full `maintain-verification-skill` audit.
+**Tiny bounded change:** inspect → edit → deterministic check → done. An adequate existing check does not invoke `code-review`, `create-verification-skill`, or a full `maintain-verification-skill` audit. A mechanical task may report a concise claim plus that check.
 
-**Normal feature:** `how` if needed → acceptance criteria → `domain-modeling` when the change introduces or changes product terms, ownership, lifecycle, or domain invariants → `tdd` / implementation → `verify-change` → `code-review` if warranted. Domain documentation is part of the feature when those concepts crystallize; use the canonical glossary and update its project index. Offer an ADR only when the [decision-record](../../references/protocols/decision-record.md) criteria hold, and wait for approval before writing it. Create or task-scoped verification maintenance only when [verification lifecycle](../../references/verification-lifecycle.md) selects it.
+**Normal feature:** `how` if needed → acceptance criteria and the existing proof → `domain-modeling` when the change introduces or changes product terms, ownership, lifecycle, or domain invariants → `tdd` / implementation in verified slices → `code-review` on the substantive delta → repair material findings → `verify-change` on the final state. Domain documentation is part of the feature when those concepts crystallize; use the canonical glossary and update its project index. Offer an ADR only when the [decision-record](../../references/protocols/decision-record.md) criteria hold, and wait for approval before writing it. Create or task-scoped verification maintenance only when [verification lifecycle](../../references/verification-lifecycle.md) selects it.
 
-**Large uncertain redesign:** `wayfinder` → `domain-modeling` → `how` → `architect` (design only: alternatives, recommendation, and unresolved questions; it must not implement) → `prototype` only for empirical claims → decision → implementation → `blast-radius` → `code-review` → `verify-change`. If rigor is high, name `interrogate` and wait for the user to invoke it.
+**Large uncertain redesign:** `wayfinder` → `domain-modeling` → `how` → `architect` (design only: alternatives, recommendation, and unresolved questions; it must not implement) → `prototype` only for empirical claims → decision → implementation → `blast-radius` → `code-review` → repair material findings → `verify-change`. If rigor is high, name `interrogate` and wait for the user to invoke it. Review depth follows [rigor](../../references/rigor.md). Do not start `arena` because the host can run it.
 
 Do not load `wayfinder`, `architect`, `prototype`, `arena`, or `swarm` for routine work. Never load `interrogate` from this workflow.
 
 ## Workflow
 
 1. Read `.methodrail/PROJECT.md` if present. Follow pointers only when relevant. Before relying on a stored note, follow [knowledge reuse](../../references/knowledge/reuse.md).
-2. Classify uncertainty with the [decision frontier](../../references/decision-frontier.md), including [consequential assumptions](../../references/decision-frontier.md#consequential-assumptions). Resolve only currently actionable questions. Use the cheapest reliable method: deterministic tool, source/`how`, `observe`, `why`, `research`, `prototype`, `domain-modeling`, or a human.
-3. Define observable success and a verification strategy before editing. Apply [Verification](#verification). Ask only when a missing choice is product/taste/preference and the repository cannot answer it. When a multi-step implementation plan is warranted, pair each meaningful outcome with the evidence that will verify it. Reuse a check across steps where appropriate; do not introduce a separate test or approval for every step.
+2. Classify uncertainty with the [decision frontier](../../references/decision-frontier.md), including the [human-decision rule](../../references/decision-frontier.md#consequential-assumptions). Resolve only currently actionable questions. Use the cheapest reliable method: deterministic tool, source/`how`, `observe`, `why`, `research`, `prototype`, `domain-modeling`, or a human. Ask one batch only when both conditions in that rule hold. Routine seams, helper names, and established conventions are not a batch.
+3. Define observable success and select existing proof before editing. Apply [Verification](#verification). When a multi-step implementation plan is warranted, pair each meaningful outcome with the evidence that will verify it. Reuse a check across steps where appropriate; do not introduce a separate test or approval for every step. A tiny edit does not acquire a spec document.
 4. Load the [simplicity procedure](../../references/simplicity.md) when considering a helper, dependency, or abstraction, or when deciding whether this change made something unused. Rename, label, copy, and other mechanical edits stay inspect → edit → check and do not load that reference. After a replacement or deletion, remove artifacts this change made unused; leave unrelated dead code.
-5. Implement in focused increments with `tdd` at agreed seams when that is the honest strategy. Follow established project patterns. Use `refactor` when the request is structural rather than a feature.
+5. Implement in focused increments with `tdd` at agreed seams when that is the honest strategy. Prove each meaningful slice before starting a slice that depends on it. Follow established project patterns. Use `refactor` when the request is structural rather than a feature. Do not commit between slices unless the user asked.
 6. If the work resolved or changed a project-specific term, ownership, lifecycle, or invariant, update the canonical glossary during this task through `domain-modeling`. If a new glossary was created, add its pointer to an existing `.methodrail/PROJECT.md`; do not create a second glossary or a project harness just to hold the pointer. Keep implementation details in code/docs where they belong. Offer a durable ADR only for a hard-to-reverse, surprising decision made among real alternatives; wait for approval before writing.
 7. Before reporting complete, inspect this task's delta. Each hunk should support the requested outcome, necessary supporting work, required verification or metadata, or [change-created cleanup](../../references/simplicity.md#change-created-cleanup). Remove only this agent's unrelated edits; do not revert other contributors' work.
-8. Use `observe` and the project verification skill when the claim is behavioral. If the task adds, changes, or removes user-facing behavior that an existing feature map represents or should represent, including a behavior the map does not yet list, invoke `maintain-verification-skill` in task-scoped mode. Update the index and the affected entries. Do not start a full audit. Then finish with `verify-change`. Use `/review` only when the user requests a separate review or rigor requires it. If later edits, including maintenance, change relevant state, rerun the affected verification before claiming completion.
-9. Summarize changed behavior, files, verification evidence, residual risk, and any durable knowledge worth proposing. Do not persist ordinary summaries.
+8. For a substantive change, run `code-review` on the task-owned delta before completion. Pass a [review packet](../../references/protocols/review-packet.md): the request, acceptance criteria, that delta, base and worktree state, applicable standards, verification evidence, and known deviations. Select depth from [rigor](../../references/rigor.md). Repair material findings inside this task. Do not start another lifecycle. Optional suggestions do not expand scope. Use `/review` when the user requests a standalone review. An explicit review request still invokes review even for a mechanical edit.
+9. Use `observe` and the project verification skill when the claim is behavioral. If the task adds, changes, or removes user-facing behavior that an existing feature map represents or should represent, including a behavior the map does not yet list, invoke `maintain-verification-skill` in task-scoped mode. Update the index and the affected entries. Do not start a full audit. Then finish with `verify-change` on the final relevant state. If later edits, including review repairs, cleanup, or maintenance, change relevant state, rerun the affected verification before claiming completion.
+10. This workflow emits one terminal [completion report](../../references/protocols/completion-report.md) for substantive work. Leaves return their results here. Summarize changed behavior, files, verification evidence, residual risk, and any durable knowledge worth proposing. Do not persist ordinary summaries. A mechanical task may use a concise claim plus its check.
 
 Matt's `implement` skill is not a public Methodrail skill. `/develop` owns the lifecycle.
 
@@ -84,7 +87,7 @@ Follow [verification lifecycle](../../references/verification-lifecycle.md).
 
 ## Done when
 
-Acceptance criteria are met, the task delta is scoped to the request and necessary supporting work, change-created leftovers are removed, and each completion claim has fresh relevant evidence or a clearly reported verification gap. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
+Acceptance criteria are met, the substantive delta was reviewed, material findings were repaired or a concrete blocker remains, the task delta is scoped to the request and necessary supporting work, change-created leftovers are removed, and each completion claim has fresh relevant evidence or a clearly reported verification gap. Substantive work ends with one [completion report](../../references/protocols/completion-report.md) from this workflow.
 
 ## Neighbors
 

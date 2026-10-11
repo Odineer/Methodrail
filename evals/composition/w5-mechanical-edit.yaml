@@ -1,0 +1,9 @@
+id: composition.w5-mechanical-edit
+kind: composition
+description: Change the button label from Save to Create.
+fixture: evals/fixtures/w5-mechanical-edit
+input:
+  prompt: "Change the button label from Save to Create."
+expected:
+  behaviors:
+    - see task.md

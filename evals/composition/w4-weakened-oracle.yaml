@@ -1,0 +1,9 @@
+id: composition.w4-weakened-oracle
+kind: composition
+description: Keep the limit of 10. The label requirement changed from Save to Create.
+fixture: evals/fixtures/w4-weakened-oracle
+input:
+  prompt: "Keep the limit of 10. The label requirement changed from Save to Create."
+expected:
+  behaviors:
+    - see task.md

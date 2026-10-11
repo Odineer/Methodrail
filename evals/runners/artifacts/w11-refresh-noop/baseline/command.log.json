@@ -1,0 +1,7 @@
+[
+  {
+    "command": "node scripts/models-policy.mjs propose --host cursor",
+    "phase": "other",
+    "exit_status": 0
+  }
+]

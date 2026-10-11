@@ -1,0 +1,12 @@
+[
+  {
+    "command": "node --test src/greet.test.js",
+    "phase": "verify",
+    "exit_status": 0
+  },
+  {
+    "command": "node scripts/hidden-greet.mjs",
+    "phase": "verify",
+    "exit_status": 0
+  }
+]

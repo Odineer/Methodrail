@@ -5,6 +5,7 @@ import { materializeFixture, readIfExists, removeWorktree, OVERLAY_MANIFEST } fr
 import { walkFiles } from "../fs-walk.js";
 import { extractCompletionReport } from "./completion-report.js";
 import { gradeMaintenanceFixture } from "../composition/grade-maintenance-trace.js";
+import { gradeWorkflowFixture } from "../composition/grade-workflow.js";
 import type { CommandLogEntry, EvalContext, EvalRun, OutcomeCheck, OutcomeGrade } from "./types.js";
 
 function check(id: string, passed: boolean, detail: string): OutcomeCheck {
@@ -897,6 +898,8 @@ const GRADERS: Record<string, (run: EvalRun, ctx: EvalContext) => OutcomeGrade> 
 };
 
 export function gradeOutcome(run: EvalRun, ctx: EvalContext): OutcomeGrade {
+  const workflow = gradeWorkflowFixture(run, ctx);
+  if (workflow) return workflow;
   const grader = GRADERS[run.fixture_id];
   if (!grader) return incompleteGrade(`no fixture grader for ${run.fixture_id}`);
   return grader(run, ctx);

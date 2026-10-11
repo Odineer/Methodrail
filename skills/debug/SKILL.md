@@ -39,9 +39,10 @@ Do not automatically profile or trace every bug.
 3. Invoke `diagnosing-bugs`: build a red-capable loop, minimise, hypothesise, instrument, then fix. Do not repeat that procedure here.
 4. Escalate only when the loop is not enough: `observe` / `runtime-forensics` for live mechanism, `trace-forensics` for an existing capture, `performance` / `hillclimb` when the work is metric-driven.
 5. Name the root cause with evidence. If the root cause remains unknown, do not disguise a guess as a fix.
-6. Apply `tdd` for the regression at a correct seam when that is the honest strategy. Keep that regression check. If the fix reveals that a project-specific term, ownership rule, lifecycle, or invariant has changed, invoke `domain-modeling` and update the canonical glossary based on the verified behavior. Do not rewrite the glossary to excuse a defect against an unchanged domain contract. If the fix adds, changes, or removes user-facing behavior an existing map represents or should represent, invoke `maintain-verification-skill` in task-scoped mode, then `verify-change`. Rerun the affected checks after those edits.
-7. Use `blast-radius` only for shared contracts or cross-boundary changes.
-8. Report reproduction, root cause, change, evidence, and residual uncertainty. A recurring failure mode may be a known-failure, regression test, or lint candidate. Do not auto-promote it.
+6. Apply `tdd` for the regression at a correct seam when that is the honest strategy. Keep that regression check. If the fix reveals that a project-specific term, ownership rule, lifecycle, or invariant has changed, invoke `domain-modeling` and update the canonical glossary based on the verified behavior. Do not rewrite the glossary to excuse a defect against an unchanged domain contract. If the fix adds, changes, or removes user-facing behavior an existing map represents or should represent, invoke `maintain-verification-skill` in task-scoped mode. Rerun the affected checks after those edits.
+7. For a nontrivial production-code fix, run `code-review` at the depth [rigor](../../references/rigor.md) selects. Repair material findings here. Do not restart diagnosis for an optional suggestion.
+8. Use `blast-radius` only for shared contracts or cross-boundary changes. Then `verify-change` on the final tree. Ask only under the [human-decision rule](../../references/decision-frontier.md#consequential-assumptions), or when authority or a concrete input is actually missing.
+9. Report reproduction, root cause, change, evidence, and residual uncertainty. A recurring failure mode may be a known-failure, regression test, or lint candidate. Do not auto-promote it.
 
 ## Verification
 
@@ -62,7 +63,7 @@ Follow [verification lifecycle](../../references/verification-lifecycle.md).
 
 ## Done when
 
-The failure is reproduced or bounded, its cause is supported by evidence, and the fix is verified against the reproduction plus proportionate regression checks. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
+The failure is reproduced or bounded, its cause is supported by evidence, a nontrivial code fix was reviewed, and the fix is verified against the reproduction plus proportionate regression checks. This workflow emits one [completion report](../../references/protocols/completion-report.md). Leaves return their results here.
 
 ## Neighbors
 

@@ -1,0 +1,13 @@
+{
+  "findings": [
+    {
+      "id": "limit",
+      "disposition": "accepted"
+    },
+    {
+      "id": "label",
+      "disposition": "rejected",
+      "reason": "prefer the old string"
+    }
+  ]
+}

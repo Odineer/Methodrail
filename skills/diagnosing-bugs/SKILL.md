@@ -21,7 +21,7 @@ NO FIXES WITHOUT A RED-CAPABLE LOOP AND A FALSIFIABLE ROOT-CAUSE CLAIM
 
 Never jump from symptom to speculative patch. If you catch yourself reading code to build a theory before the loop exists, stop.
 
-After three failed fix attempts, stop and question the architecture. Do not attempt fix #4 without that discussion.
+After three unsuccessful fixes for the same symptom, stop speculative patching. Reassess the reproduction, the oracle, the assumptions, the contract owner, and the architecture. Another fix requires a revised causal claim and new supporting evidence. That reassessment is not a fourth guess and not an automatic meeting. Ask only for a qualifying human decision, missing authority, or concrete unavailable access. See the [human-decision rule](../../references/decision-frontier.md#consequential-assumptions).
 
 ## Phase 1: Build a feedback loop
 
@@ -66,11 +66,11 @@ Confirm the loop produces the failure the **user** described. Then shrink the re
 
 ## Phase 3: Hypothesise
 
-Generate **3–5 ranked falsifiable hypotheses** before testing any of them.
+Generate one or more ranked falsifiable hypotheses, proportional to the uncertainty. One strongly supported hypothesis is enough for a sharply reproduced failure. Competing plausible mechanisms need alternatives. Do not add filler theories.
 
 > If X is the cause, then changing Y will make the bug disappear, or changing Z will make it worse.
 
-Show the ranked list. Don't block on the user; proceed if they are away.
+Show the ranked list. Test them. Don't block on the user.
 
 ## Phase 4: Instrument
 
@@ -117,7 +117,7 @@ These are not reasons to skip the loop:
 | "I'll write the test after" | Untested fixes don't stick |
 | "Multiple fixes at once" | Can't isolate what worked |
 | "I see the problem" | Seeing symptoms ≠ understanding root cause |
-| "One more fix" after 2+ failures | Question the architecture |
+| "One more fix" after three unsuccessful fixes | Reassess with a new causal claim and new evidence |
 
 ## Escalation
 

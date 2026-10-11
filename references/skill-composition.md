@@ -143,9 +143,17 @@ rename → inspect → edit → deterministic verification
 ### Normal feature
 
 ```text
-develop → relevant understanding → acceptance criteria → tdd → verify
+develop → relevant understanding → acceptance criteria and existing proof
+→ tdd or another honest seam → code-review for a substantive delta
+→ repair material findings → verify-change on the final state → one owner report
 (create or task-scoped maintenance only when the verification lifecycle selects them)
 ```
+
+Mechanical work stays inspect, edit, and the adequate check. It does not load `code-review`.
+
+### Completion ownership
+
+A composed leaf returns its result to the owning workflow. The owner emits one terminal [completion report](protocols/completion-report.md) for that substantive task. Standalone invocation keeps the leaf's own user-facing result. Intermediate evidence may be summarized without claiming the whole feature is complete. Do not add review or token keys to that block.
 
 ### Runtime bug
 
@@ -159,8 +167,9 @@ debug → diagnosing-bugs → observe → runtime-forensics only if needed
 ```text
 develop → wayfinder → domain-modeling → how → architect
 → prototype empirical unknowns → implementation → blast-radius
-→ code-review → verify
+→ code-review → repair material findings → verify
 → name interrogate if risk warrants; wait
+→ one owner report
 ```
 
 ## Decision ladder

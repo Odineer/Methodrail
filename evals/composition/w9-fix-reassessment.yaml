@@ -1,0 +1,9 @@
+id: composition.w9-fix-reassessment
+kind: composition
+description: The first item is dropped. Three patches already failed.
+fixture: evals/fixtures/w9-fix-reassessment
+input:
+  prompt: "The first item is dropped. Three patches already failed."
+expected:
+  behaviors:
+    - see task.md

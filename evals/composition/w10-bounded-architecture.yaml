@@ -1,0 +1,9 @@
+id: composition.w10-bounded-architecture
+kind: composition
+description: Sketch how order intake should be structured. The change is bounded.
+fixture: evals/fixtures/w10-bounded-architecture
+input:
+  prompt: "Sketch how order intake should be structured. The change is bounded."
+expected:
+  behaviors:
+    - see task.md

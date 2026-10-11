@@ -29,12 +29,12 @@ blast-radius/review proportional to risk
 1. Confirm the selected friction and target. Accept a named structural problem or a refactor brief. If the request is to scan, rank, or choose opportunities across the codebase, route directly to `improve-codebase-architecture` and do not begin implementation.
 2. Read `.methodrail/PROJECT.md` if present. If a knowledge pointer is relevant, follow [knowledge reuse](../../references/knowledge/reuse.md). Use `how` to understand current structure and `codebase-design` for depth/seam vocabulary.
 3. Establish a behavioral baseline with existing tests, the project verification skill, or `observe` when behavior is not already characterized. Follow [verification lifecycle](../../references/verification-lifecycle.md). Reuse adequate checks. Do not invoke `create-verification-skill` when those checks already characterize the target.
-4. Validate that the proposed change addresses the named friction. Stop if the target is quiet, unused, unrelated to current work, or supported only by speculative cleanup claims. Apply [simplicity](../../references/simplicity.md) to that target only, including the comment rule and [change-created cleanup](../../references/simplicity.md#change-created-cleanup); do not expand into adjacent cleanup.
+4. Validate that the proposed change addresses the named friction with a demonstrated benefit. A named target may be quiet or unused and still have evidenced maintenance, packaging, contract, or tooling cost. Stop when the change is unrelated to the request or supported only by speculative cleanup. Before removing unused code, check exports, dynamic loading, side effects, generated registration, and external compatibility. Absence of local callers is not proof the code is dispensable. Apply [simplicity](../../references/simplicity.md) to that target only, including the comment rule and [change-created cleanup](../../references/simplicity.md#change-created-cleanup); do not expand into adjacent cleanup.
 5. Add characterization coverage when existing checks would not catch an accidental behavior change.
 6. Change structure in small increments. Preserve public contracts unless the request explicitly includes a contract change. Retain a justified contract or test seam.
 7. Re-run the baseline after each increment.
 8. Inspect this task's delta before claiming done. Each hunk should support the selected structural change, necessary supporting work, required verification, or cleanup of artifacts this change made unused. Remove only this agent's unrelated edits.
-9. Use `blast-radius` for shared contracts or cross-boundary moves, then `code-review` when rigor or scope justifies it.
+9. Use `blast-radius` for shared contracts or cross-boundary moves. Run `code-review` for a substantive structural repair, at the depth [rigor](../../references/rigor.md) selects. An intentional behavior change the user asked for alongside the restructuring is a bounded feature phase under `develop`, not a silent behavior-preserving claim. Ask only under the [human-decision rule](../../references/decision-frontier.md#consequential-assumptions).
 10. If the refactor adds, changes, or removes user-facing behavior an existing map represents or should represent, or invalidates a shared verification helper, invoke `maintain-verification-skill` in task-scoped mode and exercise the affected entries plus dependent flows of a changed helper. Do not start a full audit. After all cleanup and review-driven edits, use `verify-change` before claiming success. If later edits change relevant state, rerun the affected verification.
 
 ## Constraints
@@ -48,7 +48,7 @@ blast-radius/review proportional to risk
 
 ## Done when
 
-The selected friction is reduced, relevant observable behavior is preserved with fresh evidence, and any intentional behavior change is explicit. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
+The selected friction is reduced, relevant observable behavior is preserved with fresh evidence, and any intentional behavior change is explicit. This workflow emits one [completion report](../../references/protocols/completion-report.md) for substantive work.
 
 ## Neighbors
 

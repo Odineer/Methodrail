@@ -1,0 +1,28 @@
+{
+  "fixture_id": "w12-shared-recheck",
+  "condition": "baseline",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "maintain-project"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Batch done.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w12-shared-recheck/baseline/answer.md",
+    "command_log": "evals/runners/artifacts/w12-shared-recheck/baseline/command.log.json",
+    "overlay": "evals/runners/artifacts/w12-shared-recheck/baseline/overlay"
+  }
+}

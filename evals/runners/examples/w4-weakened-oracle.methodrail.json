@@ -1,0 +1,28 @@
+{
+  "fixture_id": "w4-weakened-oracle",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "develop",
+    "code-review"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Restored the limit assertion and kept the authorized Create label.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w4-weakened-oracle/methodrail/answer.md",
+    "overlay": "evals/runners/artifacts/w4-weakened-oracle/methodrail/overlay"
+  }
+}

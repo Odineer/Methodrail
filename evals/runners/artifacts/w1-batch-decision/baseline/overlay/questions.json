@@ -1,0 +1,27 @@
+{
+  "rounds": [
+    {
+      "asked": [
+        {
+          "id": "field-scope",
+          "alternatives": [
+            "profile",
+            "billing"
+          ],
+          "changes": "data exposure",
+          "recommendation": "profile"
+        },
+        {
+          "id": "column-order",
+          "alternatives": [
+            "name first",
+            "email first"
+          ],
+          "changes": "column order",
+          "recommendation": "name first"
+        }
+      ],
+      "deferred": []
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+id: composition.w7-refactor-benefit
+kind: composition
+description: Remove the unused private stamp helper. The pack check fails because it is still packaged. Keep the export, the dynamic plugin load, and the metrics side effect.
+fixture: evals/fixtures/w7-refactor-benefit
+input:
+  prompt: "Remove the unused private stamp helper. The pack check fails because it is still packaged. Keep the export, the dynamic plugin load, and the metrics side effect."
+expected:
+  behaviors:
+    - see task.md

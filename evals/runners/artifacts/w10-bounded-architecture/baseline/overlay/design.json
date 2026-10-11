@@ -1,0 +1,8 @@
+{
+  "alternatives": [
+    "single-intake-module"
+  ],
+  "synthesis": "single-intake-module",
+  "arena": true,
+  "justification": "the host supports arena"
+}

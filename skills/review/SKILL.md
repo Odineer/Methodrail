@@ -26,13 +26,13 @@ Do not run multiple expensive reviewers for trivial changes. Give the reviewer a
 
 ## Workflow
 
-1. Establish the review target, base revision, request, acceptance criteria, and repository guidance. Read `.methodrail/PROJECT.md` if present. If a knowledge pointer is relevant, follow [knowledge reuse](../../references/knowledge/reuse.md). Assemble the packet. Consume existing verification evidence rather than rerunning unrelated exploration.
-2. Invoke `code-review` for Standards vs Spec on the complete requested range, including staged, unstaged, and untracked work when the worktree is dirty.
+1. Establish the review target, base revision, request, acceptance criteria, and repository guidance. Read `.methodrail/PROJECT.md` if present. If a knowledge pointer is relevant, follow [knowledge reuse](../../references/knowledge/reuse.md). Assemble the packet, including review depth from [rigor](../../references/rigor.md). Consume existing verification evidence rather than rerunning unrelated exploration. Label supplied evidence as supplied. It is not a claim that this review ran it.
+2. Invoke `code-review` for Standards vs Spec on the complete requested range, including staged, unstaged, and untracked work when the worktree is dirty. Bounded review stays in local passes. Isolated reviewers require the rigor justification, not merely a host that can spawn agents.
 3. Use `blast-radius` when boundaries, schemas, or public contracts changed, or when a small diff is untrusted. Keep it read-only: existing checks or temp probes, not repository writes.
 4. Do not substitute review for verification. Note verification gaps; run or request `verify-change` when claims of correctness lack fresh evidence. Follow [verification lifecycle](../../references/verification-lifecycle.md). Report stale or missing guidance. Do not invoke `create-verification-skill` or `maintain-verification-skill` unless the user asked for fixes.
 5. Classify findings: critical (data loss, security, unusable core behavior); important (likely incorrect behavior, serious regression, contract risk); minor (optional, non-blocking).
 6. Converge: critical → fix; important → fix or explicitly adjudicate; minor → record; the same disputed issue repeatedly → escalate rather than loop.
-7. Lead with findings, ordered by severity. Cite paths and lines. If there are no findings, say so and list material verification gaps.
+7. Present one prioritized result. Keep each finding's dimension, Standards or Spec. Do not emit a second full axis report or a second summary. Cite paths and lines. If there are no findings, say so and list material verification gaps. When a parent owns the task, return that result and do not emit a terminal completion report.
 
 ## Constraints
 
@@ -44,7 +44,7 @@ Do not run multiple expensive reviewers for trivial changes. Give the reviewer a
 
 ## Done when
 
-The requested change range was inspected in context, findings are evidence-backed and prioritized, and verification gaps are explicit. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
+The requested change range was inspected in context, findings are evidence-backed and prioritized, and verification gaps are explicit. Standalone `/review` ends with one [completion report](../../references/protocols/completion-report.md). A composed call returns the findings to the parent.
 
 ## Neighbors
 

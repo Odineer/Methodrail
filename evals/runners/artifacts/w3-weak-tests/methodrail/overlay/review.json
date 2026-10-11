@@ -1,0 +1,9 @@
+{
+  "findings": [
+    {
+      "dimension": "Spec",
+      "path": "repo/src/greet.js",
+      "detail": "the weak test never checks the greeted name"
+    }
+  ]
+}

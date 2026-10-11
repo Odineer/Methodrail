@@ -1,0 +1,35 @@
+{
+  "fixture_id": "w15-native-usage",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Recorded the native token counts for this complete run.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w15-native-usage/methodrail/answer.md"
+  },
+  "host": "cursor",
+  "model": "recorded",
+  "usage": {
+    "source": "native-report",
+    "scope": "complete-run",
+    "input_tokens": 1200,
+    "output_tokens": 300,
+    "cached_input_tokens": 400,
+    "total_tokens": 1500,
+    "artifact": "evals/runners/artifacts/w15-native-usage/methodrail/usage.json"
+  }
+}

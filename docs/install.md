@@ -54,7 +54,7 @@ Maintainer-only. Do not treat this list as a live listing.
 - [x] Manifest `.cursor-plugin/plugin.json`: unique kebab-case `name` (`methodrail`), `displayName`, `version`, `description`, relative `skills` / `rules` / `hooks` / `logo`
 - [x] `README.md` usage (start in under a minute)
 - [x] Logo committed at `assets/logo.svg` (monochrome rail glyph; no external assets)
-- [ ] Local test after a Cursor window reload: Customize shows Methodrail 0.9.2 and `/develop` autocompletes (Task 0.2 / human checkpoint 1)
-- [ ] Submit at https://cursor.com/marketplace/publish when checkpoint 1 is confirmed and the operator wants it listed
+- [ ] Local test after a Cursor window reload: Customize shows Methodrail 0.10.0 and `/develop` autocompletes
+- [ ] Submit at https://cursor.com/marketplace/publish when that reload is confirmed and the operator wants it listed
 
-Do not bump the plugin version for marketplace. Version stays `0.9.2` until the v0.10.0 release commit.
+The working tree's package and plugin version is `0.10.0`. Marketplace submission is a separate explicit release step. This implementation did not publish.

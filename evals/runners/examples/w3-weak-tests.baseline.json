@@ -1,0 +1,26 @@
+{
+  "fixture_id": "w3-weak-tests",
+  "condition": "baseline",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Tests passed.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w3-weak-tests/baseline/answer.md",
+    "command_log": "evals/runners/artifacts/w3-weak-tests/baseline/command.log.json",
+    "overlay": "evals/runners/artifacts/w3-weak-tests/baseline/overlay"
+  }
+}

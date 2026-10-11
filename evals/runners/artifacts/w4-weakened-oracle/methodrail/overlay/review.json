@@ -1,0 +1,14 @@
+{
+  "findings": [
+    {
+      "id": "limit",
+      "disposition": "restored",
+      "reason": "assertion still matches the limit of 10"
+    },
+    {
+      "id": "label",
+      "disposition": "authorized",
+      "reason": "requirement renamed Save to Create"
+    }
+  ]
+}

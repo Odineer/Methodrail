@@ -1,0 +1,7 @@
+[
+  {
+    "command": "node --test src/button.test.js",
+    "phase": "verify",
+    "exit_status": 0
+  }
+]

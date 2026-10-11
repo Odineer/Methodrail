@@ -1,0 +1,29 @@
+{
+  "fixture_id": "w8-single-hypothesis",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "debug",
+    "diagnosing-bugs"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "One hypothesis. 1 + 1 is 2.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w8-single-hypothesis/methodrail/answer.md",
+    "command_log": "evals/runners/artifacts/w8-single-hypothesis/methodrail/command.log.json",
+    "overlay": "evals/runners/artifacts/w8-single-hypothesis/methodrail/overlay"
+  }
+}

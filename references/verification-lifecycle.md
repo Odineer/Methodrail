@@ -40,6 +40,8 @@ Tiny edits keep the cheap path. A label change with an adequate existing check d
 
 The normal path is reuse, then implement, then verify. Create and maintain run only when a decision above selects them.
 
+Specs state observable outcomes. Tickets name the existing verification procedure, the scenario, and the expected result. They do not copy launch, readiness, drive, reset, or cleanup steps into each ticket.
+
 ## Placement
 
 In-repository guidance may use the repository’s supported native skill location, preferring `.agents/skills/verify-<app>/`. Linked external placement writes under `.methodrail/control/`. Do not generate a tracked native skill merely to expose private guidance.
@@ -47,6 +49,8 @@ In-repository guidance may use the repository’s supported native skill locatio
 ## Evidence
 
 A procedure that was not executed is a draft. Failed or unexecuted output is blocked or draft, not proven infrastructure. After maintenance edits invalidate evidence, rerun the affected checks before a completion claim. A task-scoped clean result covers only the inspected entries.
+
+Completion evidence is produced in the current turn against unchanged relevant state. Within that turn, reuse a complete successful result when it still proves the claim and no relevant state changed. Do not rerun a check only because a leaf skill was entered. If review fixes, cleanup, harness maintenance, or a later repair change relevant state, rerun the affected checks. Reviewing an earlier run does not make it this turn's evidence.
 
 ## Parents
 

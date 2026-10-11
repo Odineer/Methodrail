@@ -30,7 +30,7 @@ documentation/control drift  ≠  actual product regression
 
 Update generated control text when the repository's supported procedure changed. Report suspected product regressions instead of “fixing” the harness to match a broken system.
 
-Before confirmation, collect drift findings and proposed edits only. Do not invoke `maintain-verification-skill` during investigation or preview. Writing maintenance waits for init's confirmed apply phase. Do not regenerate a working verification skill on refresh. Preserve its curated content. An unchanged refresh produces no file changes. A full audit runs only when the user asks for one.
+Before confirmation, collect drift findings and proposed edits only. Do not invoke `maintain-verification-skill` during investigation or preview. Writing maintenance waits for init's confirmed apply phase. Do not regenerate a working verification skill on refresh. Preserve its curated content. Inspect only the roles and dependencies the detected change affects. Reuse an adequate verification path instead of repeating launch and drive discovery. An unchanged refresh produces no file changes and does not research the model catalog or launch a live model probe. A full audit runs only when the user asks for one.
 
 ## Preserve curated content
 

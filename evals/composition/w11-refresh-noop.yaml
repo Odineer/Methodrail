@@ -1,0 +1,9 @@
+id: composition.w11-refresh-noop
+kind: composition
+description: Refresh control guidance. Verification and the model policy are already valid and unchanged.
+fixture: evals/fixtures/w11-refresh-noop
+input:
+  prompt: "Refresh control guidance. Verification and the model policy are already valid and unchanged."
+expected:
+  behaviors:
+    - see task.md

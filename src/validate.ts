@@ -533,6 +533,7 @@ function validateMethodrailStructure(root: string, skillPaths: string[]): Valida
     "upstreams/superpowers.yaml",
     "upstreams/ponytail.yaml",
     "upstreams/karpathy-guidelines.yaml",
+    "upstreams/addy-osmani.yaml",
   ]) {
     const path = join(root, relativePath);
     if (!existsSync(path)) {

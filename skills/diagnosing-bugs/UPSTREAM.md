@@ -7,7 +7,7 @@ License: MIT (Copyright (c) 2026 Matt Pocock)
 Compared against obra/superpowers systematic-debugging (b36e0829c6d0140e93cfef2ca599b1b07d4a7797) and the previous Methodrail systematic-debugging skill. Matt won on feedback-loop construction, minimization, and instrumentation. Superpowers pressure resistance and tracing techniques are composed in. Methodrail runtime escalation (observe / runtime-forensics / trace-forensics) is preserved.
 
 Methodrail changes:
-- Superpowers rationalization table and 3-failed-fixes architecture stop
+- Superpowers rationalization table. After three unsuccessful fixes, reassess with a new causal claim and new evidence. That stop is not an automatic human meeting and not permission for a fourth unsupported guess. Hypothesis count is proportional; a single strongly supported hypothesis is allowed.
 - runtime escalation to observe / forensics
 - project knowledge / control lookup
 - Methodrail verification via verify-change and tdd

@@ -1,0 +1,27 @@
+{
+  "fixture_id": "w2-settled-policy",
+  "condition": "baseline",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "grill-with-docs"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Asked which fields to export.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w2-settled-policy/baseline/answer.md",
+    "overlay": "evals/runners/artifacts/w2-settled-policy/baseline/overlay"
+  }
+}

@@ -31,7 +31,7 @@ Explicit audit intent wins over generic maintenance wording. A later repair requ
 
 Audit is read-only for product source, project guidance, verification infrastructure, and durable artifacts. Existing checks may write disposable output. Use a temporary location when practical and report incidental generated files. Do not repair, automatically format, rewrite an index, promote knowledge, or commit a report during audit. Do not drive production or a shared destructive environment.
 
-An authorized repair may make reversible changes required for the selected outcomes. Preserve existing ADR, typed-knowledge, suggest-only review, and consequential-operation boundaries. Ask only for a genuinely unresolved consequential choice or authority the request does not give. Do not add a per-finding approval ritual.
+An authorized repair may make reversible changes required for the selected outcomes. Preserve existing ADR, typed-knowledge, suggest-only review, and consequential-operation boundaries. Ask only under the [human-decision rule](../../references/decision-frontier.md#consequential-assumptions), or for authority the request does not give. Do not add a per-finding approval ritual. Substantive repairs use the review selection in [rigor](../../references/rigor.md).
 
 ## Scope
 

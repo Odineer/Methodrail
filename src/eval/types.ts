@@ -43,6 +43,18 @@ export interface CommandLogEntry {
   stderr?: string;
 }
 
+export interface NativeUsage {
+  source: "native-report";
+  scope: "complete-run" | "parent-only" | "partial";
+  /** Inclusive of cached input. Null when the report does not establish that total. */
+  input_tokens: number | null;
+  output_tokens: number | null;
+  cached_input_tokens: number | null;
+  /** Null unless the report provides a trustworthy compatible total. */
+  total_tokens: number | null;
+  artifact?: string;
+}
+
 export interface EvalRun {
   fixture_id: string;
   condition: EvalCondition;
@@ -65,6 +77,7 @@ export interface EvalRun {
   behaviors_observed?: string[];
   notes?: string;
   artifacts?: RunArtifacts;
+  usage?: NativeUsage;
 }
 
 export interface FixtureExpectation {
@@ -113,6 +126,9 @@ export interface ScoreResult {
   forbidden_hits: string[];
   behavior_hits: string[];
   behavior_misses: string[];
+  host?: string;
+  model?: string;
+  usage?: NativeUsage;
   metrics: {
     skill_count: number;
     reference_count: number;
@@ -120,6 +136,11 @@ export interface ScoreResult {
     verification_steps: number;
     expensive_skill_count: number;
     latency_ms: number | null;
+    input_tokens: number | null;
+    output_tokens: number | null;
+    cached_input_tokens: number | null;
+    total_tokens: number | null;
+    usage_scope: NativeUsage["scope"] | null;
   };
   failures: string[];
 }

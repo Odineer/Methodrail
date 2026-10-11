@@ -1,0 +1,6 @@
+id: fixture.w10-bounded-architecture
+required_skills: [architect]
+forbidden_skills: [arena]
+expected_behaviors:
+  - two alternatives and a synthesis
+  - no automatic arena

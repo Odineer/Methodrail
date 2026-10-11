@@ -1,0 +1,7 @@
+id: fixture.w1-batch-decision
+required_skills: []
+forbidden_skills: []
+expected_behaviors:
+  - ask field scope and format together
+  - defer column order
+  - leave the export unchanged

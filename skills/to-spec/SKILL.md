@@ -13,8 +13,9 @@ Takes current conversation context and codebase understanding and produces a spe
 ## Process
 
 1. Explore the repo if you haven't already. Use the project's domain glossary throughout, and respect ADRs in the area you're touching.
-2. Sketch the seams at which you're going to test the feature. Prefer existing seams. Use the highest seam possible. Confirm seams with the user.
-3. Write the spec using the template below, then publish it:
+2. Sketch the seams at which you're going to test the feature. Prefer existing seams. Use the highest seam possible. Choose a seam the repository already supports. Ask only when that seam itself is a qualifying human decision under the [decision frontier](../../references/decision-frontier.md).
+3. Before calling the spec ready for dependent implementation, check that its acceptance criteria are observable and that qualifying human decisions are resolved. Return unresolved qualifying decisions to the parent. Do not pick the convenient behavior, and do not start an interview from this skill.
+4. Write the spec using the template below, then publish it:
    - to the project's existing issue tracker if one is already in use, or
    - as a project-local markdown file (`docs/`, `specs/`, or `.scratch/`) when no tracker integration is available. Do not write `.methodrail/knowledge/`; that path is typed notes after `reflect` approval, or decision records.
 
@@ -40,7 +41,15 @@ Modules, interfaces, architectural decisions, schema changes, API contracts. Do 
 
 ## Testing Decisions
 
-What a good test is here, which modules will be tested, prior art in the codebase.
+What a good test is here, which modules will be tested, prior art in the codebase. Point at existing project commands and verification. Do not invent numerical coverage or performance thresholds.
+
+## Acceptance Criteria
+
+Observable conditions that decide the work is done. Each criterion is testable with an existing procedure or a gap the parent must resolve. Do not manufacture a numeric target the user and the project have not set.
+
+## Boundaries
+
+Material in-scope and out-of-scope behavior. Name existing approval boundaries that still apply, such as ADRs, harness writes, and production operations. A tiny unambiguous edit does not get a spec document.
 
 ## Out of Scope
 

@@ -1,0 +1,8 @@
+{
+  "hypotheses": [
+    {
+      "id": "extra-one",
+      "prediction": "removing + 1 makes add(1, 1) return 2"
+    }
+  ]
+}

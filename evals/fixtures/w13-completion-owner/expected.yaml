@@ -1,0 +1,6 @@
+id: fixture.w13-completion-owner
+required_skills: []
+forbidden_skills: []
+expected_behaviors:
+  - one owner completion report
+  - a parseable standalone verify report

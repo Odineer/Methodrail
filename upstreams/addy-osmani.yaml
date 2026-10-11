@@ -1,0 +1,15 @@
+name: addyosmani/agent-skills
+repository: https://github.com/addyosmani/agent-skills
+license: MIT
+copyright: Copyright (c) 2025 Addy Osmani
+last_reviewed_commit: 6ca0cd7db39b41b1c37e26d335c507ee92382c6d
+last_reviewed_at: 2026-10-10
+notes: >
+  Inspected the 25 skill bodies at this snapshot on 2026-10-10. The inventory
+  matched the v0.10 classification; no additional skills were present.
+  COMPOSE techniques into existing owners only. Do not ship an Addy skill,
+  namespace, router, hook, or lifecycle wrapper. Methodrail policies win on
+  batched human decisions, proportional verification, conditional review and
+  arena, current commit authority, and project-native artifacts. COMPOSE and
+  SKIP discoveries stay report-only. The origin parser reads one primary
+  Origin line, so composed paths are not recorded as adapted origins.

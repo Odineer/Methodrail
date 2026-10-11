@@ -1,6 +1,6 @@
 ---
 name: wayfinder
-description: "Plan work too large or foggy for one session as a shared map of decision tickets, resolved one at a time until the way is clear. Use for huge uncertain projects, not for ordinary planning or implementation."
+description: "Plan work too large or foggy for one context as a shared map of decision tickets. Resolve unblocked decisions while evidence is available and no qualifying human choice blocks the next step. Use for huge uncertain projects, not for ordinary planning or implementation."
 disable-model-invocation: true
 ---
 
@@ -61,7 +61,7 @@ Open tickets are **not** listed on the map; they are found by query (or by listi
 
 ### Tickets
 
-Each ticket is a child of the map, sized to one session:
+Each ticket is a child of the map, sized to one decision:
 
 ```markdown
 ## Question
@@ -71,12 +71,12 @@ Each ticket is a child of the map, sized to one session:
 
 Types: `research`, `prototype`, `grilling`, `task`.
 
-- **Research** (AFK): call `research`.
-- **Prototype** (HITL): call `prototype`.
-- **Grilling** (HITL): call `grill-with-docs` (which includes `domain-modeling`).
+- **Research**: call `research` when the question needs external or primary sources.
+- **Prototype**: call `prototype` when the question is empirical. A safe, reversible experiment inside current authority does not require a human interruption.
+- **Grilling**: call `grill-with-docs` only when the question is a qualifying human decision under the [decision frontier](../../references/decision-frontier.md). Do not default to grilling because the next step is unclear.
 - **Task**: manual work that unblocks a decision, not delivery of the destination.
 
-A session **claims** a ticket before any work. A ticket is **unblocked** when every blocker is closed. The **frontier** is open, unblocked, unclaimed children.
+Classify the question before choosing a method. A ticket is **unblocked** when every blocker is closed. The **frontier** is open, unblocked children. Continue resolving unblocked tickets in the current context while the work stays bounded, the evidence is available, and no qualifying human decision blocks the next step. Use [isolate or handoff](../../references/context-management.md) when context size or decision independence warrants it. A new session is that choice, not a decision quota.
 
 ## Fog of war
 
@@ -84,12 +84,14 @@ Don't chart what you can't yet see. **Ticket** when the question is already shar
 
 ## Invocation
 
-Never resolve more than one ticket per session, except research tickets which may run in parallel.
+Research tickets may run in parallel. Other unblocked tickets may be resolved in this context under the rule above.
 
 ### Chart the map
 
-1. **Name the destination** with `grill-with-docs`.
-2. **Map the frontier**, breadth-first. If this surfaces no fog (the whole journey fits one session), stop and ask how the user wants to proceed. You don't need a map.
+A chart-only request stays chart-only. Do not implement the destination.
+
+1. **Name the destination** from the request and the repository. Use `grill-with-docs` only when the destination itself is a qualifying human decision.
+2. **Map the frontier**, breadth-first. If this surfaces no fog (the whole journey fits the current context), stop and return that. You don't need a map.
 3. **Create the map.**
 4. **Create the tickets you can specify now**, then wire blocking edges.
 5. **Fire research subagents** for research tickets.
@@ -98,10 +100,11 @@ Never resolve more than one ticket per session, except research tickets which ma
 ### Work through the map
 
 1. Load the map (low-res).
-2. Choose the next frontier ticket, or the one the user named. Claim it.
-3. Resolve it. Call skills named in Notes; default `grill-with-docs` if in doubt.
+2. Choose the next frontier ticket, or the one the user named.
+3. Resolve it by the classified method. Call skills named in Notes when they match that method.
 4. Record the answer, close the ticket, append a gist to Decisions so far.
 5. Add newly surfaced tickets; graduate fog that is now specifiable; rule out-of-scope work out of the route.
+6. Continue while the next ticket is unblocked and no qualifying human decision blocks it.
 
 ## Neighbors
 
@@ -112,8 +115,8 @@ Empirical claims              → prototype
 Consequential shape           → architect after the map is clear
 ```
 
-Do not restart `/develop`. One non-research ticket per session.
+Do not restart `/develop`. A composed call returns the decisions, the remaining frontier, and the evidence to the parent. Chart-only authority does not implement the feature.
 
 ## Done when
 
-The map names the destination, the current frontier is ticketed, and this session resolved at most one non-research ticket.
+The map names the destination, the current frontier is ticketed, and this context resolved the unblocked decisions it could evidence. Qualifying human decisions that remain are explicit.

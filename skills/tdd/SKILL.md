@@ -11,6 +11,8 @@ TDD is Methodrail's strong default for appropriate behavior-changing production-
 
 When exploring the codebase, read the canonical domain glossary so test names match project language, and respect ADRs in the area you're touching.
 
+Before the first test, discover how this repository runs tests. Prefer its documented command, a checked-in wrapper, and the existing focused-test form. Use that focused command during the loop. Use the project's broader suite before the slice is claimed done, when the project has one. Do not assume `npm test` is that command. Do not rerun a command that already passed in this turn if the relevant state is unchanged.
+
 ## What a good test is
 
 Tests verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't. A good test reads like a specification.

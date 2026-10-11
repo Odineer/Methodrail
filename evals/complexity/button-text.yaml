@@ -5,7 +5,7 @@ input:
   prompt: "Change button text from \"Save\" to \"Create\"."
 expected:
   skills:
-    forbidden: [wayfinder, architect, prototype, arena, swarm, interrogate, refresh-model-routing, maintain-project]
+    forbidden: [wayfinder, architect, prototype, arena, swarm, interrogate, refresh-model-routing, maintain-project, code-review, grill-with-docs, to-spec, create-verification-skill]
   behaviors:
     - inspect
     - edit

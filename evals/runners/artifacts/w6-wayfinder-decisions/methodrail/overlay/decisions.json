@@ -1,0 +1,15 @@
+{
+  "implemented": false,
+  "resolved": [
+    {
+      "title": "Store orders in sqlite",
+      "method": "source",
+      "evidence": "repo/src/app.js"
+    },
+    {
+      "title": "Expose them on /orders",
+      "method": "source",
+      "evidence": "repo/src/app.js"
+    }
+  ]
+}
