@@ -9,4 +9,4 @@ Methodrail changes:
 - do not auto-apply edits to Methodrail or org skills
 - Cursor create-skill / tracker filing isolated
 - skip trivial sessions
-- 2026-09-29: reviewers list each durable learning instead of a 3-5 cap. Did not take host model slugs.
+- 2026-09-29: reviewers list each durable learning instead of a 3-5 cap. Cursor model roles centralized in references/host-capabilities.md as of 4b4d98e.

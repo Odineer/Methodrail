@@ -1,0 +1,9 @@
+id: skill.refresh-model-routing.routing-positive
+kind: routing
+skill: refresh-model-routing
+description: "An explicit request to configure or refresh model bindings activates refresh-model-routing."
+input:
+  prompt: "Configure task-based model selection for this repository and refresh the host bindings."
+expected:
+  skills:
+    required: [refresh-model-routing]

@@ -1,0 +1,10 @@
+{
+  "name": "w7",
+  "private": true,
+  "type": "module",
+  "files": [
+    "src/index.js",
+    "src/load-plugin.js",
+    "src/register-metrics.js"
+  ]
+}

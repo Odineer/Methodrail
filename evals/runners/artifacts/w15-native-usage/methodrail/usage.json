@@ -1,0 +1,8 @@
+{
+  "source": "native-report",
+  "scope": "complete-run",
+  "input_tokens": 1200,
+  "output_tokens": 300,
+  "cached_input_tokens": 400,
+  "total_tokens": 1500
+}

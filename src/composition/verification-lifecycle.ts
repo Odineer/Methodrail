@@ -32,6 +32,7 @@ export function staticVerificationContract(root: string): string[] {
     join(root, "skills/methodrail-init/references/control-maintenance.md"),
     "utf8",
   );
+  const architecture = readFileSync(join(root, "skills/improve-codebase-architecture/SKILL.md"), "utf8");
   const developVerification = section(develop, "Verification");
 
   for (const [id, action] of [
@@ -70,9 +71,26 @@ export function staticVerificationContract(root: string): string[] {
   has(create, /draft or blocked result/, violations, "create draft");
   has(maintain, /Task-scoped clean does not mean the whole map was audited/, violations, "task coverage");
   has(maintain, /Standalone “audit the verification skill” selects \*\*full audit\*\*/, violations, "standalone audit");
+  has(maintain, /selects \*\*full audit\*\* and \*\*apply\*\*/, violations, "standalone apply");
+  has(maintain, /task-scoped\*\* and \*\*apply\*\*/, violations, "parent task-scoped apply");
   has(maintain, /Exercise every mapped feature/, violations, "full coverage");
   has(maintain, /Do not open a pull request/, violations, "no pr");
   has(maintain, /the map should represent/, violations, "maintain new entry");
+  has(maintain, /Write none of the owned files/, violations, "inspect writes");
+  has(maintain, /Inspect never reports \*\*changed\*\*/, violations, "inspect not changed");
+  has(maintain, /\*\*findings\*\*/, violations, "inspect findings");
+  has(maintain, /read-only parent cannot/i, violations, "readonly cannot apply");
+  has(maintain, /Do not generate a verification skill/, violations, "no generate on discovery");
+  has(maintain, /source-only sample is task-scoped coverage/, violations, "source-only partial");
+  has(lifecycle, /Never report `changed`/, violations, "lifecycle inspect outcome");
+  has(lifecycle, /A read-only parent cannot escalate/, violations, "lifecycle readonly");
+  has(lifecycle, /when the decision is `missing-path`/, violations, "create only missing-path");
+  has(architecture, /survey-only/, violations, "survey-only");
+  has(architecture, /### 3\. Grilling loop/, violations, "standalone grilling");
+  has(architecture, /Do not ask which candidate to explore/, violations, "survey-only stops");
+  if (!architecture.includes("Ask which candidate to explore. Do not propose")) {
+    violations.push("standalone selection");
+  }
   has(init, /discovery mode/, violations, "init discovery");
   has(init, /Do not invoke `maintain-verification-skill` before confirmation/, violations, "init maintenance gate");
   has(init, /report the partial state/, violations, "init partial");

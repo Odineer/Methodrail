@@ -23,7 +23,7 @@ Methodrail already marks workflow entry skills and high-cost operators explicit.
 
 An already-active skill loads a named skill when **its own procedure** says to and the procedure's conditions match. That is **workflow-callable**, not host discovery. `disable-model-invocation` does not mean "only a human typing the name may ever cause this skill to run."
 
-A human-started workflow may therefore load listed explicit skills on the path that justifies them: `/develop` → `wayfinder` / `architect` / `prototype`; `/methodrail-init` → `create-verification-skill` in discovery mode before confirmation and in application phase after it. `/develop`, `/debug`, and `/refactor` load `create-verification-skill` or task-scoped `maintain-verification-skill` only when [verification lifecycle](../../references/verification-lifecycle.md) selects them. Making a skill workflow-callable does not change `disable-model-invocation`.
+A human-started workflow may therefore load listed explicit skills on the path that justifies them: `/develop` → `wayfinder` / `architect` / `prototype`; `/methodrail-init` → `create-verification-skill` in discovery mode before confirmation and in application phase after it. `/develop`, `/debug`, and `/refactor` load `create-verification-skill` or task-scoped `maintain-verification-skill` only when [verification lifecycle](../../references/verification-lifecycle.md) selects them. `/maintain-project` may load `improve-codebase-architecture` in `survey-only` phase, and `maintain-verification-skill` only when it names both action and coverage. A read-only audit cannot load verification application. Making a skill workflow-callable does not change `disable-model-invocation`.
 
 **Suggest-only** is a stricter explicit skill: the active skill names it and waits for the user to invoke it. `interrogate` is suggest-only.
 
@@ -35,7 +35,7 @@ Split off a model-invoked skill when you have a distinct leading word that shoul
 
 ## Router skills
 
-When explicit skills multiply past what a human can remember, a **router skill** names the others and when to reach for each. Methodrail's routers are the native workflow skills: `methodrail-init`, `investigate`, `develop`, `debug`, `refactor`, `review`.
+When explicit skills multiply past what a human can remember, a **router skill** names the others and when to reach for each. Methodrail's routers are the native workflow skills: `methodrail-init`, `investigate`, `develop`, `debug`, `refactor`, `review`, `maintain-project`.
 
 Do not add `ask-matt`, `poteto-mode`, or `using-superpowers`. Do not let `wayfinder` or `architect` become global routers.
 

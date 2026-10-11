@@ -1,0 +1,6 @@
+id: fixture.w15-native-usage
+required_skills: []
+forbidden_skills: []
+expected_behaviors:
+  - keep reported counters
+  - label partial usage

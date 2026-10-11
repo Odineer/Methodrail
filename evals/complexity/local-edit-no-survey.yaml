@@ -5,7 +5,7 @@ input:
   prompt: "Change the button label from Save to Create."
 expected:
   skills:
-    forbidden: [wayfinder, architect, arena, swarm, interrogate, improve-codebase-architecture]
+    forbidden: [wayfinder, architect, arena, swarm, interrogate, improve-codebase-architecture, maintain-project]
   behaviors:
     - inspect
     - edit

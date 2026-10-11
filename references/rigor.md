@@ -89,3 +89,19 @@ Examples: irreversible migrations, destructive production operations, security m
 ## Choosing a level
 
 Raise rigor when failure is expensive, the change is hard to reverse, or ownership/contracts are in play. Lower it when the change is local, mechanical, and covered by deterministic checks. When unsure, prefer one level higher for verification, not for ceremony.
+
+## Review selection
+
+`code-review` is the procedure. `/review` is the separate read-only workflow. Required ordinary review does not load `interrogate`.
+
+| Situation | Required approach |
+|---|---|
+| Mechanical edit, copy change, or deterministic regeneration with an adequate check | Quick diff inspection and that check. No review skill and no reviewer agents unless the user asked for review. |
+| Substantive change: behavior-changing production code, a meaningful interface or contract change, or configuration that materially affects behavior or safety | `code-review`, with distinct Standards and Spec passes in the current context. A one-line change can be substantive. File or line counts are not the classifier. |
+| Sensitive or consequential cross-boundary change | Isolated independent review when the host can isolate reviewers and independence meaningfully reduces risk. |
+| Host cannot isolate | Separate local passes. Say that the review was not independent. |
+| User asks for a stronger review mechanism | Honor that request within its scope and the existing invocation boundaries. |
+
+Security-sensitive authorization, sensitive-data handling, hard-to-reverse migrations, concurrency, shared public contracts, and consequential architecture are signals for independent review. A reviewer capability being available is not a reason to escalate. Use `arena` only when the user asks or when consequence, ambiguity, and independent exploration justify the cost. Host support alone is not enough.
+
+`develop` uses this selection before completing a substantive change. Substantive structural repairs in `refactor` and nontrivial production-code fixes in `debug` use it too. The parent supplies the [review packet](protocols/review-packet.md). In a writing workflow, repair material findings inside the authorized task, then verify the state those repairs invalidate. Optional suggestions do not expand scope. Standalone `/review` stays read-only unless fixes were requested. Stop the loop when material findings are resolved, a concrete blocker remains, or a qualifying human decision is unsettled. Report new external scope; do not absorb it.

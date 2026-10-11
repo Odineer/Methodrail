@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
@@ -54,6 +55,17 @@ test("verification followed by another relevant edit fails", () => {
   const result = grade("verify-then-edit");
   assert.equal(result.passed, false);
   assert.equal(result.failures.includes("verification-then-edit"), true);
+});
+
+test("inspection stays read-only and standalone defaults stay compatible", () => {
+  const maintain = readFileSync(join(root, "skills/maintain-verification-skill/SKILL.md"), "utf8");
+  const architecture = readFileSync(join(root, "skills/improve-codebase-architecture/SKILL.md"), "utf8");
+  assert.match(maintain, /Inspect never reports \*\*changed\*\*/);
+  assert.match(maintain, /Write none of the owned files/);
+  assert.match(maintain, /selects \*\*full audit\*\* and \*\*apply\*\*/);
+  assert.match(architecture, /survey-only/);
+  assert.match(architecture, /### 3\. Grilling loop/);
+  assert.match(architecture, /Ask which candidate to explore\. Do not propose/);
 });
 
 test("a new feature with an existing harness must gain a map entry", () => {

@@ -1,0 +1,21 @@
+{
+  "fixture_id": "maintenance-repair",
+  "condition": "baseline",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [],
+  "references_loaded": [],
+  "tools_used": ["edit"],
+  "subagents_used": 0,
+  "verification_steps": ["npm test"],
+  "evidence": ["also rewrote format.js"],
+  "outcome": "Fixed npm test and rewrote the unselected formatter.",
+  "failure_modes": ["unselected edit"],
+  "behaviors_observed": [],
+  "notes": "constructed specification. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/maintenance-repair/baseline/answer.md",
+    "command_log": "evals/runners/artifacts/maintenance-repair/baseline/command.log.json",
+    "overlay": "evals/runners/artifacts/maintenance-repair/baseline/overlay"
+  }
+}

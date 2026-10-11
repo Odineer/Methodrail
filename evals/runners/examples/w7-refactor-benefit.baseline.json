@@ -1,0 +1,27 @@
+{
+  "fixture_id": "w7-refactor-benefit",
+  "condition": "baseline",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "refactor"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Left the unused file because it has no callers.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w7-refactor-benefit/baseline/answer.md",
+    "overlay": "evals/runners/artifacts/w7-refactor-benefit/baseline/overlay"
+  }
+}

@@ -1,0 +1,17 @@
+id: behavioral.develop.substantive-review
+kind: behavioral
+skill: develop
+description: A behavior-changing feature is reviewed against the request, not closed on a green suite.
+input:
+  prompt: "Add a --greet flag that prints hello, <name>. The current test only checks that a string is returned."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the develop skill loaded
+expected:
+  skills:
+    required: [develop, code-review]
+  behaviors:
+    - inspect the implementation and the test
+    - correct or record the untested name requirement
+    - verify the final greeting
+  baseline_failure: shipping because the weak test is green

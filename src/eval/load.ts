@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
-import type { CaptureQuality, EvalRun, FixtureExpectation, Provenance, RunArtifacts, VerificationStep } from "./types.js";
+import type { CaptureQuality, EvalRun, FixtureExpectation, NativeUsage, Provenance, RunArtifacts, VerificationStep } from "./types.js";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -84,6 +84,77 @@ export function parseExpectation(value: unknown): FixtureExpectation {
   return expected;
 }
 
+const USAGE_SCOPES = new Set(["complete-run", "parent-only", "partial"]);
+
+function usageCount(value: unknown, field: string): number | null {
+  if (value === null || value === undefined) return null;
+  if (typeof value !== "number" || !Number.isFinite(value) || !Number.isSafeInteger(value) || value < 0) {
+    throw new Error(`Native usage ${field} must be a nonnegative safe integer or null`);
+  }
+  return value;
+}
+
+export function parseUsage(value: unknown): NativeUsage | undefined {
+  if (value === undefined) return undefined;
+  if (!isRecord(value)) throw new Error("Native usage must be an object");
+  if (value.source !== "native-report") throw new Error("Native usage source must be native-report");
+  if (typeof value.scope !== "string" || !USAGE_SCOPES.has(value.scope)) {
+    throw new Error("Native usage scope must be complete-run, parent-only, or partial");
+  }
+  const semantics = value.input_semantics;
+  if (semantics !== undefined && semantics !== "inclusive" && semantics !== "split-cached-excluded") {
+    throw new Error("Native usage input_semantics is not a documented form");
+  }
+  const cached = usageCount(value.cached_input_tokens, "cached_input_tokens");
+  const output = usageCount(value.output_tokens, "output_tokens");
+  const total = usageCount(value.total_tokens, "total_tokens");
+  let input = usageCount(value.input_tokens, "input_tokens");
+  if (semantics === "split-cached-excluded") {
+    const uncached = usageCount(value.uncached_input_tokens, "uncached_input_tokens");
+    if (uncached === null || cached === null) {
+      throw new Error("split-cached-excluded usage requires uncached_input_tokens and cached_input_tokens");
+    }
+    const sum = uncached + cached;
+    if (!Number.isSafeInteger(sum)) throw new Error("Native usage input_tokens is not a safe integer");
+    if (input !== null && input !== sum) throw new Error("Native usage input_tokens disagrees with the documented split");
+    input = sum;
+  }
+  if (input !== null && cached !== null && cached > input) {
+    throw new Error("cached_input_tokens cannot exceed inclusive input_tokens");
+  }
+  if (
+    total !== null &&
+    input !== null &&
+    output !== null &&
+    cached !== null &&
+    cached > 0 &&
+    total === input + output + cached
+  ) {
+    throw new Error("total_tokens double-counts cached input");
+  }
+  if (total !== null && input !== null && output !== null) {
+    const normalizedTotal = input + output;
+    if (!Number.isSafeInteger(normalizedTotal) || total !== normalizedTotal) {
+      throw new Error("total_tokens must equal inclusive input_tokens plus output_tokens");
+    }
+  }
+  const usage: NativeUsage = {
+    source: "native-report",
+    scope: value.scope as NativeUsage["scope"],
+    input_tokens: input,
+    output_tokens: output,
+    cached_input_tokens: cached,
+    total_tokens: total,
+  };
+  if (value.artifact !== undefined) {
+    if (typeof value.artifact !== "string" || value.artifact.length === 0) {
+      throw new Error("Native usage artifact must be a nonempty string");
+    }
+    usage.artifact = value.artifact;
+  }
+  return usage;
+}
+
 export function parseRun(value: unknown): EvalRun {
   if (!isRecord(value) || typeof value.fixture_id !== "string") {
     throw new Error("Eval run requires fixture_id");
@@ -116,6 +187,8 @@ export function parseRun(value: unknown): EvalRun {
   if (typeof value.notes === "string") run.notes = value.notes;
   const artifacts = parseArtifacts(value.artifacts);
   if (artifacts) run.artifacts = artifacts;
+  const usage = parseUsage(value.usage);
+  if (usage) run.usage = usage;
   return run;
 }
 
@@ -148,6 +221,24 @@ export const REQUIRED_COMPOSITION_FIXTURES = [
   "decision-ladder",
   "knowledge-reconciliation-v0.9",
   "architecture-deepening",
+  "maintenance-audit",
+  "maintenance-repair",
+  "maintenance-verification",
+  "w1-batch-decision",
+  "w2-settled-policy",
+  "w3-weak-tests",
+  "w4-weakened-oracle",
+  "w5-mechanical-edit",
+  "w6-wayfinder-decisions",
+  "w7-refactor-benefit",
+  "w8-single-hypothesis",
+  "w9-fix-reassessment",
+  "w10-bounded-architecture",
+  "w11-refresh-noop",
+  "w12-shared-recheck",
+  "w13-completion-owner",
+  "w14-ticket-proof",
+  "w15-native-usage",
 ] as const;
 
 /** Canonical example names: `<fixture>.baseline.json` / `<fixture>.methodrail.json` for required fixtures only. Host extras and Task A traces (e.g. `knowledge-accumulation-discover.methodrail.json`) are not loaded by `npm run eval`. */

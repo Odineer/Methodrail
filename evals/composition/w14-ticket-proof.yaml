@@ -1,0 +1,9 @@
+id: composition.w14-ticket-proof
+kind: composition
+description: Split the export spec into tickets. Verification already lives in verify-project.
+fixture: evals/fixtures/w14-ticket-proof
+input:
+  prompt: "Split the export spec into tickets. Verification already lives in verify-project."
+expected:
+  behaviors:
+    - see task.md

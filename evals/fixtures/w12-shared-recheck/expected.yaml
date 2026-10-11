@@ -1,0 +1,6 @@
+id: fixture.w12-shared-recheck
+required_skills: [maintain-project]
+forbidden_skills: []
+expected_behaviors:
+  - recheck the shared dependency after the later edit
+  - leave the unselected file

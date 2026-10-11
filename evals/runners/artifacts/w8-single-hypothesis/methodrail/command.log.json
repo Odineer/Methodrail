@@ -1,0 +1,12 @@
+[
+  {
+    "command": "node --test src/add.test.js",
+    "phase": "repro",
+    "exit_status": 1
+  },
+  {
+    "command": "node --test src/add.test.js",
+    "phase": "verify",
+    "exit_status": 0
+  }
+]

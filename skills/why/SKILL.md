@@ -69,7 +69,7 @@ Pull PR bodies via `gh` when the project uses GitHub and `gh` is available. Capt
 
 ## Cheap path
 
-A narrow question does not require every category. If one file or symbol, recent `git log` / `git blame`, or an identified ADR or decision record can answer it with citations, stop there. Fan out the remaining categories only when that search is insufficient, contradictory, or the question is broader than that local record. Do not invent intent from current code; the cheap path is still historical evidence.
+A narrow question does not require every category. If one file or symbol, recent `git log` / `git blame`, or an identified ADR or decision record can answer it with citations, stop there. The cheap path does not spawn a synthesizer. Fan out the remaining categories only when that search is insufficient, contradictory, or the question is broader than that local record. Do not invent intent from current code; the cheap path is still historical evidence.
 
 ## Step 3. Search evidence categories (default posture)
 
@@ -92,7 +92,7 @@ Source control is always spawned. For the others, skip only with a written justi
 
 "I doubt long-form docs would have this" is not sufficient. Run the search; let the null result speak.
 
-If the host supports subagents, spawn one investigator per available category using [investigator-prompt.md](references/investigator-prompt.md) and the matching [sources](references/source-playbook.md) playbook. If not, search the same categories sequentially. Do not collapse every category into one vague search.
+If the host supports subagents, spawn one investigator per available category using [investigator-prompt.md](references/investigator-prompt.md) and the matching [sources](references/source-playbook.md) playbook. Use the `why investigators` role in [host capabilities](../../references/host-capabilities.md) and follow its selection procedure, including a rejected slug. If not, search the same categories sequentially. Omit `model` when the host cannot choose one. Do not collapse every category into one vague search.
 
 Give investigators the code anchor and the original question. If the target looks defensive (retries, timeouts, rate limits, flags, OOM handlers), also load [incident-postmortem.md](references/sources/incident-postmortem.md).
 
@@ -100,7 +100,7 @@ Give investigators the code anchor and the original question. If the target look
 
 Synthesize with [synthesizer-prompt.md](references/synthesizer-prompt.md) and [epistemics.md](references/epistemics.md). Separate "what we know" from "what we're inferring." Include null-result sources.
 
-If the host supports a synthesizer subagent, use it. Otherwise synthesize here. Do not rewrite confidence language to sound more authoritative.
+If the host supports a synthesizer subagent, use it with the `why synthesizer` role in [host capabilities](../../references/host-capabilities.md) and follow its selection procedure, including a rejected slug. Otherwise synthesize here. Omit `model` when the host cannot choose one. Do not rewrite confidence language to sound more authoritative.
 
 ## Step 5. Present
 

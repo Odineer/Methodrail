@@ -24,7 +24,7 @@ Instead it **selects**, **adapts**, **composes**, **verifies**, and **maintains*
 
 Install it once. Run `/methodrail-init` in a repository. Methodrail inspects the project and creates a lightweight, project-specific AI harness for future agents.
 
-Supported installs (marketplace once listed, local symlink, Claude Code / Codex): [docs/install.md](docs/install.md).
+Supported installs (marketplace once listed, local plugin surfaces, Claude Code / Codex): [docs/install.md](docs/install.md).
 
 ## Start in under a minute
 
@@ -33,14 +33,15 @@ Supported installs (marketplace once listed, local symlink, Claude Code / Codex)
 3. Run `/methodrail-init`.
 4. Use `/investigate`, `/develop`, `/debug`, `/refactor`, or `/review`.
 
-For local plugin development, clone this repository into Cursor's local plugins directory and reload the window:
+For local plugin development, clone this repository anywhere, then copy only the Cursor plugin surfaces:
 
 ```bash
-git clone https://github.com/Odineer/Methodrail.git \
-  ~/.cursor/plugins/local/methodrail
+git clone https://github.com/Odineer/Methodrail.git
+cd Methodrail
+npm run link-plugin
 ```
 
-Methodrail then appears in **Cursor Customize**. If you develop Methodrail itself, symlink your checkout there instead of cloning so Cursor always runs HEAD, and run `npm run doctor` to confirm the installed plugin matches the repository before recording any live observation. Consuming projects do not install an npm dependency, run a daemon, or use a Methodrail CLI.
+Reload the window. Methodrail appears in **Cursor Customize**. The checkout stays outside `~/.cursor/plugins/local`. That folder holds real copies of `.cursor-plugin`, `skills`, `rules`, `hooks`, and the references those skills open. Cursor does not read symlinks from that folder back to the checkout, so the skills would not appear. Run `npm run link-plugin` again after changing those surfaces, then `npm run doctor`. It must report `status: identical`. Consuming projects do not install an npm dependency, run a daemon, or use a Methodrail CLI.
 
 ## How it works
 
@@ -69,7 +70,7 @@ The Cursor plugin ships an observational hook that appends a session ledger unde
 
 **Global plugin:** portable Agent Skills, one small rule, reusable methodology references, and `/methodrail-init`.
 
-**Project harness:** a concise `.methodrail/PROJECT.md` index plus only the knowledge, control procedures, thin host integration, and project-specific skills that the repository actually justifies. Init can keep `.methodrail/` in the repository or link that canonical path to repository-bound sibling storage when knowledge should stay out of commits and PR review.
+**Project harness:** a concise `.methodrail/PROJECT.md` index plus only the knowledge, control procedures, thin host integration, optional `MODELS.yaml` task policy, and project-specific skills that the repository actually justifies. Init can keep `.methodrail/` in the repository or link that canonical path to repository-bound sibling storage when knowledge should stay out of commits and PR review. `/refresh-model-routing` updates model bindings later without reinitializing the project.
 
 Global skills such as `how`, `tdd`, and `wayfinder` stay globally installed. Init does not copy them into each project.
 
@@ -79,12 +80,14 @@ Project source, manifests, configuration, tests, and existing instructions remai
 
 Workflow entry skills are explicit:
 
-- `/methodrail-init` — inspect a repository and safely create or refresh its harness
+- `/methodrail-init` — inspect a repository and safely create or refresh its harness, including an optional task model policy
+- `/refresh-model-routing` — update that policy when host models or cost/quality preference change; ordinary work does not run it
 - `/investigate` — answer existing-system questions with labeled evidence
 - `/develop` — understand, decide, implement, and verify proportionally
 - `/debug` — reproduce and find root cause before fixing
 - `/refactor` — execute one selected structural change while preserving relevant behavior
 - `/review` — review intent, diff, evidence, and blast radius
+- `/maintain-project` — audit and rank architecture, verification, and tooling debt; a bare invocation does not edit. Example: `/maintain-project` reports ranked findings; `Fix findings T1 and V1` revalidates those findings and repairs that batch
 
 Curated operators load when relevant. Expensive skills stay explicit. The key distinctions:
 
@@ -105,11 +108,12 @@ See [capability map](references/capability-map.md) for canonical ownership.
 
 Methodrail's value is careful selection and composition, not NIH. Major methodology influences:
 
-- [pstack](https://github.com/cursor/plugins/tree/main/pstack) (Lauren Tan) — `how`, `why`, `blast-radius`, architecture and parallel operators, verification-skill generation, forensics
+- [pstack](https://github.com/cursor/plugins/tree/main/pstack) (Lauren Tan) — principles composed into Methodrail's existing owners, plus `how`, `why`, `blast-radius`, architecture and parallel operators, verification-skill generation, and forensics
 - [mattpocock/skills](https://github.com/mattpocock/skills) — domain modeling, diagnosis, TDD, review, wayfinder, design discipline, writing-for-agents, handoff
 - [obra/superpowers](https://github.com/obra/superpowers) — the hard evidence gate behind `verify-change`
 - [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) — composed simplicity discipline (reuse, native capability, shared-owner fixes, comment judgment) inside existing skills; no Ponytail command or public skill
 - [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) — composed change-created cleanup, hunk-to-task scope, and consequential-assumption handling inside existing skills; community interpretation of Karpathy's observations, not Karpathy-authored skills; no public karpathy-guidelines skill
+- [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) — composed observable specs, ticket proof pointers, review of weakened checks, repository test commands, and selective context into existing owners; no public Addy skill, router, or lifecycle wrapper
 
 Licenses, commits, and notices: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Per-skill provenance: `skills/<name>/UPSTREAM.md`. Maintainer records: [upstreams/](upstreams/README.md).
 
@@ -124,6 +128,8 @@ references
 ↓
 project knowledge
 ```
+
+The pstack principle library is incorporated as a trigger-based index in [Methodrail principles](references/principles.md), with each cue routed to its existing Methodrail owner rather than exposed as a second skill set.
 
 The global rule stays small. Workflow skills stay short and link into `references/` for rigor, the decision frontier, knowledge, evidence, and context management. Project knowledge lives in the consuming repository and grows around real work.
 
@@ -146,4 +152,4 @@ See `references/` for the methodology and `adapters/` for thin host-specific ins
 
 ## Status
 
-v0.9.2 composes Ponytail simplicity and Karpathy-inspired guidelines into existing skills (`references/simplicity.md`, `references/decision-frontier.md`); there is no public Ponytail or karpathy-guidelines workflow. Constructed evals exist. The Karpathy paired live battery (Cursor / grok-4.6, n=1) was 4 empirical-neutral, 0 helped, 0 harmed; that is not a general improvement claim. The Ponytail paired live battery was not completed. Canonical repository: [Odineer/Methodrail](https://github.com/Odineer/Methodrail). v0.9.1 splits codebase-wide architecture survey (`improve-codebase-architecture`) from selected-target `/refactor`. v0.9.0 is Project Artifact Interoperability on top of Knowledge Governance. `methodrail-init` discovers repository-root artifacts, previews pointer adoption without copying canonical files, and fails closed on a broken linked harness. Constructed mixed-artifact, decision-ladder, knowledge-reconciliation, and architecture-deepening specs pass. A 9-pair live battery (2026-09-01) was 1 helped, 8 incomplete, 0 harmed; that is a low-n inconclusive-but-no-harm pilot, not a general empirical-improvement claim. Mixed-repository dogfood is qualitative. v0.8 constructed applicability, dispute, and retirement specs still pass; its 9-pair live C7 battery was empirical-neutral on applicability and retirement, helped on Cursor dispute, and incomplete on Codex dispute. v0.7 constructed reuse/refresh specs still pass; its 6-pair live pilot was outcome-neutral on reuse and helped on refresh when Methodrail proposed a note update. Simple work is still required to stay cheap. Cursor is first-class; reusable skills remain compatible with Agent Skills-oriented Claude Code and Codex setups.
+v0.10.0 tightens human-decision batching, requires code review for substantive delivery, and keeps mechanical work on the cheap path. Independent reviewers and arena are conditional. Wayfinder can resolve several unblocked technical decisions in one context. Specs and tickets point at existing proof. Final claims still need fresh evidence. Addy Osmani's agent skills are a curated composed source; specialist and lifecycle skills from that set are deferred. Constructed W1–W15 specification pairs pass. The paired live pilot was not run, so this is not a behavior-validated or token-savings claim. Native token counts are recorded only when a host report supplies them. v0.9.2 composes Ponytail simplicity and Karpathy-inspired guidelines into existing skills (`references/simplicity.md`, `references/decision-frontier.md`); there is no public Ponytail or karpathy-guidelines workflow. Constructed evals exist. The Karpathy paired live battery (Cursor / grok-4.6, n=1) was 4 empirical-neutral, 0 helped, 0 harmed; that is not a general improvement claim. The Ponytail paired live battery was not completed. Canonical repository: [Odineer/Methodrail](https://github.com/Odineer/Methodrail). v0.9.1 splits codebase-wide architecture survey (`improve-codebase-architecture`) from selected-target `/refactor`. v0.9.0 is Project Artifact Interoperability on top of Knowledge Governance. `methodrail-init` discovers repository-root artifacts, previews pointer adoption without copying canonical files, and fails closed on a broken linked harness. Constructed mixed-artifact, decision-ladder, knowledge-reconciliation, and architecture-deepening specs pass. A 9-pair live battery (2026-09-01) was 1 helped, 8 incomplete, 0 harmed; that is a low-n inconclusive-but-no-harm pilot, not a general empirical-improvement claim. Mixed-repository dogfood is qualitative. v0.8 constructed applicability, dispute, and retirement specs still pass; its 9-pair live C7 battery was empirical-neutral on applicability and retirement, helped on Cursor dispute, and incomplete on Codex dispute. v0.7 constructed reuse/refresh specs still pass; its 6-pair live pilot was outcome-neutral on reuse and helped on refresh when Methodrail proposed a note update. Simple work is still required to stay cheap. Cursor is first-class; reusable skills remain compatible with Agent Skills-oriented Claude Code and Codex setups.

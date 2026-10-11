@@ -1,0 +1,6 @@
+id: fixture.w9-fix-reassessment
+required_skills: [diagnosing-bugs]
+forbidden_skills: []
+expected_behaviors:
+  - stop after three unsuccessful fixes
+  - fix only with a new causal claim

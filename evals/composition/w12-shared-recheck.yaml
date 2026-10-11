@@ -1,0 +1,9 @@
+id: composition.w12-shared-recheck
+kind: composition
+description: Repair the two selected files. They share check-a. Leave the unselected file alone.
+fixture: evals/fixtures/w12-shared-recheck
+input:
+  prompt: "Repair the two selected files. They share check-a. Leave the unselected file alone."
+expected:
+  behaviors:
+    - see task.md

@@ -1,0 +1,35 @@
+{
+  "fixture_id": "w15-native-usage",
+  "condition": "baseline",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "The full task cost was measured.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w15-native-usage/baseline/answer.md"
+  },
+  "host": "cursor",
+  "model": "recorded",
+  "usage": {
+    "source": "native-report",
+    "scope": "partial",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cached_input_tokens": 0,
+    "total_tokens": 0,
+    "artifact": "evals/runners/artifacts/w15-native-usage/baseline/usage.json"
+  }
+}

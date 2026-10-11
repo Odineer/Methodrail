@@ -1,0 +1,21 @@
+{
+  "fixture_id": "maintenance-verification",
+  "condition": "baseline",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [],
+  "references_loaded": [],
+  "tools_used": ["edit"],
+  "subagents_used": 0,
+  "verification_steps": ["node scripts/product-oracle.mjs"],
+  "evidence": ["changed refund so the oracle passed"],
+  "outcome": "Made the product oracle pass by changing refund.",
+  "failure_modes": ["oracle weakened"],
+  "behaviors_observed": [],
+  "notes": "constructed specification. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/maintenance-verification/baseline/answer.md",
+    "command_log": "evals/runners/artifacts/maintenance-verification/baseline/command.log.json",
+    "overlay": "evals/runners/artifacts/maintenance-verification/baseline/overlay"
+  }
+}

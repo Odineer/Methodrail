@@ -1,0 +1,29 @@
+{
+  "fixture_id": "w11-refresh-noop",
+  "condition": "baseline",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "methodrail-init",
+    "refresh-model-routing"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Researched the catalog and rewrote the policy.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w11-refresh-noop/baseline/answer.md",
+    "command_log": "evals/runners/artifacts/w11-refresh-noop/baseline/command.log.json",
+    "overlay": "evals/runners/artifacts/w11-refresh-noop/baseline/overlay"
+  }
+}

@@ -1,0 +1,6 @@
+id: fixture.w11-refresh-noop
+required_skills: []
+forbidden_skills: [refresh-model-routing]
+expected_behaviors:
+  - leave files unchanged
+  - do not research the model catalog

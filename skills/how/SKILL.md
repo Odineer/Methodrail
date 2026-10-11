@@ -86,7 +86,7 @@ Decompose the question into 2–4 parallel exploration angles, each a distinct s
 
 Narrow questions: 2 explorers is fine. Broad subsystems: up to 4.
 
-If the host supports subagents, spawn all explorers in a single message, read-only. Each explorer gets [explorer-prompt.md](references/explorer-prompt.md) plus its slice. If the host does not, run the same slices sequentially in this context. See [host capabilities](../../references/host-capabilities.md).
+If the host supports subagents, spawn all explorers in a single message, read-only. Use the `how explorer` role in [host capabilities](../../references/host-capabilities.md) and follow its selection procedure, including a rejected slug. Each explorer gets [explorer-prompt.md](references/explorer-prompt.md) plus its slice. If the host does not, run the same slices sequentially in this context. Omit `model` when the host cannot choose one.
 
 Explorers follow [explorer-prompt.md](references/explorer-prompt.md) and return that structured output:
 
@@ -101,7 +101,7 @@ Then proceed to Step 3.
 
 ### Step 2b. Direct explain (simple questions)
 
-Explore and explain in one pass, read-only, still covering entrypoint, flow, state, boundaries, and unknowns. Use [explainer-prompt.md](references/explainer-prompt.md) for communication style and output format. If the host supports a read-only subagent, you may use one; otherwise do the work here.
+Explore and explain in one pass, read-only, still covering entrypoint, flow, state, boundaries, and unknowns. Use [explainer-prompt.md](references/explainer-prompt.md) for communication style and output format. If the host supports a read-only subagent, you may use one with the `how explainer` role in [host capabilities](../../references/host-capabilities.md), following its selection procedure, including a rejected slug. Otherwise do the work here. Omit `model` when the host cannot choose one.
 
 Proceed to Step 4.
 

@@ -41,6 +41,15 @@ export function classifyCommands(events: LedgerEvent[]): CommandLogEntry[] {
   for (let i = 0; i < events.length; i += 1) {
     const event = events[i];
     if (!event || (event.event !== "tool" && event.event !== "tool_failure")) continue;
+    if (event.event === "tool" && EDIT_TOOLS.has(event.tool_name)) {
+      const target = event.path ?? "";
+      log.push({
+        command: target ? `${event.tool_name} ${target}` : event.tool_name,
+        phase: "edit",
+        exit_status: 0,
+      });
+      continue;
+    }
     if (event.tool_name !== "Shell") continue;
     const command = event.command ?? "";
     const isVerifyish = VERIFY_RE.test(command);

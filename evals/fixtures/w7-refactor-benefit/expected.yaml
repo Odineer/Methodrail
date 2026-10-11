@@ -1,0 +1,6 @@
+id: fixture.w7-refactor-benefit
+required_skills: [refactor]
+forbidden_skills: []
+expected_behaviors:
+  - remove the private target with packaging cost
+  - keep exported dynamic and side-effect code

@@ -1,0 +1,7 @@
+[
+  {
+    "command": "read .methodrail/MODELS.yaml",
+    "phase": "read",
+    "exit_status": 0
+  }
+]

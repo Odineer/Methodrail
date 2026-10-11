@@ -42,6 +42,8 @@ npm run eval -- compare evals/runners/examples/simple-change.baseline.json evals
 
 `npm test` / `npm run validate` check fixture shape, unique ids, coverage, and that host projections match the family invariant.
 
+`maintenance-audit`, `maintenance-repair`, and `maintenance-verification` are constructed specification fixtures. Their canonical pairs must not be labeled as live improvement. Outcome graders live in `src/composition/grade-maintenance-trace.ts`.
+
 To evaluate live agents:
 
 1. Run the fixture task without Methodrail skills.

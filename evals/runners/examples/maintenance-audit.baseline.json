@@ -1,0 +1,21 @@
+{
+  "fixture_id": "maintenance-audit",
+  "condition": "baseline",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [],
+  "references_loaded": [],
+  "tools_used": ["edit"],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": ["rewrote format.js"],
+  "outcome": "Rewrote the quiet formatter and ranked the ledger, the formatter, and both copies of the broken test command.",
+  "failure_modes": ["speculative rewrite", "duplicate ranking"],
+  "behaviors_observed": [],
+  "notes": "constructed specification. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/maintenance-audit/baseline/answer.md",
+    "command_log": "evals/runners/artifacts/maintenance-audit/baseline/command.log.json",
+    "overlay": "evals/runners/artifacts/maintenance-audit/baseline/overlay"
+  }
+}

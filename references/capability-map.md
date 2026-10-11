@@ -4,24 +4,26 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 
 | Capability | Canonical skill | Origin | Invocation | Escalates to | Used by |
 |---|---|---|---|---|---|
-| Project harness init | `methodrail-init` | Methodrail-native | explicit | `create-verification-skill` | humans |
+| Project harness init | `methodrail-init` | Methodrail-native | explicit | `create-verification-skill`, `refresh-model-routing` | humans |
+| Task-based model policy | `refresh-model-routing` | Methodrail-native | explicit | — | `methodrail-init` |
 | Existing-system investigation | `investigate` | Methodrail-native | explicit | `how`, `why`, `observe`, `research`, `prototype`, `blast-radius` | humans |
 | Feature delivery | `develop` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `grill-with-docs`, `domain-modeling`, `wayfinder`, `architect`, `prototype`, `tdd`, `code-review`, `verify-change`, `blast-radius`, `create-verification-skill`, `maintain-verification-skill` | humans |
 | Failure diagnosis and fix | `debug` | Methodrail-native | explicit | `diagnosing-bugs`, `observe`, `runtime-forensics`, `trace-forensics`, `performance`, `hillclimb`, `tdd`, `verify-change`, `create-verification-skill`, `maintain-verification-skill` | humans |
 | Behavior-preserving restructure of a selected target | `refactor` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `how`, `codebase-design`, `blast-radius`, `code-review`, `verify-change`, `maintain-verification-skill` | humans |
+| Evidence-backed project maintenance | `maintain-project` | Methodrail-native | explicit | `improve-codebase-architecture` (`survey-only`), `maintain-verification-skill` (named action and coverage), `refactor`, `debug`, `develop` when a selected repair requires that owner | humans |
 | Change review workflow | `review` | Methodrail-native | explicit | `code-review`, `blast-radius`, `verify-change` | humans |
 | Current codebase understanding | `how` | pstack | model-invoked | `observe` | `investigate`, `develop`, `refactor`, `architect` |
 | Historical motivation | `why` | pstack | model-invoked | — | `investigate`, `architect` |
 | Live behavior | `observe` | Methodrail-native | model-invoked | `runtime-forensics` | `investigate`, `debug`, `verify-change` |
 | External/reference research | `research` | Matt Pocock | model-invoked | — | `investigate`, `wayfinder` |
 | Impact beyond the diff | `blast-radius` | pstack | model-invoked | `arena` (wide changes) | `develop`, `debug`, `refactor`, `review` |
-| Ubiquitous language | `domain-modeling` | Matt Pocock | model-invoked | ADR via same skill | `develop`, `grill-with-docs`, `wayfinder` |
+| Domain vocabulary and durable domain decisions | `domain-modeling` | Matt Pocock | model-invoked | Glossary updates when project terms, ownership, lifecycle, or invariants crystallize; ADR offer when all three decision criteria hold | `develop`, `debug` when verified behavior changes the domain contract, `grill-with-docs`, `wayfinder` |
 | Ambiguous requirements interview | `grill-with-docs` | Matt Pocock | explicit | `domain-modeling` | `develop`, `wayfinder` |
 | Large uncertain planning | `wayfinder` | Matt Pocock | explicit | `grill-with-docs`, `research`, `prototype` | `develop` |
 | Empirical experiment | `prototype` | Matt Pocock + Methodrail evidence semantics | explicit | — | `investigate`, `develop`, `wayfinder` |
 | Architecture decision exercise | `architect` | pstack | explicit | `how`, `why`, `arena` | `develop` |
 | Deep-module design vocabulary | `codebase-design` | Matt Pocock + Ponytail composed | model-invoked | `architect` when a decision exists | `tdd`, `refactor`, `improve-codebase-architecture` |
-| Codebase-wide architecture survey and candidate selection | `improve-codebase-architecture` | Matt Pocock + Ponytail composed | explicit | `grill-with-docs`, `codebase-design` | humans |
+| Codebase-wide architecture survey and candidate selection | `improve-codebase-architecture` | Matt Pocock + Ponytail composed | explicit | `grill-with-docs`, `codebase-design` | humans; `maintain-project` for `survey-only` |
 | Test-first implementation | `tdd` | Matt Pocock | model-invoked | `codebase-design`, `verify-change` | `develop`, `debug` |
 | Baseline bug diagnosis | `diagnosing-bugs` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model/workflow invoked | `runtime-forensics`, `trace-forensics`, `performance` | `debug` |
 | Completion verification | `verify-change` | Superpowers-derived | model/workflow invoked | `observe`, project verify skill | all workflows |
@@ -37,7 +39,7 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 | Iterative metric optimization | `hillclimb` | pstack playbook | explicit | `show-me-your-work` | `debug` |
 | Rendered visual equivalence | `visual-parity` | pstack playbook | explicit | — | humans |
 | Project verify skill generation | `create-verification-skill` | pstack | explicit | `maintain-verification-skill` | `methodrail-init`, `develop`, `debug` |
-| Verify-skill upkeep | `maintain-verification-skill` | pstack | explicit | `create-verification-skill` if missing | `develop`, `debug`, `refactor`; humans for a full audit |
+| Verify-skill upkeep | `maintain-verification-skill` | pstack | explicit | `create-verification-skill` if missing | `develop`, `debug`, `refactor` for task-scoped application; `maintain-project` when it names action and coverage; humans for a full audit |
 | Compact decision trail | `show-me-your-work` | pstack | explicit | — | `hillclimb`, long runs |
 | Session lessons as candidates | `reflect` | pstack | explicit | knowledge / skill / structural-enforcement candidates | humans |
 | Cross-session continuity | `handoff` | Matt Pocock | explicit | — | humans, long sessions, `prototype` round-trips |
@@ -55,8 +57,10 @@ Typical artifacts, not process nesting: `how` → implementation understanding; 
 - **Implement:** Matt `implement` is not shipped. `/develop` owns the lifecycle and reuses `tdd` / `code-review` / `verify-change`.
 - **Simplicity:** `references/simplicity.md` is the shared procedure, including change-created cleanup. There is no public Ponytail or karpathy-guidelines skill, command, or review axis. Compose into `develop`, `codebase-design`, `refactor`, `diagnosing-bugs`, `code-review`, and `improve-codebase-architecture`.
 - **Assumptions:** `references/decision-frontier.md` owns uncertainty resolution, including consequential assumptions. Do not add an assumption ledger or a public clarification skill.
-- **Architecture maintenance:** `improve-codebase-architecture` owns codebase-wide discovery and selection. `/refactor` executes one selected behavior-preserving change. A survey-shaped `/refactor` request routes to `improve-codebase-architecture` without starting implementation.
+- **Architecture maintenance:** `improve-codebase-architecture` owns codebase-wide discovery and selection. `/refactor` executes one selected behavior-preserving change. A survey-shaped `/refactor` request routes to `improve-codebase-architecture` without starting implementation. `maintain-project` may request `survey-only` and must stop before that skill's selection prompt.
+- **Project maintenance:** `maintain-project` owns cross-lane discovery, ranking, and reconciliation for architecture, verification, and build/tooling/documentation debt. A bare invocation audits and does not edit. Specialists keep their procedures. There is no debt ledger or consumer runtime.
 - **Control planes:** `poteto-mode`, `ask-matt`, `using-superpowers`, `setup-*` global routers, and Ponytail commands/hooks are not imported.
 - **Skill authoring:** `writing-for-agents` subsumes the earlier `writing-great-skills` concept. Do not ship both.
+- **Model routing:** `references/model-routing.md` owns tiers, precedence, fallback, and evidence. `refresh-model-routing` maintains `.methodrail/MODELS.yaml`. Skills keep logical role names. There is no custom router or model SDK.
 - **Handoff:** operational skill for Methodrail's handoff context transition. Explicit-only.
 - **Upstream sync:** `sync-upstream` is a project skill at `.cursor/skills/sync-upstream/`. Cursor discovers it when this repository is the workspace. It is not a consumer capability and is not shipped by the plugin.

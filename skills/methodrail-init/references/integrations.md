@@ -32,3 +32,7 @@ Inspect existing AI instruction surfaces before adding a pointer:
 Never overwrite them. Prefer the existing source of truth plus a thin Methodrail pointer. Detect contradictions; repository-specific instructions outrank generic Methodrail assumptions.
 
 For linked external storage, the globally installed Methodrail integration discovers the canonical repository-root `.methodrail` link. Do not put a host rule in an arbitrary sibling folder or edit tracked project instructions solely to expose Methodrail. If the global integration is unavailable, report that limitation instead of claiming discovery works. See [harness location](harness-location.md).
+
+## Model settings
+
+Do not install both Cursor and Claude integrations so model routing works on either host. Do not write global user model settings, and do not add tracked native agent files solely to project routing. A linked harness keeps `MODELS.yaml` in external storage. Cursor Auto and Claude session model choices that the host will not accept from a project file stay manual actions in the init report.

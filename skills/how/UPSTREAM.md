@@ -5,7 +5,7 @@ License: MIT (Copyright (c) 2026 Lauren Tan)
 
 Methodrail changes:
 - project knowledge lookup and freshness check before expensive exploration
-- host-specific model slugs isolated; subagents optional
+- Cursor model roles centralized in references/host-capabilities.md as of 4b4d98e; subagents optional
 - Methodrail inference/unknown labeling
 - public skill restored to require entrypoint, data/control/state flow, boundaries, structured explorer output, and non-default critique
 - added Methodrail behavioral evals

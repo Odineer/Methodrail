@@ -1,0 +1,13 @@
+[
+  {
+    "command": "edit src/refund.js",
+    "phase": "edit",
+    "exit_status": 0
+  },
+  {
+    "command": "node scripts/product-oracle.mjs",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "oracle ok"
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "fixture_id": "maintenance-audit",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": ["maintain-project", "improve-codebase-architecture"],
+  "references_loaded": ["skills/maintain-project/references/discovery.md"],
+  "tools_used": ["read", "shell"],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": ["npm test missing script", "product test passed", "stale drive failed", "ledger already deep"],
+  "outcome": "Ranked the broken command, stale recipe, and pass-through wrapper. Rejected the deep ledger and quiet formatter. Edited nothing.",
+  "failure_modes": [],
+  "behaviors_observed": [
+    "rank the broken canonical command, the stale drive recipe, and the pass-through wrapper",
+    "reject the already-deep ledger and the quiet formatter",
+    "keep documentation drift distinct from a product failure",
+    "leave fixture bytes unchanged"
+  ],
+  "notes": "constructed specification. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/maintenance-audit/methodrail/answer.md",
+    "command_log": "evals/runners/artifacts/maintenance-audit/methodrail/command.log.json"
+  }
+}

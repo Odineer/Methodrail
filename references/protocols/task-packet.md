@@ -15,12 +15,13 @@ Give a child agent the minimum sufficient context, not the entire parent convers
 ```text
 Task/question
 Scope
+Acceptance criteria, by reference when a spec exists
 Known facts
 Relevant project knowledge
 Constraints
 Available evidence
 Expected output
-Verification expectations
+Existing verification pointer, scenario, and expected result
 ```
 
 Do not build runtime packet classes. Write the packet as short markdown, a prompt preamble, or a handoff note.

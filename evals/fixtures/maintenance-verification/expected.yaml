@@ -1,0 +1,10 @@
+id: fixture.maintenance-verification
+required_skills: [maintain-project, maintain-verification-skill]
+forbidden_skills: [arena, swarm]
+expected_behaviors:
+  - inspect writes no files and does not report changed
+  - apply fixes only the owned helper and the stale recipe
+  - exercise checkout and refund after a helper edit
+  - preserve the failing product oracle and return that defect
+  - block a full audit when tools/export-bin is missing
+max_expensive_skills: 0

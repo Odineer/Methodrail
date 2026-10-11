@@ -1,0 +1,29 @@
+{
+  "fixture_id": "w13-completion-owner",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "develop",
+    "code-review",
+    "verify-change"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "One owner report.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w13-completion-owner/methodrail/answer.md",
+    "transcript": "evals/runners/artifacts/w13-completion-owner/methodrail/standalone.md"
+  }
+}

@@ -1,0 +1,16 @@
+id: behavioral.refresh-model-routing.preserve-and-label
+kind: behavioral
+skill: refresh-model-routing
+description: Refresh updates material bindings and keeps pins, without calling configuration a live proof.
+input:
+  prompt: "Refresh model routing for this repository. Keep the pinned reviewer model. Inspect the policy before writing."
+expected:
+  skills:
+    required: [refresh-model-routing]
+  behaviors:
+    - inspect the existing policy before writing
+    - preserve pinned model ids
+    - leave the file unchanged when bindings are materially the same
+    - label documented-only bindings separately from a live probe
+    - report a manual picker or session action when the host requires one
+  baseline_failure: overwriting pins and claiming routing works from a schema check

@@ -1,0 +1,9 @@
+id: composition.w8-single-hypothesis
+kind: composition
+description: 1 + 1 returns 3. Reproduce it and fix it.
+fixture: evals/fixtures/w8-single-hypothesis
+input:
+  prompt: "1 + 1 returns 3. Reproduce it and fix it."
+expected:
+  behaviors:
+    - see task.md

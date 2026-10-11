@@ -20,7 +20,7 @@ Use durable artifacts as the source of continuity when the old conversation is n
 
 ## Isolate
 
-Use a fresh child context for bounded work. Give the child a [task packet](protocols/task-packet.md), not the parent conversation.
+Use a fresh child context for bounded work when context size or independence warrants it. A new session is that context choice, not a quota on how many decisions the current context may resolve. Give the child a [task packet](protocols/task-packet.md) or [review packet](protocols/review-packet.md), not the parent conversation. The packet carries the decisions, acceptance criteria, and evidence pointers the child needs.
 
 ## Handoff
 

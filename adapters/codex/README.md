@@ -8,3 +8,9 @@ project instructions. Do not edit that invariant by hand; change
 
 Do not copy skill bodies into this adapter. Link or install the canonical skill
 directories so updates remain centralized.
+
+## Model controls
+
+Use Codex's documented model control when it has one. Otherwise keep the native
+default and report that per-task routing is unavailable. Do not copy Cursor or
+Claude slugs into Codex configuration.

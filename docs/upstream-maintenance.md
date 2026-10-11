@@ -24,7 +24,7 @@ update recorded upstream SHA only when mapped items are resolved
 stop before commit
 ```
 
-Never automatically overwrite Methodrail adaptations. New, SKIP, and COMPOSE upstream skills are report-only during a sync.
+Never automatically overwrite Methodrail adaptations. New, SKIP, and COMPOSE upstream skills are report-only during a sync. Addy Osmani paths are COMPOSE or SKIP. They are not primary Origin lines, so a moved Addy HEAD stays `discoveries-only` unless some other adapted origin path also changed.
 
 ## Records
 

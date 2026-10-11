@@ -153,3 +153,38 @@ SOFTWARE.
 - Plugin author metadata: `forrestchang`
 
 This is a community interpretation of Karpathy's observations, not code authored by Andrej Karpathy. Methodrail composes original wording for change-created cleanup, hunk-to-task scope, and consequential-assumption handling into existing skills. Host installation surfaces (`CLAUDE.md`, `CURSOR.md`, the always-on Cursor rule, plugin/router) are not imported. No public `karpathy-guidelines` skill is shipped.
+
+---
+
+## addyosmani/agent-skills
+
+- Repository: https://github.com/addyosmani/agent-skills
+- Reviewed commit: `6ca0cd7db39b41b1c37e26d335c507ee92382c6d`
+- Reviewed: 2026-10-10
+- License: MIT
+
+```
+MIT License
+
+Copyright (c) 2025 Addy Osmani
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+Selected techniques from `spec-driven-development`, `constraint-driven-development`, `planning-and-task-breakdown`, `incremental-implementation`, `test-driven-development`, `context-engineering`, and `code-review-and-quality` are composed into existing Methodrail owners. The remaining skills at this snapshot are SKIP. No Addy skill, router, hook, or lifecycle wrapper is shipped.

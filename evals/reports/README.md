@@ -22,11 +22,13 @@ Constructed pairs must never be quoted as `helped`. Current Codex pilot JSON is 
 
 [karpathy-guidelines-pilot-results.md](./karpathy-guidelines-pilot-results.md) records the Karpathy-inspired guidelines paired live battery (Cursor / grok-4.6, 4/4 empirical-neutral). It is not an integrity-gated manifest and is separate from the Ponytail results.
 
+[v0.10-workflow-pilot-protocol.md](./v0.10-workflow-pilot-protocol.md) freezes the v0.10 paired live protocol. No trials were launched. It is not an integrity-gated manifest. [v0.10-workflow-pilot-results.md](./v0.10-workflow-pilot-results.md) records that gap.
+
 Layers:
 
 - **Outcome** — derived from the resulting tree, patch/overlay, tests, and final answer
 - **Routing** — `appropriate` | `miss` | `violation` (Methodrail skill names never fail a baseline that did the work)
-- **Cost** — skills, references, subagents, real verification commands, latency
+- **Cost** — skills, references, subagents, real verification commands, latency, and native token counts when a report supplies them. Missing counts stay unavailable. They are not zero.
 - **Operational quality** — `clean` | `wasteful` | `violating`
 
 The integrity gate fails on missing pairs, missing artifacts, broken graders, specification `failed`, or guardrail `missed`. It does **not** fail on empirical `harmed`.

@@ -1,0 +1,29 @@
+{
+  "fixture_id": "w9-fix-reassessment",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "debug",
+    "diagnosing-bugs"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Reassessed the index origin, then fixed it.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w9-fix-reassessment/methodrail/answer.md",
+    "command_log": "evals/runners/artifacts/w9-fix-reassessment/methodrail/command.log.json",
+    "overlay": "evals/runners/artifacts/w9-fix-reassessment/methodrail/overlay"
+  }
+}

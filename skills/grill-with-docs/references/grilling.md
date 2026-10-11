@@ -3,9 +3,11 @@ name: grilling
 description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
 ---
 
-Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
+Interview until the qualifying decisions are shared. Map this as a **design tree**: every decision branches into the decisions that hang off it.
 
-Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for the user's answers before the next round.
+Filter questions through the [human-decision rule](../../../references/decision-frontier.md#consequential-assumptions). A question enters a round only when human judgment is necessary and the answer would change the build. Find facts yourself. Do not ask the user to resolve a technical approach, a supported seam, or a convention.
+
+Work the tree in **rounds**. The **frontier** is every qualifying decision whose prerequisites are already settled. Ask that frontier in one round: number each question, state the alternatives and what each would build, and give your recommended answer. Then wait. A dependent question waits for a later round.
 
 Format a round like so:
 
@@ -25,4 +27,4 @@ Each round the user answers reshapes the tree: settled decisions push the fronti
 
 Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, etc.), dispatch a sub-agent to find it; don't ask the user for anything you could look up yourself. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report; ask the rest of the frontier now. The _decisions_ are the user's: put each to them and wait.
 
-The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.
+The session is done when no qualifying decision remains. Report the understanding. A standalone interview ends with that synthesis and does not implement. When the caller already authorized the work, return the understanding and do not ask for a second approval of the same decisions.

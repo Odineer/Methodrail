@@ -1,0 +1,15 @@
+id: composition.model-routing-init
+kind: composition
+description: Init proposes a balanced model policy in discovery and writes it only after the same confirmation.
+input:
+  prompt: "Initialize Methodrail in this repository and configure task-based model selection."
+expected:
+  skills:
+    required: [methodrail-init, refresh-model-routing]
+    forbidden: [arena, swarm]
+  behaviors:
+    - preview a balanced model policy before writing
+    - write MODELS.yaml only after confirmation
+    - preserve existing model pins
+    - avoid changing global user model settings
+    - avoid tracked native agent files when the harness is linked externally

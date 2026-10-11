@@ -1,0 +1,7 @@
+[
+  {
+    "command": "read repo/src/export.js",
+    "phase": "read",
+    "exit_status": 0
+  }
+]

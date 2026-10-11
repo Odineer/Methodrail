@@ -1,0 +1,24 @@
+[
+  {
+    "command": "npm test",
+    "phase": "repro",
+    "exit_status": 1,
+    "stderr": "Cannot find module scripts/run-tests.mjs"
+  },
+  {
+    "command": "edit package.json",
+    "phase": "edit",
+    "exit_status": 0
+  },
+  {
+    "command": "edit src/quiet/format.js",
+    "phase": "edit",
+    "exit_status": 0
+  },
+  {
+    "command": "npm test",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "product ok"
+  }
+]

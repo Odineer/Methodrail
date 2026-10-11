@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.10.0 — 2026-10-10
+
+Strengthen the existing lifecycle without adding public skills. Consequential human decisions are batched. Routine technical choices are not. Substantive delivery runs the canonical code review. Mechanical edits stay on the cheap path. Independent reviewers and arena are conditional. Wayfinder can resolve more than one unblocked technical decision in the current context. Specs and tickets point at existing verification. Composed work emits one owner completion report. Fresh evidence is still required after later edits.
+
+Constructed specification pairs W1–W15 pass under `npm run eval`. The six-pair live pilot in `evals/reports/v0.10-workflow-pilot-protocol.md` was not launched. Token usage from the host was unavailable. Do not read this release as a measured behavior or cost improvement.
+
+- Shared human-decision rule in `references/decision-frontier.md`, used by planning, grilling, and wayfinder
+- Review depth in `references/rigor.md`; `develop`, `debug`, and `refactor` call `code-review` for substantive changes
+- Proportional hypotheses and a reassessment stop in diagnosis; refactor relevance is benefit, not quietness
+- Optional `NativeUsage` on eval runs, parsed from a native report and omitted when absent
+- Addy Osmani agent-skills `6ca0cd7db39b41b1c37e26d335c507ee92382c6d` recorded as COMPOSE/SKIP. No new public skill
+- Harden workflow graders with maintainer-owned behavioral probes, protected verification recipes, ordered causal reassessment, and separate correctness/routing results. Token comparisons require known host/model identities and normalized totals must agree with inclusive input plus output.
+
 ## 0.9.2 — 2026-09-13
 
 Compose Ponytail simplicity and Karpathy-inspired guidelines into existing Methodrail skills. No public Ponytail or `karpathy-guidelines` skill, command, or intensity mode. Constructed evals added. Karpathy paired live battery (Cursor / grok-4.6, n=1): 4 empirical-neutral, 0 helped, 0 harmed; not a general improvement claim. Ponytail paired live battery remains unavailable. Repository identity is [Odineer/Methodrail](https://github.com/Odineer/Methodrail).

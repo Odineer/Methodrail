@@ -1,0 +1,6 @@
+id: fixture.w2-settled-policy
+required_skills: []
+forbidden_skills: [grill-with-docs]
+expected_behaviors:
+  - follow the written export policy
+  - do not reopen the settled choice

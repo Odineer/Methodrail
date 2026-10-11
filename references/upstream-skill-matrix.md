@@ -2,7 +2,7 @@
 
 Classification of considered upstream skills. Decisions: **ADOPT** (substantially intact), **ADAPT** (meaningful Methodrail integration), **COMPOSE** (reused inside another canonical skill), **HOST-SPECIFIC** (not portable enough), **SKIP**.
 
-Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.yaml](../upstreams/pstack.yaml), [superpowers.yaml](../upstreams/superpowers.yaml), [ponytail.yaml](../upstreams/ponytail.yaml), [karpathy-guidelines.yaml](../upstreams/karpathy-guidelines.yaml).
+Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.yaml](../upstreams/pstack.yaml), [superpowers.yaml](../upstreams/superpowers.yaml), [ponytail.yaml](../upstreams/ponytail.yaml), [karpathy-guidelines.yaml](../upstreams/karpathy-guidelines.yaml), [addy-osmani.yaml](../upstreams/addy-osmani.yaml).
 
 ## mattpocock/skills
 
@@ -55,8 +55,8 @@ Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.
 | prototype playbook | Specialized probes | COMPOSE | `prototype` reference | Not a second prototype skill | — |
 | tdd | pstack TDD | SKIP | `tdd` (Matt) | Duplicate TDD owner | — |
 | poteto-mode | Global router + playbooks | SKIP | Methodrail workflows | Competing control plane | Cursor-specific |
-| setup-pstack | Model-role assignment | SKIP | — | Host bootstrap | Cursor-specific |
-| principle-* | First-principles library | SKIP | Methodrail `references/` | Would duplicate composition language | — |
+| setup-pstack | Model-role assignment | SKIP | `refresh-model-routing` | Host bootstrap; Methodrail keeps task policy instead of importing setup-pstack | Cursor-specific |
+| principle-* | First-principles library | COMPOSE | [Methodrail principles](principles.md) and linked skill owners | Principle names and task triggers are indexed in the existing methodology; no parallel public skills or router | portable |
 | automate-me / unslop / bro / no-comments / teach / recall / figure-it-out / technical-writing / typescript-best-practices | Style, personal, or language-specific | SKIP | — | Not core Methodrail | mixed |
 | benny automations / Graphite shipping playbooks | Org release flows | SKIP | — | Host/org-specific | GitHub/Graphite |
 
@@ -94,3 +94,37 @@ Fidelity deviations for the composed skills: no intensity modes; no `ponytail:` 
 | CLAUDE.md / CURSOR.md / always-on Cursor rule / plugin marketplace | Host installation and global activation | SKIP | Methodrail workflows | Competing control plane | host-specific |
 
 Fidelity deviations: no stop-when-unclear; no single-use-abstraction ban; no 200-to-50 rewrite metric; no skip of "impossible" failure paths; no assumption ledger; `verify-change` stays stronger than compact success-loop examples. Comparison: [karpathy-upstream-comparison.md](../docs/internal/karpathy-upstream-comparison.md).
+
+## addyosmani/agent-skills
+
+Snapshot `6ca0cd7db39b41b1c37e26d335c507ee92382c6d` (reviewed 2026-10-10). MIT, Copyright (c) 2025 Addy Osmani. Twenty-five skills were present. No extra skill was discovered. COMPOSE and SKIP stay report-only.
+
+| Skill | Purpose | Decision | Canonical Methodrail capability | Reason | Host requirements |
+|---|---|---|---|---|---|
+| using-agent-skills | Lifecycle selection | SKIP | Methodrail workflows | Existing owners already select the lifecycle | — |
+| interview-me | Requirements interview | SKIP | `grill-with-docs` | Keep batched grilling and the shared human-decision rule | — |
+| idea-refine | Ideation | SKIP | — | No new ideation owner in this release | — |
+| spec-driven-development | Spec before code | COMPOSE | `to-spec`, `develop` | Observable criteria, boundaries, and readiness. No per-phase human gate | portable |
+| constraint-driven-development | Check the checks | COMPOSE | `code-review` | Scrutiny of weakened tests and checks. No constraints-setup workflow | portable |
+| planning-and-task-breakdown | Task graph | COMPOSE | `to-tickets` | Acceptance, dependencies, and existing proof. No routine quiz | portable |
+| incremental-implementation | Verified slices | COMPOSE | `develop` | Meaningful slices. Current commit authority stays | portable |
+| test-driven-development | Red-green commands | COMPOSE | `tdd` | Discover the repository's focused and broader commands | portable |
+| context-engineering | Selective context | COMPOSE | context and composition references | Selective loading and bounded phase continuity. No token planner | portable |
+| source-driven-development | Primary sources | SKIP | `research` | Existing research capability | — |
+| doubt-driven-development | In-flight doubt | SKIP | `code-review`, `interrogate` | No universal adversarial loop. Interrogate stays suggest-only | — |
+| frontend-ui-engineering | UI specialist | SKIP | — | Deferred | — |
+| api-and-interface-design | API specialist | SKIP | — | Deferred | — |
+| browser-testing-with-devtools | Browser checks | SKIP | project verification | Verification stays portable and tool-aware | browser |
+| debugging-and-error-recovery | Debug loop | SKIP | `diagnosing-bugs` | Proportional diagnosis stays Methodrail-native | — |
+| code-review-and-quality | Multi-axis review | COMPOSE | `code-review` | Relevant correctness and verification effectiveness inside two axes | portable |
+| code-simplification | Simplify | SKIP | `references/simplicity.md` | Existing simplicity owner | — |
+| security-and-hardening | Security specialist | SKIP | — | Deferred. Relevant review concerns still apply | — |
+| performance-optimization | Performance specialist | SKIP | `performance` | Existing measured performance operators | — |
+| git-workflow-and-versioning | Commit cadence | SKIP | — | No forced commit cadence or line-count quota | git |
+| ci-cd-and-automation | Release automation | SKIP | — | Deferred | — |
+| deprecation-and-migration | Migration specialist | SKIP | — | Deferred | — |
+| documentation-and-adrs | Docs and ADRs | SKIP | `domain-modeling`, `writing-for-agents` | Existing owners | — |
+| observability-and-instrumentation | Observability specialist | SKIP | — | Deferred | — |
+| shipping-and-launch | Launch specialist | SKIP | — | Deferred | — |
+
+Deviations: no five public review axes, no `CONSTRAINTS.md` or floor-guard script, no invented numeric thresholds, no `tasks/todo.md` requirement, no commit-per-slice rule, and no automatic catalog or browser-devtools workflow. Primary origins of adapted skills stay on their existing upstreams.

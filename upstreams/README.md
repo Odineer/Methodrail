@@ -11,6 +11,7 @@ Tracked sources:
 | [superpowers.yaml](superpowers.yaml) | `obra/superpowers` | Verification gate and debugging pressure resistance |
 | [ponytail.yaml](ponytail.yaml) | `DietrichGebert/ponytail` | Composed simplicity discipline; no public Ponytail skill |
 | [karpathy-guidelines.yaml](karpathy-guidelines.yaml) | `multica-ai/andrej-karpathy-skills` | Composed change-created cleanup, hunk scope, and consequential assumptions; no public karpathy-guidelines skill |
+| [addy-osmani.yaml](addy-osmani.yaml) | `addyosmani/agent-skills` | Composed spec, ticket, review, TDD, and context techniques; no public Addy skill or router |
 
 Each adopted or derived skill keeps a short `UPSTREAM.md` beside `SKILL.md`. Provenance stays out of the skill prompt.
 

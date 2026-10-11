@@ -17,7 +17,7 @@ NO COMPLETION CLAIM WITHOUT FRESH RELEVANT EVIDENCE
 
 If you haven't run the verification in this turn, you cannot claim it passes.
 
-Verification must be produced in this turn against unchanged relevant state. A prior message, a stale test run, or a check taken before later edits does not count.
+Verification must be produced in this turn against unchanged relevant state. A prior message, a stale test run, or a check taken before later edits does not count. Within this turn, reuse a complete successful result when it still proves the claim and no relevant state changed. Do not rerun it only because another leaf skill was entered. If a later edit changes relevant state, the earlier result is stale.
 
 The upstream Superpowers gate function is the operating procedure. Keep it. The full original is in [superpowers-verification-before-completion.md](references/superpowers-verification-before-completion.md).
 
@@ -26,7 +26,7 @@ The upstream Superpowers gate function is the operating procedure. Keep it. The 
 BEFORE claiming any status or expressing satisfaction:
 
 1. **IDENTIFY:** What command or observation proves this claim?
-2. **RUN:** Execute the FULL command (fresh, complete), or exercise the real path when the claim is behavioral.
+2. **RUN:** Reuse a qualifying current-turn result, or execute the FULL command, or exercise the real path when the claim is behavioral.
 3. **READ:** Full output, check exit code, count failures. Inspect the result; do not skim.
 4. **VERIFY:** Does the output confirm the claim?
    - If NO: state actual status with evidence
@@ -126,4 +126,4 @@ Performance claim             → performance
 Visual claim                  → visual-parity
 ```
 
-This skill is a leaf gate, not a workflow. Prefer the project-local verify skill when present. Do not weaken this gate to save tokens. Evidence method should be proportional to the claim. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
+This skill is a leaf gate, not a workflow. Prefer the project-local verify skill when present. Do not weaken this gate to save tokens. Evidence method should be proportional to the claim. When composed, return the judged claim, evidence, and gaps to the owner. Do not emit a second terminal completion report. A standalone invocation ends with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.

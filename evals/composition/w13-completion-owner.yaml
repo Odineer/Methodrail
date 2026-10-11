@@ -1,0 +1,9 @@
+id: composition.w13-completion-owner
+kind: composition
+description: Finish the feature. Review and verify are composed. A standalone verify call is the control.
+fixture: evals/fixtures/w13-completion-owner
+input:
+  prompt: "Finish the feature. Review and verify are composed. A standalone verify call is the control."
+expected:
+  behaviors:
+    - see task.md

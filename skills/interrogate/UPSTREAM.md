@@ -8,6 +8,6 @@ Replaces the previous Methodrail interrogate reimplementation. Explicit / high-r
 
 Methodrail changes:
 - activation remains explicit-only; /review does not auto-invoke
-- host model slugs isolated
+- Cursor model roles centralized in references/host-capabilities.md as of 4b4d98e
 - review-packet cross-link
 - 2026-09-13: took matching rubric wording; skipped host model slugs and principle-skill names

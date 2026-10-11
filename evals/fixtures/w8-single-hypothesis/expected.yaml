@@ -1,0 +1,6 @@
+id: fixture.w8-single-hypothesis
+required_skills: [diagnosing-bugs]
+forbidden_skills: []
+expected_behaviors:
+  - use one falsifiable hypothesis
+  - prove the original case

@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
-import { cpSync, mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { cpSync, lstatSync, mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
+import { linkCursorPlugin } from "../scripts/link-cursor-plugin.mjs";
 import { defaultPluginDir, diagnoseInstall, formatDoctor } from "../src/doctor.js";
 
 function fakeRepo(version = "1.2.3"): string {
@@ -23,21 +24,48 @@ test("doctor reports missing when no plugin is installed", () => {
   try {
     const report = diagnoseInstall(repo, join(repo, "not-there"));
     assert.equal(report.status, "missing");
-    assert.match(formatDoctor(report), /ln -s/);
+    assert.match(formatDoctor(report), /npm run link-plugin/);
   } finally {
     rmSync(repo, { recursive: true, force: true });
   }
 });
 
-test("doctor reports linked when the plugin dir resolves to the checkout", () => {
+test("doctor rejects a plugin symlink whose target is outside the local plugins folder", () => {
   const repo = fakeRepo();
   const plugins = mkdtempSync(join(tmpdir(), "methodrail-doctor-plugins-"));
   try {
     const link = join(plugins, "methodrail");
     symlinkSync(repo, link);
     const report = diagnoseInstall(repo, link);
-    assert.equal(report.status, "linked");
+    assert.equal(report.status, "rejected");
+    assert.match(formatDoctor(report), /npm run link-plugin/);
+  } finally {
+    rmSync(plugins, { recursive: true, force: true });
+    rmSync(repo, { recursive: true, force: true });
+  }
+});
+
+test("doctor reports identical when plugin surfaces are real copies", () => {
+  const repo = fakeRepo();
+  const plugins = mkdtempSync(join(tmpdir(), "methodrail-doctor-surfaces-"));
+  try {
+    mkdirSync(join(repo, "hooks"), { recursive: true });
+    writeFileSync(join(repo, "hooks", "hooks.json"), "{}\n");
+    mkdirSync(join(repo, "assets"), { recursive: true });
+    writeFileSync(join(repo, "assets", "logo.svg"), "<svg/>\n");
+    mkdirSync(join(repo, "scripts", "hooks"), { recursive: true });
+    writeFileSync(join(repo, "scripts", "hooks", "session-ledger.sh"), "#!/bin/sh\n");
+    mkdirSync(join(repo, "references"), { recursive: true });
+    mkdirSync(join(repo, "templates"), { recursive: true });
+    const pluginDir = join(plugins, "methodrail");
+    linkCursorPlugin(repo, pluginDir);
+    linkCursorPlugin(repo, pluginDir);
+    const skill = join(pluginDir, "skills", "how", "SKILL.md");
+    assert.equal(lstatSync(skill).isSymbolicLink(), false);
+    const report = diagnoseInstall(repo, pluginDir);
+    assert.equal(report.status, "identical");
     assert.deepEqual(report.differing, []);
+    assert.match(formatDoctor(report), /Installed copy matches HEAD/);
   } finally {
     rmSync(plugins, { recursive: true, force: true });
     rmSync(repo, { recursive: true, force: true });

@@ -1,0 +1,29 @@
+{
+  "rounds": [
+    {
+      "asked": [
+        {
+          "id": "field-scope",
+          "alternatives": [
+            "approved profile fields",
+            "all billing fields"
+          ],
+          "changes": "which customer data the file exposes",
+          "recommendation": "approved profile fields"
+        },
+        {
+          "id": "output-format",
+          "alternatives": [
+            "csv",
+            "json"
+          ],
+          "changes": "the export interface",
+          "recommendation": "csv"
+        }
+      ],
+      "deferred": [
+        "column-order"
+      ]
+    }
+  ]
+}

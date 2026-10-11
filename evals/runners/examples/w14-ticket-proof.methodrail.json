@@ -1,0 +1,27 @@
+{
+  "fixture_id": "w14-ticket-proof",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "to-tickets"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Two tickets point at verify-project.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w14-ticket-proof/methodrail/answer.md",
+    "overlay": "evals/runners/artifacts/w14-ticket-proof/methodrail/overlay"
+  }
+}

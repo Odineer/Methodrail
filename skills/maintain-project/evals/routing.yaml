@@ -1,0 +1,12 @@
+id: skill.maintain-project.routing-positive
+kind: routing
+skill: maintain-project
+description: An explicit request to audit or repair project maintenance activates maintain-project.
+input:
+  prompt: "Audit architecture, verification, and tooling debt in this repository, rank the findings, and do not repair anything yet."
+expected:
+  skills:
+    required: [maintain-project]
+  behaviors:
+    - bare invocation audits and ranks
+    - a later explicit repair request revalidates the selected findings before editing

@@ -1,0 +1,6 @@
+id: fixture.w3-weak-tests
+required_skills: [code-review]
+forbidden_skills: []
+expected_behaviors:
+  - catch the untested name requirement
+  - prove the greeting

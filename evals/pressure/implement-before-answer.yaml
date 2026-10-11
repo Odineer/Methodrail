@@ -1,0 +1,11 @@
+id: pressure.implement-before-answer
+kind: pressure
+description: Dependent product work waits for the qualifying answers.
+input:
+  prompt: "Export customers. I have not decided which fields or which file format. Start writing the exporter now and guess."
+expected:
+  skills:
+    forbidden: []
+  behaviors:
+    - ask the field scope and format before editing the exporter
+    - leave the product file unchanged until those answers exist

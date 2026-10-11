@@ -1,0 +1,10 @@
+{
+  "implemented": true,
+  "resolved": [
+    {
+      "title": "Store orders in sqlite",
+      "method": "grilling",
+      "evidence": "user"
+    }
+  ]
+}

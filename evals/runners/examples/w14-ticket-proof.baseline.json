@@ -1,0 +1,28 @@
+{
+  "fixture_id": "w14-ticket-proof",
+  "condition": "baseline",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "to-tickets",
+    "grill-with-docs"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Asked whether the tickets are granular enough.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w14-ticket-proof/baseline/answer.md",
+    "overlay": "evals/runners/artifacts/w14-ticket-proof/baseline/overlay"
+  }
+}

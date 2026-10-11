@@ -46,7 +46,7 @@ test("ledgerToRun derives skills, references, verification phases, subagents, an
     assert.equal(run.latency_ms, 12000);
     assert.deepEqual(
       commandLog.map((c) => c.phase),
-      ["repro", "regression", "verify", "other"],
+      ["repro", "edit", "regression", "verify", "other"],
     );
     assert.equal(run.verification_steps.length, 3);
     assert.equal(answer, "Fixed. Tests pass.");

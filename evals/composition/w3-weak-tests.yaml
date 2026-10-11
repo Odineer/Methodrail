@@ -1,0 +1,9 @@
+id: composition.w3-weak-tests
+kind: composition
+description: Add a greet flag that prints hello, <name>. The existing test only checks that a string comes back.
+fixture: evals/fixtures/w3-weak-tests
+input:
+  prompt: "Add a greet flag that prints hello, <name>. The existing test only checks that a string comes back."
+expected:
+  behaviors:
+    - see task.md

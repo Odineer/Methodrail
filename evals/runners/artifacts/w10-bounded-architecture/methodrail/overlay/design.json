@@ -1,0 +1,9 @@
+{
+  "alternatives": [
+    "module-per-order",
+    "single-intake-module"
+  ],
+  "synthesis": "single-intake-module",
+  "arena": false,
+  "justification": "bounded work; independent sketches would not change the comparison"
+}

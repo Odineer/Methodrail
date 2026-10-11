@@ -15,6 +15,14 @@ Call `codebase-design` for the vocabulary (**module**, **interface**, **depth**,
 
 This skill owns portfolio-level discovery and selection across the codebase. `/refactor` is a downstream executor for one selected behavior-preserving change; it does not invoke or own this survey.
 
+## Parent phase
+
+Standalone invocation keeps the process below: survey, candidate selection, grilling, and a refactor brief.
+
+A parent may request `survey-only`. Run Explore and the four-way classification, return the candidates and their evidence, and stop. Do not ask which candidate to explore. Do not start the grilling loop, a refactor brief, or implementation.
+
+An already-selected complex structural item may use `grill-with-docs`, `domain-modeling`, and `codebase-design` when the seam or the verification path is still uncertain. A local obvious repair does not restart this survey or the grilling loop.
+
 ## Process
 
 ### 1. Explore
@@ -90,4 +98,5 @@ Log the selection in TSV only when `show-me-your-work` is already justified. Off
 Vocabulary                    → codebase-design
 Chosen candidate              → grill-with-docs
 Behavior-preserving work      → /refactor
+Parent survey-only            → return candidates and stop before selection
 ```

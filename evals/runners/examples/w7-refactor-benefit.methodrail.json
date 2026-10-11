@@ -1,0 +1,27 @@
+{
+  "fixture_id": "w7-refactor-benefit",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "refactor"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Removed the private stamp helper. Pack check passes. Protected files remain.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w7-refactor-benefit/methodrail/answer.md",
+    "overlay": "evals/runners/artifacts/w7-refactor-benefit/methodrail/overlay"
+  }
+}

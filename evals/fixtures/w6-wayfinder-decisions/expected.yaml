@@ -1,0 +1,6 @@
+id: fixture.w6-wayfinder-decisions
+required_skills: [wayfinder]
+forbidden_skills: [grill-with-docs, develop]
+expected_behaviors:
+  - resolve both unblocked decisions
+  - do not implement the destination

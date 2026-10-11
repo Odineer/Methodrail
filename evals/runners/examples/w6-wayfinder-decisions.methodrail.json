@@ -1,0 +1,27 @@
+{
+  "fixture_id": "w6-wayfinder-decisions",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [
+    "wayfinder"
+  ],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Resolved both source decisions. Did not implement the app.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w6-wayfinder-decisions/methodrail/answer.md",
+    "overlay": "evals/runners/artifacts/w6-wayfinder-decisions/methodrail/overlay"
+  }
+}

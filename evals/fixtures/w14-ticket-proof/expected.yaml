@@ -1,0 +1,6 @@
+id: fixture.w14-ticket-proof
+required_skills: [to-tickets]
+forbidden_skills: []
+expected_behaviors:
+  - cover both outcomes
+  - point at the existing flow

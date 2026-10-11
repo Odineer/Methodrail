@@ -1,0 +1,15 @@
+id: composition.maintain-project-specialists
+kind: composition
+description: Maintain-project keeps the portfolio and hands one selected item to its specialist.
+input:
+  prompt: "Audit architecture, verification, and tooling debt, then fix only the selected verification finding."
+expected:
+  skills:
+    required: [maintain-project, improve-codebase-architecture, maintain-verification-skill]
+    forbidden: [arena, swarm]
+  behaviors:
+    - audit is read-only until a selected repair is authorized
+    - architecture survey-only returns candidates without grilling
+    - verification inspect writes nothing
+    - verification apply stays inside owned files
+    - one selected item transfers execution ownership and returns evidence

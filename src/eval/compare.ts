@@ -7,6 +7,24 @@ import type {
   SpecificationResult,
 } from "./types.js";
 
+function tokenText(value: number | null): string {
+  return value === null ? "n/a" : String(value);
+}
+
+export function usageCost(baseline: ScoreResult, methodrail: ScoreResult): string {
+  const left = baseline.usage;
+  const right = methodrail.usage;
+  if (!left && !right) return "token usage unavailable";
+  const sameHost = typeof baseline.host === "string" && baseline.host.trim().length > 0 && baseline.host === methodrail.host;
+  const sameModel = typeof baseline.model === "string" && baseline.model.trim().length > 0 && baseline.model === methodrail.model;
+  const sameScope = left?.scope === right?.scope;
+  if (!left || !right || !sameHost || !sameModel || !sameScope) {
+    return "token usage incompatible";
+  }
+  const coverage = left.scope === "complete-run" ? "complete-run" : `${left.scope} (not full task cost)`;
+  return `tokens ${coverage} input ${tokenText(left.input_tokens)}→${tokenText(right.input_tokens)} output ${tokenText(left.output_tokens)}→${tokenText(right.output_tokens)} total ${tokenText(left.total_tokens)}→${tokenText(right.total_tokens)}`;
+}
+
 function comparisonKind(baseline: ScoreResult, methodrail: ScoreResult): ComparisonKind {
   if (baseline.provenance === "synthetic" || methodrail.provenance === "synthetic") return "guardrail";
   if (baseline.provenance === "constructed" || methodrail.provenance === "constructed") return "specification";
@@ -66,6 +84,7 @@ export function compareScores(baseline: ScoreResult, methodrail: ScoreResult): C
   if (baseline.metrics.latency_ms != null || methodrail.metrics.latency_ms != null) {
     cost.push(`latency_ms ${baseline.metrics.latency_ms ?? "n/a"}→${methodrail.metrics.latency_ms ?? "n/a"}`);
   }
+  cost.push(usageCost(baseline, methodrail));
 
   const report: ComparisonReport = {
     fixture_id: methodrail.fixture_id,

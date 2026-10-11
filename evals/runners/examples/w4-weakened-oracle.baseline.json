@@ -1,0 +1,25 @@
+{
+  "fixture_id": "w4-weakened-oracle",
+  "condition": "baseline",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": [],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "shell"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [],
+  "evidence": [
+    "constructed artifact"
+  ],
+  "outcome": "Tests pass.",
+  "failure_modes": [],
+  "behaviors_observed": [],
+  "notes": "constructed specification for v0.10. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/w4-weakened-oracle/baseline/answer.md",
+    "overlay": "evals/runners/artifacts/w4-weakened-oracle/baseline/overlay"
+  }
+}

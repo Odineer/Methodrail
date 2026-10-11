@@ -1,0 +1,8 @@
+id: fixture.w5-mechanical-edit
+required_skills: []
+forbidden_skills: [code-review, wayfinder, architect, arena, swarm, interrogate, grill-with-docs, to-spec, create-verification-skill]
+expected_behaviors:
+  - edit the label
+  - run the existing test
+max_subagents: 0
+max_expensive_skills: 0

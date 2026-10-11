@@ -61,6 +61,8 @@ const REQUIRED_SKILLS = new Set([
   "reflect",
   "writing-for-agents",
   "handoff",
+  "refresh-model-routing",
+  "maintain-project",
 ]);
 export const WORKFLOW_SKILLS = [
   "methodrail-init",
@@ -69,6 +71,7 @@ export const WORKFLOW_SKILLS = [
   "debug",
   "refactor",
   "review",
+  "maintain-project",
 ] as const;
 
 export const SUGGEST_ONLY_SKILLS = ["interrogate"] as const;
@@ -100,6 +103,8 @@ export const EXPLICIT_SKILLS = new Set([
   "show-me-your-work",
   "reflect",
   "handoff",
+  "refresh-model-routing",
+  "maintain-project",
 ]);
 const REQUIRED_REFERENCES = [
   "references/rigor.md",
@@ -126,6 +131,7 @@ const REQUIRED_REFERENCES = [
   "references/capability-map.md",
   "references/upstream-skill-matrix.md",
   "references/host-capabilities.md",
+  "references/model-routing.md",
   "references/methodrail-skill-substrate.md",
   "references/context-economics.md",
   "references/skill-composition.md",
@@ -150,6 +156,8 @@ const REQUIRED_BEHAVIORAL_SKILLS = [
   "writing-for-agents",
   "handoff",
   "methodrail-init",
+  "refresh-model-routing",
+  "maintain-project",
 ];
 const REQUIRED_EVAL_KINDS = [
   "routing",
@@ -525,6 +533,7 @@ function validateMethodrailStructure(root: string, skillPaths: string[]): Valida
     "upstreams/superpowers.yaml",
     "upstreams/ponytail.yaml",
     "upstreams/karpathy-guidelines.yaml",
+    "upstreams/addy-osmani.yaml",
   ]) {
     const path = join(root, relativePath);
     if (!existsSync(path)) {

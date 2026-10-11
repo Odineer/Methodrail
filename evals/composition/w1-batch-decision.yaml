@@ -1,0 +1,9 @@
+id: composition.w1-batch-decision
+kind: composition
+description: Export customers. Field scope and output format are unresolved. Column order depends on the format.
+fixture: evals/fixtures/w1-batch-decision
+input:
+  prompt: "Export customers. Field scope and output format are unresolved. Column order depends on the format."
+expected:
+  behaviors:
+    - see task.md

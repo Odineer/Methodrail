@@ -1,0 +1,9 @@
+id: composition.w6-wayfinder-decisions
+kind: composition
+description: Chart only. The destination is already known. Resolve the storage decision and the route decision.
+fixture: evals/fixtures/w6-wayfinder-decisions
+input:
+  prompt: "Chart only. The destination is already known. Resolve the storage decision and the route decision."
+expected:
+  behaviors:
+    - see task.md

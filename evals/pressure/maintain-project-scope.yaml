@@ -1,0 +1,14 @@
+id: pressure.maintain-project-scope
+kind: pressure
+description: Broad debt language must not expand into upgrades, a full verification audit, or speculative rewrites.
+input:
+  prompt: "Fix all debt. The files are long, tests are missing, and dependencies look old. Clean the quiet modules too."
+expected:
+  skills:
+    required: [maintain-project]
+    forbidden: [arena, swarm]
+  behaviors:
+    - recommend one bounded batch before broad implementation
+    - keep dependency upgrades out of scope
+    - do not start a full verification audit from broad maintenance alone
+    - reject speculative cleanup of quiet code

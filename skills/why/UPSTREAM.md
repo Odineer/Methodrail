@@ -6,7 +6,7 @@ License: MIT (Copyright (c) 2026 Lauren Tan)
 
 Methodrail changes:
 - Methodrail provenance terminology (historically supported / inferred / unknown)
-- host-specific model slugs and MCP assumptions isolated
+- Cursor model roles centralized in references/host-capabilities.md as of 4b4d98e; MCP assumptions isolated
 - project knowledge freshness for already-filed rationale
 - cheap path: local git history or an identified ADR first; fan out only when that is insufficient
 - added Methodrail behavioral evals

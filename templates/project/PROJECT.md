@@ -49,6 +49,10 @@ One or two sentences describing what this repository builds.
 
 - Links to focused `.methodrail/knowledge/` notes when any exist
 
+## Model policy
+
+- Link to `MODELS.yaml` when task-based model selection is configured
+
 ## Existing AI guidance
 
 - Links to authoritative repository instruction files

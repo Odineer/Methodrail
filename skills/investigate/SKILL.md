@@ -61,13 +61,13 @@ Do not call source reading observed behavior.
 ## Constraints
 
 - Read-only unless the user explicitly authorizes a disposable prototype. `research` findings stay in chat unless the user asks to persist them. `blast-radius` uses existing checks or temp probes, not repository writes. Follow [verification lifecycle](../../references/verification-lifecycle.md): reuse verification procedures for evidence, and report missing infrastructure. Do not invoke `create-verification-skill` or `maintain-verification-skill` from this workflow.
-- Ask only for information unavailable from the repository or environment.
-- Do not turn an investigation into implementation.
+- Ask only for missing user intent or an input that is unavailable after a reasonable attempt. Do not ask the user for a fact the repository or environment can answer. An unknown technical fact goes to the next suitable evidence source, or is reported as a limit.
+- Do not turn an investigation into implementation. Discovery of a possible change does not authorize making it. Follow the [human-decision rule](../../references/decision-frontier.md#consequential-assumptions) when a real build choice appears. Do not add a spec, review, or verification-generation phase.
 - See [observation record](../../references/protocols/observation-record.md) and [skill composition](../../references/skill-composition.md).
 
 ## Done when
 
-The original question has a direct evidence-backed answer, or the blocker and remaining uncertainty are explicit. End with the [completion report](../../references/protocols/completion-report.md) block; keep it proportional.
+The original question has a direct evidence-backed answer, or the blocker and remaining uncertainty are explicit. Standalone investigation ends with one [completion report](../../references/protocols/completion-report.md). A composed call returns the answer and its limits.
 
 ## Neighbors
 

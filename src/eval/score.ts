@@ -78,7 +78,15 @@ export function scoreRun(run: EvalRun, expected: FixtureExpectation, ctx: EvalCo
       verification_steps: verificationCount,
       expensive_skill_count: expensiveCount,
       latency_ms: run.latency_ms ?? null,
+      input_tokens: run.usage?.input_tokens ?? null,
+      output_tokens: run.usage?.output_tokens ?? null,
+      cached_input_tokens: run.usage?.cached_input_tokens ?? null,
+      total_tokens: run.usage?.total_tokens ?? null,
+      usage_scope: run.usage?.scope ?? null,
     },
+    ...(run.host ? { host: run.host } : {}),
+    ...(run.model ? { model: run.model } : {}),
+    ...(run.usage ? { usage: run.usage } : {}),
     failures,
   };
 }

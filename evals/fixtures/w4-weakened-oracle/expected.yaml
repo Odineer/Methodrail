@@ -1,0 +1,6 @@
+id: fixture.w4-weakened-oracle
+required_skills: [code-review]
+forbidden_skills: []
+expected_behaviors:
+  - restore a still-valid assertion
+  - accept the authorized label change

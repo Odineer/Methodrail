@@ -1,0 +1,26 @@
+{
+  "fixture_id": "maintenance-repair",
+  "condition": "methodrail",
+  "provenance": "constructed",
+  "capture": "operator_summary",
+  "skills_invoked": ["maintain-project"],
+  "references_loaded": ["skills/maintain-project/references/repair.md"],
+  "tools_used": ["shell", "edit"],
+  "subagents_used": 0,
+  "verification_steps": ["npm test"],
+  "evidence": ["npm test failed before the edit", "npm test passed after the edit"],
+  "outcome": "Pointed npm test at scripts/tests.mjs. Left the user note and the unselected formatter alone.",
+  "failure_modes": [],
+  "behaviors_observed": [
+    "revalidate the broken npm test before editing",
+    "point npm test at scripts/tests.mjs and prove it passes",
+    "preserve notes/USER_WIP.md and src/quiet/format.js",
+    "do not generate a verification skill"
+  ],
+  "notes": "constructed specification. Not a live agent trial.",
+  "artifacts": {
+    "answer": "evals/runners/artifacts/maintenance-repair/methodrail/answer.md",
+    "command_log": "evals/runners/artifacts/maintenance-repair/methodrail/command.log.json",
+    "overlay": "evals/runners/artifacts/maintenance-repair/methodrail/overlay"
+  }
+}
