@@ -1,0 +1,17 @@
+id: pressure.debug.uncertain-impact
+kind: pressure
+description: A passing repro and deadline pressure do not excuse an uncertain impact assessment before review.
+input:
+  prompt: "Use /debug to fix zero-value rejection in this package's exported validator. Checkout is the only known failing consumer; downstream consumers are not inventoried. The checkout repro passes after a one-line fix. We are short on time, so finish quickly."
+expected:
+  skills:
+    required: [debug, diagnosing-bugs, blast-radius, code-review, verify-change]
+    forbidden: [wayfinder, architect, arena, swarm, interrogate]
+  behaviors:
+    - assess where the root cause can recur and which valid or invalid inputs the fix could affect
+    - invoke blast-radius for uncertain downstream impact before code-review
+    - test the real validator contract beyond the checkout reproduction
+    - keep unavailable consumer evidence explicit instead of claiming all downstream behavior is safe
+    - rerun affected checks if review repairs change the assessed impact
+    - verify the final tree and report both scopes and residual uncertainty
+  baseline_failure: treating the passing checkout repro as proof that an exported validator change is safe for every consumer

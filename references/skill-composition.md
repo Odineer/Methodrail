@@ -159,8 +159,11 @@ A composed leaf returns its result to the owning workflow. The owner emits one t
 
 ```text
 debug → diagnosing-bugs → observe → runtime-forensics only if needed
-→ regression evidence → fix → verify
+→ regression evidence → fix → failure and fix scope
+→ code-review for a nontrivial production-code fix → verify-change
 ```
+
+Every debug task assesses both scopes. Invoke `blast-radius` for shared behavior, boundary crossings, or uncertain impact; a clearly isolated fix needs a brief evidence-backed check. See [debug](../skills/debug/SKILL.md) for the procedure.
 
 ### Large uncertain change
 

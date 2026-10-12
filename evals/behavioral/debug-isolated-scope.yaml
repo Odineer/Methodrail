@@ -1,0 +1,19 @@
+id: behavioral.debug.isolated-scope
+kind: behavioral
+skill: debug
+description: A clearly isolated fix still assesses failure and fix scope without invoking the full blast-radius skill.
+input:
+  prompt: "Use /debug to fix a misspelled error message in one CLI branch. The failure is reproduced by the existing CLI fixture. The string is not exported, parsed, or shared, and no callers or control flow change."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the debug skill loaded
+expected:
+  skills:
+    required: [debug, diagnosing-bugs, verify-change]
+    forbidden: [blast-radius, code-review, wayfinder, architect, arena, swarm, interrogate]
+  behaviors:
+    - assess where the misspelling occurs and what the string change could affect
+    - cite code or existing fixture evidence supporting the isolated scope
+    - keep the assessment brief and use the existing CLI fixture for final verification
+    - report failure and fix scope with the verification evidence
+  baseline_failure: either skipping scope assessment because the repro passes or invoking expensive analysis for an isolated string edit
