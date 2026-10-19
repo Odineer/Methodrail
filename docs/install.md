@@ -1,6 +1,6 @@
 # Install Methodrail
 
-Methodrail is a Cursor plugin and a portable Agent Skills family. Consuming projects do not install an npm dependency, run a daemon, or use a Methodrail CLI.
+Methodrail is a Cursor plugin and a portable Agent Skills family. Consuming projects do not install an npm dependency, run a daemon, or use a Methodrail CLI. Z Code loads the same skills through `.zcode-plugin/plugin.json`.
 
 Three supported installs:
 
@@ -34,12 +34,13 @@ npm run doctor
 
 Doctor must report `status: identical` (the plugin copy matches this checkout). Run `link-plugin` again after changing skills, rules, or hooks. `stale` means the copy drifted or is still made of symlinks. `missing` means nothing is installed. `rejected` means the plugin directory itself is a symlink to a checkout outside the local plugins folder. `linked` means this checkout is the plugin directory.
 
-## 3. Claude Code and Codex
+## 3. Claude Code, Codex, and Z Code
 
 Reusable skills stay compatible with Agent Skills-oriented hosts. Do not copy skill bodies.
 
 - Claude Code: [adapters/claude/README.md](../adapters/claude/README.md) — expose selected skills through `.claude/skills/` and the projected invariant in `adapters/claude/CLAUDE.md`.
 - Codex: [adapters/codex/README.md](../adapters/codex/README.md) — expose selected skills through `.agents/skills/` and the projected invariant in `adapters/codex/AGENTS.md`.
+- Z Code: [adapters/zcode/README.md](../adapters/zcode/README.md) — install the plugin from `marketplace.json`, or symlink skills into `~/.zcode/skills/` and use `adapters/zcode/AGENTS.md`.
 
 Change `references/methodrail-family-invariant.md` and run `npm run project-hosts` rather than editing those copies by hand.
 

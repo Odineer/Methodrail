@@ -14,6 +14,10 @@ Preferred for tool-neutral repositories that already use `AGENTS.md`. Add only a
 
 Use when `CLAUDE.md` is the established instruction surface. Add only the pointer block; do not duplicate `.methodrail/PROJECT.md`.
 
+## Z Code
+
+Z Code reads workspace `AGENTS.md` and `~/.zcode/AGENTS.md`. It does not keep reading `CLAUDE.md`. Use the AGENTS.md pointer. Project skills live in `.zcode/skills/`. Do not copy Methodrail skill bodies there.
+
 ## GitHub Copilot instructions
 
 Use when `.github/copilot-instructions.md` is already authoritative. Add only a concise pointer if that client can follow repository-local links in the intended environment.
@@ -27,6 +31,7 @@ Inspect existing AI instruction surfaces before adding a pointer:
 - `.agents/skills/`
 - `.claude/`
 - `.codex/`
+- `.zcode/`
 - `.github/copilot-instructions.md`
 
 Never overwrite them. Prefer the existing source of truth plus a thin Methodrail pointer. Detect contradictions; repository-specific instructions outrank generic Methodrail assumptions.

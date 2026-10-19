@@ -1,0 +1,17 @@
+{
+  "name": "methodrail",
+  "version": "0.10.0",
+  "description": "Unified, evidence-driven engineering environment for AI coding agents.",
+  "author": {
+    "name": "Odineer"
+  },
+  "repository": "https://github.com/Odineer/Methodrail",
+  "license": "MIT",
+  "keywords": [
+    "engineering",
+    "evidence",
+    "skills",
+    "verification"
+  ],
+  "skills": "skills"
+}

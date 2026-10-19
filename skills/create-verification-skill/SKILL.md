@@ -41,7 +41,7 @@ In-repository guidance uses the repository's established native skill location, 
 .agents/skills/verify-<app>/SKILL.md
 ```
 
-Fall back to `.cursor/skills/verify-<app>/` or `.claude/skills/verify-<app>/` only when that is already the project's convention. Linked external placement writes the procedure under `.methodrail/control/` and does not add a tracked native skill. YAML frontmatter is required for a native skill (`name: verify-<app>` and a description that names the app, the surface, and when to reach for it).
+Fall back to `.cursor/skills/verify-<app>/`, `.claude/skills/verify-<app>/`, or `.zcode/skills/verify-<app>/` only when that is already the project's convention. Linked external placement writes the procedure under `.methodrail/control/` and does not add a tracked native skill. YAML frontmatter is required for a native skill (`name: verify-<app>` and a description that names the app, the surface, and when to reach for it).
 
 Preserve existing curated content. Sections, each grounded in the interview (no placeholders):
 

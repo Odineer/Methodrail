@@ -24,7 +24,7 @@ hosts: {}
 | `pins` | Role to exact model id. Refresh preserves every pin. |
 | `hosts` | Host id to parent strategy, tier bindings, optional `supported` ids, and evidence. |
 
-Parent strategy is `auto` on Cursor. Optional `router_mode` is `cost`, `balance`, or `intelligence` and describes the picker; it does not change the picker. Claude parent values are `opusplan`, `haiku`, `sonnet`, `opus`, `fable`, or `default`. Any other host uses `default`.
+Parent strategy is `auto` on Cursor. Optional `router_mode` is `cost`, `balance`, or `intelligence` and describes the picker; it does not change the picker. Claude parent values are `opusplan`, `haiku`, `sonnet`, `opus`, `fable`, or `default`. Z Code and any other host use `default`.
 
 Each tier has `selection`, `fallback`, and `effort`. `selection` and `fallback` are `inherit`, `omit`, or a supported id. `auto` is not a tier selection. Fallback must be `inherit`, `omit`, or a selection already present on that host. `effort` is a host parameter string or null.
 

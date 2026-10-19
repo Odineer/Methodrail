@@ -4,7 +4,7 @@ Pointer index for Methodrail maintainers. Canonical product docs stay in the rep
 
 ## Purpose
 
-Methodrail is a Cursor plugin and portable Agent Skills family. It is methodology plus a project harness, not an agent runtime.
+Methodrail is a Cursor plugin, a Z Code plugin, and a portable Agent Skills family. It is methodology plus a project harness, not an agent runtime.
 
 ## Important boundaries
 
@@ -54,3 +54,4 @@ This repository has no user-facing runtime, so there is no project-local verify 
 - Cursor plugin rule: [rules/methodrail.mdc](../rules/methodrail.mdc)
 - Claude adapter: [adapters/claude/CLAUDE.md](../adapters/claude/CLAUDE.md)
 - Codex adapter: [adapters/codex/AGENTS.md](../adapters/codex/AGENTS.md)
+- Z Code adapter: [adapters/zcode/AGENTS.md](../adapters/zcode/AGENTS.md)

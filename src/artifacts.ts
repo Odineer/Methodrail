@@ -84,13 +84,13 @@ function classifyFile(rel: string, absolute: string): DiscoveredArtifact | null 
   }
 
   if (
-    /^\.(?:agents|cursor|claude)\/skills\/verify-[^/]+\/SKILL\.md$/i.test(rel) &&
+    /^\.(?:agents|cursor|claude|zcode)\/skills\/verify-[^/]+\/SKILL\.md$/i.test(rel) &&
     /##\s+Launch/i.test(source)
   ) {
     return { path: rel, role: "verification-skill", evidence: "project-local verify skill with Launch" };
   }
   if (
-    /^\.(?:agents|cursor|claude)\/skills\/verify-[^/]+\/features\/.+\.md$/i.test(rel) &&
+    /^\.(?:agents|cursor|claude|zcode)\/skills\/verify-[^/]+\/features\/.+\.md$/i.test(rel) &&
     hasHeading(source, /^##\s+Sub-features\s*$/m)
   ) {
     return { path: rel, role: "verification-map", evidence: "feature map with Sub-features heading" };
@@ -103,6 +103,7 @@ function classifyFile(rel: string, absolute: string): DiscoveredArtifact | null 
     /^\.cursor\/(rules|skills)\//.test(rel) ||
     /^\.claude\//.test(rel) ||
     /^\.codex\//.test(rel) ||
+    /^\.zcode\//.test(rel) ||
     (/^\.agents\/skills\//.test(rel) && !/\/verify-[^/]+\//.test(rel))
   ) {
     return { path: rel, role: "host-instruction", evidence: "existing host instruction or unmanaged skill" };

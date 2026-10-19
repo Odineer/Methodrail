@@ -69,7 +69,7 @@ Do not add Methodrail-specific metadata when native skill metadata expresses the
 
 ## Architecture boundary
 
-Methodrail defines good engineering behavior. Cursor, Claude Code, Codex, and other Agent Skills-compatible harnesses own context, tool execution, planning, task state, and subagents.
+Methodrail defines good engineering behavior. Cursor, Claude Code, Codex, Z Code, and other Agent Skills-compatible harnesses own context, tool execution, planning, task state, and subagents.
 
 Do not add a router, workflow engine, agent protocol, daemon, database, mandatory CLI, or generated copies of canonical skills. Host-specific adapters must remain thin projections. Do not install `poteto-mode`, `ask-matt`, `using-superpowers`, or Ponytail commands/hooks as additional operating systems.
 
@@ -81,7 +81,7 @@ Maintainer evals live in `evals/routing/`, `evals/behavioral/`, `evals/pressure/
 
 Behavioral, composition, and fidelity evals compare a baseline agent with Methodrail; recorded or live native-harness runs are acceptable. `npm run eval` validates fixtures and scores recorded example runs. It does not ship an agent runtime. Complexity evals guard over-orchestration of simple work. After a failed eval, use `reflect` to classify knowledge / skill / verification / tooling / structural-enforcement problems before adding instructions.
 
-Host guidance must be projected from `references/methodrail-family-invariant.md`. Do not hand-edit Cursor, Claude, or Codex copies of that contract. Run `npm run project-hosts` after changing the invariant.
+Host guidance must be projected from `references/methodrail-family-invariant.md`. Do not hand-edit Cursor, Claude, Codex, or Z Code copies of that contract. Run `npm run project-hosts` after changing the invariant.
 
 ## Repo commands
 

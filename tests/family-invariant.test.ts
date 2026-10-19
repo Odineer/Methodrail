@@ -8,7 +8,7 @@ import { evaluateProjectMd } from "../src/project-md.js";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 
-test("Cursor, Claude, and Codex projections match the canonical family invariant", () => {
+test("Cursor, Claude, Codex, and Z Code projections match the canonical family invariant", () => {
   const body = readCanonicalInvariant(root);
   const projections = hostProjections(body);
   assert.ok(body.length > 200 && body.length < 2500);

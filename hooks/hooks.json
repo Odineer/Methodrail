@@ -1,11 +1,16 @@
 {
-  "version": 1,
   "hooks": {
-    "sessionStart": [{ "command": "./scripts/hooks/session-ledger.sh", "timeout": 5 }],
-    "postToolUse": [{ "command": "./scripts/hooks/session-ledger.sh", "timeout": 5 }],
-    "postToolUseFailure": [{ "command": "./scripts/hooks/session-ledger.sh", "timeout": 5 }],
-    "subagentStop": [{ "command": "./scripts/hooks/session-ledger.sh", "timeout": 5 }],
-    "afterAgentResponse": [{ "command": "./scripts/hooks/session-ledger.sh", "timeout": 5 }],
-    "stop": [{ "command": "./scripts/hooks/session-ledger.sh", "timeout": 5 }]
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${ZCODE_PLUGIN_ROOT}/scripts/hooks/zcode-session-start.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
   }
 }

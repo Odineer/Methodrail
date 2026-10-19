@@ -1,0 +1,13 @@
+{
+  "name": "methodrail",
+  "description": "Methodrail engineering methodology for Z Code.",
+  "plugins": [
+    {
+      "name": "methodrail",
+      "source": "./",
+      "description": "Unified, evidence-driven engineering environment for AI coding agents.",
+      "version": "0.10.0",
+      "category": "developer-tools"
+    }
+  ]
+}

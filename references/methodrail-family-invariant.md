@@ -1,6 +1,6 @@
 # Methodrail family invariant
 
-Canonical cross-host contract. Host projections must reuse this body verbatim. Do not write a second philosophy for Cursor, Claude, or Codex.
+Canonical cross-host contract. Host projections must reuse this body verbatim. Do not write a second philosophy for Cursor, Claude, Codex, or Z Code.
 
 <!-- methodrail-family-invariant:start -->
 Use Methodrail proportionally. Match depth to uncertainty and risk. Ordinary work is inspect, edit, and the cheapest honest check. Load extra skills only when they remove real uncertainty or risk.

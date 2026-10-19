@@ -66,7 +66,7 @@ If none exists, record that fact and assess existing scripts or control evidence
 
 Accept the task intent, changed paths, affected features, and existing evidence.
 
-1. Locate the verification skill (`.agents/skills/verify-*`, `.cursor/skills/verify-*`, `.claude/skills/verify-*`, `.methodrail/control/`, or the path `PROJECT.md` points at). None → follow [No verification skill](#no-verification-skill).
+1. Locate the verification skill (`.agents/skills/verify-*`, `.cursor/skills/verify-*`, `.claude/skills/verify-*`, `.zcode/skills/verify-*`, `.methodrail/control/`, or the path `PROJECT.md` points at). None → follow [No verification skill](#no-verification-skill).
 2. During **apply**, update affected entries, shared instructions, and helpers. Add or remove an entry, and update the feature-map index, when the task adds or removes user-facing behavior the map should represent. Expand only when a dependency or observed drift reaches outside that set. During **inspect**, report those corrections and write nothing.
 3. Reuse fresh evidence that still matches unchanged relevant state. Rerun a check after an edit invalidates it.
 4. During **apply**, prove every changed driving procedure. Report the limited coverage.

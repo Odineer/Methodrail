@@ -45,7 +45,7 @@ only when:
 
 Do not create a skill for every command.
 
-For an in-repository harness, place a new skill in the repository's established native skill location (`.agents/skills/`, `.cursor/skills/`, or `.claude/skills/`). Preserve an existing skill with the same name unless the user approves a merge. For linked external storage, do not create a host-native skill outside its discovery root; keep the reusable verification procedure under `.methodrail/control/`.
+For an in-repository harness, place a new skill in the repository's established native skill location (`.agents/skills/`, `.cursor/skills/`, `.claude/skills/`, or `.zcode/skills/`). Preserve an existing skill with the same name unless the user approves a merge. For linked external storage, do not create a host-native skill outside its discovery root; keep the reusable verification procedure under `.methodrail/control/`.
 
 ## verify-project
 

@@ -72,7 +72,7 @@ report created, adopted, unchanged, blocked, and skipped
 - For linked external placement, use the bundled deterministic script from [harness location](references/harness-location.md). The only repository entry is the locally ignored `.methodrail` link; all harness contents live outside the repository, and `HARNESS.yaml` owns the binding.
 - Recognize typed notes and legacy untyped notes. Validate that typed notes are indexed. Report dependency-fresh, `review-required`, `unknown`, malformed, disputed, retired, unbounded, and broken-pointer notes. Say that freshness means declared relevant paths did not change; it does not prove the claim is still right. Do not rewrite, resolve, or migrate notes. Do not create files under `.methodrail/knowledge/` during init (typed or untyped).
 - Record commands the repository already supports; do not invent infrastructure.
-- Preserve existing `AGENTS.md`, `CLAUDE.md`, Cursor rules, copilot instructions, and local skills. Repository-specific instructions outrank generic Methodrail assumptions.
+- Preserve existing `AGENTS.md`, `CLAUDE.md`, Cursor rules, `.zcode/` skills, copilot instructions, and local skills. Repository-specific instructions outrank generic Methodrail assumptions.
 - Do not copy generic Methodrail doctrine into the project.
 - Do not create a skill for every command.
 - Do not install multiple integrations “for compatibility.”

@@ -301,7 +301,7 @@ test("architecture survey distinguishes delete, deepen, preserve, and reject", (
   assert.doesNotMatch(html, /cdn\.tailwindcss\.com/);
 });
 
-test("Cursor and Claude verify skills are verification roles, not host-instruction", () => {
+test("Cursor, Claude, and Z Code verify skills are verification roles, not host-instruction", () => {
   const dir = tempDir("methodrail-host-verify-");
   try {
     const skill = "---\nname: verify-app\ndescription: Verify the app.\n---\n\n# Verify app\n\n## Launch\n\n`npm start`\n";
@@ -310,12 +310,18 @@ test("Cursor and Claude verify skills are verification roles, not host-instructi
     write(dir, ".cursor/skills/verify-app/features/pay.md", feature);
     write(dir, ".claude/skills/verify-app/SKILL.md", skill);
     write(dir, ".claude/skills/verify-app/features/pay.md", feature);
+    write(dir, ".zcode/skills/verify-app/SKILL.md", skill);
+    write(dir, ".zcode/skills/verify-app/features/pay.md", feature);
+    write(dir, ".zcode/skills/notes/SKILL.md", "---\nname: notes\ndescription: Local notes.\n---\n\n# Notes\n");
     const report = discoverProjectArtifacts(dir);
     const byPath = new Map(report.artifacts.map((item) => [item.path, item.role]));
     assert.equal(byPath.get(".cursor/skills/verify-app/SKILL.md"), "verification-skill");
     assert.equal(byPath.get(".claude/skills/verify-app/SKILL.md"), "verification-skill");
+    assert.equal(byPath.get(".zcode/skills/verify-app/SKILL.md"), "verification-skill");
     assert.equal(byPath.get(".cursor/skills/verify-app/features/pay.md"), "verification-map");
     assert.equal(byPath.get(".claude/skills/verify-app/features/pay.md"), "verification-map");
+    assert.equal(byPath.get(".zcode/skills/verify-app/features/pay.md"), "verification-map");
+    assert.equal(byPath.get(".zcode/skills/notes/SKILL.md"), "host-instruction");
     assert.ok(!report.artifacts.some((item) => item.path.includes("verify-app") && item.role === "host-instruction"));
     assert.ok(!report.preview.some((item) => item.op === "unavailable"));
   } finally {

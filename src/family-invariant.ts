@@ -52,10 +52,22 @@ export function renderCodex(body: string): string {
   ].join("\n");
 }
 
+export function renderZcode(body: string): string {
+  return [
+    "# Methodrail",
+    "",
+    body,
+    "",
+    "Use installed Methodrail skills only when their descriptions match the task.",
+    "",
+  ].join("\n");
+}
+
 export function hostProjections(body: string): Record<string, string> {
   return {
     "rules/methodrail.mdc": renderCursorRule(body),
     "adapters/claude/CLAUDE.md": renderClaude(body),
     "adapters/codex/AGENTS.md": renderCodex(body),
+    "adapters/zcode/AGENTS.md": renderZcode(body),
   };
 }

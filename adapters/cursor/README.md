@@ -7,7 +7,8 @@ from the repository root using `.cursor-plugin/plugin.json`. Change
 rather than editing the rule copy by hand.
 
 Do not copy skill or rule bodies into this directory. It only documents the
-Cursor projection; the root package content is the source of truth.
+Cursor projection; the root package content is the source of truth. Cursor
+hooks are `hooks/cursor.json`. `hooks/hooks.json` is the Z Code session hook.
 
 ## Model controls
 

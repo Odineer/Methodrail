@@ -69,13 +69,14 @@ Do not fully document a repository during init. Do not create files under `.meth
 
 ## Existing instructions outrank Methodrail
 
-Inspect `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/`, `.cursor/skills/`, `.agents/skills/`, `.claude/`, and `.codex/`. Never overwrite them. Prefer an existing source of truth plus a thin Methodrail pointer. Detect contradictions; repository-specific instructions win.
+Inspect `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/`, `.cursor/skills/`, `.agents/skills/`, `.claude/`, `.codex/`, and `.zcode/`. Never overwrite them. Prefer an existing source of truth plus a thin Methodrail pointer. Detect contradictions; repository-specific instructions win.
 
 ## Host surfaces
 
 - Cursor: plugin `skills/` and `rules/`
 - Claude Code: `.claude/skills/` and `CLAUDE.md`
 - Codex: `.agents/skills/` and `AGENTS.md`
+- Z Code: plugin `skills/` via `.zcode-plugin/plugin.json`, workspace `AGENTS.md`, and `.zcode/skills/`
 
 Reference canonical Methodrail skills instead of copying their bodies.
 

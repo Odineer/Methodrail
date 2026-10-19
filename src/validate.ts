@@ -472,9 +472,18 @@ function validateMethodrailStructure(root: string, skillPaths: string[]): Valida
       ) {
         issues.push(issue(pluginPath, "Plugin and package versions must agree"));
       }
+      if (isRecord(plugin) && plugin.hooks !== "./hooks/cursor.json") {
+        issues.push(
+          issue(pluginPath, "Cursor hooks must stay at ./hooks/cursor.json so Z Code can own hooks/hooks.json"),
+        );
+      }
     } catch {
       // validatePlugin reports malformed JSON.
     }
+  }
+
+  if (typeof packageJson.version === "string") {
+    issues.push(...validateZcodeHost(root, packageJson.version));
   }
 
   const lockPath = join(root, "package-lock.json");
@@ -717,6 +726,69 @@ function validateUpstreamFidelity(root: string, skillPaths: string[]): Validatio
     }
   }
 
+  return issues;
+}
+
+function validateZcodeHost(root: string, packageVersion: string): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+  const pluginPath = join(root, ".zcode-plugin", "plugin.json");
+  const marketPath = join(root, "marketplace.json");
+  const hooksPath = join(root, "hooks", "hooks.json");
+  if (!existsSync(pluginPath)) {
+    return [issue(pluginPath, "Missing Z Code plugin manifest")];
+  }
+  let plugin: Record<string, unknown>;
+  try {
+    const value: unknown = JSON.parse(readFileSync(pluginPath, "utf8"));
+    if (!isRecord(value)) return [issue(pluginPath, "Z Code plugin.json must contain a JSON object")];
+    plugin = value;
+  } catch (error) {
+    return [issue(pluginPath, `Z Code plugin.json is not valid JSON: ${(error as Error).message}`)];
+  }
+  if (plugin.name !== "methodrail") issues.push(issue(pluginPath, "Z Code plugin name must be methodrail"));
+  if (plugin.version !== packageVersion) {
+    issues.push(issue(pluginPath, "Z Code plugin and package versions must agree"));
+  }
+  if (plugin.skills !== "skills") {
+    issues.push(issue(pluginPath, "Z Code plugin must use the canonical skills tree"));
+  }
+  if (plugin.hooks !== undefined || plugin.rules !== undefined) {
+    issues.push(issue(pluginPath, "Z Code plugin must not declare Cursor rules or a second hooks path"));
+  }
+  if (!existsSync(marketPath)) {
+    issues.push(issue(marketPath, "Missing Z Code marketplace.json"));
+  } else {
+    try {
+      const market: unknown = JSON.parse(readFileSync(marketPath, "utf8"));
+      const entry =
+        isRecord(market) && Array.isArray(market.plugins) ? market.plugins.find((item) => isRecord(item)) : undefined;
+      if (!isRecord(market) || market.name !== "methodrail" || !isRecord(entry)) {
+        issues.push(issue(marketPath, "marketplace.json must name methodrail and list a plugin"));
+      } else if (entry.name !== "methodrail" || entry.source !== "./" || entry.version !== packageVersion) {
+        issues.push(issue(marketPath, "marketplace.json must point at this repository and match the package version"));
+      }
+    } catch (error) {
+      issues.push(issue(marketPath, `marketplace.json is not valid JSON: ${(error as Error).message}`));
+    }
+  }
+  if (!existsSync(hooksPath)) {
+    issues.push(issue(hooksPath, "Missing Z Code hooks/hooks.json"));
+    return issues;
+  }
+  try {
+    const config: unknown = JSON.parse(readFileSync(hooksPath, "utf8"));
+    const hooks = isRecord(config) && isRecord(config.hooks) ? config.hooks : undefined;
+    const events = hooks ? Object.keys(hooks) : [];
+    if (!hooks || events.length !== 1 || events[0] !== "SessionStart") {
+      issues.push(issue(hooksPath, "Z Code hooks must declare only SessionStart"));
+    } else if (!JSON.stringify(hooks).includes("zcode-session-start.sh")) {
+      issues.push(issue(hooksPath, "Z Code SessionStart must run scripts/hooks/zcode-session-start.sh"));
+    }
+    const script = join(root, "scripts", "hooks", "zcode-session-start.sh");
+    if (!existsSync(script)) issues.push(issue(script, "Missing Z Code session hook"));
+  } catch (error) {
+    issues.push(issue(hooksPath, `Z Code hooks.json is not valid JSON: ${(error as Error).message}`));
+  }
   return issues;
 }
 
