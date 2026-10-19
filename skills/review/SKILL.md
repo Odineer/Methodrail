@@ -1,6 +1,7 @@
 ---
 name: review
 description: Review a change for correctness, requirement fit, maintainability, evidence, and regressions. Run only when explicitly requested.
+when_to_use: Explicit request only (/review), or an active workflow names it. Reviews a delivered change for correctness, evidence, and regressions.
 disable-model-invocation: true
 ---
 

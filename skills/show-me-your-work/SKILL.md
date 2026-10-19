@@ -1,6 +1,7 @@
 ---
 name: show-me-your-work
 description: "Keep a compact decision/evidence trail for long or unattended work. Use for autonomous or multi-phase runs a human will review later. Do not use for trivial work. A conversation transcript is not this log."
+when_to_use: Explicit request only, or an active workflow names it. Keeps a decision and evidence trail for long or unattended runs a human will review; not trivial work.
 disable-model-invocation: true
 ---
 

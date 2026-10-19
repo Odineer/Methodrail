@@ -229,7 +229,7 @@ function validateMarkdownLinks(path: string, source: string): ValidationIssue[] 
   return issues;
 }
 
-function validateSkill(path: string): ValidationIssue[] {
+function validateSkill(path: string, shipped: boolean): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   const source = readFileSync(path, "utf8");
   const metadata = frontmatter(source);
@@ -261,6 +261,24 @@ function validateSkill(path: string): ValidationIssue[] {
   }
   if (EXPLICIT_SKILLS.has(folder) && metadata["disable-model-invocation"] !== true) {
     issues.push(issue(path, `${folder} must set disable-model-invocation: true`));
+  }
+  if (shipped) {
+    // Z Code ignores disable-model-invocation and reads when_to_use instead;
+    // fixture- and project-local skills are consumer artifacts and skip this.
+    if (typeof metadata.when_to_use !== "string" || metadata.when_to_use.trim() === "") {
+      issues.push(issue(path, "Skill frontmatter requires a non-empty when_to_use"));
+    } else if (metadata.when_to_use.length > 1024) {
+      issues.push(issue(path, "Skill when_to_use must be at most 1024 characters"));
+    } else if (metadata.when_to_use.includes(": ")) {
+      issues.push(issue(path, "Skill when_to_use must not contain ': ' (breaks flat frontmatter parsers)"));
+    } else {
+      const prefix = (SUGGEST_ONLY_SKILLS as readonly string[]).includes(folder)
+        ? "Suggest-only"
+        : "Explicit request only";
+      if (EXPLICIT_SKILLS.has(folder) && !metadata.when_to_use.startsWith(prefix)) {
+        issues.push(issue(path, `${folder} when_to_use must start with "${prefix}"`));
+      }
+    }
   }
   if (
     metadata.paths !== undefined &&
@@ -891,7 +909,7 @@ export function validateRepository(root: string): ValidationResult {
     issues.push(issue(path, "Legacy skill.yaml is not allowed; use native SKILL.md frontmatter"));
   }
   for (const path of skillPaths) {
-    issues.push(...validateSkill(path));
+    issues.push(...validateSkill(path, path.startsWith(join(absoluteRoot, "skills") + sep)));
     if (path.includes(`${sep}skills${sep}`) && path.startsWith(join(absoluteRoot, "skills"))) {
       issues.push(...validateSkillEvals(path));
     }

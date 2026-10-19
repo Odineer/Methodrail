@@ -1,6 +1,7 @@
 ---
 name: methodrail-init
 description: Initialize or refresh Methodrail guidance in a repository after inspecting its code, tooling, and existing AI instructions. Run only when explicitly requested, including requests to refresh control knowledge.
+when_to_use: Explicit request only (/methodrail-init), including requests to initialize or refresh Methodrail guidance and control knowledge in a repository.
 disable-model-invocation: true
 ---
 

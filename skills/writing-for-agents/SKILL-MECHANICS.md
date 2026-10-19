@@ -19,6 +19,14 @@ Pick model-invocation when mixed-intent discovery must reach the skill. If the s
 
 Methodrail already marks workflow entry skills and high-cost operators explicit. Do not silently flip those to model-invoked.
 
+### when_to_use
+
+`when_to_use` is the portable trigger text for the same choice, because some hosts (Z Code) ignore `disable-model-invocation` while others (Cursor) ignore `when_to_use`. It restates the description; it is not a second mechanism and never flips a skill's invocation on a host that enforces `disable-model-invocation`.
+
+- Model-invoked skills restate their trigger branches and carve-outs there — hosts that truncate long descriptions still see them.
+- Explicit skills open with `Explicit request only`, then the named-entry and active-workflow conditions. Suggest-only skills open with `Suggest-only` and say to name it and wait.
+- The value never contains `: `, so flat `key: value` frontmatter parsers keep it whole.
+
 ### Parent composition
 
 An already-active skill loads a named skill when **its own procedure** says to and the procedure's conditions match. That is **workflow-callable**, not host discovery. `disable-model-invocation` does not mean "only a human typing the name may ever cause this skill to run."

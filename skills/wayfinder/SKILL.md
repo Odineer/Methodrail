@@ -1,6 +1,7 @@
 ---
 name: wayfinder
 description: "Plan work too large or foggy for one context as a shared map of decision tickets. Resolve unblocked decisions while evidence is available and no qualifying human choice blocks the next step. Use for huge uncertain projects, not for ordinary planning or implementation."
+when_to_use: Explicit request only (/wayfinder), or an active workflow names it. A shared decision-ticket map for work too large or foggy for one context; not ordinary planning.
 disable-model-invocation: true
 ---
 

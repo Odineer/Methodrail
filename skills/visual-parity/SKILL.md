@@ -1,6 +1,7 @@
 ---
 name: visual-parity
 description: "Visual equivalence work with actual rendered comparison. Use when making X match Y exactly. Equivalence is verified by image diff, not by eye. Do not use for ordinary layout tweaks without a baseline."
+when_to_use: Explicit request only, or an active workflow names it. Pixel-verified equivalence between two rendered states; ordinary layout tweaks without a baseline are not this.
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: create-verification-skill
 description: "Generate a project-local verification skill that drives the app the way a user does. Use when explicitly requested, or when an authorized workflow names discovery or application. Do not use on libraries with no runnable surface, and do not generate only because a verify directory is absent."
+when_to_use: Explicit request only, or an authorized workflow names discovery or application. Generates a project-local verification skill; not for libraries with no runnable surface.
 disable-model-invocation: true
 ---
 

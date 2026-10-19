@@ -1,6 +1,7 @@
 ---
 name: hillclimb
 description: "Iterative measurable optimization: baseline → one change → measure → retain or revert → repeat. Use for sustained improvement against a target. Do not use for a one-off perf fix."
+when_to_use: Explicit request only, or an active workflow names it. Sustained iterative optimization against a measured target; a one-off measured fix is performance.
 disable-model-invocation: true
 ---
 

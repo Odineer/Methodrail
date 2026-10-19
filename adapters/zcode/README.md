@@ -11,6 +11,31 @@ invariant. Cursor's ledger stays in `hooks/cursor.json`. Z Code does not read
 Change `references/methodrail-family-invariant.md` and run `npm run project-hosts`
 rather than editing `AGENTS.md` by hand.
 
+## Trigger guards
+
+Z Code ignores `disable-model-invocation`, so without a countermeasure the
+explicit-only workflows would become freely model-invocable here. Every shipped
+skill therefore declares `when_to_use`, which Z Code presents next to the
+description: workflow entry skills and expensive operators open with `Explicit
+request only` (`interrogate` with `Suggest-only`), and the model-invoked
+operators restate their trigger branches there because Z Code truncates long
+descriptions. The field restates what each description already says, so Cursor,
+Claude Code, and Codex behavior is unchanged. `src/validate.ts` and
+`tests/zcode-host.test.ts` enforce the contract.
+
+There is no plugin `commands/` surface, on purpose. Z Code already routes
+`/<skill-name>` to skills, and a second entry point would duplicate every
+workflow in the `/` menu without removing model invocability — commands do not
+take the skill out of the model's invocation list either.
+
+The session hook is a POSIX shell wrapper that probes common Node locations.
+On Windows it fails open (no injection, no error). The plugin is maintained on
+macOS and Linux.
+
+Z Code support is conformance-tested — manifest, hook schema, frontmatter, and
+trigger guards run under `npm run check`. No live Z Code battery has run, so
+make no behavior-improvement claim from it.
+
 ## Install
 
 Plugin (skills plus the session hook):

@@ -1,6 +1,7 @@
 ---
 name: runtime-forensics
 description: "Instrument a live process to diagnose leaks, spins, idle-but-busy behavior, or intermittent glitches. Use when understanding live behavior requires runtime evidence. Do not use for ordinary source-level bugs or already-captured traces."
+when_to_use: Explicit request only, or an active workflow names it. Instruments a live process for leaks, spins, or intermittent glitches; captured artifacts are trace-forensics.
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: verify-change
 description: "Use when about to claim work is complete, fixed, or passing. Requires fresh verification evidence before any success claim. Do not use as an investigation skill."
+when_to_use: Use when about to claim work is complete, fixed, or passing. Requires fresh verification evidence before any success claim. Not an investigation skill.
 ---
 
 # Verify change

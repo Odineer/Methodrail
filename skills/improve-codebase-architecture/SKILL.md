@@ -1,6 +1,7 @@
 ---
 name: improve-codebase-architecture
 description: "Orchestrate a codebase-wide architecture improvement survey: scan active, high-churn code, classify delete vs deepen vs preserve vs reject, help select a candidate, and produce a refactor brief. Use when the user asks to find, rank, or choose architecture improvements across a codebase. Do not use to implement an already-selected refactor or for speculative cleanup of quiet code."
+when_to_use: Explicit request only, or maintain-project names it in survey phase. Finds, ranks, and helps choose architecture improvements codebase-wide; not for executing an already-selected refactor.
 disable-model-invocation: true
 ---
 

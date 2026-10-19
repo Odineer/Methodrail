@@ -1,6 +1,7 @@
 ---
 name: maintain-project
 description: "Audit and rank evidence-backed architecture, verification, and tooling debt; resolve selected maintenance work when repairs are explicitly requested. A bare invocation audits without edits."
+when_to_use: Explicit request only (/maintain-project). Audits and ranks debt without editing; repairs only when explicitly requested as a follow-up.
 disable-model-invocation: true
 ---
 

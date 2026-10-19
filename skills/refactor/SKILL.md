@@ -1,6 +1,7 @@
 ---
 name: refactor
 description: Execute one selected, behavior-preserving structural change from a named friction, target, or refactor brief. Run only when explicitly requested. Do not use to survey the whole codebase, choose architecture opportunities, perform feature work, or handle mechanical edits.
+when_to_use: Explicit request only (/refactor), or an active workflow names it. Executes one selected behavior-preserving change; surveying or choosing architecture work is improve-codebase-architecture.
 disable-model-invocation: true
 ---
 

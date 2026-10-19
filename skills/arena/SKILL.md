@@ -1,6 +1,7 @@
 ---
 name: arena
 description: "Same problem, multiple competing candidate solutions, then comparison and synthesis. Use for /arena or when one attempt at a non-trivial artifact would lock in the wrong shape. Do not auto-trigger for routine work."
+when_to_use: Explicit request only (/arena), or an active workflow names it. Competing candidate solutions for one non-trivial artifact; partitioned parallel coverage is swarm, not this.
 disable-model-invocation: true
 ---
 

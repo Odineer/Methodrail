@@ -1,6 +1,7 @@
 ---
 name: performance
 description: "Measured performance investigation. Tie every fix to a baseline and a post-change measurement. Use for slow / expensive / high-latency issues. Use hillclimb for iterative optimization against a target."
+when_to_use: Explicit request only, or an active workflow names it. Measured investigation of slow or expensive behavior; iterative optimization against a target is hillclimb.
 disable-model-invocation: true
 ---
 

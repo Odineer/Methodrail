@@ -1,6 +1,7 @@
 ---
 name: why
 description: "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, or postmortems. Searches historical evidence categories in parallel and returns a cited read on decisions and tradeoffs. Never infer intent from current code alone. Use how for current implementation."
+when_to_use: Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, or postmortems. Use how for current implementation.
 ---
 
 # Why

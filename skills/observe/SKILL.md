@@ -1,6 +1,7 @@
 ---
 name: observe
 description: Establish a baseline, exercise a real user/client path, and record runtime evidence. Use when behavior is in question and observation is reasonably cheap.
+when_to_use: Use when behavior is in question and exercising a real user or client path is reasonably cheap. Establishes a baseline and records runtime evidence.
 ---
 
 # Observe

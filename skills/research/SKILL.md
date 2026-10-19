@@ -1,6 +1,7 @@
 ---
 name: research
 description: "Investigate a question against high-trust primary sources and return cited findings in chat. Use for external docs, specs, APIs, or first-party references. Do not use for current-codebase how, historical why, or live observe. Do not write a file unless the user asks to persist."
+when_to_use: Use for external docs, specs, APIs, or first-party references. Not for current-codebase how, historical why, or live observe. Persists findings only when the user asks.
 ---
 
 # Research

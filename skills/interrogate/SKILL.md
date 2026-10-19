@@ -1,6 +1,7 @@
 ---
 name: interrogate
 description: "Explicit multi-reviewer adversarial analysis of a high-risk change. Use only when the user names interrogate. Agreement is signal; disagreement is evidence; do not auto-apply patches."
+when_to_use: Suggest-only. Never load it yourself; an active skill names it and waits for the user to invoke it. Multi-reviewer adversarial analysis of a high-risk change.
 disable-model-invocation: true
 ---
 

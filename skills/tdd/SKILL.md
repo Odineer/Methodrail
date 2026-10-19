@@ -1,6 +1,7 @@
 ---
 name: tdd
 description: "Test-driven development with a red-green loop. Use when building features or fixes test-first, or when implementation should proceed in vertical slices at agreed seams. Not for throwaway prototypes or generated code."
+when_to_use: Use when building features or fixes test-first, or when implementation should proceed in vertical slices at agreed seams. Not for throwaway prototypes.
 ---
 
 # Test-driven development

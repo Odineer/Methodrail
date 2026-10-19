@@ -1,6 +1,7 @@
 ---
 name: maintain-verification-skill
 description: "Keep a project's verification skill and feature map honest. Use for an explicit full audit, or when an owning workflow requests task-scoped maintenance. Never edit product code during a run."
+when_to_use: Explicit request only for a full audit, or an owning workflow requests task-scoped maintenance. Never edits product code during a run.
 disable-model-invocation: true
 ---
 

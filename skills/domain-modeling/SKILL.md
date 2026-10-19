@@ -1,6 +1,7 @@
 ---
 name: domain-modeling
 description: "Build and sharpen a project's domain model. Use when discussing codebase terminology, ownership, states, or recording a consequential domain decision. Challenge fuzzy terms, stress-test with scenarios, and write canonical language down when it crystallises."
+when_to_use: Use when discussing codebase terminology, ownership, states, or recording a consequential domain decision. Challenges fuzzy terms and writes canonical language down.
 ---
 
 # Domain modeling

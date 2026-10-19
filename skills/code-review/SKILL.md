@@ -1,6 +1,7 @@
 ---
 name: code-review
 description: "Two-axis review of the diff since a fixed point: Standards (repo coding standards plus a smell baseline) and Spec (does it implement the originating request/spec?). Use when reviewing a branch, PR, or work-in-progress. Do not use as the Methodrail /review workflow; that orchestrates this skill."
+when_to_use: Use when reviewing a branch, PR, or work-in-progress diff for standards and spec fit. Do not use as the /review workflow; that orchestrates this skill.
 ---
 
 # Code review

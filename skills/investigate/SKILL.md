@@ -1,6 +1,7 @@
 ---
 name: investigate
 description: Investigate a codebase question with bounded, evidence-backed exploration. Run only when explicitly requested.
+when_to_use: Explicit request only (/investigate), or an active workflow names it. Bounded, evidence-backed answers to existing-system questions.
 disable-model-invocation: true
 ---
 

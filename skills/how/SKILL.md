@@ -1,6 +1,7 @@
 ---
 name: how
 description: "Use for \"how does X work\", code walkthroughs before changing something, and placement / ownership / layering questions. Explains subsystem architecture and runtime flow from actual implementation. Can critique architecture. Use why for historical motivation and observe for live behavior."
+when_to_use: Use for 'how does X work', walkthroughs before changing something, and placement, ownership, or layering questions. Use why for motivation and observe for live behavior.
 ---
 
 # How

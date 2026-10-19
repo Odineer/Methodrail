@@ -1,6 +1,7 @@
 ---
 name: refresh-model-routing
 description: "Configure or refresh task-based model policy and host bindings. Use when asked to configure models, update model bindings, reconsider cost or quality preference, or repair a rejected model selection. Workflow-callable from methodrail-init. Stay idle for ordinary development and for an ambiguous mention of models."
+when_to_use: Explicit request only (/refresh-model-routing), or methodrail-init names it. Configures or repairs task model policy; stays idle for ordinary development.
 disable-model-invocation: true
 ---
 

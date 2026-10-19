@@ -1,6 +1,7 @@
 ---
 name: codebase-design
 description: "Shared vocabulary for designing deep modules. Use when designing or improving a module's interface, finding deepening opportunities, deciding where a seam goes, or making code more testable. Distinct from architect, which is an explicit architecture decision exercise."
+when_to_use: Use when designing or improving a module interface, deepening modules, placing a seam, or improving testability. Distinct from architect, the explicit decision exercise.
 ---
 
 # Codebase design

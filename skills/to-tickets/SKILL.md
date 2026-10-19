@@ -1,6 +1,7 @@
 ---
 name: to-tickets
 description: "Break a plan, spec, or conversation into tracer-bullet tickets with blocking edges. Publishes to the project's tracker when available, otherwise to local markdown. Do not use to implement the work."
+when_to_use: Explicit request only, or an active workflow names it. Breaks a plan or spec into tracer-bullet tickets with blocking edges; does not implement the work.
 disable-model-invocation: true
 ---
 

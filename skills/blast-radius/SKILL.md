@@ -1,6 +1,7 @@
 ---
 name: blast-radius
 description: "Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by running real code when practical. Use for 'blast radius of X', 'what could this break', or reviewing a small diff you don't trust. Do not use for purely local mechanical edits."
+when_to_use: Use for 'blast radius of X', 'what could this break', or distrusting a small diff. Read-only probing beyond the diff. Do not use for purely local mechanical edits.
 ---
 
 # Blast radius

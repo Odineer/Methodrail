@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
+import { EXPLICIT_SKILLS, SUGGEST_ONLY_SKILLS } from "../src/validate.js";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 
@@ -39,4 +40,32 @@ test("Z Code session hook injects the projected invariant and fails open", () =>
   assert.equal(bad.status, 0, bad.stderr);
   const fallback = JSON.parse(bad.stdout) as { hookSpecificOutput: { hookEventName: string } };
   assert.equal(fallback.hookSpecificOutput.hookEventName, "SessionStart");
+});
+
+test("every shipped skill carries a Z Code-readable when_to_use trigger", () => {
+  for (const entry of readdirSync(join(root, "skills"))) {
+    const skillPath = join(root, "skills", entry, "SKILL.md");
+    if (!existsSync(skillPath)) continue;
+    const source = readFileSync(skillPath, "utf8");
+    const match = /^when_to_use:[ \t]*(\S[^\n]*)$/m.exec(source);
+    assert.ok(match, `${entry} must declare when_to_use`);
+    const value = match?.[1] ?? "";
+    assert.ok(value.length <= 280, `${entry} when_to_use is ${value.length} characters; keep it under 280`);
+    assert.doesNotMatch(value, /:\s/, `${entry} when_to_use must avoid ': ' for flat frontmatter parsers`);
+
+    if (EXPLICIT_SKILLS.has(entry)) {
+      const prefix = (SUGGEST_ONLY_SKILLS as readonly string[]).includes(entry)
+        ? "Suggest-only"
+        : "Explicit request only";
+      assert.ok(
+        value.startsWith(prefix),
+        `${entry} is explicit on Cursor but Z Code ignores disable-model-invocation; its when_to_use must open with "${prefix}"`,
+      );
+    } else {
+      assert.ok(
+        !value.startsWith("Explicit request only"),
+        `${entry} is model-invoked; its when_to_use must state trigger branches, not the explicit guard`,
+      );
+    }
+  }
 });

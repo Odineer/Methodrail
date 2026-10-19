@@ -1,6 +1,7 @@
 ---
 name: writing-for-agents
 description: Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md, CLAUDE.md, Methodrail project instructions, verification skills, or any doc an agent reaches by a pointer.
+when_to_use: Use when creating or editing skills, or modifying AGENTS.md, CLAUDE.md, project instructions, verification skills, or any doc an agent reaches by a pointer.
 ---
 
 # Writing for agents

@@ -1,6 +1,7 @@
 ---
 name: grill-with-docs
 description: "Relentless interview to sharpen a plan or design, updating the domain glossary and ADRs as decisions crystallise. Use when consequential requirements remain ambiguous and documents exist that should be interrogated alongside the human. Do not use for routine implementation."
+when_to_use: Explicit request only, or an active workflow names it. Interviews the human while consequential requirements stay ambiguous; not routine implementation.
 disable-model-invocation: true
 ---
 

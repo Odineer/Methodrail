@@ -1,6 +1,7 @@
 ---
 name: architect
 description: "Explicit architecture decision exercise. Ground in current implementation, sketch distinct alternatives, and compare tradeoffs. Return that design when composed under develop. Implement only when this skill was invoked directly and implementation was requested. Do not use for local mechanical changes."
+when_to_use: Explicit request only, or an active workflow names it. A deliberate architecture decision exercise with distinct alternatives and tradeoffs; not for local mechanical changes.
 disable-model-invocation: true
 ---
 

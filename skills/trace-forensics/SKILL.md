@@ -1,6 +1,7 @@
 ---
 name: trace-forensics
 description: "Diagnose from an already captured trace, profile, heap snapshot, or spindump. Use when the artifact exists. Do not re-run the system; that is runtime-forensics."
+when_to_use: Explicit request only, or an active workflow names it. Diagnoses from an already captured trace, profile, or snapshot without re-running the system; live instrumentation is runtime-forensics.
 disable-model-invocation: true
 ---
 

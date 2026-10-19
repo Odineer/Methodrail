@@ -1,6 +1,7 @@
 ---
 name: reflect
 description: "Mine a completed non-trivial session for durable lessons and propose knowledge, skill, or structural-enforcement candidates. Use when the user says reflect, or after complex work that generalized. Do not turn every session into self-analysis. Never auto-apply standing rules."
+when_to_use: Explicit request only, or the user asks to reflect on complex completed work. Mines durable lessons and proposes candidates; never auto-applies standing rules.
 disable-model-invocation: true
 ---
 

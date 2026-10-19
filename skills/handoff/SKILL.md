@@ -1,6 +1,7 @@
 ---
 name: handoff
 description: Compact the current conversation into a handoff document for another agent to pick up.
+when_to_use: Explicit request only, or an active workflow names it. Compacts the current conversation into a pickup document for another agent.
 disable-model-invocation: true
 ---
 

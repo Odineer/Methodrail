@@ -1,6 +1,7 @@
 ---
 name: diagnosing-bugs
 description: "Diagnosis loop for hard bugs and performance regressions. Use when something is broken, throwing, failing, flaking, or slow. Build a red-capable feedback loop before hypothesising. Do not use for feature work or pure how-questions."
+when_to_use: Use when something is broken, throwing, failing, flaking, or slow. Build a red-capable loop before hypothesising. Not for feature work or pure how-questions.
 ---
 
 # Diagnosing bugs

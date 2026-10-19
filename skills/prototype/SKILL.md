@@ -1,6 +1,7 @@
 ---
 name: prototype
 description: "Build a throwaway prototype to answer an empirical question. Use when a state model, UI, or approach is cheaper to test than to argue. Prototypes are evidence, not production. Do not use for questions answerable from source or existing tests."
+when_to_use: Explicit request only, or an active workflow names it. A throwaway executable experiment when testing is cheaper than arguing; not for questions source or tests already answer.
 disable-model-invocation: true
 ---
 

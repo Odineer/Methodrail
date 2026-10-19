@@ -58,7 +58,7 @@ Z Code loads `skills/*/SKILL.md` from this plugin or from `~/.zcode/skills/` and
 | AskQuestion | Ask in the conversation. |
 | Browser / CDP | Repository CLI, tests, or headless harness. Record the gap. |
 | Model ids and `~/.cursor/rules/pstack-models.mdc` | Ignore them. Use `inherit`, a Z Code model id, or omit `model`. |
-| `disable-model-invocation` | Ignored. An explicit skill may still be offered to the model. |
+| `disable-model-invocation` | Ignored. `when_to_use` carries the same guard — `Explicit request only` for explicit skills — and Z Code presents it to the model. |
 | Session ledger | Cursor hook only (`hooks/cursor.json`). |
 
 ## Control planes

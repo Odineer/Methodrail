@@ -1,6 +1,7 @@
 ---
 name: swarm
 description: "Fan out parallel workers over different independent slices and return one report. Use for /swarm, partitioned coverage, or exploration across disjoint scopes. Do not use to compete on the same artifact; that is arena."
+when_to_use: Explicit request only (/swarm), or an active workflow names it. Parallel workers over different independent slices; competing on one artifact is arena.
 disable-model-invocation: true
 ---
 

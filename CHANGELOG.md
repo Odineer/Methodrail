@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+Make the Z Code install first-class without changing other hosts.
+
+- Z Code plugin surface: `.zcode-plugin/plugin.json` loads the shared `skills/` tree, root `marketplace.json` catalogs it, and `hooks/hooks.json` injects the projected family invariant on every SessionStart (fail open, Cursor's ledger untouched in `hooks/cursor.json`)
+- Every shipped skill declares `when_to_use`. Z Code ignores `disable-model-invocation`, so the field carries the invocation choice where Z Code reads it: explicit skills open with `Explicit request only` (`interrogate` with `Suggest-only`), model-invoked operators restate their trigger branches there because Z Code truncates long descriptions. The field restates existing description semantics; Cursor, Claude Code, and Codex behavior is unchanged
+- Validation requires `when_to_use` on shipped skills only (non-empty, at most 1024 characters, no `: ` for flat frontmatter parsers, guard prefix on explicit skills); `tests/zcode-host.test.ts` covers the hook, the hook/file split, and the trigger-guard contract
+- `skills/writing-for-agents/SKILL-MECHANICS.md` documents `when_to_use` as portable trigger text for the existing invocation choice, not a second mechanism
+- Z Code adapter docs record the no-plugin-commands decision (Z Code already routes `/<skill-name>` to skills), the POSIX hook limitation (fails open on Windows), and that Z Code fit is conformance-tested, not behavior-validated
+
 ## 0.10.0 — 2026-10-10
 
 Strengthen the existing lifecycle without adding public skills. Consequential human decisions are batched. Routine technical choices are not. Substantive delivery runs the canonical code review. Mechanical edits stay on the cheap path. Independent reviewers and arena are conditional. Wayfinder can resolve more than one unblocked technical decision in the current context. Specs and tickets point at existing verification. Composed work emits one owner completion report. Fresh evidence is still required after later edits.
