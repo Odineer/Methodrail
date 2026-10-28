@@ -41,7 +41,9 @@ Check that the set covers the spec's required outcomes and adds no invented scop
 - **Local files** (default when no tracker is configured): one file per ticket under `.scratch/<feature-slug>/issues/` or `docs/tickets/<feature-slug>/`, numbered from `01` in dependency order.
 - **Real tracker** (GitHub, Linear, GitLab, …): one issue per ticket, using native blocking when the tracker has it. Only when the project already uses that tracker.
 
-Do not require `setup-matt-pocock-skills`. Do not close or modify any parent issue unless asked.
+When the source is an existing issue and the tracker already supports sub-issues, create each ticket as a sub-issue of that source using the tracker's native sub-issue operation. On a real tracker, omit the Blocked by section from the issue body when native blocking edges are set. Creating those sub-issues is the only permitted write to the source issue: do not close or otherwise modify it unless asked.
+
+Do not require `setup-matt-pocock-skills`.
 
 Local ticket body:
 

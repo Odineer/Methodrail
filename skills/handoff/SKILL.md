@@ -13,7 +13,7 @@ This is the operational skill for Methodrail's **handoff** context transition. I
 
 ## Where to write it
 
-Save to the temporary directory of the user's OS, not the current workspace, unless the user asked for a project-local artifact. A handoff is a travel document for the next agent, not durable project knowledge.
+Save to the temporary directory of the user's OS (`$TMPDIR`, else `/tmp`; `%TEMP%` on Windows), not the current workspace, unless the user asked for a project-local artifact. A handoff is a travel document for the next agent, not durable project knowledge.
 
 If the next agent is another session in this same checkout and nothing needs to travel, prefer continue, clear, isolate, or compact instead.
 

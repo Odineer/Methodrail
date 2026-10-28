@@ -90,7 +90,7 @@ When the error is deep in a call stack, use [root-cause-tracing.md](references/r
 Write the regression test **before the fix** when a correct seam exists. Use `tdd` for that seam. If no correct seam exists, that itself is the finding.
 
 1. Turn the minimised repro into a failing test
-2. Watch it fail
+2. Watch it fail. If you forced the red by mutating code or a fixture, `diff` against a pristine copy to prove the mutation landed before you trust it.
 3. Apply the minimal fix at the owner of the violated contract. Fix caller misuse at the caller; fix a defective shared implementation there even if only one caller exposes it. Verify the reported path and relevant shared behavior.
 4. Watch it pass
 5. Re-run the Phase 1 loop against the original scenario

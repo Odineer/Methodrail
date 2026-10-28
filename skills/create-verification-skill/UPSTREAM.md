@@ -1,7 +1,7 @@
 Origin: pstack / create-verification-skill
 Import mode: adapted
 Fidelity: upstream-preserved-with-extensions
-Upstream revision: 46125561306434d8a1d7745d540d8932ab0cd2a2
+Upstream revision: c742dd61706fbacc1b95f1a20b7b988cf096ce6c
 License: MIT (Copyright (c) 2026 Lauren Tan)
 
 Methodrail changes:
@@ -12,3 +12,4 @@ Methodrail changes:
 - does not repair product code; a product defect returns to the parent workflow
 - compared with pstack @ 5bf2b1544db739998121a306340631963c2ff3de (create-verification-skill and docs/guide/06-verify-and-ship.md); did not import product-code repair, .cursor-only placement, or PR shipping
 - CONTROL.md may still be generated for non-obvious coordination
+- 2026-10-27: launch must be usable from an empty data dir; a journey missing seed data fails into Gotchas; a stand-in proof lists setup the real target will not do.

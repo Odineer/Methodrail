@@ -2,8 +2,8 @@ name: addyosmani/agent-skills
 repository: https://github.com/addyosmani/agent-skills
 license: MIT
 copyright: Copyright (c) 2025 Addy Osmani
-last_reviewed_commit: 6ca0cd7db39b41b1c37e26d335c507ee92382c6d
-last_reviewed_at: 2026-10-10
+last_reviewed_commit: aeac41d4d005999432bb7312f7ff06383a91d59d
+last_reviewed_at: 2026-10-27
 notes: >
   Inspected the 25 skill bodies at this snapshot on 2026-10-10. The inventory
   matched the v0.10 classification; no additional skills were present.
@@ -13,3 +13,7 @@ notes: >
   arena, current commit authority, and project-native artifacts. COMPOSE and
   SKIP discoveries stay report-only. The origin parser reads one primary
   Origin line, so composed paths are not recorded as adapted origins.
+  aeac41d (2026-10-27) discoveries only. Changed COMPOSE paths, not
+  imported: code-review-and-quality, constraint-driven-development
+  floor-guard, context-engineering, spec-driven-development, and
+  test-driven-development. SKIP hooks and other skills were not imported.

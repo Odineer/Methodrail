@@ -1,7 +1,7 @@
 Origin: mattpocock/skills / skills/engineering/code-review
 Import mode: adapted
 Fidelity: methodrail-composed
-Upstream revision: 5b15a47f2d7150f545fbcacbfe381787fc0230dc
+Upstream revision: 59db609eb1e18aaf59b63284d0e52255aff0c63c
 License: MIT (Copyright (c) 2026 Matt Pocock)
 
 Methodrail changes:
@@ -13,3 +13,4 @@ Methodrail changes:
 - WIP review captures staged, unstaged, and untracked work, not only `<base>...HEAD`
 - Ponytail composed: unnecessary-complexity and redundant-comment checks on Standards only; no third axis; no "Lean already. Ship." verdict (DietrichGebert/ponytail `356918eba965ee1eac64bd3a7f0dd02108350de5`)
 - Karpathy-inspired guidelines composed: Spec scope-creep allows necessary supporting work and change-created cleanup; unrelated churn remains out of scope (multica-ai/andrej-karpathy-skills `2c606141936f1eeef17fa3043a72095b4765b9c2`)
+- 2026-10-27: standards search must include every repo writing-standard file, and `CODING_STANDARDS.md` / `CONTRIBUTING.md` when present. Did not take the foreground parallel sub-agent spawn.

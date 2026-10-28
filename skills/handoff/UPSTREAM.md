@@ -1,6 +1,6 @@
 Origin: mattpocock/skills / skills/productivity/handoff
 Import mode: adapted
-Upstream revision: 6654f6b60cd9d5be8b54c6fafe44346dabeb3b76
+Upstream revision: 59db609eb1e18aaf59b63284d0e52255aff0c63c
 License: MIT (Copyright (c) 2026 Matt Pocock)
 Fidelity: upstream-preserved-with-extensions
 
@@ -12,3 +12,4 @@ Methodrail changes:
 - reference `.methodrail` artifacts instead of copying them
 - Methodrail suggested-skills wording
 - added Methodrail routing and behavioral evals
+- 2026-10-27: temp dir is `$TMPDIR`, else `/tmp`, and `%TEMP%` on Windows. A requested project-local artifact still wins.

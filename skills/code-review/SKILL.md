@@ -49,7 +49,7 @@ Do not require `docs/agents/issue-tracker.md` or any Matt Pocock setup skill.
 
 ### 3. Identify the standards sources
 
-Anything in the repo that documents how code should be written, such as `CONTRIBUTING.md` or `CODING_STANDARDS.md`.
+Search the repo for every file that documents how code should be written. When `CODING_STANDARDS.md` or `CONTRIBUTING.md` exists, it must be on the list.
 
 On top of whatever the repo documents, the Standards axis always carries this **smell baseline** (Fowler, *Refactoring*, ch.3). Two rules:
 

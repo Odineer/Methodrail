@@ -32,7 +32,7 @@ The map is an **index**, not a store. Decisions live in their tickets. The map g
 .scratch/<effort-slug>/wayfinder/tickets/<nn>-<slug>.md
 ```
 
-Labels such as `wayfinder:map` apply on real trackers. Locally, the MAP.md file *is* the map. Do not require a setup skill.
+On a real tracker, the only labels are `wayfinder:map` on the map and `wayfinder:<type>` on each ticket (`research`, `prototype`, `grilling`, `task`). Those labels are decisions, not implementation work. Do not apply a triage label such as `ready-for-agent`. Locally, the MAP.md file *is* the map and tickets carry no labels. Do not require a setup skill.
 
 ### The map body
 
@@ -62,7 +62,7 @@ Open tickets are **not** listed on the map; they are found by query (or by listi
 
 ### Tickets
 
-Each ticket is a child of the map, sized to one decision:
+Each ticket is a child of the map, sized to one decision. Record the type beside the question. On a tracker the type is the `wayfinder:<type>` label and the body stays the question:
 
 ```markdown
 ## Question
@@ -70,14 +70,24 @@ Each ticket is a child of the map, sized to one decision:
 <the decision or investigation this ticket resolves>
 ```
 
+Local markdown has no labels. Record the type on its own line so resolution reads that line:
+
+```markdown
+Type: <research | prototype | grilling | task>
+
+## Question
+
+<the decision or investigation this ticket resolves>
+```
+
 Types: `research`, `prototype`, `grilling`, `task`.
 
-- **Research**: call `research` when the question needs external or primary sources.
+- **Research**: call `research` when the question needs external or primary sources. The subagent's task is to persist the cited findings on a throwaway `research/<ticket-slug>` branch, point the ticket at that branch, and push the branch. Open no pull request. The branch is never merged.
 - **Prototype**: call `prototype` when the question is empirical. A safe, reversible experiment inside current authority does not require a human interruption.
 - **Grilling**: call `grill-with-docs` only when the question is a qualifying human decision under the [decision frontier](../../references/decision-frontier.md). Do not default to grilling because the next step is unclear.
 - **Task**: manual work that unblocks a decision, not delivery of the destination.
 
-Classify the question before choosing a method. A ticket is **unblocked** when every blocker is closed. The **frontier** is open, unblocked children. Continue resolving unblocked tickets in the current context while the work stays bounded, the evidence is available, and no qualifying human decision blocks the next step. Use [isolate or handoff](../../references/context-management.md) when context size or decision independence warrants it. A new session is that choice, not a decision quota.
+When creating a ticket, classify the question and record that type before choosing a method. A ticket is **unblocked** when every blocker is closed. The **frontier** is open, unblocked children. Continue resolving unblocked tickets in the current context while the work stays bounded, the evidence is available, and no qualifying human decision blocks the next step. Use [isolate or handoff](../../references/context-management.md) when context size or decision independence warrants it. A new session is that choice, not a decision quota.
 
 ## Fog of war
 
@@ -94,17 +104,17 @@ A chart-only request stays chart-only. Do not implement the destination.
 1. **Name the destination** from the request and the repository. Use `grill-with-docs` only when the destination itself is a qualifying human decision.
 2. **Map the frontier**, breadth-first. If this surfaces no fog (the whole journey fits the current context), stop and return that. You don't need a map.
 3. **Create the map.**
-4. **Create the tickets you can specify now**, then wire blocking edges.
-5. **Fire research subagents** for research tickets.
+4. **Create the tickets you can specify now**, then wire blocking edges. In that wiring pass, write cross-references with the real ids those tickets received: a tracker issue id, or the local ticket path. Do not leave a placeholder `#<n>`. It auto-links to an unrelated issue.
+5. **Fire research subagents** for research tickets. Each follows the research type: throwaway `research/<ticket-slug>` branch, pushed, no pull request.
 6. Stop. Charting hand-resolves nothing.
 
 ### Work through the map
 
 1. Load the map (low-res).
 2. Choose the next frontier ticket, or the one the user named.
-3. Resolve it by the classified method. Call skills named in Notes when they match that method.
+3. Resolve it as the recorded type: the `wayfinder:<type>` label on a tracker, or the `Type:` line locally. Read that record. Do not infer the type from the question body. Call skills named in Notes when they match that type.
 4. Record the answer, close the ticket, append a gist to Decisions so far.
-5. Add newly surfaced tickets; graduate fog that is now specifiable; rule out-of-scope work out of the route.
+5. Add newly surfaced tickets, then wire their blocking edges with the real ids just created. Do not leave a placeholder `#<n>`. Graduate fog that is now specifiable; rule out-of-scope work out of the route.
 6. Continue while the next ticket is unblocked and no qualifying human decision blocks it.
 
 ## Neighbors

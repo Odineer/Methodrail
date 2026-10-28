@@ -29,7 +29,7 @@ Produce at least two structurally distinct candidates before synthesis. Whole-sh
 
 Sketch at least two structurally distinct alternatives in this context by default. Use `arena` only when the user asks or when consequence, ambiguity, and independent exploration justify the cost. Host support alone is not enough. See [rigor](../../references/rigor.md). When arena runs, pass `architect runners` rather than `arena runners`, and follow the [host capabilities](../../references/host-capabilities.md) selection procedure, including a rejected slug. Each candidate produces a design package per [runner-prompt.md](references/runner-prompt.md) and [rationale-template.md](references/rationale-template.md). Omit `model` when the host cannot choose one. If the host cannot isolate candidates, sketch both alternatives here and say so.
 
-Screen every candidate against [design-red-flags.md](references/design-red-flags.md). Reject shallow modules, information leakage, temporal decomposition, and pass-through methods.
+Screen every candidate against [design-red-flags.md](references/design-red-flags.md). Reject shallow modules, information leakage, temporal decomposition, pass-through methods, split ownership, two ways to do one task, importable internals, and hand-synced lists. Assume the next contributor is an agent that sees only the files it opened, copies the nearest example, and takes the shortest path that compiles. Prefer the design where a change that looks right from one file is right for the whole repo.
 
 Compare viable candidates on:
 

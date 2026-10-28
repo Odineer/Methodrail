@@ -9,7 +9,7 @@ Methodrail itself is licensed under the MIT License. See `LICENSE`.
 ## mattpocock/skills
 
 - Repository: https://github.com/mattpocock/skills
-- Reviewed commit: `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`
+- Reviewed commit: `59db609eb1e18aaf59b63284d0e52255aff0c63c`
 - License: MIT
 
 ```
@@ -44,7 +44,7 @@ Adopted or derived skills include `domain-modeling`, `diagnosing-bugs`, `tdd`, `
 
 - Repository: https://github.com/cursor/plugins
 - Path: `pstack/`
-- Reviewed commit: `46125561306434d8a1d7745d540d8932ab0cd2a2`
+- Reviewed commit: `c742dd61706fbacc1b95f1a20b7b988cf096ce6c`
 - License: MIT
 
 ```
@@ -78,7 +78,7 @@ Adopted or derived skills include `how`, `why`, `blast-radius`, `architect`, `ar
 ## obra/superpowers
 
 - Repository: https://github.com/obra/superpowers
-- Reviewed commit: `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`
+- Reviewed commit: `2ce8aa15d05bd57213e6f746f953aafb7ded7a8b`
 - License: MIT
 
 ```
@@ -112,7 +112,7 @@ SOFTWARE.
 ## DietrichGebert/ponytail
 
 - Repository: https://github.com/DietrichGebert/ponytail
-- Reviewed commit: `356918eba965ee1eac64bd3a7f0dd02108350de5`
+- Reviewed commit: `09c434ab73ca43761c5d8b0c5d341926c2fba710`
 - License: MIT
 
 ```
@@ -159,8 +159,8 @@ This is a community interpretation of Karpathy's observations, not code authored
 ## addyosmani/agent-skills
 
 - Repository: https://github.com/addyosmani/agent-skills
-- Reviewed commit: `6ca0cd7db39b41b1c37e26d335c507ee92382c6d`
-- Reviewed: 2026-10-10
+- Reviewed commit: `aeac41d4d005999432bb7312f7ff06383a91d59d`
+- Reviewed: 2026-10-27
 - License: MIT
 
 ```

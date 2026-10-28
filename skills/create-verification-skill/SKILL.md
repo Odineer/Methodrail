@@ -46,7 +46,7 @@ Fall back to `.cursor/skills/verify-<app>/`, `.claude/skills/verify-<app>/`, or 
 
 Preserve existing curated content. Sections, each grounded in the interview (no placeholders):
 
-- **Launch:** exact command, readiness signal, teardown. For a short-lived CLI there is no server to keep alive.
+- **Launch:** exact command, readiness signal, teardown. Launch must reach a usable state from an empty data dir, including any migrations and seed data. Ready means usable, not just that a process answers. A database health check can pass while its init scripts are still running. For a short-lived CLI there is no server to keep alive.
 - **Doctor:** one read-only check that answers "is this instance worth driving?"
 - **Drive:** harness recipe with real selectors/commands from this repo.
 - **Evidence:** what to capture and where. Exercise the real user path. Capture action and resulting state. Verify side effects. Mocks only at production boundaries.
@@ -57,13 +57,13 @@ Also record start/doctor/drive/inspect/capture/reset/stop in `.methodrail/contro
 
 ## 3. Seed the feature map
 
-Create `features/README.md` plus one file per user-facing feature you can identify (aim for the top 3–5). Follow [`references/feature-map-example/`](references/feature-map-example/). Each file answers, from the user's point of view: what the feature is, how to reach it, how to drive it, and what observable end state proves it works. Required H2s: `Sub-features`, `How to get to it (user POV)`, `Driving it with <harness>`, `Gotchas`. Optional `Related project knowledge` may sit immediately after `Sub-features`.
+Create `features/README.md` plus one file per user-facing feature you can identify (aim for the top 3–5). Follow [`references/feature-map-example/`](references/feature-map-example/). Each file answers, from the user's point of view: what the feature is, how to reach it, how to drive it, and what observable end state proves it works. Required H2s: `Sub-features`, `How to get to it (user POV)`, `Driving it with <harness>`, `Gotchas`. If the seed data lacks a precondition that a journey needs, the journey reports a failure and the reason goes in that feature's `Gotchas`. Never weaken the journey to make it pass. Optional `Related project knowledge` may sit immediately after `Sub-features`.
 
 Read canonical docs and eligible knowledge as discovery inputs. Confirm every user path from current source and live behavior. Link only knowledge that materially constrains or explains a feature. Do not copy claims into the map.
 
 ## 4. Prove the generated skill before handing it over
 
-Run its own instructions end to end once: launch, doctor, drive ONE mapped feature, capture evidence, clean up. After cleanup, confirm the evidence still exists. Failed or unexecuted output is a draft or blocked result, not proven infrastructure.
+Run its own instructions end to end once: launch, doctor, drive ONE mapped feature, capture evidence, clean up. After cleanup, confirm the evidence still exists. Failed or unexecuted output is a draft or blocked result, not proven infrastructure. If you proved it in a stand-in for the real target (a container in place of a fresh VM, a local stack in place of a remote one), list every setup step the stand-in did that the target will not. Those steps stay unverified until a run on the real target covers them.
 
 ## 5. Offer the maintenance loop
 

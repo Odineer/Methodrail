@@ -24,7 +24,7 @@ See [tests.md](references/tests.md) for examples, [mocking.md](references/mockin
 
 A **seam** is the public boundary you test at. Tests live at seams, never against internals.
 
-Before writing any test, write down the seams under test. Prefer agreeing them with the user when the interface shape is itself in question. Use `codebase-design` for the vocabulary of module, interface, depth, seam, adapter, leverage, and locality.
+Before writing any test, write down the seams under test. Give each proposed seam a one-line note on what it catches and what it misses. Prefer agreeing them with the user when the interface shape is itself in question. Use `codebase-design` for the vocabulary of module, interface, depth, seam, adapter, leverage, and locality.
 
 ## Anti-patterns
 

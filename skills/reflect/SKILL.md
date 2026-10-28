@@ -17,21 +17,21 @@ skill candidate
 structural-enforcement candidate
 ```
 
-See [knowledge lifecycle](../../references/knowledge/lifecycle.md), [note contract](../../references/knowledge/note-contract.md), [reuse](../../references/knowledge/reuse.md), and [structural enforcement](../../references/structural-enforcement.md).
+The note contract is the field list in step 4 plus the sections of the note itself (Claim / Evidence / Reuse / Rediscovery cost / Staleness). There is no separate lifecycle or enforcement reference; step 4's routing rules are the contract.
 
 ## Process
 
 ### 1. Locate the work just completed
 
-Prefer this conversation's artifacts, diffs, and decision log. If the host exposes a transcript for the active workspace, use that path only. Do not glob unrelated private chats.
+Prefer this conversation's artifacts, diffs, and decision log. If the host exposes a transcript for the active workspace, use that path only; on Z Code that is [Z Code session transcripts](../../references/host-capabilities.md#z-code-session-transcripts). When it does not, mine the work's durable artifacts instead — commits, receipts, decision docs, diffs. Do not glob unrelated private chats. When several transcript files are candidates, read the first record of each and take the file whose opening user text is this conversation's opening prompt. If none matches, use the durable artifacts instead.
 
 ### 2. Review from three lenses
 
-When the host supports parallel subagents, spawn judgment, tooling, and divergent reviewers using [judgment-reviewer.md](references/judgment-reviewer.md), [tooling-reviewer.md](references/tooling-reviewer.md), and [divergent-reviewer.md](references/divergent-reviewer.md). Judgment uses the `reflect judgment` role, divergent uses `reflect divergent`, and tooling uses `reflect tooling`, each via [host capabilities](../../references/host-capabilities.md) and its selection procedure, including a rejected slug. Otherwise run the three lenses sequentially in this context. Omit `model` when the host cannot choose one.
+When the host supports parallel subagents, spawn judgment, tooling, and divergent reviewers using [judgment-reviewer.md](references/judgment-reviewer.md), [tooling-reviewer.md](references/tooling-reviewer.md), and [divergent-reviewer.md](references/divergent-reviewer.md), passing each the work digest or artifact paths in place of a transcript. Follow the host's role/model selection procedure if it has one. Otherwise run the three lenses sequentially in this context. Omit `model` when the host cannot choose one.
 
 ### 3. Synthesize
 
-Use [synthesizer.md](references/synthesizer.md). If the host can spawn the synthesizer, use the `reflect synthesizer` role in [host capabilities](../../references/host-capabilities.md) and follow its selection procedure, including a rejected slug. Otherwise synthesize here. Omit `model` when the host cannot choose one. Produce Accepted / Rejected / Backlog.
+Use [synthesizer.md](references/synthesizer.md). If the host can spawn subagents, spawn the synthesizer with the three reviewer outputs. Otherwise synthesize here. Omit `model` when the host cannot choose one. Produce Accepted / Rejected / Backlog.
 
 ### 4. Route Accepted items
 
@@ -79,7 +79,7 @@ Show the full Accepted / Rejected / Backlog list. Wait for explicit approval bef
 1. Recheck that the evidence still supports the claim.
 2. Confirm that another canonical document does not already own the information.
 3. Confirm that structural enforcement is not the better destination.
-4. Apply the approved mutation using [templates/project/knowledge/note.md](../../templates/project/knowledge/note.md). Default is exactly one typed note. A reciprocal dispute may update both notes and the PROJECT.md pointer set as one transaction.
+4. Apply the approved mutation as a typed note (frontmatter `kind`/`status`/`lifecycle`/`validated_at`/`relevant_paths`, then Claim / Evidence / Reuse / Rediscovery cost / Staleness sections; no template file exists). Default is exactly one typed note. A reciprocal dispute may update both notes and the PROJECT.md pointer set as one transaction.
 5. Add or update the concise PROJECT.md pointer(s).
 6. Validate kind, status, lifecycle, evidence, index, size, and dispute/retirement sections. Report freshness and scope. An approved reconciliation updates evidence and `validated_at` in the same write.
 7. Verify that an unchanged rerun produces no diff.

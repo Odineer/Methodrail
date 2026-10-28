@@ -13,6 +13,10 @@ Adversarial reviewers are useful because they're aggressive. But aggression with
 
 You have the full conversation context. Use it.
 
+## Proof gate
+
+Judge only findings that survived the proof gate: a reviewer ran each one, and your rerun showed a failure that breaks the intent. Dropped notes stay out of Act on, Consider, Noted, and Dismissed. That includes unrun style, naming, structure, and future-risk notes, a rerun that did not show the failure, and a failure that does not break the intent. Count those as dropped. Do not apply fixes.
+
 ## Filtering Principles
 
 ### Nitpick Gravity
@@ -55,4 +59,4 @@ Be especially careful about dismissing security findings and correctness bugs. T
 
 A good verdict is useful, not comprehensive. The user should be able to read the "Act On" section, fix those issues, and ship with confidence. If your "Act On" list has more than 5 items, you're probably not filtering hard enough.
 
-The "Dismissed" section is not busywork. It's a trust mechanism. Showing the user what you rejected and why lets them override your judgment where they disagree. This is more valuable than hiding the rejected findings.
+The "Dismissed" section is not busywork. It's a trust mechanism. Showing the user what you rejected and why lets them override your judgment where they disagree. This is more valuable than hiding the rejected findings. Dismissed lists kept findings you rejected. Notes the proof gate dropped are a count, not entries here.
