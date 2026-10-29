@@ -13,7 +13,7 @@ how → observe → domain-modeling → wayfinder → architect
 → prototype → tdd → blast-radius → code-review → interrogate → reflect
 ```
 
-That would be a failure.
+That would be a failure. Ketchup, reflect, and formal-check creation stay off that chain. Formal upkeep runs only when an existing check's recorded coverage is touched.
 
 ## One workflow owner at a time
 
@@ -41,6 +41,9 @@ tdd                    → executable behavioral evidence
 verify-change          → fresh verification evidence
 create-verification-skill → proposed or proved project verification
 maintain-verification-skill → inspect findings, or task-scoped / full-audit corrections when apply is named
+create-formal-verification-skill → one formal check when a formal target is express
+maintain-formal-verification-skill → inspect findings, or scoped apply when coverage is named
+ketchup → read-only human catch-up; no writes and no completion claim
 maintain-project           → ranked audit; selected-repair evidence returned from the item owner
 code-review            → findings
 show-me-your-work      → operational TSV trail; ADR only via the three-part gate
@@ -58,7 +61,7 @@ Usually not: ordinary source summaries, one-off local variable behavior, tempora
 
 ### Harness
 
-`methodrail-init`, `create-verification-skill`, `maintain-verification-skill`
+`methodrail-init`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`, `maintain-formal-verification-skill`
 
 ### Understand
 
@@ -82,7 +85,7 @@ Usually not: ordinary source summaries, one-off local variable behavior, tempora
 
 ### Continuity / learning
 
-`handoff`, `show-me-your-work`, `reflect`, `writing-for-agents`
+`handoff`, `show-me-your-work`, `reflect`, `ketchup`, `writing-for-agents`
 
 These are functional groupings inside one Methodrail family. Do not expose upstream families in user-facing organization.
 

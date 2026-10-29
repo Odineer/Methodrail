@@ -16,6 +16,7 @@ Give the child the prior facts, the acceptance criteria, and a [task packet](../
 | One behavior-preserving structural repair | `refactor` | Preserve the stated behavior. Do not widen into a survey |
 | Intentional behavior change the repair explicitly requires | `develop` | Only that change |
 | Verification drift or owned helper | `maintain-verification-skill` with action `apply` and the named coverage | A read-only audit cannot escalate itself to `apply` |
+| Formal-check drift | `maintain-formal-verification-skill` with action `apply` and the named coverage | A read-only audit cannot escalate itself to `apply`. A product bug returns to `debug` |
 | Broken command or pointer with an obvious fix | Bounded direct edit | Prove the canonical command |
 | Failure that needs diagnosis | `debug` | Classify a product defect as a defect |
 

@@ -29,6 +29,7 @@ Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.
 | wizard | HITL bash wizard | SKIP | — | Personal/ops helper, not core | runtime-tool |
 | writing-for-agents | Agent-facing document design | ADAPT | `writing-for-agents` | Current canonical skill; subsumes writing-great-skills | portable |
 | handoff | Cross-session continuity document | ADAPT | `handoff` | Operational Methodrail handoff transition; explicit-only | portable |
+| retro | Environment retrospective | COMPOSE | inside `reflect` tooling lens | Navigation, unwired checks, mechanical standards, instruction load, and tool access. No public retro skill | portable |
 | grill-me / remaining productivity/* | Personal productivity | SKIP | — | Not central | — |
 | in-progress/* / misc/* | Unstable or personal | SKIP | — | Do not import incomplete skills | — |
 
@@ -46,7 +47,12 @@ Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.
 | create-verification-skill | Interview repo, generate verify skill | ADAPT | `create-verification-skill` | Discovery and application are caller-scoped; init still confirms before writes | runtime-tool when generating live drive |
 | maintain-verification-skill | Source + live coverage of feature map | ADAPT | `maintain-verification-skill` | Full audit preserved; task-scoped mode does not ship a PR | runtime-tool; subagent-optional |
 | show-me-your-work | Decision/evidence TSV | ADAPT | `show-me-your-work` | Transcript ≠ decision log | portable |
-| reflect | Mine session for skill edits | ADAPT | `reflect` | Candidates only, no auto-rules | subagent/multi-model-optional |
+| reflect | Mine session for skill edits | ADAPT | `reflect` | Candidates only, no auto-rules. Retro's environment lens is composed here | subagent/multi-model-optional |
+| ketchup | Human catch-up and pending decisions | ADAPT | `ketchup` | Explicit and read-only. No bro dependency. Older pending decisions survive the window | portable |
+| ketchup-video | Slide-video catch-up | SKIP | — | Deferred. No renderer, ffmpeg, or public skill in this slice | media |
+| create-formal-verification-skill | One project-local formal check | ADAPT | `create-formal-verification-skill` | Shared formal contract. No mandatory statechart | portable; the project's verifier |
+| maintain-formal-verification-skill | Align formal checks with code | ADAPT | `maintain-formal-verification-skill` | Sync record covers dirty inputs. No product edits | portable |
+| statechart | TLA+ chart and shortest bug path | SKIP | — | Deferred. Reports use the installed verifier's raw output | Java/TLC; mise |
 | runtime-forensics playbook | Live instrumentation | ADAPT | `runtime-forensics` | Escalation operator | runtime-tool-required |
 | trace-forensics playbook | Diagnose from capture | ADAPT | `trace-forensics` | Distinct from live forensics | portable (artifact parser) |
 | perf-issue playbook | Measured perf | ADAPT | `performance` | Measurement-first | runtime-tool-optional |
@@ -59,6 +65,8 @@ Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.
 | principle-* | First-principles library | COMPOSE | [Methodrail principles](principles.md) and linked skill owners | Principle names and task triggers are indexed in the existing methodology; no parallel public skills or router | portable |
 | automate-me / unslop / bro / no-comments / teach / recall / figure-it-out / technical-writing / typescript-best-practices | Style, personal, or language-specific | SKIP | — | Not core Methodrail | mixed |
 | benny automations / Graphite shipping playbooks | Org release flows | SKIP | — | Host/org-specific | GitHub/Graphite |
+
+Fidelity deviations for ketchup and the formal pair: no `bro`, no ketchup-video, no statechart, mise, or Java install in Methodrail. Comparison: [session-and-formal-verification-upstream-comparison.md](../docs/internal/session-and-formal-verification-upstream-comparison.md).
 
 ## obra/superpowers
 

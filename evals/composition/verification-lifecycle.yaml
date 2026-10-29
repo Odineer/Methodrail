@@ -6,7 +6,7 @@ input:
 expected:
   skills:
     required: [develop]
-    forbidden: [create-verification-skill, maintain-verification-skill, wayfinder, architect]
+    forbidden: [create-verification-skill, maintain-verification-skill, create-formal-verification-skill, maintain-formal-verification-skill, ketchup, reflect, wayfinder, architect]
   behaviors:
     - reuse the existing check
     - do not generate a verification skill

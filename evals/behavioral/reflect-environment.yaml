@@ -1,0 +1,21 @@
+id: behavioral.reflect-environment
+kind: behavioral
+skill: reflect
+description: Repeated mechanical mistakes route to the existing unwired check, not a new prose rule.
+input:
+  prompt: "Reflect on the session where == kept landing in the fee helper. The lint script already catches it."
+conditions:
+  baseline: native agent without the reflect environment lens
+  treatment: native agent with reflect loaded
+expected:
+  skills:
+    required: [reflect]
+  behaviors:
+    - cite the session evidence
+    - name the existing lint command and that CI does not run it
+    - propose structural enforcement
+    - retain the unwired-check candidate even though neither that check nor a relevant skill was invoked
+    - reject the one-off typo
+    - write no knowledge, guidance, code, or tracker item
+  baseline_failure: adding a prose rule as the primary fix or claiming unmeasured savings
+grader: npx --no-install tsx --test tests/session-formal-grading.test.ts

@@ -36,7 +36,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-Adopted or derived skills include `domain-modeling`, `diagnosing-bugs`, `tdd`, `code-review`, `grill-with-docs`, `wayfinder`, `codebase-design`, `improve-codebase-architecture`, `prototype`, `research`, `to-spec`, `to-tickets`, `writing-for-agents`, and `handoff`. `writing-for-agents` subsumes the earlier `writing-great-skills` concept.
+Adopted or derived skills include `domain-modeling`, `diagnosing-bugs`, `tdd`, `code-review`, `grill-with-docs`, `wayfinder`, `codebase-design`, `improve-codebase-architecture`, `prototype`, `research`, `to-spec`, `to-tickets`, `writing-for-agents`, and `handoff`. `writing-for-agents` subsumes the earlier `writing-great-skills` concept. `retro` is not a public skill. Its environment analysis is composed into `reflect` at the same reviewed commit.
 
 ---
 
@@ -71,7 +71,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-Adopted or derived skills include `how`, `why`, `blast-radius`, `architect`, `arena`, `swarm`, `interrogate`, `create-verification-skill`, `maintain-verification-skill`, `show-me-your-work`, `reflect`, `runtime-forensics`, `trace-forensics`, `performance`, `hillclimb`, and `visual-parity`.
+Adopted or derived skills include `how`, `why`, `blast-radius`, `architect`, `arena`, `swarm`, `interrogate`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`, `maintain-formal-verification-skill`, `ketchup`, `show-me-your-work`, `reflect`, `runtime-forensics`, `trace-forensics`, `performance`, `hillclimb`, and `visual-parity`. `ketchup-video` and `statechart` were not imported.
 
 ---
 

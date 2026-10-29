@@ -1,7 +1,7 @@
 id: skill.reflect.routing-positive
 kind: routing
 skill: reflect
-description: "Explicit reflect after complex work activates reflect."
+description: "Explicit reflect after complex work, including an environment review of repeated mistakes, activates reflect."
 input:
   prompt: "Reflect on that session and propose knowledge, skill, or structural-enforcement candidates. Don't auto-apply rules."
 expected:

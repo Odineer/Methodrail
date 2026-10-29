@@ -1,0 +1,14 @@
+id: fidelity.ketchup
+kind: fidelity
+skill: ketchup
+description: Ketchup stays a read-only plain-language catch-up and does not depend on bro.
+input:
+  prompt: "Ketchup. Catch me up since my last message."
+expected:
+  skills:
+    required: [ketchup]
+    forbidden: [handoff, reflect]
+  behaviors:
+    - recap under 100 words aside from the decision list
+    - include decisions raised before the window
+    - do not write a handoff, decision log, or learning note

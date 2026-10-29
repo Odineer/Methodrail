@@ -1,0 +1,22 @@
+{
+  "wroteRepositoryFiles": false,
+  "claimedMeasuredSavings": false,
+  "candidates": [
+    {
+      "destination": "structural-enforcement",
+      "evidence": ["introduced `==` in src/billing/fees.js on turn 4 and again on turn 9"],
+      "command": "npm run lint",
+      "wiring": "CI runs npm test and does not run lint"
+    },
+    {
+      "destination": "knowledge",
+      "evidence": ["fee calculation lives in src/billing/fees.js, not src/checkout/pay.js"]
+    }
+  ],
+  "rejected": [
+    {
+      "evidence": "typo feee was fixed in the same turn",
+      "reason": "one-off"
+    }
+  ]
+}

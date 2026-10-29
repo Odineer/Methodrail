@@ -1,0 +1,13 @@
+id: composition.ketchup-ownership
+kind: composition
+description: Ketchup summarizes and does not take over handoff, reflect, or delivery.
+input:
+  prompt: "Ketchup, then write the handoff, file the lessons, and finish the branch."
+expected:
+  skills:
+    required: [ketchup]
+    forbidden: [handoff, reflect]
+  behaviors:
+    - stay read-only
+    - do not emit a completion report
+    - name agent-owned work without restarting it

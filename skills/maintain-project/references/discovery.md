@@ -7,7 +7,7 @@ Lane detail for [maintain-project](../SKILL.md). This file does not replace spec
 | Lane | Look for | Reuse |
 |---|---|---|
 | Architecture | Demonstrated caller burden, repeated structural defects, leaky seams, unnecessary layers in relevant active code | `improve-codebase-architecture` in `survey-only` phase, `codebase-design`, then `refactor` for one selected behavior-preserving change |
-| Verification | Stale recipes, broken owned helpers, map omissions, inadequate characterization of selected behavior | `maintain-verification-skill` with an explicit action and coverage, [verification lifecycle](../../../references/verification-lifecycle.md), `verify-change` |
+| Verification | Stale recipes, broken owned helpers, map omissions, inadequate characterization of selected behavior, and drift in an existing formal check | `maintain-verification-skill` with an explicit action and coverage; `maintain-formal-verification-skill` inspect during audit; [verification lifecycle](../../../references/verification-lifecycle.md); [formal verification](../../../references/formal-verification.md); `verify-change` |
 | Build, tooling, and documentation | Broken canonical commands, recurring setup friction, incorrect CI wiring, stale operational instructions, contradictory pointers | Existing deterministic tools and bounded direct repairs. `debug` when a failure needs diagnosis |
 
 Merge duplicate symptoms when evidence supports one shared cause. Do not merge findings only because they touch one file. A baseline product failure, an environmental blocker, documentation drift, and a harness defect stay distinct.
@@ -34,11 +34,11 @@ Keep delete, deepen, preserve, and reject. Relevance rules, verification-based r
 
 ## Verification
 
-Name action `inspect` during audit. Name coverage `task-scoped` unless the user asked for a full verification audit. Broad project maintenance does not request a full audit.
+Name action `inspect` during audit. Name coverage `task-scoped` unless the user asked for a full verification audit. Broad project maintenance does not request a full audit. Formal drift discovered in that lane uses the same inspect action on `maintain-formal-verification-skill`. Do not generate a proof during audit.
 
 `inspect` reports proposed corrections and gaps. It writes none of the owned verification files and never reports `changed`.
 
-When no verification skill exists, record that fact and assess existing scripts and control evidence. Do not generate a skill during discovery.
+When no verification skill exists, record that fact and assess existing scripts and control evidence. Do not generate a skill during discovery. An existing formal check is a separate procedure. Record its drift through inspect. Do not generate a proof because the app skill is absent.
 
 A source-only sample is partial coverage. Say so. Full-audit inspection still requires every mapped feature to be exercised or individually blocked.
 

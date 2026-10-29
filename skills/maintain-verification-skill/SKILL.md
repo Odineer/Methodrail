@@ -86,6 +86,7 @@ Accept the task intent, changed paths, affected features, and existing evidence.
 
 ```text
 Missing verify skill          → create-verification-skill only for missing-path repair
+Formal model alignment        → maintain-formal-verification-skill
 Project index                 → `.methodrail/PROJECT.md`
 Owning workflows              → develop, debug, refactor, maintain-project
 ```

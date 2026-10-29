@@ -196,6 +196,23 @@ test("maintain-project stays explicit and off ordinary tiny work", () => {
   }
 });
 
+test("session catch-up and formal checks stay explicit and off the cheap path", () => {
+  for (const name of ["ketchup", "create-formal-verification-skill", "maintain-formal-verification-skill"]) {
+    assert.equal(EXPLICIT_SKILLS.has(name), true, name);
+    assert.equal((WORKFLOW_SKILLS as readonly string[]).includes(name), false, name);
+    const skill = readFileSync(join(root, "skills", name, "SKILL.md"), "utf8");
+    assert.match(skill, /^disable-model-invocation:\s*true\s*$/m);
+    assert.doesNotMatch(skill, /statechart|\/bro\b/);
+  }
+  const develop = readFileSync(join(root, "skills/develop/SKILL.md"), "utf8");
+  const verify = readFileSync(join(root, "skills/verify-change/SKILL.md"), "utf8");
+  const ketchup = readFileSync(join(root, "skills/ketchup/SKILL.md"), "utf8");
+  assert.match(develop, /expressly names a formal check or proof target/);
+  assert.match(develop, /does not invoke `code-review`, `create-verification-skill`, `create-formal-verification-skill`/);
+  assert.match(verify, /Do not invoke `create-formal-verification-skill`/);
+  assert.match(ketchup, /Do not start tests/);
+});
+
 test("knowledge reuse refuses retired notes and does not pick a dispute winner", () => {
   const reuse = readFileSync(join(root, "references/knowledge/reuse.md"), "utf8");
   const reflect = readFileSync(join(root, "skills/reflect/SKILL.md"), "utf8");

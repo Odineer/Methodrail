@@ -1,0 +1,19 @@
+id: behavioral.create-formal-verification-skill
+kind: behavioral
+skill: create-formal-verification-skill
+description: An express lease invariant produces runnable formal guidance or an honest block.
+input:
+  prompt: "Create a formal verification skill proving a protected lease operation cannot proceed for two valid holders."
+conditions:
+  baseline: native agent without the formal creator
+  treatment: native agent with create-formal-verification-skill loaded
+expected:
+  skills:
+    required: [create-formal-verification-skill]
+  behaviors:
+    - reuse an adequate check instead of duplicating it
+    - declare the method, covered code, command, and sync record
+    - rehearse a deliberate break and restore the user tree when a verifier runs
+    - label a generated-input fallback as testing
+  baseline_failure: a placeholder skill, a Launch requirement, or a formal-proof claim for property testing
+grader: npx --no-install tsx --test tests/session-formal-grading.test.ts

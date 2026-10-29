@@ -15,7 +15,9 @@ notes: >
   without forcing either name. codebase-design, diagnosing-bugs,
   improve-codebase-architecture, and tdd already use the project-native
   glossary, so those string replacements were skipped. Did not import
-  ask-matt, implement-spec, pr, retro, wait-what, triage, or setup skills.
+  ask-matt, implement-spec, pr, wait-what, triage, or setup skills.
+  retro's environment analysis is composed into reflect at this same
+  commit. There is no public retro skill.
   59db609 (2026-10-27) incorporated code-review standards search,
   diagnosing-bugs pristine-copy red proof, tdd seam catch/miss notes,
   to-tickets sub-issues and omitted Blocked by on native edges, wayfinder

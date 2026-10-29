@@ -43,7 +43,7 @@ one owner completion report
 
 Match effort to [rigor](../../references/rigor.md). Do not activate the whole stack.
 
-**Tiny bounded change:** inspect → edit → deterministic check → done. An adequate existing check does not invoke `code-review`, `create-verification-skill`, or a full `maintain-verification-skill` audit. A mechanical task may report a concise claim plus that check.
+**Tiny bounded change:** inspect → edit → deterministic check → done. An adequate existing check does not invoke `code-review`, `create-verification-skill`, `create-formal-verification-skill`, or a full `maintain-verification-skill` or `maintain-formal-verification-skill` audit. A mechanical task may report a concise claim plus that check.
 
 **Normal feature:** `how` if needed → acceptance criteria and the existing proof → `domain-modeling` when the change introduces or changes product terms, ownership, lifecycle, or domain invariants → `tdd` / implementation in verified slices → `code-review` on the substantive delta → repair material findings → `verify-change` on the final state. Domain documentation is part of the feature when those concepts crystallize; use the canonical glossary and update its project index. Offer an ADR only when the [decision-record](../../references/protocols/decision-record.md) criteria hold, and wait for approval before writing it. Create or task-scoped verification maintenance only when [verification lifecycle](../../references/verification-lifecycle.md) selects it.
 
@@ -83,6 +83,7 @@ Follow [verification lifecycle](../../references/verification-lifecycle.md).
 - Reuse adequate verification, tests, scripts, or control docs. Do not invoke `create-verification-skill` when those already prove the change.
 - Invoke `create-verification-skill` in application phase only for decision `missing-path`, inside this task's authorized scope. Discovery-only requests do not write files.
 - Invoke `maintain-verification-skill` in task-scoped mode for decision `mapped-change`, including a new user-facing behavior the map does not yet list. Update the index and the affected entries. Do not start a full audit from this workflow.
+- When this task touches covered code of an existing formal check, invoke `maintain-formal-verification-skill` with action `apply` and task-scoped coverage. Invoke `create-formal-verification-skill` only when the task expressly names a formal check or proof target. Retries, concurrency, parsers, and high rigor do not authorize creation. Follow [formal verification](../../references/formal-verification.md).
 - A product defect found while creating or maintaining verification returns here. Do not change expected behavior to make it pass.
 - Finish with `verify-change` after the last relevant edit.
 

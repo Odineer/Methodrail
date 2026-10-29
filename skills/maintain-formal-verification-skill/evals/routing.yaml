@@ -1,0 +1,9 @@
+id: skill.maintain-formal-verification-skill.routing-positive
+kind: routing
+skill: maintain-formal-verification-skill
+description: "An explicit request to realign a stale formal model activates formal upkeep."
+input:
+  prompt: "The lease model is stale after the split. Bring the formal check back in line with the code."
+expected:
+  skills:
+    required: [maintain-formal-verification-skill]

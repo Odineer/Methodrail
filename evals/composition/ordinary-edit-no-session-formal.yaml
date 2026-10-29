@@ -1,0 +1,11 @@
+id: composition.ordinary-edit-no-session-formal
+kind: composition
+description: A button label or a narrow lookup does not start catch-up, reflect, or formal verification.
+input:
+  prompt: "Change the button label from Save to Create, and tell me where retryCount is defined."
+expected:
+  skills:
+    forbidden: [ketchup, reflect, create-formal-verification-skill, maintain-formal-verification-skill, create-verification-skill]
+  behaviors:
+    - inspect, edit, and the existing check
+    - do not create a proof or audit formal checks

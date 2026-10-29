@@ -1,0 +1,9 @@
+id: skill.create-formal-verification-skill.routing-negative
+kind: routing
+skill: create-formal-verification-skill
+description: "A button-label edit does not create a formal check."
+input:
+  prompt: "Change the button label from Save to Create. Don't prove anything."
+expected:
+  skills:
+    forbidden: [create-formal-verification-skill]

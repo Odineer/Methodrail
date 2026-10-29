@@ -1,0 +1,19 @@
+id: behavioral.maintain-formal-verification-skill
+kind: behavioral
+skill: maintain-formal-verification-skill
+description: A passing atomic model is stale after claim is split, and alignment exposes the violation.
+input:
+  prompt: "The lease model still passes after claim was split into begin and finish. Bring the formal check back in line. Do not edit product code."
+conditions:
+  baseline: native agent without formal upkeep
+  treatment: native agent with maintain-formal-verification-skill loaded
+expected:
+  skills:
+    required: [maintain-formal-verification-skill]
+  behaviors:
+    - treat the old pass as a stale description
+    - follow the split and any new writer
+    - expose the two-holder violation after alignment
+    - leave product code unchanged
+  baseline_failure: accepting the atomic model or weakening SingleOwner to make it pass
+grader: npx --no-install tsx --test tests/session-formal-grading.test.ts

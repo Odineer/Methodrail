@@ -54,6 +54,7 @@ A fresh agent can continue from the document plus the referenced artifacts, with
 Usually follows:              develop, debug, investigate, prototype
 Often produces:               continuity artifact for a fresh agent
 Escalate to:                  reflect when lessons are in scope
+Human catch-up in this chat   → ketchup; this document is for the next agent
 Avoid combining automatically with: compact-as-substitute
 ```
 

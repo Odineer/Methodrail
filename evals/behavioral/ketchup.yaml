@@ -1,0 +1,20 @@
+id: behavioral.ketchup
+kind: behavioral
+skill: ketchup
+description: Catch-up keeps an older pending decision and does not treat the work as wholly finished.
+input:
+  prompt: "Ketchup. I still have not picked whether archived notes belong in search."
+conditions:
+  baseline: native agent without ketchup
+  treatment: native agent with ketchup loaded
+expected:
+  skills:
+    required: [ketchup]
+  behaviors:
+    - open with what waits on the user
+    - keep the archived-notes decision
+    - start the window at the last user message
+    - leave the stale test receipt historical
+    - do not start a job or write a file
+  baseline_failure: dropping the older decision or claiming the current tree passes from an earlier receipt
+grader: npx --no-install tsx --test tests/session-formal-grading.test.ts

@@ -26,6 +26,7 @@ Interview the repository first. Then, for each role below, collect candidates fr
 | Plans / tickets / scratch | Superpowers plans, `docs/plans/`, tickets, `.scratch/` | planning or tracker artifacts |
 | Operational log | `decisions.tsv`, `.audit/*.tsv` | header `ts	phase	decision	why	evidence	result` |
 | Verification | `verify-*` skill with Launch, `features/` maps | user-facing recipes |
+| Formal check | native skill declaring `Verification method: formal` with Properties, Covered code, and Run | invariant procedure, not a feature map |
 | Typed / legacy knowledge | `.methodrail/knowledge/*.md` | note contract or legacy prose |
 | Control | `.methodrail/control/` | launch/drive/reset procedures |
 | Model policy | `.methodrail/MODELS.yaml` | Methodrail task model policy. Do not classify it as typed knowledge or as a generic plan. |

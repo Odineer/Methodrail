@@ -1,0 +1,9 @@
+id: skill.maintain-formal-verification-skill.routing-negative
+kind: routing
+skill: maintain-formal-verification-skill
+description: "A button-label edit does not audit formal checks."
+input:
+  prompt: "Fix the button label from Save to Create. No model."
+expected:
+  skills:
+    forbidden: [maintain-formal-verification-skill]

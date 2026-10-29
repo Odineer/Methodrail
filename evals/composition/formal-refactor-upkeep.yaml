@@ -1,0 +1,12 @@
+id: composition.formal-refactor-upkeep
+kind: composition
+description: A refactor that splits a covered operation returns formal upkeep evidence to the parent.
+input:
+  prompt: "Refactor claim into beginClaim and finishClaim. The formal lease check covers claim. Preserve behavior."
+expected:
+  skills:
+    required: [refactor, maintain-formal-verification-skill]
+  behaviors:
+    - task-scoped formal apply
+    - one completion owner
+    - no new proof infrastructure from generic refactor intent

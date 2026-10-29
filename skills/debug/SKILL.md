@@ -56,6 +56,7 @@ Follow [verification lifecycle](../../references/verification-lifecycle.md).
 
 - Reproduce with the existing verification procedure when it can drive the symptom.
 - A failure to drive or inspect working behavior is a harness defect. Invoke `create-verification-skill` in application phase only for decision `missing-path`, or repair the harness under task-scoped `maintain-verification-skill`.
+- When this task touches covered code of an existing formal check, invoke `maintain-formal-verification-skill` with action `apply` and task-scoped coverage. Invoke `create-formal-verification-skill` only for an express formal target. Follow [formal verification](../../references/formal-verification.md).
 - A product defect keeps its expected behavior. Do not rewrite the oracle to match the bug.
 - Do not start a full audit from this workflow.
 

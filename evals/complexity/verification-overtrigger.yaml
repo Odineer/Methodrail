@@ -5,7 +5,7 @@ input:
   prompt: "Change button text from Save to Create. The component test already covers the label."
 expected:
   skills:
-    forbidden: [create-verification-skill, maintain-verification-skill, maintain-project, wayfinder, architect, arena, swarm]
+    forbidden: [create-verification-skill, maintain-verification-skill, maintain-project, wayfinder, architect, arena, swarm, ketchup, reflect, create-formal-verification-skill, maintain-formal-verification-skill]
   behaviors:
     - inspect
     - edit

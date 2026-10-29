@@ -1,0 +1,11 @@
+[
+  {
+    "command": "gh pr view 18",
+    "exit_status": 0
+  },
+  {
+    "command": "gh pr checks 18",
+    "exit_status": 1,
+    "stderr": "status unavailable"
+  }
+]

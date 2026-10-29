@@ -1,0 +1,9 @@
+id: skill.ketchup.routing-negative
+kind: routing
+skill: ketchup
+description: "A button-label edit is not a catch-up."
+input:
+  prompt: "Rename the button label from Save to Create."
+expected:
+  skills:
+    forbidden: [ketchup]

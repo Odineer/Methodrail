@@ -36,9 +36,9 @@ Do not change expected behavior to make a failing product pass. Return a product
 
 ## Proportional path
 
-Tiny edits keep the cheap path. A label change with an adequate existing check does not bootstrap a feature map and does not start an application-wide audit.
+Tiny edits keep the cheap path. A label change with an adequate existing check does not bootstrap a feature map, a formal proof, or an application-wide audit.
 
-The normal path is reuse, then implement, then verify. Create and maintain run only when a decision above selects them.
+The normal path is reuse, then implement, then verify. Create and maintain run only when a decision above selects them. App-driving verification and formal checks are separate procedures. Formal alignment follows [formal verification](formal-verification.md). A recognized formal procedure does not prove app coverage, and an app feature map does not add proof obligations. Create a formal check only for an express formal target. Maintain one only when its recorded coverage is touched.
 
 Specs state observable outcomes. Tickets name the existing verification procedure, the scenario, and the expected result. They do not copy launch, readiness, drive, reset, or cleanup steps into each ticket.
 

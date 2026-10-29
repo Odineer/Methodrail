@@ -56,4 +56,5 @@ If the host can spawn a reviewer on a different model family, do so and end with
 ```text
 Often follows                 → hillclimb, arena, long debug
 May inform                    → reflect, handoff
+Human catch-up reads this trail and does not append → ketchup
 ```

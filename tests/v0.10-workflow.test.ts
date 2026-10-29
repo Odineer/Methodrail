@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readdirSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
@@ -8,7 +8,7 @@ import { gradeOutcome } from "../src/eval/grade-outcome.js";
 import { loadRunFile, parseRun, parseUsage } from "../src/eval/load.js";
 import { scoreRun } from "../src/eval/score.js";
 import type { EvalContext, EvalRun } from "../src/eval/types.js";
-import { EXPLICIT_SKILLS } from "../src/validate.js";
+import { EXPLICIT_SKILLS, WORKFLOW_SKILLS } from "../src/validate.js";
 import { classifyChangedPaths, loadMatrixRows, loadSkillOrigins, parseMatrix } from "../scripts/upstream-preflight.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -36,17 +36,22 @@ function minimalRun(usage: unknown): EvalRun {
   });
 }
 
-test("public catalog stays 40 skills and 28 explicit", () => {
-  const skills = readdirSync(join(root, "skills")).filter((name) => {
-    try {
-      readFileSync(join(root, "skills", name, "SKILL.md"));
-      return true;
-    } catch {
-      return false;
-    }
-  });
-  assert.equal(skills.length, 40);
-  assert.equal(EXPLICIT_SKILLS.size, 28);
+test("explicit catalog includes workflow skills and the session and formal specialists", () => {
+  for (const name of WORKFLOW_SKILLS) {
+    assert.equal(EXPLICIT_SKILLS.has(name), true, name);
+  }
+  for (const name of [
+    "ketchup",
+    "create-formal-verification-skill",
+    "maintain-formal-verification-skill",
+    "reflect",
+  ]) {
+    assert.equal(EXPLICIT_SKILLS.has(name), true, name);
+    readFileSync(join(root, "skills", name, "SKILL.md"), "utf8");
+  }
+  for (const name of ["ketchup", "create-formal-verification-skill", "maintain-formal-verification-skill"]) {
+    assert.equal((WORKFLOW_SKILLS as readonly string[]).includes(name), false, name);
+  }
 });
 
 test("workflow instructions keep the v0.10 boundaries", () => {

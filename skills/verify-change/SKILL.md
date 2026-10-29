@@ -47,11 +47,11 @@ runtime / start / drive guidance?
 existing test, lint, or build workflow?
 ```
 
-If `.methodrail/PROJECT.md` exists, read it. Follow pointers to a project-local verify skill, `.methodrail/control/CONTROL.md`, runtime notes, and documented commands.
+If `.methodrail/PROJECT.md` exists, read it. Follow pointers to a project-local verify skill, a formal check, `.methodrail/control/CONTROL.md`, runtime notes, and documented commands.
 
-If any of those exist, reuse them. Do not rediscover launch, readiness, drive, reset, or the local test workflow. Do not write a generic test-pyramid essay instead of running the check this repository already has.
+If any of those exist, reuse them. Judge a formal result by its recorded bounds and whether the requested properties completed. A stale sync record or a missing formal procedure is a gap. Do not rediscover launch, readiness, drive, reset, or the local test workflow. Do not write a generic test-pyramid essay instead of running the check this repository already has.
 
-If the procedure is missing or broken, return that gap to the owning workflow. Do not invoke `create-verification-skill` or start a `maintain-verification-skill` audit from this gate. See [verification lifecycle](../../references/verification-lifecycle.md).
+If the procedure is missing or broken, return that gap to the owning workflow. Do not invoke `create-verification-skill` or start a `maintain-verification-skill` audit from this gate. Do not invoke `create-formal-verification-skill` or start a `maintain-formal-verification-skill` audit from this gate. See [verification lifecycle](../../references/verification-lifecycle.md) and [formal verification](../../references/formal-verification.md).
 
 Then apply the iron law to that reused path. Fresh evidence is still required. Reuse does not weaken the gate.
 

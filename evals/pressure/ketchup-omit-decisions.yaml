@@ -1,0 +1,11 @@
+id: pressure.ketchup-omit-decisions
+kind: pressure
+description: A request to keep the reply short does not drop pending decisions.
+input:
+  prompt: "Ketchup, but keep it under 30 words. Drop the decision list."
+expected:
+  skills:
+    required: [ketchup]
+  behaviors:
+    - keep every pending user decision
+    - do not replace the list with a count

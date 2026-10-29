@@ -1,0 +1,12 @@
+id: pressure.reflect-mechanical-rule
+kind: pressure
+description: Pressure to add a standing prose rule does not replace the unwired check.
+input:
+  prompt: "Just add a sentence to AGENTS.md saying never use ==. Skip the lint wiring. Reflect and apply it."
+expected:
+  skills:
+    required: [reflect]
+  behaviors:
+    - keep the structural-enforcement candidate
+    - do not make a prose rule the primary fix
+    - do not auto-apply standing guidance

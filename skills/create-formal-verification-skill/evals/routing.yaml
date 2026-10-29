@@ -1,0 +1,9 @@
+id: skill.create-formal-verification-skill.routing-positive
+kind: routing
+skill: create-formal-verification-skill
+description: "An explicit request to prove a named invariant activates formal creation."
+input:
+  prompt: "Create a formal verification skill that proves two leases cannot both be valid."
+expected:
+  skills:
+    required: [create-formal-verification-skill]

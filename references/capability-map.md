@@ -7,10 +7,10 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 | Project harness init | `methodrail-init` | Methodrail-native | explicit | `create-verification-skill`, `refresh-model-routing` | humans |
 | Task-based model policy | `refresh-model-routing` | Methodrail-native | explicit | — | `methodrail-init` |
 | Existing-system investigation | `investigate` | Methodrail-native | explicit | `how`, `why`, `observe`, `research`, `prototype`, `blast-radius` | humans |
-| Feature delivery | `develop` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `grill-with-docs`, `domain-modeling`, `wayfinder`, `architect`, `prototype`, `tdd`, `code-review`, `verify-change`, `blast-radius`, `create-verification-skill`, `maintain-verification-skill` | humans |
-| Failure diagnosis and fix | `debug` | Methodrail-native | explicit | `diagnosing-bugs`, `observe`, `runtime-forensics`, `trace-forensics`, `performance`, `hillclimb`, `tdd`, `blast-radius` (shared behavior, boundary crossings, or uncertain impact), `code-review`, `verify-change`, `create-verification-skill`, `maintain-verification-skill` | humans |
-| Behavior-preserving restructure of a selected target | `refactor` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `how`, `codebase-design`, `blast-radius`, `code-review`, `verify-change`, `maintain-verification-skill` | humans |
-| Evidence-backed project maintenance | `maintain-project` | Methodrail-native | explicit | `improve-codebase-architecture` (`survey-only`), `maintain-verification-skill` (named action and coverage), `refactor`, `debug`, `develop` when a selected repair requires that owner | humans |
+| Feature delivery | `develop` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `grill-with-docs`, `domain-modeling`, `wayfinder`, `architect`, `prototype`, `tdd`, `code-review`, `verify-change`, `blast-radius`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`, `maintain-formal-verification-skill` | humans |
+| Failure diagnosis and fix | `debug` | Methodrail-native | explicit | `diagnosing-bugs`, `observe`, `runtime-forensics`, `trace-forensics`, `performance`, `hillclimb`, `tdd`, `blast-radius` (shared behavior, boundary crossings, or uncertain impact), `code-review`, `verify-change`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`, `maintain-formal-verification-skill` | humans |
+| Behavior-preserving restructure of a selected target | `refactor` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `how`, `codebase-design`, `blast-radius`, `code-review`, `verify-change`, `maintain-verification-skill`, `maintain-formal-verification-skill` | humans |
+| Evidence-backed project maintenance | `maintain-project` | Methodrail-native | explicit | `improve-codebase-architecture` (`survey-only`), `maintain-verification-skill` (named action and coverage), `maintain-formal-verification-skill` (named action and coverage), `refactor`, `debug`, `develop` when a selected repair requires that owner | humans |
 | Change review workflow | `review` | Methodrail-native | explicit | `code-review`, `blast-radius`, `verify-change` | humans |
 | Current codebase understanding | `how` | pstack | model-invoked | `observe` | `investigate`, `develop`, `refactor`, `architect` |
 | Historical motivation | `why` | pstack | model-invoked | — | `investigate`, `architect` |
@@ -26,7 +26,7 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 | Codebase-wide architecture survey and candidate selection | `improve-codebase-architecture` | Matt Pocock + Ponytail composed | explicit | `grill-with-docs`, `codebase-design` | humans; `maintain-project` for `survey-only` |
 | Test-first implementation | `tdd` | Matt Pocock | model-invoked | `codebase-design`, `verify-change` | `develop`, `debug` |
 | Baseline bug diagnosis | `diagnosing-bugs` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model/workflow invoked | `runtime-forensics`, `trace-forensics`, `performance` | `debug` |
-| Completion verification | `verify-change` | Superpowers-derived | model/workflow invoked | `observe`, project verify skill | all workflows |
+| Completion verification | `verify-change` | Superpowers-derived | model/workflow invoked | `observe`, project verify skill; consumes a formal result without creating or auditing one | all workflows |
 | Two-axis diff review | `code-review` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model-invoked | — | `review`, `develop` |
 | Adversarial independent review | `interrogate` | pstack | explicit / high rigor | — | `review` (suggested only) |
 | Competing candidates | `arena` | pstack | explicit | `verify-change` | `architect`, `blast-radius` |
@@ -41,11 +41,14 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 | Project verify skill generation | `create-verification-skill` | pstack | explicit | `maintain-verification-skill` | `methodrail-init`, `develop`, `debug` |
 | Verify-skill upkeep | `maintain-verification-skill` | pstack | explicit | `create-verification-skill` if missing | `develop`, `debug`, `refactor` for task-scoped application; `maintain-project` when it names action and coverage; humans for a full audit |
 | Compact decision trail | `show-me-your-work` | pstack | explicit | — | `hillclimb`, long runs |
-| Session lessons as candidates | `reflect` | pstack | explicit | knowledge / skill / structural-enforcement candidates | humans |
+| Session lessons as candidates | `reflect` | pstack + Matt retro composed | explicit | knowledge / skill / structural-enforcement candidates | humans |
+| Human catch-up | `ketchup` | pstack | explicit | — | humans |
+| Formal check creation | `create-formal-verification-skill` | pstack | explicit | `maintain-formal-verification-skill` | humans; `develop` and `debug` only for an express formal target |
+| Formal check upkeep | `maintain-formal-verification-skill` | pstack | explicit | suggest `create-formal-verification-skill` when none exist, without running it | `develop`, `debug`, and `refactor` when recorded coverage is touched; `maintain-project` when it names action and coverage |
 | Cross-session continuity | `handoff` | Matt Pocock | explicit | — | humans, long sessions, `prototype` round-trips |
 | Agent-facing document design | `writing-for-agents` | Matt Pocock | model-invoked | skill mechanics | `methodrail-init`, skill maintenance, harness generation, verification-skill generation, agent-facing docs |
 
-Typical artifacts, not process nesting: `how` → implementation understanding; `observe` → runtime evidence; `why` → historical rationale; `domain-modeling` → vocabulary; `prototype` → empirical evidence; `wayfinder` → decision map; `architect` → decision; `tdd` → behavioral tests; `verify-change` → fresh verification; `code-review` → findings; `show-me-your-work` → trail; `reflect` → learning candidates; `handoff` → continuity artifact.
+Typical artifacts, not process nesting: `how` → implementation understanding; `observe` → runtime evidence; `why` → historical rationale; `domain-modeling` → vocabulary; `prototype` → empirical evidence; `wayfinder` → decision map; `architect` → decision; `tdd` → behavioral tests; `verify-change` → fresh verification; `code-review` → findings; `show-me-your-work` → trail; `reflect` → learning candidates; `ketchup` → human catch-up; `handoff` → continuity artifact.
 
 ## Ownership decisions
 
@@ -63,4 +66,6 @@ Typical artifacts, not process nesting: `how` → implementation understanding; 
 - **Skill authoring:** `writing-for-agents` subsumes the earlier `writing-great-skills` concept. Do not ship both.
 - **Model routing:** `references/model-routing.md` owns tiers, precedence, fallback, and evidence. `refresh-model-routing` maintains `.methodrail/MODELS.yaml`. Skills keep logical role names. There is no custom router or model SDK.
 - **Handoff:** operational skill for Methodrail's handoff context transition. Explicit-only.
+- **Catch-up:** `ketchup` explains outcomes and pending user decisions in the current conversation. It does not write a handoff, a decision log, or a learning note, and it does not resume the work.
+- **Formal verification:** `create-formal-verification-skill` and `maintain-formal-verification-skill` own project-local formal checks. App-driving verification stays with `create-verification-skill` and `maintain-verification-skill`. `verify-change` judges an existing formal result and does not create or audit one. Ordinary edits do not start formal creation.
 - **Upstream sync:** `sync-upstream` is a project skill at `.cursor/skills/sync-upstream/`. Cursor discovers it when this repository is the workspace. It is not a consumer capability and is not shipped by the plugin.

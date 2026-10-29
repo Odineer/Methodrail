@@ -67,7 +67,7 @@ Run its own instructions end to end once: launch, doctor, drive ONE mapped featu
 
 ## 5. Offer the maintenance loop
 
-Point at `maintain-verification-skill` for keeping the map honest as the app changes. Return the result to the parent. Do not open a pull request, commit, or release from this skill.
+Point at `maintain-verification-skill` for keeping the map honest as the app changes. Formal proof of an invariant is `create-formal-verification-skill`, not a feature-map obligation. Return the result to the parent. Do not open a pull request, commit, or release from this skill.
 
 ## Neighbors
 

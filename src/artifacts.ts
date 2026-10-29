@@ -14,6 +14,7 @@ export const ARTIFACT_ROLES = [
   "decision-log",
   "verification-map",
   "verification-skill",
+  "formal-verification-skill",
   "typed-knowledge",
   "control",
   "host-instruction",
@@ -73,6 +74,16 @@ function hasHeading(source: string, heading: RegExp): boolean {
   return heading.test(source);
 }
 
+const NATIVE_SKILL = /^\.(?:agents|cursor|claude|zcode)\/skills\/[^/]+\/SKILL\.md$/i;
+
+/** Formal contract marker plus the three identifying sections. Property-testing guidance does not match. */
+export function isFormalVerificationContract(source: string): boolean {
+  if (!/^Verification method:\s*formal\s*$/m.test(source)) return false;
+  if (!hasHeading(source, /^##\s+Properties\s*$/m)) return false;
+  if (!hasHeading(source, /^##\s+Covered code\s*$/m)) return false;
+  return hasHeading(source, /^##\s+Run\s*$/m);
+}
+
 function classifyFile(rel: string, absolute: string): DiscoveredArtifact | null {
   const source = readHead(absolute);
 
@@ -83,6 +94,13 @@ function classifyFile(rel: string, absolute: string): DiscoveredArtifact | null 
     return { path: rel, role: "model-policy", evidence: "Methodrail task model policy" };
   }
 
+  if (NATIVE_SKILL.test(rel) && isFormalVerificationContract(source)) {
+    return {
+      path: rel,
+      role: "formal-verification-skill",
+      evidence: "native skill with a formal verification contract",
+    };
+  }
   if (
     /^\.(?:agents|cursor|claude|zcode)\/skills\/verify-[^/]+\/SKILL\.md$/i.test(rel) &&
     /##\s+Launch/i.test(source)
@@ -352,8 +370,9 @@ export function discoverProjectArtifacts(projectRoot: string): DiscoveryReport {
   }
 
   const hasVerify = (byRole.get("verification-skill") ?? []).length > 0;
+  const hasFormal = (byRole.get("formal-verification-skill") ?? []).length > 0;
   const hasControl = (byRole.get("control") ?? []).length > 0;
-  if (!hasVerify && !hasControl) {
+  if (!hasVerify && !hasFormal && !hasControl) {
     preview.push({
       path: "project-local verification",
       op: "unavailable",

@@ -1,0 +1,14 @@
+{
+  "provenance": "constructed",
+  "note": "These are synthetic TLC log examples for grading tests, not executions of TLC or a live formal-verification result.",
+  "pass": {
+    "command": "java -cp tools/tla2tools.jar tlc2.TLC -config model/Lease.cfg model/Lease.tla",
+    "exit_status": 0,
+    "stdout": "Starting...\nComputing initial states...\nModel checking completed. No error has been found.\n"
+  },
+  "violation": {
+    "command": "java -cp tools/tla2tools.jar tlc2.TLC -config model/Lease.cfg model/Lease.tla",
+    "exit_status": 12,
+    "stdout": "Error: Invariant SingleOwner is violated.\nError: The behavior up to this point is:\nState 1: <Initial predicate>\n/\\ holders = {}\n/\\ intent = {}\nState 2: <BeginClaim>\n/\\ holders = {}\n/\\ intent = {a}\nState 3: <FinishClaim>\n/\\ holders = {a}\n/\\ intent = {}\nState 4: <BeginClaim>\n/\\ holders = {a}\n/\\ intent = {b}\nState 5: <FinishClaim>\n/\\ holders = {a, b}\n/\\ intent = {}\n"
+  }
+}

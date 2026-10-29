@@ -5,7 +5,7 @@ input:
   prompt: "Where is retryCount defined?"
 expected:
   skills:
-    forbidden: [wayfinder, architect, prototype, arena, swarm, interrogate, maintain-project]
+    forbidden: [wayfinder, architect, prototype, arena, swarm, interrogate, maintain-project, ketchup, reflect, create-formal-verification-skill, maintain-formal-verification-skill]
   behaviors:
     - local source lookup
     - do not spawn a full how exploration unless the repository actually requires it

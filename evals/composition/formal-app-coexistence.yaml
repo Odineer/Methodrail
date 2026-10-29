@@ -1,0 +1,13 @@
+id: composition.formal-app-coexistence
+kind: composition
+description: Init can point at an app verify skill and a formal check without generating either.
+input:
+  prompt: "Inspect Methodrail setup. The repo already has a verify skill and a formal lease check."
+expected:
+  skills:
+    required: [methodrail-init]
+    forbidden: [create-formal-verification-skill, create-verification-skill]
+  behaviors:
+    - adopt both pointers
+    - do not generate a feature map or a proof during inspection
+    - do not treat the two procedures as duplicate owners

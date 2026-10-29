@@ -1,0 +1,13 @@
+id: fidelity.maintain-formal-verification-skill
+kind: fidelity
+skill: maintain-formal-verification-skill
+description: Upkeep keeps in-sync, updated, bug, and blocked, including dirty covered files.
+input:
+  prompt: "Is the lease model still true to the code, including my uncommitted edit?"
+expected:
+  skills:
+    required: [maintain-formal-verification-skill]
+  behaviors:
+    - hash covered contents rather than trusting HEAD alone
+    - allow updated and bug together
+    - do not advance a blocked sync record

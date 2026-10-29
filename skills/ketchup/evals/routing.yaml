@@ -1,0 +1,9 @@
+id: skill.ketchup.routing-positive
+kind: routing
+skill: ketchup
+description: "An explicit catch-up request activates ketchup."
+input:
+  prompt: "Ketchup. What changed since I last wrote, and what do I still need to decide?"
+expected:
+  skills:
+    required: [ketchup]

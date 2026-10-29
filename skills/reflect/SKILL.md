@@ -27,7 +27,7 @@ Prefer this conversation's artifacts, diffs, and decision log. If the host expos
 
 ### 2. Review from three lenses
 
-When the host supports parallel subagents, spawn judgment, tooling, and divergent reviewers using [judgment-reviewer.md](references/judgment-reviewer.md), [tooling-reviewer.md](references/tooling-reviewer.md), and [divergent-reviewer.md](references/divergent-reviewer.md), passing each the work digest or artifact paths in place of a transcript. Follow the host's role/model selection procedure if it has one. Otherwise run the three lenses sequentially in this context. Omit `model` when the host cannot choose one.
+When the host supports parallel subagents, spawn judgment, tooling, and divergent reviewers using [judgment-reviewer.md](references/judgment-reviewer.md), [tooling-reviewer.md](references/tooling-reviewer.md), and [divergent-reviewer.md](references/divergent-reviewer.md), passing each the work digest or artifact paths in place of a transcript. Follow the host's role/model selection procedure if it has one. Otherwise run the three lenses sequentially in this context. Omit `model` when the host cannot choose one. The tooling lens includes the environment that enabled an evidenced mistake. Route a mechanical miss to structural enforcement. A missing guardrail is a candidate, not an edit.
 
 ### 3. Synthesize
 
@@ -95,6 +95,7 @@ Do not file tracker issues unless the user asks. Do not treat Methodrail global 
 ```text
 Existing decision trail       → show-me-your-work
 Continuity artifact           → handoff
+Human catch-up               → ketchup (explicit; does not mine lessons)
 ```
 
 Do not auto-promote candidates.

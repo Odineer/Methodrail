@@ -30,25 +30,38 @@ Scan for:
 - Debugging entry points: how to capture a trace, where logs land, which RPC to hit
 - Build / package-manager / sandbox surprises that cost minutes the first time
 
+## Environment that enabled an evidenced mistake
+
+Analyze only this session, its artifacts, and relevant project guidance. For an evidenced incident, inspect the environment that enabled it. A missing guardrail is a candidate. Do not implement it, and do not start a tooling migration.
+
+- Navigation: repeated discovery of the same non-obvious relationship may justify a concise pointer to an existing source. A one-off search is not a pointer.
+- Checks: read the repository's actual check commands and CI or pre-commit wiring before proposing new enforcement. Distinguish a missing check from an existing check that is never run or is silently broken. Cite the command and the wiring.
+- Standards: route a fixed syntactic pattern, banned API, import shape, or file-placement rule to deterministic enforcement with the tooling the repository already uses. Reserve guidance for judgment tooling cannot reliably express. A new prose rule is not the primary fix.
+- Instruction load: when the session shows the cost, name redundant, stale, or ineffective steering. Preserve essential pointers and applicable instructions.
+- Tool economy and access: report concrete avoidable discovery or unavailable evidence that affected the session. Use recorded measurements when the session has them. Do not invent token savings or time estimates.
+
+Routing for a mechanical check is `structural-enforcement: <command and wiring>`. Routing for a gap in a skill this session used stays the existing skill path. List each finding with Principle, Evidence, and Routing.
+
 ## Scope to skills and tools the session actually used
 
-Findings must point to skills, tools, or MCPs invoked in this transcript. Speculative routings to skills the parent never opened do not count. To check whether a skill was used, scan the transcript for:
+For skill-body edits and missed-trigger findings, point to a skill, tool, or MCP invoked in this transcript or a catalog skill that should have triggered. Environment and structural-enforcement candidates are also eligible when the session shows the mistake and repository evidence shows the missing, broken, or unwired mechanism. The mechanism need not have been invoked. A check that was never run can be the finding. Keep that candidate even when no skill-edit route applies. Speculative skill edits still do not count. To check whether a skill was used, scan the transcript for:
 
 - `Read` tool calls against any `SKILL.md` file (workspace `.cursor/skills/`, user-level `~/.cursor/skills/`, or plugin-installed paths under `~/.cursor/plugins/`)
 - `Task` prompts that name a skill path
 - Tool calls (Shell, Grep, MCP, etc.) that match a skill's documented commands
 
-Two valid finding shapes:
+Three valid finding shapes:
 
 - The parent invoked the skill and you found a real gap in its body. Route to the skill's relevant section.
 - The skill was visible in the catalog but did not trigger when it would have helped. Tune the skill's description so future agents pick it up. Route as `tune description: <skill path>`.
+- The session and repository evidence support an environment or enforcement candidate. Route as `structural-enforcement: <command and wiring>` or name the evidenced environment mechanism, even if it was never invoked.
 
-If a skill was neither invoked nor a missed-trigger candidate, drop it. Adding text to a skill the parent never opened does not change behavior.
+Drop an unsupported skill edit when the skill was neither invoked nor a missed-trigger candidate. Preserve separately evidenced environment and structural-enforcement candidates. Adding text to a skill the parent never opened does not change behavior.
 
 List each durable learning you find. For each:
 - Principle: one sentence naming the convention or technical fact. Concrete enough that a future agent recognizes when it applies.
 - Evidence: the exact moment in the transcript (turn number or short quote, including the command or flag).
-- Routing: most relevant existing skill (give the `SKILL.md` path as it appears in the transcript), OR `tune description: <skill path>` when the skill should have triggered but didn't, OR "new skill: <kebab-name>".
+- Routing: the evidenced environment mechanism or `structural-enforcement: <command and wiring>`; otherwise the most relevant existing skill path, `tune description: <skill path>`, or "new skill: <kebab-name>".
 
 Skip trivial things (typos, retries). Skip anything already obvious from the existing skill the parent followed. Skip implementation details that drift: specific SHAs, current file paths, version numbers, exact byte counts. Convention generalizes; pinned details don't.
 

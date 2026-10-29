@@ -18,7 +18,8 @@ Apply each criterion to every finding:
 - Convergence: findings echoed by 2+ reviewers carry higher confidence. Singletons must clear a higher bar on the other criteria.
 - Decision-changing: a future agent does something different because of the edit, not just reads more text.
 - Structural-mechanism check: route to Backlog when a lint rule, script, metadata flag, or runtime check already enforces the rule or could enforce it cheaply. Skill prose is for things mechanisms cannot enforce.
-- Skill-was-used: only accept findings that route to a skill, tool, or MCP the parent actually invoked in the transcript. If the skill wasn't used but should have been, route to `tune description: <skill path>` so it triggers next time. If neither, reject as `skill-not-used`.
+- Environment mechanism: an evidenced unwired, missing, or silently broken check, or a mechanical standard, is a structural-enforcement candidate. A new prose rule is not the primary fix. Keep those candidates in severity order. Do not treat the candidate as permission to edit the repository or to file a tracker item. Do not invent token or time savings.
+- Skill-was-used applies to skill edits: accept a body edit only for a skill, tool, or MCP the parent actually invoked. A catalog skill that should have triggered routes to `tune description: <skill path>`. Reject other unsupported skill edits as `skill-not-used`. Environment and structural-enforcement candidates are exempt from this invocation filter when session and repository evidence support the mechanism; keep an unwired or never-run check in Backlog even when no skill-edit route applies.
 - Already-covered: read the target skill before accepting any body-edit row. If the proposal duplicates clear, well-placed existing guidance, reject as `already-covered`. The issue is execution, not the skill. If the existing guidance is buried, weak, or easy to skip past, accept the row but reframe the proposal as a wording / placement improvement to make it fire (not a duplicate addition).
 
 Drop (implementation details that drift):
@@ -53,4 +54,4 @@ For each rejected finding:
 
 ## Backlog
 
-For each item, describe the pattern, what was hit, and the suggested mechanism. The parent files each to whatever devex / backlog tracker the team uses.
+For each item, describe the pattern, what was hit, and the suggested mechanism. Structural-enforcement candidates stay here for the parent to present. Do not file a tracker item unless the user asked.

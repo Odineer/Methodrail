@@ -1,0 +1,13 @@
+id: fidelity.create-formal-verification-skill
+kind: fidelity
+skill: create-formal-verification-skill
+description: Formal creation keeps code correspondence and does not require statechart.
+input:
+  prompt: "Prove the lease invariant with a formal check. Use whatever verifier this repo can run."
+expected:
+  skills:
+    required: [create-formal-verification-skill]
+  behaviors:
+    - map model steps to real operations and their atomicity
+    - report a missing verifier as a setup gap
+    - do not require statechart, mise, or Java from Methodrail
