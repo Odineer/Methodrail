@@ -110,7 +110,7 @@ Methodrail's value is careful selection and composition, not NIH. Major methodol
 
 - [pstack](https://github.com/cursor/plugins/tree/main/pstack) (Lauren Tan) — principles composed into Methodrail's existing owners, plus `how`, `why`, `blast-radius`, architecture and parallel operators, app and formal verification skills, `ketchup`, and forensics
 - [mattpocock/skills](https://github.com/mattpocock/skills) — domain modeling, diagnosis, TDD, review, wayfinder, design discipline, writing-for-agents, handoff, and the retro environment lens composed into `reflect`
-- [obra/superpowers](https://github.com/obra/superpowers) — the hard evidence gate behind `verify-change`
+- [obra/superpowers](https://github.com/obra/superpowers) — the hard evidence gate behind `verify-change` and the review feedback procedure behind `receiving-code-review`
 - [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) — composed simplicity discipline (reuse, native capability, shared-owner fixes, comment judgment) inside existing skills; no Ponytail command or public skill
 - [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) — composed change-created cleanup, hunk-to-task scope, and consequential-assumption handling inside existing skills; community interpretation of Karpathy's observations, not Karpathy-authored skills; no public karpathy-guidelines skill
 - [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) — composed observable specs, ticket proof pointers, review of weakened checks, repository test commands, and selective context into existing owners; no public Addy skill, router, or lifecycle wrapper

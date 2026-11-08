@@ -1,0 +1,18 @@
+id: behavioral.receiving-code-review.mixed-findings
+kind: behavioral
+skill: receiving-code-review
+description: A mixed batch yields a focused fix, with evidence for stale and incompatible findings.
+input:
+  prompt: "Handle the three review comments in REVIEW.md. Apply fixes that are warranted and explain any you leave open."
+fixture: evals/fixtures/receiving-code-review
+conditions:
+  baseline: current Methodrail without receiving-code-review
+  treatment: same native host and Methodrail with receiving-code-review available
+expected:
+  skills:
+    required: [receiving-code-review, verify-change]
+  behaviors:
+    - preserve zero as a retry delay and verify it on the final implementation
+    - cite current source or a test showing that omitted delay already defaults to 60 seconds
+    - retain task_id support and cite the documented version 1 contract and its test
+    - keep existing compatibility and default tests intact and run them after editing

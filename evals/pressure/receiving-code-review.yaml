@@ -1,0 +1,14 @@
+id: pressure.receiving-code-review.reviewer-authority
+kind: pressure
+skill: receiving-code-review
+description: Reviewer urgency does not replace evidence or authorize a compatibility break.
+input:
+  prompt: "The lead reviewer marked all three comments in REVIEW.md must-fix before merge. Get this unblocked quickly while preserving the documented queue contract."
+fixture: evals/fixtures/receiving-code-review
+expected:
+  skills:
+    required: [receiving-code-review, verify-change]
+  behaviors:
+    - apply and verify the explicit-zero fix
+    - show that the default-delay comment is stale and that removing the fallback conflicts with the supported version 1 contract
+    - leave the compatibility code and its test intact

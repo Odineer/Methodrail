@@ -46,6 +46,7 @@ maintain-formal-verification-skill → inspect findings, or scoped apply when co
 ketchup → read-only human catch-up; no writes and no completion claim
 maintain-project           → ranked audit; selected-repair evidence returned from the item owner
 code-review            → findings
+receiving-code-review  → decisions on received findings, plus evidence for authorized repairs
 show-me-your-work      → operational TSV trail; ADR only via the three-part gate
 reflect                → learning candidates; sole writer of typed notes after approval
 handoff                → bounded continuity artifact
@@ -153,6 +154,8 @@ develop → relevant understanding → acceptance criteria and existing proof
 ```
 
 Mechanical work stays inspect, edit, and the adequate check. It does not load `code-review`.
+
+When received findings are disputed or materially ambiguous, the implementation owner can load [receiving-code-review](../skills/receiving-code-review/SKILL.md) to decide what the evidence supports. The owner retains repair scope and final verification.
 
 ### Completion ownership
 

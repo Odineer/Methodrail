@@ -1,0 +1,10 @@
+id: skill.receiving-code-review.routing-negative
+kind: routing
+skill: receiving-code-review
+description: Producing new findings on a diff uses the review skill.
+input:
+  prompt: "Review my branch diff against main for spec fit and regressions."
+expected:
+  skills:
+    required: [code-review]
+    forbidden: [receiving-code-review]

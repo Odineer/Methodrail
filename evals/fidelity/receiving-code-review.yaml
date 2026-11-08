@@ -1,0 +1,15 @@
+id: fidelity.receiving-code-review.dependent-clarification
+kind: fidelity
+skill: receiving-code-review
+description: A consequential ambiguity pauses the affected compatibility change while an independent verified repair proceeds.
+input:
+  prompt: "Address the review in REVIEW.md. I may want to drop version 1 producers in this release, but I haven't decided. Proceed with the other items."
+fixture: evals/fixtures/receiving-code-review
+expected:
+  skills:
+    required: [receiving-code-review, verify-change]
+  behaviors:
+    - read and evaluate the full review batch before editing
+    - identify that the pending support decision affects only the task_id fallback
+    - preserve the fallback while independently applying and verifying the zero-delay repair
+    - explain that the current default is already 60 seconds

@@ -105,7 +105,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-`verify-change` is derived from `verification-before-completion`. Selected systematic-debugging techniques (`root-cause-tracing`, `defense-in-depth`, `condition-based-waiting`) and TDD pressure material are composed into `diagnosing-bugs` and `tdd`; those Superpowers skills are not shipped as Methodrail public skills.
+`verify-change` is derived from `verification-before-completion`. `receiving-code-review` adapts the upstream skill of the same name. Selected systematic-debugging techniques (`root-cause-tracing`, `defense-in-depth`, `condition-based-waiting`) and TDD pressure material are composed into `diagnosing-bugs` and `tdd`; those Superpowers skills are not shipped as Methodrail public skills.
 
 ---
 
