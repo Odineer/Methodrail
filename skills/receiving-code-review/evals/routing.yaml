@@ -1,0 +1,9 @@
+id: skill.receiving-code-review.routing-positive
+kind: routing
+skill: receiving-code-review
+description: Existing findings are evaluated before a repair is chosen.
+input:
+  prompt: "The PR reviewer wants us to remove the legacy fallback. Check whether the finding holds and fix it if warranted."
+expected:
+  skills:
+    required: [receiving-code-review]

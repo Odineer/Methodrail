@@ -77,7 +77,8 @@ Fidelity deviations for ketchup and the formal pair: no `bro`, no ketchup-video,
 | test-driven-development | Iron-law TDD | COMPOSE | inside `tdd` references | Duplicate TDD; pressure/honesty rules reused | portable |
 | using-superpowers | Global skill bootstrap | SKIP | Methodrail workflows | Competing control plane | — |
 | brainstorming / writing-plans / executing-plans | Planning OS | SKIP | `wayfinder`, `/develop` | Overlapping orchestration | — |
-| requesting-code-review / receiving-code-review | Review handshake | SKIP | `/review`, `code-review` | Overlap | — |
+| requesting-code-review | Request a review | SKIP | `/review`, `code-review` | Existing review entrypoints | — |
+| receiving-code-review | Assess and address existing review findings | ADAPT | `receiving-code-review` | Verification before implementation and evidence-backed disposition | portable |
 | subagent-driven-development / dispatching-parallel-agents | Parallel execution OS | SKIP | `swarm`, `arena` | Overlapping orchestration | subagent-required |
 | using-git-worktrees | Worktree isolation | SKIP | arena/swarm output paths | Helper, not a product skill | git |
 | finishing-a-development-branch / writing-skills | Superpowers packaging | SKIP | — | Org-specific | — |
