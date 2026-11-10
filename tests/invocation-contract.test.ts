@@ -3,7 +3,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { EXPLICIT_SKILLS, SUGGEST_ONLY_SKILLS, WORKFLOW_SKILLS } from "../src/validate.js";
+import { EXPLICIT_SKILLS, HOST_RESERVED_SKILL_NAMES, SUGGEST_ONLY_SKILLS, WORKFLOW_SKILLS } from "../src/validate.js";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 
@@ -20,6 +20,14 @@ test("SKILL-MECHANICS distinguishes host discovery from parent composition", () 
   }
 });
 
+test("review workflow avoids Cursor's reserved first-party skill name", () => {
+  // Observed on Cursor: ~/.cursor/skills-cursor/review asks Bugbot vs Security, shadowing a plugin `review`.
+  assert.equal((WORKFLOW_SKILLS as readonly string[]).includes("methodrail-review"), true);
+  for (const name of readdirSync(join(root, "skills"))) {
+    assert.equal(HOST_RESERVED_SKILL_NAMES.has(name), false, name);
+  }
+});
+
 test("workflow and suggest-only skills stay explicit", () => {
   for (const name of [...WORKFLOW_SKILLS, ...SUGGEST_ONLY_SKILLS]) {
     assert.equal(EXPLICIT_SKILLS.has(name), true, name);
@@ -29,7 +37,7 @@ test("workflow and suggest-only skills stay explicit", () => {
 });
 
 test("parent skills name interrogate and wait instead of loading it", () => {
-  const parents = ["architect", "develop", "review", "code-review"];
+  const parents = ["architect", "develop", "methodrail-review", "code-review"];
   for (const name of parents) {
     const source = readFileSync(join(root, "skills", name, "SKILL.md"), "utf8");
     assert.match(source, /[Nn]ame `interrogate`/, name);
@@ -107,7 +115,7 @@ test("research returns findings in chat and does not write knowledge by default"
 
 test("code-review WIP includes staged, unstaged, and untracked work", () => {
   const source = readFileSync(join(root, "skills/code-review/SKILL.md"), "utf8");
-  const review = readFileSync(join(root, "skills/review/SKILL.md"), "utf8");
+  const review = readFileSync(join(root, "skills/methodrail-review/SKILL.md"), "utf8");
   assert.match(source, /git diff --cached/);
   assert.match(source, /git ls-files --others --exclude-standard/);
   assert.match(source, /never includes the working tree/);
@@ -135,7 +143,7 @@ test("durable knowledge writes go through reflect or existing decision records",
 
 test("blast-radius stays read-only under review and investigate", () => {
   const blast = readFileSync(join(root, "skills/blast-radius/SKILL.md"), "utf8");
-  const review = readFileSync(join(root, "skills/review/SKILL.md"), "utf8");
+  const review = readFileSync(join(root, "skills/methodrail-review/SKILL.md"), "utf8");
   const investigate = readFileSync(join(root, "skills/investigate/SKILL.md"), "utf8");
   assert.match(blast, /\*\*Read-only parent\*\*/);
   assert.match(blast, /temp file outside the repository/);

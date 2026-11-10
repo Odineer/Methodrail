@@ -28,7 +28,7 @@ const REQUIRED_SKILLS = new Set([
   "develop",
   "debug",
   "refactor",
-  "review",
+  "methodrail-review",
   "how",
   "observe",
   "why",
@@ -74,11 +74,16 @@ export const WORKFLOW_SKILLS = [
   "develop",
   "debug",
   "refactor",
-  "review",
+  "methodrail-review",
   "maintain-project",
 ] as const;
 
 export const SUGGEST_ONLY_SKILLS = ["interrogate"] as const;
+
+// Cursor ships a first-party skill named `review` (its Bugbot/Security
+// dispatcher); a shipped skill with that name is shadowed there and
+// unreachable via `/review`, so the review workflow is `methodrail-review`.
+export const HOST_RESERVED_SKILL_NAMES = new Set(["review"]);
 
 export const EXPLICIT_SKILLS = new Set([
   "methodrail-init",
@@ -86,7 +91,7 @@ export const EXPLICIT_SKILLS = new Set([
   "develop",
   "debug",
   "refactor",
-  "review",
+  "methodrail-review",
   "prototype",
   "grill-with-docs",
   "wayfinder",
@@ -251,6 +256,9 @@ function validateSkill(path: string, shipped: boolean): ValidationIssue[] {
   }
 
   const folder = basename(dirname(path));
+  if (shipped && HOST_RESERVED_SKILL_NAMES.has(folder)) {
+    issues.push(issue(path, `Skill name "${folder}" is reserved by a host first-party skill and would be shadowed; use a methodrail- prefixed name`));
+  }
   if (typeof metadata.name !== "string" || metadata.name.trim() === "") {
     issues.push(issue(path, "Skill frontmatter requires a non-empty name"));
   } else if (metadata.name !== folder) {

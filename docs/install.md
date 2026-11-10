@@ -9,7 +9,9 @@ Three supported installs:
 When the plugin is listed, install **Methodrail** from the Cursor marketplace and reload the window. Then in a project:
 
 1. Run `/methodrail-init`.
-2. Use `/investigate`, `/develop`, `/debug`, `/refactor`, or `/review`.
+2. Use `/investigate`, `/develop`, `/debug`, `/refactor`, or `/methodrail-review`.
+
+Cursor ships its own first-party `/review` skill (a Bugbot/Security dispatcher), which shadows any plugin skill named `review`. That is why Methodrail's review workflow is `/methodrail-review` on every host — typing `/review` in Cursor will always offer Bugbot or Security Review instead.
 
 Until it is listed, use the local plugin surfaces below. Submission is a maintainer action at https://cursor.com/marketplace/publish — see the checklist at the end of this page.
 

@@ -1,13 +1,13 @@
 id: behavioral.review.consume-verification
 kind: behavioral
-skill: review
+skill: methodrail-review
 description: Review should consume supplied verification evidence instead of rediscovering it.
 input:
   prompt: "Review this checkout change. Tests and verify-project evidence are in the packet."
 fixture: evals/fixtures/review-with-evidence
 expected:
   skills:
-    required: [review, code-review]
+    required: [methodrail-review, code-review]
     forbidden: [how, swarm, interrogate]
   behaviors:
     - consume supplied verification evidence

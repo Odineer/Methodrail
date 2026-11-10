@@ -12,7 +12,7 @@ Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.
 | diagnosing-bugs | Feedback-loop diagnosis | ADAPT | `diagnosing-bugs` | Won comparative review vs Superpowers and Methodrail | portable; HITL script optional |
 | tdd | Red-green vertical slices at seams | ADAPT | `tdd` | Best seam/anti-pattern guidance; compatible with Methodrail's "not only TDD" rule | portable |
 | codebase-design | Deep modules / seams | ADAPT | `codebase-design` | Distinct from `architect` | portable; DESIGN-IT-TWICE prefers subagents |
-| code-review | Standards vs Spec axes | ADAPT | `code-review` | Two-axis split is the leaf; `/review` orchestrates | subagent-optional |
+| code-review | Standards vs Spec axes | ADAPT | `code-review` | Two-axis split is the leaf; `/methodrail-review` orchestrates | subagent-optional |
 | grill-with-docs | Interview + glossary/ADRs | ADAPT | `grill-with-docs` | Composes grilling; explicit only | portable |
 | grilling | Design-tree interview | COMPOSE | inside `grill-with-docs` | Avoid a second interview skill | portable |
 | wayfinder | Decision-ticket map through fog | ADAPT | `wayfinder` | Operational decision frontier | tracker optional; local markdown fallback |
@@ -77,7 +77,7 @@ Fidelity deviations for ketchup and the formal pair: no `bro`, no ketchup-video,
 | test-driven-development | Iron-law TDD | COMPOSE | inside `tdd` references | Duplicate TDD; pressure/honesty rules reused | portable |
 | using-superpowers | Global skill bootstrap | SKIP | Methodrail workflows | Competing control plane | — |
 | brainstorming / writing-plans / executing-plans | Planning OS | SKIP | `wayfinder`, `/develop` | Overlapping orchestration | — |
-| requesting-code-review | Request a review | SKIP | `/review`, `code-review` | Existing review entrypoints | — |
+| requesting-code-review | Request a review | SKIP | `/methodrail-review`, `code-review` | Existing review entrypoints | — |
 | receiving-code-review | Assess and address existing review findings | ADAPT | `receiving-code-review` | Verification before implementation and evidence-backed disposition | portable |
 | subagent-driven-development / dispatching-parallel-agents | Parallel execution OS | SKIP | `swarm`, `arena` | Overlapping orchestration | subagent-required |
 | using-git-worktrees | Worktree isolation | SKIP | arena/swarm output paths | Helper, not a product skill | git |

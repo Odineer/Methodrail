@@ -11,12 +11,12 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 | Failure diagnosis and fix | `debug` | Methodrail-native | explicit | `diagnosing-bugs`, `observe`, `runtime-forensics`, `trace-forensics`, `performance`, `hillclimb`, `tdd`, `blast-radius` (shared behavior, boundary crossings, or uncertain impact), `code-review`, `verify-change`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`, `maintain-formal-verification-skill` | humans |
 | Behavior-preserving restructure of a selected target | `refactor` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `how`, `codebase-design`, `blast-radius`, `code-review`, `verify-change`, `maintain-verification-skill`, `maintain-formal-verification-skill` | humans |
 | Evidence-backed project maintenance | `maintain-project` | Methodrail-native | explicit | `improve-codebase-architecture` (`survey-only`), `maintain-verification-skill` (named action and coverage), `maintain-formal-verification-skill` (named action and coverage), `refactor`, `debug`, `develop` when a selected repair requires that owner | humans |
-| Change review workflow | `review` | Methodrail-native | explicit | `code-review`, `blast-radius`, `verify-change` | humans |
+| Change review workflow | `methodrail-review` | Methodrail-native | explicit | `code-review`, `blast-radius`, `verify-change` | humans |
 | Current codebase understanding | `how` | pstack | model-invoked | `observe` | `investigate`, `develop`, `refactor`, `architect` |
 | Historical motivation | `why` | pstack | model-invoked | — | `investigate`, `architect` |
 | Live behavior | `observe` | Methodrail-native | model-invoked | `runtime-forensics` | `investigate`, `debug`, `verify-change` |
 | External/reference research | `research` | Matt Pocock | model-invoked | — | `investigate`, `wayfinder` |
-| Impact beyond the diff | `blast-radius` | pstack | model-invoked | `arena` (wide changes) | `develop`, `debug`, `refactor`, `review` |
+| Impact beyond the diff | `blast-radius` | pstack | model-invoked | `arena` (wide changes) | `develop`, `debug`, `refactor`, `methodrail-review` |
 | Domain vocabulary and durable domain decisions | `domain-modeling` | Matt Pocock | model-invoked | Glossary updates when project terms, ownership, lifecycle, or invariants crystallize; ADR offer when all three decision criteria hold | `develop`, `debug` when verified behavior changes the domain contract, `grill-with-docs`, `wayfinder` |
 | Ambiguous requirements interview | `grill-with-docs` | Matt Pocock | explicit | `domain-modeling` | `develop`, `wayfinder` |
 | Large uncertain planning | `wayfinder` | Matt Pocock | explicit | `grill-with-docs`, `research`, `prototype` | `develop` |
@@ -27,9 +27,9 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 | Test-first implementation | `tdd` | Matt Pocock | model-invoked | `codebase-design`, `verify-change` | `develop`, `debug` |
 | Baseline bug diagnosis | `diagnosing-bugs` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model/workflow invoked | `runtime-forensics`, `trace-forensics`, `performance` | `debug` |
 | Completion verification | `verify-change` | Superpowers-derived | model/workflow invoked | `observe`, project verify skill; consumes a formal result without creating or auditing one | all workflows |
-| Two-axis diff review | `code-review` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model-invoked | — | `review`, `develop` |
+| Two-axis diff review | `code-review` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model-invoked | — | `methodrail-review`, `develop` |
 | Assessment and repair of received review findings | `receiving-code-review` | Superpowers-derived | model/workflow invoked | `verify-change` | humans; implementation workflows for disputed or ambiguous findings |
-| Adversarial independent review | `interrogate` | pstack | explicit / high rigor | — | `review` (suggested only) |
+| Adversarial independent review | `interrogate` | pstack | explicit / high rigor | — | `methodrail-review` (suggested only) |
 | Competing candidates | `arena` | pstack | explicit | `verify-change` | `architect`, `blast-radius` |
 | Partitioned parallel coverage | `swarm` | pstack | explicit | — | humans, large investigations |
 | Durable spec from resolved intent | `to-spec` | Matt Pocock | explicit | — | `develop` after grilling |
@@ -57,7 +57,7 @@ Typical artifacts, not process nesting: `how` → implementation understanding; 
 - **TDD:** `tdd` (Matt). Superpowers TDD and pstack TDD are not public. Superpowers pressure material is a `tdd` reference. Verification-without-TDD remains `verify-change`.
 - **Prototype:** one public `prototype`. Matt's throwaway branches plus Methodrail evidence semantics. pstack prototype playbook is a reference, not a competing skill.
 - **Invocation:** `explicit` means host discovery is off (`disable-model-invocation: true`). Workflows and other parent skills may still load that skill when their procedure's conditions match. `interrogate` is suggest-only: name it and wait. Canonical rules: [SKILL-MECHANICS](../skills/writing-for-agents/SKILL-MECHANICS.md).
-- **Review:** `/review` is the workflow; `code-review` is the two-axis leaf. `interrogate` is suggest-only.
+- **Review:** `/methodrail-review` is the workflow; `code-review` is the two-axis leaf. `interrogate` is suggest-only.
 - **Implement:** Matt `implement` is not shipped. `/develop` owns the lifecycle and reuses `tdd` / `code-review` / `verify-change`.
 - **Simplicity:** `references/simplicity.md` is the shared procedure, including change-created cleanup. There is no public Ponytail or karpathy-guidelines skill, command, or review axis. Compose into `develop`, `codebase-design`, `refactor`, `diagnosing-bugs`, `code-review`, and `improve-codebase-architecture`.
 - **Assumptions:** `references/decision-frontier.md` owns uncertainty resolution, including consequential assumptions. Do not add an assumption ledger or a public clarification skill.

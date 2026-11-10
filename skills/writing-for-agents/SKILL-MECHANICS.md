@@ -43,7 +43,7 @@ Split off a model-invoked skill when you have a distinct leading word that shoul
 
 ## Router skills
 
-When explicit skills multiply past what a human can remember, a **router skill** names the others and when to reach for each. Methodrail's routers are the native workflow skills: `methodrail-init`, `investigate`, `develop`, `debug`, `refactor`, `review`, `maintain-project`.
+When explicit skills multiply past what a human can remember, a **router skill** names the others and when to reach for each. Methodrail's routers are the native workflow skills: `methodrail-init`, `investigate`, `develop`, `debug`, `refactor`, `methodrail-review`, `maintain-project`.
 
 Do not add `ask-matt`, `poteto-mode`, or `using-superpowers`. Do not let `wayfinder` or `architect` become global routers.
 

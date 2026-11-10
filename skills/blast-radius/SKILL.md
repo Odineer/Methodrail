@@ -10,7 +10,7 @@ Find what a change breaks somewhere else, before it ships.
 
 Companion to `how` and `why`. Listing the callers is not the job. Grep can do that in a second. The job is the breakage grep won't show you.
 
-This is not generic code review. Do not collapse it into `code-review` or `/review`.
+This is not generic code review. Do not collapse it into `code-review` or `/methodrail-review`.
 
 ## Don't trust your own writeup
 
@@ -35,7 +35,7 @@ Any safety fact you can't get to step 4, say so. Don't write it up as settled.
 3. Look where grep stops. Read the source of the library you call, and check its pinned version and any local patch. Follow what a symbol search misses: the JSON an API returns, a DB column, a wire format, another language reading the same bytes, a feature flag, code three hops downstream.
 4. Be honest about each risk. Give it a real chance of happening and a real cost if it does. Cite a real `file:line`. A search that finds nothing is still an answer. Never make up a caller or an API.
 5. Prove the one fact.
-   - **Read-only parent** (`/review`, `/investigate`, or the user said not to edit): run an existing test or script first. If you need a new probe, run it from a temp file outside the repository (or an equivalent one-shot command) and leave the worktree unchanged. Do not add tests, scripts, or product files.
+   - **Read-only parent** (`/methodrail-review`, `/investigate`, or the user said not to edit): run an existing test or script first. If you need a new probe, run it from a temp file outside the repository (or an equivalent one-shot command) and leave the worktree unchanged. Do not add tests, scripts, or product files.
    - **Write parent** (`/develop`, `/debug`, `/refactor`, or a direct request that may edit): prefer a real test or script in the repo that calls the real code and fails loud if you're wrong.
    If you can't prove it cheaply, mark it unproven. Don't overstate.
 6. For a big or wide change, run `arena` only when the parent may edit and the host supports competing candidates. Under a read-only parent, obtain a second independent pass in this context or state the limitation. See [host capabilities](../../references/host-capabilities.md).

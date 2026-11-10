@@ -1,9 +1,9 @@
 id: skill.review.routing-negative
 kind: routing
-skill: review
+skill: methodrail-review
 description: "Implementation requests do not automatically invoke the explicit review entry skill."
 input:
   prompt: "Implement the payment change and verify it."
 expected:
   skills:
-    forbidden: [review]
+    forbidden: [methodrail-review]

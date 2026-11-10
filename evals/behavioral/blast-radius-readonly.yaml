@@ -1,12 +1,12 @@
 id: behavioral.blast-radius.read-only-parent
 kind: behavioral
 skill: blast-radius
-description: Under /review, blast-radius proves safety without writing repository files.
+description: Under /methodrail-review, blast-radius proves safety without writing repository files.
 input:
   prompt: "Review this payment schema change. Stay read-only. What else could it break?"
 expected:
   skills:
-    required: [review, blast-radius]
+    required: [methodrail-review, blast-radius]
     forbidden: [arena, swarm, interrogate]
   behaviors:
     - identify impact beyond the diff

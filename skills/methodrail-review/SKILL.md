@@ -1,7 +1,7 @@
 ---
-name: review
+name: methodrail-review
 description: Review a change for correctness, requirement fit, maintainability, evidence, and regressions. Run only when explicitly requested.
-when_to_use: Explicit request only (/review), or an active workflow names it. Reviews a delivered change for correctness, evidence, and regressions.
+when_to_use: Explicit request only (/methodrail-review), or an active workflow names it. Reviews a delivered change for correctness, evidence, and regressions.
 disable-model-invocation: true
 ---
 
@@ -45,7 +45,7 @@ Do not run multiple expensive reviewers for trivial changes. Give the reviewer a
 
 ## Done when
 
-The requested change range was inspected in context, findings are evidence-backed and prioritized, and verification gaps are explicit. Standalone `/review` ends with one [completion report](../../references/protocols/completion-report.md). A composed call returns the findings to the parent.
+The requested change range was inspected in context, findings are evidence-backed and prioritized, and verification gaps are explicit. Standalone `/methodrail-review` ends with one [completion report](../../references/protocols/completion-report.md). A composed call returns the findings to the parent.
 
 ## Neighbors
 

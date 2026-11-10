@@ -5,7 +5,7 @@ Upstream revision: 59db609eb1e18aaf59b63284d0e52255aff0c63c
 License: MIT (Copyright (c) 2026 Matt Pocock)
 
 Methodrail changes:
-- /review remains the workflow entrypoint; this skill is the two-axis leaf
+- /methodrail-review remains the workflow entrypoint; this skill is the two-axis leaf
 - issue-tracker setup isolated; no setup-matt-pocock-skills requirement
 - Methodrail review-packet integration
 - subagents are conditional. Bounded review uses local Standards and Spec passes. Isolated reviewers require a rigor justification. Host availability alone does not escalate. This replaces the upstream default that both axes run as parallel sub-agents whenever the host supports them.

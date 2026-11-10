@@ -1,0 +1,10 @@
+id: skill.review.routing-positive
+kind: routing
+skill: methodrail-review
+description: "Explicit review requests activate methodrail-review."
+input:
+  prompt: "/methodrail-review this payment change"
+expected:
+  skills:
+    required: [methodrail-review]
+    forbidden: [interrogate]

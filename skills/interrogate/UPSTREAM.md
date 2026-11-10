@@ -7,7 +7,7 @@ License: MIT (Copyright (c) 2026 Lauren Tan)
 Replaces the previous Methodrail interrogate reimplementation. Explicit / high-rigor only. Multi-model reviewers degrade to independent contexts or a stated limitation. Methodrail review-packet integration preserved.
 
 Methodrail changes:
-- activation remains explicit-only; /review does not auto-invoke
+- activation remains explicit-only; /methodrail-review does not auto-invoke
 - Cursor model roles centralized in references/host-capabilities.md as of 4b4d98e
 - review-packet cross-link
 - 2026-09-13: took matching rubric wording; skipped host model slugs and principle-skill names
