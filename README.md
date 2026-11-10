@@ -31,7 +31,7 @@ Supported installs (marketplace once listed, local plugin surfaces, Claude Code 
 1. Install this repository as a Cursor Plugin.
 2. Open a project in Cursor.
 3. Run `/methodrail-init`.
-4. Use `/investigate`, `/develop`, `/debug`, `/refactor`, or `/review`.
+4. Use `/investigate`, `/develop`, `/debug`, `/refactor`, or `/methodrail-review`.
 
 For local plugin development, clone this repository anywhere, then copy only the Cursor plugin surfaces:
 
@@ -86,7 +86,7 @@ Workflow entry skills are explicit:
 - `/develop` — understand, decide, implement, and verify proportionally
 - `/debug` — reproduce and find root cause before fixing
 - `/refactor` — execute one selected structural change while preserving relevant behavior
-- `/review` — review intent, diff, evidence, and blast radius
+- `/methodrail-review` — review intent, diff, evidence, and blast radius
 - `/maintain-project` — audit and rank architecture, verification, and tooling debt; a bare invocation does not edit. Example: `/maintain-project` reports ranked findings; `Fix findings T1 and V1` revalidates those findings and repairs that batch
 
 Curated operators load when relevant. Expensive skills stay explicit. The key distinctions:

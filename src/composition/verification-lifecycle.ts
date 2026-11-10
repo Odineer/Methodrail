@@ -22,7 +22,7 @@ export function staticVerificationContract(root: string): string[] {
   const develop = readFileSync(join(root, "skills/develop/SKILL.md"), "utf8");
   const debug = readFileSync(join(root, "skills/debug/SKILL.md"), "utf8");
   const refactor = readFileSync(join(root, "skills/refactor/SKILL.md"), "utf8");
-  const review = readFileSync(join(root, "skills/review/SKILL.md"), "utf8");
+  const review = readFileSync(join(root, "skills/methodrail-review/SKILL.md"), "utf8");
   const investigate = readFileSync(join(root, "skills/investigate/SKILL.md"), "utf8");
   const verify = readFileSync(join(root, "skills/verify-change/SKILL.md"), "utf8");
   const create = readFileSync(join(root, "skills/create-verification-skill/SKILL.md"), "utf8");

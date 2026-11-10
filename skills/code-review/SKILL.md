@@ -1,7 +1,7 @@
 ---
 name: code-review
-description: "Two-axis review of the diff since a fixed point: Standards (repo coding standards plus a smell baseline) and Spec (does it implement the originating request/spec?). Use when reviewing a branch, PR, or work-in-progress. Do not use as the Methodrail /review workflow; that orchestrates this skill."
-when_to_use: Use when reviewing a branch, PR, or work-in-progress diff for standards and spec fit. Do not use as the /review workflow; that orchestrates this skill.
+description: "Two-axis review of the diff since a fixed point: Standards (repo coding standards plus a smell baseline) and Spec (does it implement the originating request/spec?). Use when reviewing a branch, PR, or work-in-progress. Do not use as the Methodrail /methodrail-review workflow; that orchestrates this skill."
+when_to_use: Use when reviewing a branch, PR, or work-in-progress diff for standards and spec fit. Do not use as the /methodrail-review workflow; that orchestrates this skill.
 ---
 
 # Code review
@@ -13,7 +13,7 @@ Two-axis review of the requested range since a fixed point, including uncommitte
 
 Keep Standards and Spec distinct. For a bounded substantive change, run them as separate passes in the current context. Use isolated independent reviewers only when [rigor](../../references/rigor.md) selects that depth: the change is sensitive or consequential across a boundary, the host can isolate, and independence meaningfully reduces risk. Host support alone is not a reason. If the host cannot isolate, run separate local passes and say the review was not independent. An explicit request for a stronger mechanism is honored within its scope.
 
-`/review` is the Methodrail workflow that may also invoke `blast-radius` and `verify-change`, and may name `interrogate` and wait. This skill is the leaf that performs the two-axis inspection. Do not load `interrogate` from this skill.
+`/methodrail-review` is the Methodrail workflow that may also invoke `blast-radius` and `verify-change`, and may name `interrogate` and wait. This skill is the leaf that performs the two-axis inspection. Do not load `interrogate` from this skill.
 
 Give reviewers a [review packet](../../references/protocols/review-packet.md) when one exists. A composed reviewer uses the packet's base, spec, and diff and does not ask the user to supply them again. Standalone review resolves the range from the request and repository before seeking missing human input.
 

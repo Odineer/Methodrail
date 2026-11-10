@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+Rename the review workflow skill `review` → `methodrail-review` (breaking: invoke `/methodrail-review`). Cursor ships a first-party skill named `review` that asks Bugbot vs Security Review, which shadowed Methodrail's skill so `/review` never reached it. Validation now rejects shipped skill names reserved by host first-party skills.
+
 Make the Z Code install first-class without changing other hosts.
 
 - Z Code plugin surface: `.zcode-plugin/plugin.json` loads the shared `skills/` tree, root `marketplace.json` catalogs it, and `hooks/hooks.json` injects the projected family invariant on every SessionStart (fail open, Cursor's ledger untouched in `hooks/cursor.json`)

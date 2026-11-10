@@ -66,6 +66,10 @@ Z Code loads `skills/*/SKILL.md` from this plugin or from `~/.zcode/skills/` and
 
 Z Code persists full session transcripts in `~/.zcode/cli/db/db.sqlite`. Candidate sessions for a workspace: `select id from session where directory = '<absolute workspace path>' order by time_updated desc`. Several sessions can share one directory, and a concurrent session can be newer; take the newest whose first user text is this conversation's opening prompt, not blindly `limit 1`. Turns are `message` rows for that `session_id` in `sequence` order; the role is `json_extract(message.data, '$.role')` (user/assistant — there is no role column). Content blocks are `part` rows joined on `message_id`, ordered by `message.sequence, part.sequence` (`part.sequence` restarts within each message). The type is `json_extract(part.data, '$.type')`: `text` and `reasoning` carry their text in `data.text`; `tool` carries the tool name and full input and output in `data.state`; `step-start` and `step-finish` are boundary rows with no content. Query read-only (`sqlite3 'file:<path>?mode=ro'` …); never write the database while a session is live. Do not use `~/.zcode/cli/rollout/*.jsonl` as a transcript; those model-io files are partial debug captures.
 
+## Cursor
+
+Cursor ships first-party skills under reserved names (observed: `review`, its Bugbot/Security dispatcher). A plugin skill with the same name is shadowed and unreachable by that slash name, so shipped skill names must avoid host first-party names — hence `methodrail-review`, not `review`. Validation rejects the observed reserved names.
+
 ## Control planes
 
 Methodrail's control plane is the native host plus Methodrail workflow entry skills. Do not load `poteto-mode`, `ask-matt`, `using-superpowers`, or other global routers.
