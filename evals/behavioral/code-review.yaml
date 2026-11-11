@@ -1,9 +1,15 @@
-id: behavioral.code-review.two-axes
+id: behavioral.code-review.three-axes
 kind: behavioral
 skill: code-review
-description: Loading code-review should keep Standards and Spec axes separate.
+description: Review should flag documentation drift and newly obsolete code separately from Standards and Spec findings.
 input:
-  prompt: "Review the changes since main."
+  prompt: >-
+    Review my WIP since main. The request is to replace the old CSV parser while preserving the CLI interface.
+    The staged parser passes the existing behavior tests, but adds an import that violates CONTRIBUTING.md.
+    The unstaged call-site change removes the last consumer of the old private parser helper.
+    The unchanged contributor guide still directs maintainers to extend that helper.
+    An untracked file adds the new parser plugin, which the manifest registers by name, so it has no direct calls.
+    There is also an unrelated legacy utility that was already unused on main.
 conditions:
   baseline: native agent without Methodrail skills
   treatment: native agent with the code-review skill loaded
@@ -13,6 +19,9 @@ expected:
   behaviors:
     - pin a fixed point and inspect that range
     - include staged, unstaged, and untracked work when reviewing WIP
-    - report Standards and Spec separately
-    - not merge or rerank findings across axes
-  baseline_failure: a single blended style-and-intent review
+    - report Standards, Spec, and Maintainability separately without duplicate findings
+    - flag the documented import violation under Standards
+    - assess preservation of the CLI interface under Spec
+    - cite the obsolete helper and stale contributor guide under Maintainability
+    - recognize the manifest registration as a consumer and omit unrelated legacy debt
+  baseline_failure: stops at standards and behavior, misses artifacts outside the diff, or mistakes indirect use for dead code

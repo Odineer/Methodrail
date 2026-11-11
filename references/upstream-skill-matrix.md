@@ -12,7 +12,7 @@ Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.
 | diagnosing-bugs | Feedback-loop diagnosis | ADAPT | `diagnosing-bugs` | Won comparative review vs Superpowers and Methodrail | portable; HITL script optional |
 | tdd | Red-green vertical slices at seams | ADAPT | `tdd` | Best seam/anti-pattern guidance; compatible with Methodrail's "not only TDD" rule | portable |
 | codebase-design | Deep modules / seams | ADAPT | `codebase-design` | Distinct from `architect` | portable; DESIGN-IT-TWICE prefers subagents |
-| code-review | Standards vs Spec axes | ADAPT | `code-review` | Two-axis split is the leaf; `/methodrail-review` orchestrates | subagent-optional |
+| code-review | Standards vs Spec axes | ADAPT | `code-review` | Preserves both dimensions and adds Maintainability; `/methodrail-review` orchestrates | subagent-optional |
 | grill-with-docs | Interview + glossary/ADRs | ADAPT | `grill-with-docs` | Composes grilling; explicit only | portable |
 | grilling | Design-tree interview | COMPOSE | inside `grill-with-docs` | Avoid a second interview skill | portable |
 | wayfinder | Decision-ticket map through fog | ADAPT | `wayfinder` | Operational decision frontier | tracker optional; local markdown fallback |
@@ -88,7 +88,7 @@ Fidelity deviations for ketchup and the formal pair: no `bro`, no ketchup-video,
 | Skill | Purpose | Decision | Canonical Methodrail capability | Reason | Host requirements |
 |---|---|---|---|---|---|
 | ponytail | Reuse, native-capability, and necessity ladder for implementation | COMPOSE | `references/simplicity.md` via `develop`, `codebase-design`, `refactor` | Useful simplicity discipline without a competing workflow | portable |
-| ponytail-review | Diff review for unnecessary complexity | COMPOSE | inside `code-review` Standards | Complexity hunt belongs on the existing Standards axis | portable |
+| ponytail-review | Diff review for unnecessary complexity | COMPOSE | inside `code-review` Maintainability | Review complexity within the requested diff | portable |
 | ponytail-audit | Repo-wide over-engineering survey | COMPOSE | inside `improve-codebase-architecture` | Survey owner already exists; rank by benefit and risk, not deleted lines | portable |
 | ponytail-debt / ponytail-gain / ponytail-help | Debt ledger, scoreboard, command help | SKIP | — | Markers, metrics, and host commands are out of scope | mixed |
 | intensity modes / hooks / host routers | Always-on `/ponytail` activation | SKIP | Methodrail workflows | Competing control plane | host-specific |
@@ -125,7 +125,7 @@ Snapshot `6ca0cd7db39b41b1c37e26d335c507ee92382c6d` (reviewed 2026-10-10). MIT, 
 | api-and-interface-design | API specialist | SKIP | — | Deferred | — |
 | browser-testing-with-devtools | Browser checks | SKIP | project verification | Verification stays portable and tool-aware | browser |
 | debugging-and-error-recovery | Debug loop | SKIP | `diagnosing-bugs` | Proportional diagnosis stays Methodrail-native | — |
-| code-review-and-quality | Multi-axis review | COMPOSE | `code-review` | Relevant correctness and verification effectiveness inside two axes | portable |
+| code-review-and-quality | Multi-axis review | COMPOSE | `code-review` | Relevant correctness and verification effectiveness within the existing review axes | portable |
 | code-simplification | Simplify | SKIP | `references/simplicity.md` | Existing simplicity owner | — |
 | security-and-hardening | Security specialist | SKIP | — | Deferred. Relevant review concerns still apply | — |
 | performance-optimization | Performance specialist | SKIP | `performance` | Existing measured performance operators | — |

@@ -1,9 +1,9 @@
 id: skill.code-review.routing-positive
 kind: routing
 skill: code-review
-description: "Review of a branch diff activates code-review."
+description: "Review of documentation and debt tied to a branch diff activates code-review."
 input:
-  prompt: "Review the changes since main for spec compliance and coding standards."
+  prompt: "Review the changes since main. Did this leave any docs stale or helpers that no longer have callers?"
 expected:
   skills:
     required: [code-review]

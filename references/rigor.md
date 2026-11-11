@@ -97,7 +97,7 @@ Raise rigor when failure is expensive, the change is hard to reverse, or ownersh
 | Situation | Required approach |
 |---|---|
 | Mechanical edit, copy change, or deterministic regeneration with an adequate check | Quick diff inspection and that check. No review skill and no reviewer agents unless the user asked for review. |
-| Substantive change: behavior-changing production code, a meaningful interface or contract change, or configuration that materially affects behavior or safety | `code-review`, with distinct Standards and Spec passes in the current context. A one-line change can be substantive. File or line counts are not the classifier. |
+| Substantive change: behavior-changing production code, a meaningful interface or contract change, or configuration that materially affects behavior or safety | `code-review`, with a separate pass for each axis in the current context. A one-line change can be substantive. File or line counts are not the classifier. |
 | Sensitive or consequential cross-boundary change | Isolated independent review when the host can isolate reviewers and independence meaningfully reduces risk. |
 | Host cannot isolate | Separate local passes. Say that the review was not independent. |
 | User asks for a stronger review mechanism | Honor that request within its scope and the existing invocation boundaries. |

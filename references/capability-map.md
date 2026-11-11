@@ -27,7 +27,7 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 | Test-first implementation | `tdd` | Matt Pocock | model-invoked | `codebase-design`, `verify-change` | `develop`, `debug` |
 | Baseline bug diagnosis | `diagnosing-bugs` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model/workflow invoked | `runtime-forensics`, `trace-forensics`, `performance` | `debug` |
 | Completion verification | `verify-change` | Superpowers-derived | model/workflow invoked | `observe`, project verify skill; consumes a formal result without creating or auditing one | all workflows |
-| Two-axis diff review | `code-review` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model-invoked | — | `methodrail-review`, `develop` |
+| Diff review: Standards, Spec, and Maintainability | `code-review` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model-invoked | — | `methodrail-review`, `develop` |
 | Assessment and repair of received review findings | `receiving-code-review` | Superpowers-derived | model/workflow invoked | `verify-change` | humans; implementation workflows for disputed or ambiguous findings |
 | Adversarial independent review | `interrogate` | pstack | explicit / high rigor | — | `methodrail-review` (suggested only) |
 | Competing candidates | `arena` | pstack | explicit | `verify-change` | `architect`, `blast-radius` |
@@ -57,7 +57,7 @@ Typical artifacts, not process nesting: `how` → implementation understanding; 
 - **TDD:** `tdd` (Matt). Superpowers TDD and pstack TDD are not public. Superpowers pressure material is a `tdd` reference. Verification-without-TDD remains `verify-change`.
 - **Prototype:** one public `prototype`. Matt's throwaway branches plus Methodrail evidence semantics. pstack prototype playbook is a reference, not a competing skill.
 - **Invocation:** `explicit` means host discovery is off (`disable-model-invocation: true`). Workflows and other parent skills may still load that skill when their procedure's conditions match. `interrogate` is suggest-only: name it and wait. Canonical rules: [SKILL-MECHANICS](../skills/writing-for-agents/SKILL-MECHANICS.md).
-- **Review:** `/methodrail-review` is the workflow; `code-review` is the two-axis leaf. `interrogate` is suggest-only.
+- **Review:** `/methodrail-review` is the workflow; `code-review` owns diff inspection. `interrogate` is suggest-only.
 - **Implement:** Matt `implement` is not shipped. `/develop` owns the lifecycle and reuses `tdd` / `code-review` / `verify-change`.
 - **Simplicity:** `references/simplicity.md` is the shared procedure, including change-created cleanup. There is no public Ponytail or karpathy-guidelines skill, command, or review axis. Compose into `develop`, `codebase-design`, `refactor`, `diagnosing-bugs`, `code-review`, and `improve-codebase-architecture`.
 - **Assumptions:** `references/decision-frontier.md` owns uncertainty resolution, including consequential assumptions. Do not add an assumption ledger or a public clarification skill.

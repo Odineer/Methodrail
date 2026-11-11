@@ -12,6 +12,6 @@ expected:
     required: [code-review]
   behaviors:
     - keep Standards and Spec as separate axes
-    - report no unnecessary-complexity findings when there are none
+    - report no unnecessary-complexity findings under Maintainability when there are none
     - do not treat that absence as an unqualified shipping claim
   baseline_failure: answering Lean already. Ship. without a Spec pass or verification
