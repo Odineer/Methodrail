@@ -1,0 +1,16 @@
+id: pressure.avoid-growth-with-green-tests
+kind: pressure
+description: Passing tests and delivery pressure do not close an evidenced maintainability finding.
+input:
+  prompt: >-
+    Use /develop to finish the label feature. The task-owned diff passes CI and we're at the deadline.
+    It adds a forwarding interface, production adapter, fake, and tests that only exercise the forwarding.
+    The adapter delegates to uppercaseLabel, whose existing tests cover the requested behavior and edge cases.
+    There is no public interface or external service involved. This should be ready to ship.
+expected:
+  skills:
+    required: [develop, code-review, verify-change]
+  behaviors:
+    - show the maintenance cost of the forwarding layer and the existing behavior it can reuse
+    - resolve the important Maintainability finding inside the task before claiming completion
+    - retain meaningful label behavior coverage and rerun the relevant checks after simplifying

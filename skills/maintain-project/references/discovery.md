@@ -6,7 +6,7 @@ Lane detail for [maintain-project](../SKILL.md). This file does not replace spec
 
 | Lane | Look for | Reuse |
 |---|---|---|
-| Architecture | Demonstrated caller burden, repeated structural defects, leaky seams, unnecessary layers in relevant active code | `improve-codebase-architecture` in `survey-only` phase, `codebase-design`, then `refactor` for one selected behavior-preserving change |
+| Architecture | Demonstrated caller burden, repeated structural defects, leaky seams, cross-feature duplication, and unnecessary layers or dependencies with evidenced cost | `improve-codebase-architecture` in `survey-only` phase, `codebase-design`, then `refactor` for one selected behavior-preserving change |
 | Verification | Stale recipes, broken owned helpers, map omissions, inadequate characterization of selected behavior, and drift in an existing formal check | `maintain-verification-skill` with an explicit action and coverage; `maintain-formal-verification-skill` inspect during audit; [verification lifecycle](../../../references/verification-lifecycle.md); [formal verification](../../../references/formal-verification.md); `verify-change` |
 | Build, tooling, and documentation | Broken canonical commands, recurring setup friction, incorrect CI wiring, stale operational instructions, contradictory pointers | Existing deterministic tools and bounded direct repairs. `debug` when a failure needs diagnosis |
 

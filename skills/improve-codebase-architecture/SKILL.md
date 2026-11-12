@@ -32,7 +32,8 @@ An already-selected complex structural item may use `grill-with-docs`, `domain-m
 
 - If the user named a module, subsystem, or pain point, take it.
 - Otherwise walk commit history for hot spots. If changes are scattered, widen the net.
-- Stop if the code is quiet, unused, or unrelated to current work.
+- Follow evidenced duplication or overlap across feature boundaries. Check apparently unused paths and dependencies for remaining callers, exports, registrations, and tooling use.
+- Stop exploring quiet or unrelated code unless there is concrete evidence of cost or the user scoped it in.
 
 Read the glossary, ADRs, typed notes, and verification features in the area first. Then walk the code. For each candidate collect:
 
