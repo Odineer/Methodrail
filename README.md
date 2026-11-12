@@ -104,6 +104,12 @@ refactor                      = execute one selected behavior-preserving change
 
 See [capability map](references/capability-map.md) for canonical ownership.
 
+### Control codebase growth
+
+- Use `/develop` to find what can be reused or retired before adding code. For substantive changes, its Maintainability pass requires demonstrated avoidable growth to be resolved before completion.
+- Use `/methodrail-review` for a separate pre-merge review. Ask for an isolated reviewer when you want a fresh context and the host supports it.
+- Run `/maintain-project` periodically to rank consolidation opportunities across features by demonstrated cost and regression risk. Select a small repair with a verification path.
+
 ## Origins
 
 Methodrail's value is careful selection and composition, not NIH. Major methodology influences:

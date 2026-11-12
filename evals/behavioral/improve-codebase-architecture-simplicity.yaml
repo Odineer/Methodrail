@@ -3,7 +3,7 @@ kind: behavioral
 skill: improve-codebase-architecture
 description: Architecture surveys should note reuse, native capability, and unnecessary layers and rank by benefit and risk.
 input:
-  prompt: "Audit this repo for over-engineering. Rank what we should delete or replace."
+  prompt: "Audit this repo for over-engineering. Two active features maintain separate implementations of the same rule and have already diverged. One uses a package that appears to be unused elsewhere. Rank what we should delete or replace."
 conditions:
   baseline: native agent without Methodrail skills
   treatment: native agent with the improve-codebase-architecture skill loaded
@@ -13,6 +13,7 @@ expected:
     forbidden: [refactor]
   behaviors:
     - collect reuse, native-capability, and unnecessary-layer candidates
+    - compare the two implementations and trace the package through code, tooling, and indirect consumers before recommending removal
     - classify delete, deepen, preserve, or reject
     - rank by justified benefit and risk, not deleted lines
     - do not edit source during the survey

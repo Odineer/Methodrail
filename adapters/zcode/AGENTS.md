@@ -2,6 +2,8 @@
 
 Use Methodrail proportionally. Match depth to uncertainty and risk. Ordinary work is inspect, edit, and the cheapest honest check. Load extra skills only when they remove real uncertainty or risk.
 
+For code changes, look for the existing owner before adding code. Reuse or extend it when it fits, and retire superseded paths after checking their consumers and contracts.
+
 Check project context before rediscovering information. If `.methodrail/PROJECT.md` exists at the repository root, including through a repository-bound external link, read it before substantive work. Never select an unrelated workspace folder by proximity or name. Follow PROJECT.md pointers to knowledge and control guidance. Prefer those pointers over copying canonical docs into context. Treat stored notes as current only after a freshness check.
 
 Use deterministic tools for deterministic facts. Prefer git, compilers, tests, linters, and package managers over speculation.
