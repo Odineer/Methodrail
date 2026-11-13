@@ -22,7 +22,7 @@ disable-model-invocation: true
 
 ## Delegation
 
-Use [swarm](../swarm/SKILL.md) when independent slices are substantial enough to benefit from parallel work. Give each worker a [task packet](../../references/protocols/task-packet.md) with its paths, behavior to preserve, baseline, and reduction goal. Delegate edits only with isolated writable workspaces and disjoint ownership of source and verification artifacts. Handle shared contracts, files, and dependent edits sequentially. Integrate and review the combined diff, then run checks on the integrated state. Use the same procedure sequentially when isolation is unavailable or a parent already delegated the slice.
+Use [swarm's implementation procedure](../swarm/SKILL.md#implementation-slices) for substantial independent slices. Include the behavior to preserve, baseline, and reduction goal in each task packet. Review each returned patch before integration, then review and verify the combined diff. Run coupled or already delegated work locally.
 
 ## Constraints
 

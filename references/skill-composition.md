@@ -17,7 +17,7 @@ That would be a failure. Ketchup, reflect, and formal-check creation stay off th
 
 ## One workflow owner at a time
 
-`/develop` owns the feature lifecycle. Inside it, `wayfinder`, `architect`, `prototype`, and `tdd` are bounded operators. They must not independently restart another full development lifecycle. Under `develop`, `architect` returns alternatives, a recommendation, and unresolved questions; it does not implement. [Simplicity](simplicity.md) supplies the shared procedure for substantive implementation, complexity assessment, and change-created cleanup. For mechanical edits, apply only comment discipline and change-created cleanup.
+`/develop` owns the feature lifecycle. Inside it, `wayfinder`, `architect`, `prototype`, `tdd`, and `swarm` are bounded operators. They must not independently restart another full development lifecycle. Under `develop`, `architect` returns alternatives, a recommendation, and unresolved questions; it does not implement. [Simplicity](simplicity.md) supplies the shared procedure for substantive implementation, complexity assessment, and change-created cleanup. For mechanical edits, apply only comment discipline and change-created cleanup.
 
 `/debug` owns debugging. `diagnosing-bugs` owns the diagnosis procedure inside it. `runtime-forensics` is an escalation operator. `verify-change` is an evidence gate.
 
@@ -108,7 +108,7 @@ competing candidates
 multi-model adversarial review
 ```
 
-Only move downward when the current level cannot reliably resolve the problem or risk justifies escalation.
+Move downward when the current level cannot reliably resolve the problem, risk justifies escalation, or substantial independent assignments justify parallel work.
 
 ## Parallel semantics
 
@@ -124,17 +124,7 @@ code-review axes   = independent review dimensions
 
 ## Multi-agent cost gate
 
-Guidance, not a scheduler. Explicit user invocation remains allowed.
-
-| Rigor | Parallel posture |
-|---|---|
-| 0–1 | Prefer one context |
-| 2 | Isolated subagents only where they improve context quality or independence |
-| 3 | Parallel exploration may be justified |
-| 4 | Arena may be justified; name `interrogate` and wait |
-| 5 | Strong independent evidence/review is expected where available |
-
-See [rigor](rigor.md) and [host capabilities](host-capabilities.md).
+Use [rigor](rigor.md) and [host capabilities](host-capabilities.md) to decide when parallel work earns its cost. Writing workflows use the [swarm implementation procedure](../skills/swarm/SKILL.md#implementation-slices). `code-review` owns [parallel review assignments](../skills/code-review/SKILL.md#4-review-each-axis).
 
 ## Proportional examples
 

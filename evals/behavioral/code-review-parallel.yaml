@@ -1,0 +1,23 @@
+id: behavioral.code-review.parallel
+kind: behavioral
+skill: code-review
+description: Substantial independent review passes share one fixed target and preserve all three review axes.
+input:
+  prompt: >-
+    Use /methodrail-review to review the export and import changes since main
+    against the supplied spec and repository standards. Include the staged tests
+    and the untracked import fixture. Each area has substantial changes, and the
+    host has read-only subagents. Check the shared CLI round-trip contract too.
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with Methodrail skills available
+expected:
+  skills:
+    required: [methodrail-review, code-review, swarm]
+    forbidden: [arena, interrogate]
+  behaviors:
+    - delegate independent read-only passes using one captured diff and review packet
+    - cover the staged tests, the untracked fixture, and the shared CLI contract
+    - return one consolidated set of evidenced findings with axis labels and any coverage gaps
+    - leave the worktree untouched
+

@@ -1,0 +1,20 @@
+id: composition.develop.parallel-slices
+kind: composition
+description: Develop delegates independent implementation slices and reviews each patch before integration.
+input:
+  prompt: >-
+    Use /develop to add RFC-compliant CSV escaping to the export formatter and
+    improve invalid-row diagnostics in the import validator. Each module has its
+    own source and tests, and neither change affects their shared public types.
+    Then update the shared CLI round-trip scenario to exercise both changes.
+    The host supports parallel subagents and isolated writable workspaces.
+expected:
+  skills:
+    required: [develop, swarm, code-review, verify-change]
+    forbidden: [arena, interrogate]
+  behaviors:
+    - start the export and import workers in parallel with disjoint source and test ownership
+    - review each actual patch against its acceptance criteria when it returns, even if the other worker is still running
+    - integrate only reviewed patches with material findings resolved, then update the dependent CLI scenario
+    - review interactions and verify the integrated result after the last relevant edit
+

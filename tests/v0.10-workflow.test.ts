@@ -69,7 +69,7 @@ test("workflow instructions keep the v0.10 boundaries", () => {
   assert.match(diagnosis, /three unsuccessful fixes/);
   assert.doesNotMatch(tickets, /Quiz the user/);
   assert.match(tickets, /existing procedure/);
-  assert.doesNotMatch(review, /parallel sub-agents/);
+  assert.match(review, /Use local passes for bounded changes/);
   assert.match(review, /unjustified weakening/);
   assert.match(simplify, /demonstrated benefit/);
   assert.doesNotMatch(simplify, /Stop if the target is quiet/);

@@ -23,8 +23,8 @@ Guidance, not a scheduler. Explicit user invocation remains allowed.
 | Rigor | Parallel posture |
 |---|---|
 | 0–1 | Prefer one context |
-| 2 | Isolated subagents only where they improve context quality or independence |
-| 3 | Parallel exploration may be justified |
+| 2 | Use subagents for substantial independent slices when the benefit justifies coordination |
+| 3 | Consider parallel implementation, exploration, or review when assignments are independent |
 | 4 | Arena may be justified; name `interrogate` and wait |
 | 5 | Strong independent evidence/review is expected where available |
 
@@ -97,9 +97,9 @@ Raise rigor when failure is expensive, the change is hard to reverse, or ownersh
 | Situation | Required approach |
 |---|---|
 | Mechanical edit, copy change, or deterministic regeneration with an adequate check | Quick diff inspection and that check. No review skill and no reviewer agents unless the user asked for review. |
-| Substantive change: behavior-changing production code, a meaningful interface or contract change, or configuration that materially affects behavior or safety | `code-review`, with a separate pass for each axis in the current context. A one-line change can be substantive. File or line counts are not the classifier. |
+| Substantive change: behavior-changing production code, a meaningful interface or contract change, or configuration that materially affects behavior or safety | `code-review` across all three axes. Use local passes for bounded changes and read-only parallel passes when substantial assignments can run independently. A one-line change can be substantive. File or line counts are not the classifier. |
 | Sensitive or consequential cross-boundary change | Isolated independent review when the host can isolate reviewers and independence meaningfully reduces risk. |
-| Host cannot isolate | Separate local passes. Say that the review was not independent. |
+| Independent review is warranted and the host lacks an isolated reviewer context | Separate local passes. Report the limit on review independence. |
 | User asks for a stronger review mechanism | Honor that request within its scope and the existing invocation boundaries. |
 
 Security-sensitive authorization, sensitive-data handling, hard-to-reverse migrations, concurrency, shared public contracts, and consequential architecture are signals for independent review. A reviewer capability being available is not a reason to escalate. Use `arena` only when the user asks or when consequence, ambiguity, and independent exploration justify the cost. Host support alone is not enough.

@@ -28,7 +28,7 @@ Do not run multiple expensive reviewers for trivial changes. Give the reviewer a
 ## Workflow
 
 1. Establish the review target, base revision, request, acceptance criteria, and repository guidance. Read `.methodrail/PROJECT.md` if present. If a knowledge pointer is relevant, follow [knowledge reuse](../../references/knowledge/reuse.md). Assemble the packet, including review depth from [rigor](../../references/rigor.md). Consume existing verification evidence rather than rerunning unrelated exploration. Label supplied evidence as supplied. It is not a claim that this review ran it.
-2. Invoke `code-review` on the complete requested range, including staged, unstaged, and untracked work when the worktree is dirty. Use local passes for bounded review. Follow [rigor](../../references/rigor.md) for isolated review, including explicit requests.
+2. Invoke `code-review` on the complete requested range, including staged, unstaged, and untracked work when the worktree is dirty. Use its read-only parallel procedure for substantial independent assignments and local passes for bounded reviews. Follow [rigor](../../references/rigor.md) for review independence, including explicit requests.
 3. Use `blast-radius` when boundaries, schemas, or public contracts changed, or when a small diff is untrusted. Keep it read-only: existing checks or temp probes, not repository writes.
 4. Do not substitute review for verification. Note verification gaps; run or request `verify-change` when claims of correctness lack fresh evidence. Follow [verification lifecycle](../../references/verification-lifecycle.md). Report stale or missing guidance. Do not invoke `create-verification-skill` or `maintain-verification-skill` unless the user asked for fixes.
 5. Classify findings by impact. Critical findings include data loss, security, and unusable core behavior. Important findings include likely incorrect behavior, serious regressions, contract risk, and material avoidable growth demonstrated by `code-review`. Minor findings are optional.
@@ -53,5 +53,5 @@ The requested change range was inspected in context, findings are evidence-backe
 Usually follows:              develop, debug, simplify
 Often produces:               findings; verification gaps
 Escalate to:                  code-review, blast-radius, verify-change
-Avoid combining automatically with: arena, swarm, interrogate
+Avoid combining automatically with: arena, interrogate
 ```

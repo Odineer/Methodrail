@@ -1,0 +1,16 @@
+id: complexity.develop.coupled-feature-no-swarm
+kind: complexity
+description: Parallel tools stay idle when implementation and verification depend on a changing contract.
+input:
+  prompt: >-
+    Use /develop to change one CLI output field. The formatter, caller, and
+    assertions depend on the same unsettled output shape and update the same
+    shared tests. The host has subagents and isolated workspaces.
+expected:
+  skills:
+    required: [develop, code-review, verify-change]
+    forbidden: [swarm, arena]
+  behaviors:
+    - resolve the output contract from the existing request and evidence before implementing dependent changes
+    - implement and verify the coupled change in one context
+
