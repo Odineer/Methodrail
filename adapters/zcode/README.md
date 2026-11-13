@@ -52,6 +52,10 @@ Skills only, without the hook: symlink each `skills/<name>` directory into
 `adapters/zcode/AGENTS.md` to workspace `AGENTS.md` or `~/.zcode/AGENTS.md`.
 Do not paste that block again when the plugin hook is enabled.
 
+Z Code also discovers `~/.agents/skills/` and workspace `.agents/skills/`.
+Symlink into one root only: two roots create duplicate entries, and discovery
+order decides which same-named copy loads.
+
 Z Code reads those two `AGENTS.md` files only. It does not keep reading `CLAUDE.md`.
 
 ## What stays on Cursor

@@ -50,7 +50,7 @@ On an unavailable model, use the tier's prevalidated fallback once, then omit `m
 
 ## Z Code
 
-Z Code loads `skills/*/SKILL.md` from this plugin or from `~/.zcode/skills/` and `.zcode/skills/`. Its instruction files are workspace `AGENTS.md` and `~/.zcode/AGENTS.md`. The plugin session hook injects the family invariant. Substitutions follow the same idea as [pstack-claude](https://github.com/michael-denyer/pstack-claude): one workflow, host-native tools.
+Z Code loads `skills/*/SKILL.md` from this plugin or from skill roots under `~/.zcode/skills/`, `~/.agents/skills/`, workspace `.zcode/skills/`, and workspace `.agents/skills/`. Discovering the same skill through two roots yields duplicate entries, and discovery order decides which same-named copy loads. Install from one root only. Its instruction files are workspace `AGENTS.md` and `~/.zcode/AGENTS.md`. The plugin session hook injects the family invariant. Substitutions follow the same idea as [pstack-claude](https://github.com/michael-denyer/pstack-claude): one workflow, host-native tools.
 
 | Cursor | Z Code |
 | --- | --- |
@@ -60,9 +60,11 @@ Z Code loads `skills/*/SKILL.md` from this plugin or from `~/.zcode/skills/` and
 | Model ids and `~/.cursor/rules/pstack-models.mdc` | Ignore them. Use `inherit`, a Z Code model id, or omit `model`. |
 | `disable-model-invocation` | Ignored. `when_to_use` carries the same guard — `Explicit request only` for explicit skills — and Z Code presents it to the model. |
 | Session ledger | Cursor hook only (`hooks/cursor.json`). |
-| Session transcript | `~/.zcode/cli/db/db.sqlite` (see below). |
+| Session transcript | Native `ListSessions` / `ReadSession` tools; read-only SQLite fallback (see below). |
 
 ### Z Code session transcripts
+
+Prefer the native session tools when the build provides them: `ListSessions` to find the session for a workspace, `ReadSession` to read its history. They are safe on a live session. The SQLite path below is the fallback when those tools are absent.
 
 Z Code persists full session transcripts in `~/.zcode/cli/db/db.sqlite`. Candidate sessions for a workspace: `select id from session where directory = '<absolute workspace path>' order by time_updated desc`. Several sessions can share one directory, and a concurrent session can be newer; take the newest whose first user text is this conversation's opening prompt, not blindly `limit 1`. Turns are `message` rows for that `session_id` in `sequence` order; the role is `json_extract(message.data, '$.role')` (user/assistant — there is no role column). Content blocks are `part` rows joined on `message_id`, ordered by `message.sequence, part.sequence` (`part.sequence` restarts within each message). The type is `json_extract(part.data, '$.type')`: `text` and `reasoning` carry their text in `data.text`; `tool` carries the tool name and full input and output in `data.state`; `step-start` and `step-finish` are boundary rows with no content. Query read-only (`sqlite3 'file:<path>?mode=ro'` …); never write the database while a session is live. Do not use `~/.zcode/cli/rollout/*.jsonl` as a transcript; those model-io files are partial debug captures.
 
