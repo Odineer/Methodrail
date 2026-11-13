@@ -5,7 +5,7 @@ input:
   prompt: "Refactor claim into beginClaim and finishClaim. The formal lease check covers claim. Preserve behavior."
 expected:
   skills:
-    required: [refactor, maintain-formal-verification-skill]
+    required: [simplify, maintain-formal-verification-skill]
   behaviors:
     - task-scoped formal apply
     - one completion owner

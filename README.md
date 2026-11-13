@@ -9,7 +9,7 @@ methodrail-init
 ↓
     project harness
 ↓
-investigate / develop / debug / refactor / review
+investigate / develop / debug / simplify / methodrail-review
 ```
 
 Methodrail does not replace Cursor, Claude Code, Codex, or Z Code. They are the runtime. Methodrail supplies the engineering methodology and the project-specific context those agents should use.
@@ -31,7 +31,7 @@ Supported installs (marketplace once listed, local plugin surfaces, Claude Code 
 1. Install this repository as a Cursor Plugin.
 2. Open a project in Cursor.
 3. Run `/methodrail-init`.
-4. Use `/investigate`, `/develop`, `/debug`, `/refactor`, or `/methodrail-review`.
+4. Use `/investigate`, `/develop`, `/debug`, `/simplify`, or `/methodrail-review`.
 
 For local plugin development, clone this repository anywhere, then copy only the Cursor plugin surfaces:
 
@@ -85,7 +85,7 @@ Workflow entry skills are explicit:
 - `/investigate` — answer existing-system questions with labeled evidence
 - `/develop` — understand, decide, implement, and verify proportionally
 - `/debug` — reproduce and find root cause before fixing
-- `/refactor` — execute one selected structural change while preserving relevant behavior
+- `/simplify` — reduce avoidable code and complexity across selected targets while preserving behavior
 - `/methodrail-review` — review intent, diff, evidence, and blast radius
 - `/maintain-project` — audit and rank architecture, verification, and tooling debt; a bare invocation does not edit. Example: `/maintain-project` reports ranked findings; `Fix findings T1 and V1` revalidates those findings and repairs that batch
 
@@ -99,7 +99,7 @@ research                      = external/reference sources
 prototype                     = executable experiment
 blast-radius                  = what else may be affected
 improve-codebase-architecture = find, rank, and choose architecture opportunities
-refactor                      = execute one selected behavior-preserving change
+simplify                      = execute selected behavior-preserving reductions
 ```
 
 See [capability map](references/capability-map.md) for canonical ownership.

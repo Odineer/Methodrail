@@ -64,6 +64,6 @@ Init keeps its preview contract: discovery proposes artifacts, and application w
 
 `apply` corrects owned files inside the existing edit scope and proves changed driving procedures. Apply outcomes stay `clean`, `changed`, and `blocked`.
 
-Standalone “audit the verification skill” is full-audit application. `develop`, `debug`, and `refactor` keep task-scoped application when a decision above selects maintenance. `maintain-project` names both the action and the coverage. A read-only parent cannot escalate inspection into application. Broad project maintenance does not by itself request a full audit. A source-only sample is task-scoped coverage, not a full audit.
+Standalone “audit the verification skill” is full-audit application. `develop`, `debug`, and `simplify` keep task-scoped application when a decision above selects maintenance. `maintain-project` names both the action and the coverage. A read-only parent cannot escalate inspection into application. Broad project maintenance does not by itself request a full audit. A source-only sample is task-scoped coverage, not a full audit.
 
 When no verification skill exists, record that fact and assess existing scripts or control evidence. Do not generate one during discovery or inspection. Create only during an authorized repair when the decision is `missing-path`.

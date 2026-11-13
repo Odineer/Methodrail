@@ -60,7 +60,7 @@ test("workflow instructions keep the v0.10 boundaries", () => {
   const diagnosis = read("skills/diagnosing-bugs/SKILL.md");
   const tickets = read("skills/to-tickets/SKILL.md");
   const review = read("skills/code-review/SKILL.md");
-  const refactor = read("skills/refactor/SKILL.md");
+  const simplify = read("skills/simplify/SKILL.md");
   assert.match(develop, /run `code-review` on the task-owned delta/);
   assert.match(develop, /Tiny bounded change/);
   assert.doesNotMatch(wayfinder, /at most one non-research ticket/);
@@ -71,8 +71,8 @@ test("workflow instructions keep the v0.10 boundaries", () => {
   assert.match(tickets, /existing procedure/);
   assert.doesNotMatch(review, /parallel sub-agents/);
   assert.match(review, /unjustified weakening/);
-  assert.match(refactor, /demonstrated benefit/);
-  assert.doesNotMatch(refactor, /Stop if the target is quiet/);
+  assert.match(simplify, /demonstrated benefit/);
+  assert.doesNotMatch(simplify, /Stop if the target is quiet/);
 });
 
 test("historical eval JSON without usage still parses", () => {

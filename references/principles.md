@@ -27,9 +27,9 @@ Use these as situational cues, not as a second workflow or a checklist to recite
 | foundational-thinking | [architect](../skills/architect/SKILL.md), [domain-modeling](../skills/domain-modeling/SKILL.md) | Choosing core data structures, ownership, or sequencing foundational work. |
 | redesign-from-first-principles | [architect](../skills/architect/SKILL.md), [improve-codebase-architecture](../skills/improve-codebase-architecture/SKILL.md) | A requirement is foundational and the current design has accumulated bolted-on fixes. |
 | attack-the-premise | [decision frontier](decision-frontier.md), [diagnosing-bugs](../skills/diagnosing-bugs/SKILL.md) | Multiple fixes based on the same assumption have failed. |
-| subtract-before-you-add | [simplicity](simplicity.md), [refactor](../skills/refactor/SKILL.md) | Existing dead weight or duplication is making the requested change harder. |
+| subtract-before-you-add | [simplicity](simplicity.md), [simplify](../skills/simplify/SKILL.md) | Existing dead weight or duplication is making the requested change harder. |
 | minimize-reader-load | [context economics](context-economics.md), [writing-for-agents](../skills/writing-for-agents/SKILL.md) | A design or instruction makes readers hold unnecessary layers or hidden state. |
-| outcome-oriented-execution | [develop](../skills/develop/SKILL.md), [refactor](../skills/refactor/SKILL.md) | A planned migration or rewrite needs explicit phases and a clear target state. |
+| outcome-oriented-execution | [develop](../skills/develop/SKILL.md), [simplify](../skills/simplify/SKILL.md) | A planned migration or rewrite needs explicit phases and a clear target state. |
 | experience-first | [decision frontier](decision-frontier.md), [grill-with-docs](../skills/grill-with-docs/SKILL.md) | Product trade-offs depend on user experience or preference; ask the human where needed. |
 | exhaust-the-design-space | [prototype](../skills/prototype/SKILL.md), [arena](../skills/arena/SKILL.md) | Several materially different options remain and the decision justifies comparison. |
 | build-the-lever | [structural enforcement](structural-enforcement.md), [swarm](../skills/swarm/SKILL.md) | Repeated or broad work can be made reproducible with a script, check, or partitioned process. |
@@ -37,7 +37,7 @@ Use these as situational cues, not as a second workflow or a checklist to recite
 | boundary-discipline | [codebase-design](../skills/codebase-design/SKILL.md), [architect](../skills/architect/SKILL.md) | External input crosses into trusted logic or validation ownership is unclear. |
 | type-system-discipline | [codebase-design](../skills/codebase-design/SKILL.md), [tdd](../skills/tdd/SKILL.md) | Types can encode an invariant or make invalid states harder to represent. |
 | make-operations-idempotent | [methodrail-init](../skills/methodrail-init/SKILL.md), [develop](../skills/develop/SKILL.md) | Operations may be retried, resumed, or run after partial completion. |
-| migrate-callers-then-delete-legacy-apis | [develop](../skills/develop/SKILL.md), [refactor](../skills/refactor/SKILL.md) | A migration can move callers and remove obsolete compatibility paths in one coherent wave. Preserve compatibility when an external contract requires it. |
+| migrate-callers-then-delete-legacy-apis | [develop](../skills/develop/SKILL.md), [simplify](../skills/simplify/SKILL.md) | A migration can move callers and remove obsolete compatibility paths in one coherent wave. Preserve compatibility when an external contract requires it. |
 | separate-before-serializing-shared-state | [architect](../skills/architect/SKILL.md) | Multiple actors may write shared state; remove contention before adding coordination when feasible. |
 | prove-it-works | [verify-change](../skills/verify-change/SKILL.md), [evidence](evidence.md) | Before completion; verify the real artifact and report what the evidence proves. |
 | fix-root-causes | [diagnosing-bugs](../skills/diagnosing-bugs/SKILL.md) | A symptom has a reproducible causal chain that can be fixed at its owner. |

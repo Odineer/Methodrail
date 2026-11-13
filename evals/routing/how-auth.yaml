@@ -6,4 +6,4 @@ input:
 expected:
   skills:
     required: [how]
-    forbidden: [why, observe, develop, refactor]
+    forbidden: [why, observe, develop, simplify]

@@ -1,7 +1,7 @@
 ---
 name: debug
 description: Diagnose and fix a reproducible failure using evidence, explicit hypotheses, and focused verification. Run only when explicitly requested.
-when_to_use: Explicit request only (/debug), or an active workflow names it. Diagnose and fix a reproducible failure; feature work is develop and structural work is refactor.
+when_to_use: Explicit request only (/debug), or an active workflow names it. Diagnose and fix a reproducible failure; feature work is develop and structural work is simplify.
 disable-model-invocation: true
 ---
 

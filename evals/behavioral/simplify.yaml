@@ -1,0 +1,19 @@
+id: behavioral.simplify.preserve-behavior
+kind: behavioral
+skill: simplify
+description: Loading simplify should establish a behavioral baseline before structural change.
+input:
+  prompt: "Use /simplify on the auth service to shrink it without changing behavior. The proposed diff deletes a wrapper but adds a new adapter and an untracked regression test."
+conditions:
+  baseline: native agent without Methodrail skills
+  treatment: native agent with the simplify skill loaded
+expected:
+  skills:
+    required: [simplify]
+  behaviors:
+    - treat the work as structural, not a feature
+    - establish a behavioral baseline
+    - change structure incrementally with continuous verification
+    - report implementation and test changes separately and include the untracked test in the net total before claiming a reduction
+    - avoid speculative cleanup of unrelated code
+  baseline_failure: rewriting auth while mixing in feature changes or skipping a baseline

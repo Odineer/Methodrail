@@ -23,8 +23,8 @@ test("Cursor and Z Code hooks stay on separate files", () => {
 });
 
 test("Z Code session hook injects the projected invariant and fails open", () => {
-  const script = join(root, "scripts/hooks/zcode-session-start.mjs");
-  const ok = spawnSync(process.execPath, [script], {
+  const script = join(root, "scripts/hooks/zcode-session-start.sh");
+  const ok = spawnSync(script, [], {
     input: `${JSON.stringify({ hook_event_name: "SessionStart" })}\n`,
     encoding: "utf8",
   });
@@ -36,7 +36,7 @@ test("Z Code session hook injects the projected invariant and fails open", () =>
   assert.match(payload.hookSpecificOutput.additionalContext, /Use Methodrail proportionally/);
   assert.match(payload.hookSpecificOutput.additionalContext, /descriptions match the task/);
 
-  const bad = spawnSync(process.execPath, [script], { input: "not-json", encoding: "utf8" });
+  const bad = spawnSync(script, [], { input: "not-json", encoding: "utf8" });
   assert.equal(bad.status, 0, bad.stderr);
   const fallback = JSON.parse(bad.stdout) as { hookSpecificOutput: { hookEventName: string } };
   assert.equal(fallback.hookSpecificOutput.hookEventName, "SessionStart");

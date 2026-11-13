@@ -1,7 +1,7 @@
 ---
 name: maintain-project
 description: "Audit and rank evidence-backed architecture, verification, and tooling debt; resolve selected maintenance work when repairs are explicitly requested. A bare invocation audits without edits."
-when_to_use: Explicit request only (/maintain-project). Audits and ranks debt without editing; repairs only when explicitly requested as a follow-up.
+when_to_use: Explicit request only (/maintain-project). Audits and ranks debt without editing. Repairs confirmed findings when the request authorizes it.
 disable-model-invocation: true
 ---
 
@@ -23,9 +23,11 @@ Explicit audit intent wins over generic maintenance wording. A later repair requ
 
 | Request | Behavior |
 |---|---|
-| `/maintain-project` | Read-only audit and ranked report. Stop before repairs. |
+| `/maintain-project` | Read-only audit and ranked report, including behavior-preserving consolidation. Stop before repairs. |
 | `/maintain-project` plus a named area | Read-only audit of that area and necessary dependencies. |
 | Fix named findings from an audit | Revalidate those findings, then repair that batch. |
+| Address all findings from the audit | Revalidate the entire confirmed, in-scope set. Work through every item, including independent items after a blocker. |
+| Audit and address the findings | Report the ranked audit first, then repair the confirmed in-scope findings if the same request authorizes edits. Honor an explicit stop after the audit. |
 | Repair a named target | Inspect it and carry the bounded repair through verification. |
 | Find and fix clear low-risk debt in a named subsystem | Announce the selected items, then repair that batch. No extra approval prompt. |
 | Fix all debt, with no practical boundary | Recommend one evidence-backed batch. Establish that batch before broad implementation. |
@@ -48,11 +50,11 @@ Match depth to [rigor](../../references/rigor.md). Load [simplicity](../../refer
 
 Frame scope, establish a baseline, discover proportionally, deduplicate, rank, and report. Execute a selected batch only when the request authorizes repair. Then verify and reconcile. Handoffs and evidence invalidation: [repair](references/repair.md).
 
-1. Start with project guidance and the canonical deterministic checks that match the scope. Reuse evidence that still matches relevant state. Inspect changed and current-work areas before deep structural exploration. Load a specialist reference only for the lane under examination. A broad request does not launch every skill, every test, full live feature coverage, or subagents.
-2. Record findings with the [discovery](references/discovery.md) contract. Identifiers select work inside this run only. Rank confirmed items by urgency, demonstrated benefit, effort, risk, and dependency order. Explain material tradeoffs. Do not rank by deleted lines. Do not invent a confidence number, a debt total, or a project-health score. Keep speculative hypotheses out of the repair queue.
+1. Start with project guidance and the canonical deterministic checks that match the scope. Reuse evidence that still matches relevant state. Inspect changed and current-work areas before deep structural exploration. Load a specialist reference only for the lane under examination. For substantial independent audit slices, use [swarm](../swarm/SKILL.md) with read-only task packets. Reconcile shared causes and rank the evidence in the parent. Keep small or coupled audits local.
+2. Include the [consolidation scan](references/discovery.md#consolidation) in the applicable lanes. Record findings with the [discovery](references/discovery.md) contract. Rank consolidation candidates by demonstrated maintenance benefit and regression risk. Use urgency, effort, and dependencies to order the work. Keep speculative hypotheses out of the repair queue.
 3. An audit ends with the ranked report and a top recommendation.
-4. When repair is authorized, revalidate the selected findings, then hand each item to its owner. Sequential repairs are the default. Independent read-only discovery may use native isolated workers when cost and host capability justify it. Do not automatically parallelize shared-file repairs.
-5. Stop when the selected outcomes are verified, a concrete blocker prevents further progress, or an agreed budget is reached. Do not start a second discovery sweep. Unexpected out-of-batch findings return to the report.
+4. When repair is authorized, revalidate the selected findings, then hand each item to its owner. Use [swarm](../swarm/SKILL.md) for substantial independent repairs when workers can edit in isolation. Assign disjoint source and verification artifacts and pass each owner a task packet. Run coupled repairs sequentially. Integrate, review, and verify the combined changes in the parent.
+5. Account for every selected item. Route behavior-preserving reductions to `simplify` when they warrant that workflow. Mark each item verified, stale, blocked, or still open with evidence. Stop when the batch is accounted for or an agreed budget is reached. Unexpected out-of-batch findings return to the report.
 
 A reproducible product defect found in these lanes is reported and may enter the selected batch through `debug`. Classify it as a defect. Do not relabel it as technical debt. Use `develop` only when the selected repair explicitly requires an intentional behavior change.
 
@@ -66,13 +68,13 @@ Finish a substantive repair with the [completion report](../../references/protoc
 
 ## Ownership
 
-This skill owns the portfolio. While one selected item executes, its chosen workflow owns that item's lifecycle, then returns evidence here. That workflow must not restart project-wide discovery. Handoffs reuse prior facts and acceptance criteria. See [skill composition](../../references/skill-composition.md) and [task packets](../../references/protocols/task-packet.md).
+This skill owns the portfolio. Each selected workflow owns its assigned work and returns evidence here. A delegated owner works within its packet and leaves further delegation to the parent. That workflow must not restart project-wide discovery. Handoffs reuse prior facts and acceptance criteria. See [skill composition](../../references/skill-composition.md) and [task packets](../../references/protocols/task-packet.md).
 
 ## Neighbors
 
 ```text
 Usually follows:              a human maintenance request
 Often produces:               ranked audit; selected-repair evidence
-Escalate to:                  improve-codebase-architecture, maintain-verification-skill, refactor, debug, develop
+Escalate to:                  improve-codebase-architecture, maintain-verification-skill, simplify, debug, develop
 Avoid combining automatically with: ordinary edits, standalone debug, review, a standalone architecture survey, a standalone verification audit
 ```

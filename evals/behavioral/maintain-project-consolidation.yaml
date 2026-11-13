@@ -1,0 +1,18 @@
+id: behavioral.maintain-project.consolidation
+kind: behavioral
+skill: maintain-project
+description: A consolidation audit stops before edits and a follow-up can select every confirmed finding.
+input:
+  prompt: >-
+    Use /maintain-project to audit this repository and stop after the audit.
+    In a follow-up I ask you to address all findings from that report.
+    There are two confirmed duplicate scripts, a verified pass-through wrapper,
+    and a possibly unused entry point with unresolved external consumers.
+expected:
+  skills:
+    required: [maintain-project, simplify]
+  behaviors:
+    - identify removals, preserved behavior, and before and after checks
+    - rank by maintenance benefit and regression risk and stop after the audit
+    - after authorization revalidate and address every confirmed in-scope finding
+    - leave the unconfirmed entry point open with its evidence gap

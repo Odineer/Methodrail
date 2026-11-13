@@ -39,7 +39,7 @@ Before writing any test, write down the seams under test. Give each proposed sea
 - **Don't add speculative features.**
 - After green, `verify-change` before claiming the slice done.
 
-Refactoring of production structure is not a substitute for the loop. Local cleanup after green is fine; broad restructuring belongs to `/refactor`.
+Refactoring of production structure is not a substitute for the loop. Local cleanup after green is fine; broad restructuring belongs to `/simplify`.
 
 ## Pressure resistance
 

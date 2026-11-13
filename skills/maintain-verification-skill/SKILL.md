@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 Keep a verification procedure and its feature map accurate. Follow [verification lifecycle](../../references/verification-lifecycle.md). The caller names the action and the coverage.
 
-Standalone “audit the verification skill” selects **full audit** and **apply**. Calls from `develop`, `debug`, and `refactor` stay **task-scoped** and **apply**. `maintain-project` must name both the action and the coverage. A read-only parent cannot switch this skill to **apply**. Broad project maintenance alone does not request a full audit.
+Standalone “audit the verification skill” selects **full audit** and **apply**. Calls from `develop`, `debug`, and `simplify` stay **task-scoped** and **apply**. `maintain-project` must name both the action and the coverage. A read-only parent cannot switch this skill to **apply**. Broad project maintenance alone does not request a full audit.
 
 Return changes and evidence to the parent. Do not open a pull request, commit, or release from this skill.
 
@@ -88,5 +88,5 @@ Accept the task intent, changed paths, affected features, and existing evidence.
 Missing verify skill          → create-verification-skill only for missing-path repair
 Formal model alignment        → maintain-formal-verification-skill
 Project index                 → `.methodrail/PROJECT.md`
-Owning workflows              → develop, debug, refactor, maintain-project
+Owning workflows              → develop, debug, simplify, maintain-project
 ```

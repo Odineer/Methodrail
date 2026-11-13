@@ -13,7 +13,7 @@ Give the child the prior facts, the acceptance criteria, and a [task packet](../
 | Selected work | Owner | Stop rule |
 |---|---|---|
 | Architecture candidate still uncertain | `improve-codebase-architecture` design operators (`grill-with-docs`, `codebase-design`) for that item only | Do not rerun the whole survey or grilling loop for a local obvious repair |
-| One behavior-preserving structural repair | `refactor` | Preserve the stated behavior. Do not widen into a survey |
+| Selected behavior-preserving reductions | `simplify` | Preserve the stated behavior. Do not widen into a survey |
 | Intentional behavior change the repair explicitly requires | `develop` | Only that change |
 | Verification drift or owned helper | `maintain-verification-skill` with action `apply` and the named coverage | A read-only audit cannot escalate itself to `apply` |
 | Formal-check drift | `maintain-formal-verification-skill` with action `apply` and the named coverage | A read-only audit cannot escalate itself to `apply`. A product bug returns to `debug` |

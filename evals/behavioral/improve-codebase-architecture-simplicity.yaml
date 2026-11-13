@@ -10,7 +10,7 @@ conditions:
 expected:
   skills:
     required: [improve-codebase-architecture]
-    forbidden: [refactor]
+    forbidden: [simplify]
   behaviors:
     - collect reuse, native-capability, and unnecessary-layer candidates
     - compare the two implementations and trace the package through code, tooling, and indirect consumers before recommending removal

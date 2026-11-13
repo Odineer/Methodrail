@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+Rename `/refactor` to `/simplify` (breaking). The workflow executes selected behavior-preserving reductions in batches. Both `simplify` and `maintain-project` can delegate substantial independent work through `swarm`.
+
 Rename the review workflow skill `review` → `methodrail-review` (breaking: invoke `/methodrail-review`). Cursor ships a first-party skill named `review` that asks Bugbot vs Security Review, which shadowed Methodrail's skill so `/review` never reached it. Validation now rejects shipped skill names reserved by host first-party skills.
 
 Make the Z Code install first-class without changing other hosts.

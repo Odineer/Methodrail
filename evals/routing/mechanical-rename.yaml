@@ -5,7 +5,7 @@ input:
   prompt: "Rename foo to bar."
 expected:
   skills:
-    forbidden: [architect, prototype, interrogate, refactor, wayfinder, arena, swarm]
+    forbidden: [architect, prototype, interrogate, simplify, wayfinder, arena, swarm]
   behaviors:
     - treat the work as local and mechanical
     - skip architecture, prototype, and adversarial review

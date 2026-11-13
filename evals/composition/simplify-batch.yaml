@@ -1,0 +1,16 @@
+id: composition.simplify-batch
+kind: composition
+description: Simplification delegates independent work and verifies the integrated reduction.
+input:
+  prompt: >-
+    Use /simplify for the three confirmed reductions. Two are substantial and have
+    disjoint source and tests. The third changes a contract used by the first.
+    The host supports isolated workspaces. Preserve existing behavior and shrink
+    the total code, including any added tests and glue.
+expected:
+  skills:
+    required: [simplify, swarm, verify-change]
+  behaviors:
+    - delegate independent slices with scoped paths and baseline checks
+    - sequence dependent changes and verify the combined result
+    - account for support and test code when reporting the net reduction

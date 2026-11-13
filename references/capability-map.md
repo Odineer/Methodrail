@@ -9,26 +9,26 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 | Existing-system investigation | `investigate` | Methodrail-native | explicit | `how`, `why`, `observe`, `research`, `prototype`, `blast-radius` | humans |
 | Feature delivery | `develop` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `grill-with-docs`, `domain-modeling`, `wayfinder`, `architect`, `prototype`, `tdd`, `code-review`, `verify-change`, `blast-radius`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`, `maintain-formal-verification-skill` | humans |
 | Failure diagnosis and fix | `debug` | Methodrail-native | explicit | `diagnosing-bugs`, `observe`, `runtime-forensics`, `trace-forensics`, `performance`, `hillclimb`, `tdd`, `blast-radius` (shared behavior, boundary crossings, or uncertain impact), `code-review`, `verify-change`, `create-verification-skill`, `maintain-verification-skill`, `create-formal-verification-skill`, `maintain-formal-verification-skill` | humans |
-| Behavior-preserving restructure of a selected target | `refactor` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `how`, `codebase-design`, `blast-radius`, `code-review`, `verify-change`, `maintain-verification-skill`, `maintain-formal-verification-skill` | humans |
-| Evidence-backed project maintenance | `maintain-project` | Methodrail-native | explicit | `improve-codebase-architecture` (`survey-only`), `maintain-verification-skill` (named action and coverage), `maintain-formal-verification-skill` (named action and coverage), `refactor`, `debug`, `develop` when a selected repair requires that owner | humans |
+| Behavior-preserving reduction across selected targets | `simplify` | Methodrail-native + Ponytail composed + Karpathy-inspired guidelines composed | explicit | `how`, `codebase-design`, `blast-radius`, `code-review`, `verify-change`, `maintain-verification-skill`, `maintain-formal-verification-skill`, `swarm` for substantial independent slices | humans |
+| Evidence-backed project maintenance | `maintain-project` | Methodrail-native | explicit | `improve-codebase-architecture` (`survey-only`), `maintain-verification-skill` (named action and coverage), `maintain-formal-verification-skill` (named action and coverage), `simplify`, `debug`, `develop` when a selected repair requires that owner, `swarm` for substantial independent slices | humans |
 | Change review workflow | `methodrail-review` | Methodrail-native | explicit | `code-review`, `blast-radius`, `verify-change` | humans |
-| Current codebase understanding | `how` | pstack | model-invoked | `observe` | `investigate`, `develop`, `refactor`, `architect` |
+| Current codebase understanding | `how` | pstack | model-invoked | `observe` | `investigate`, `develop`, `simplify`, `architect` |
 | Historical motivation | `why` | pstack | model-invoked | — | `investigate`, `architect` |
 | Live behavior | `observe` | Methodrail-native | model-invoked | `runtime-forensics` | `investigate`, `debug`, `verify-change` |
 | External/reference research | `research` | Matt Pocock | model-invoked | — | `investigate`, `wayfinder` |
-| Impact beyond the diff | `blast-radius` | pstack | model-invoked | `arena` (wide changes) | `develop`, `debug`, `refactor`, `methodrail-review` |
+| Impact beyond the diff | `blast-radius` | pstack | model-invoked | `arena` (wide changes) | `develop`, `debug`, `simplify`, `methodrail-review` |
 | Domain vocabulary and durable domain decisions | `domain-modeling` | Matt Pocock | model-invoked | Glossary updates when project terms, ownership, lifecycle, or invariants crystallize; ADR offer when all three decision criteria hold | `develop`, `debug` when verified behavior changes the domain contract, `grill-with-docs`, `wayfinder` |
 | Ambiguous requirements interview | `grill-with-docs` | Matt Pocock | explicit | `domain-modeling` | `develop`, `wayfinder` |
 | Large uncertain planning | `wayfinder` | Matt Pocock | explicit | `grill-with-docs`, `research`, `prototype` | `develop` |
 | Empirical experiment | `prototype` | Matt Pocock + Methodrail evidence semantics | explicit | — | `investigate`, `develop`, `wayfinder` |
 | Architecture decision exercise | `architect` | pstack | explicit | `how`, `why`, `arena` | `develop` |
-| Deep-module design vocabulary | `codebase-design` | Matt Pocock + Ponytail composed | model-invoked | `architect` when a decision exists | `tdd`, `refactor`, `improve-codebase-architecture` |
+| Deep-module design vocabulary | `codebase-design` | Matt Pocock + Ponytail composed | model-invoked | `architect` when a decision exists | `tdd`, `simplify`, `improve-codebase-architecture` |
 | Codebase-wide architecture survey and candidate selection | `improve-codebase-architecture` | Matt Pocock + Ponytail composed | explicit | `grill-with-docs`, `codebase-design` | humans; `maintain-project` for `survey-only` |
 | Test-first implementation | `tdd` | Matt Pocock | model-invoked | `codebase-design`, `verify-change` | `develop`, `debug` |
 | Baseline bug diagnosis | `diagnosing-bugs` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model/workflow invoked | `runtime-forensics`, `trace-forensics`, `performance` | `debug` |
 | Completion verification | `verify-change` | Superpowers-derived | model/workflow invoked | `observe`, project verify skill; consumes a formal result without creating or auditing one | all workflows |
 | Diff review: Standards, Spec, and Maintainability | `code-review` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model-invoked | — | `methodrail-review`, `develop` |
-| Assessment and repair of received review findings | `receiving-code-review` | Superpowers-derived | model/workflow invoked | `verify-change` | humans; implementation workflows for disputed or ambiguous findings |
+| Assessment and repair of received review findings | `receiving-code-review` | Superpowers-derived | model/workflow invoked | `debug`, `develop`, `swarm` for independent slices, `verify-change` | humans; implementation workflows for disputed or ambiguous findings |
 | Adversarial independent review | `interrogate` | pstack | explicit / high rigor | — | `methodrail-review` (suggested only) |
 | Competing candidates | `arena` | pstack | explicit | `verify-change` | `architect`, `blast-radius` |
 | Partitioned parallel coverage | `swarm` | pstack | explicit | — | humans, large investigations |
@@ -40,12 +40,12 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 | Iterative metric optimization | `hillclimb` | pstack playbook | explicit | `show-me-your-work` | `debug` |
 | Rendered visual equivalence | `visual-parity` | pstack playbook | explicit | — | humans |
 | Project verify skill generation | `create-verification-skill` | pstack | explicit | `maintain-verification-skill` | `methodrail-init`, `develop`, `debug` |
-| Verify-skill upkeep | `maintain-verification-skill` | pstack | explicit | `create-verification-skill` if missing | `develop`, `debug`, `refactor` for task-scoped application; `maintain-project` when it names action and coverage; humans for a full audit |
+| Verify-skill upkeep | `maintain-verification-skill` | pstack | explicit | `create-verification-skill` if missing | `develop`, `debug`, `simplify` for task-scoped application; `maintain-project` when it names action and coverage; humans for a full audit |
 | Compact decision trail | `show-me-your-work` | pstack | explicit | — | `hillclimb`, long runs |
 | Session lessons as candidates | `reflect` | pstack + Matt retro composed | explicit | knowledge / skill / structural-enforcement candidates | humans |
 | Human catch-up | `ketchup` | pstack | explicit | — | humans |
 | Formal check creation | `create-formal-verification-skill` | pstack | explicit | `maintain-formal-verification-skill` | humans; `develop` and `debug` only for an express formal target |
-| Formal check upkeep | `maintain-formal-verification-skill` | pstack | explicit | suggest `create-formal-verification-skill` when none exist, without running it | `develop`, `debug`, and `refactor` when recorded coverage is touched; `maintain-project` when it names action and coverage |
+| Formal check upkeep | `maintain-formal-verification-skill` | pstack | explicit | suggest `create-formal-verification-skill` when none exist, without running it | `develop`, `debug`, and `simplify` when recorded coverage is touched; `maintain-project` when it names action and coverage |
 | Cross-session continuity | `handoff` | Matt Pocock | explicit | — | humans, long sessions, `prototype` round-trips |
 | Agent-facing document design | `writing-for-agents` | Matt Pocock | model-invoked | skill mechanics | `methodrail-init`, skill maintenance, harness generation, verification-skill generation, agent-facing docs |
 
@@ -59,9 +59,9 @@ Typical artifacts, not process nesting: `how` → implementation understanding; 
 - **Invocation:** `explicit` means host discovery is off (`disable-model-invocation: true`). Workflows and other parent skills may still load that skill when their procedure's conditions match. `interrogate` is suggest-only: name it and wait. Canonical rules: [SKILL-MECHANICS](../skills/writing-for-agents/SKILL-MECHANICS.md).
 - **Review:** `/methodrail-review` is the workflow; `code-review` owns diff inspection. `interrogate` is suggest-only.
 - **Implement:** Matt `implement` is not shipped. `/develop` owns the lifecycle and reuses `tdd` / `code-review` / `verify-change`.
-- **Simplicity:** `references/simplicity.md` is the shared procedure, including change-created cleanup. There is no public Ponytail or karpathy-guidelines skill, command, or review axis. Compose into `develop`, `codebase-design`, `refactor`, `diagnosing-bugs`, `code-review`, and `improve-codebase-architecture`.
+- **Simplicity:** `references/simplicity.md` is the shared procedure, including change-created cleanup. There is no public Ponytail or karpathy-guidelines skill, command, or review axis. Compose into `develop`, `codebase-design`, `simplify`, `diagnosing-bugs`, `code-review`, and `improve-codebase-architecture`.
 - **Assumptions:** `references/decision-frontier.md` owns uncertainty resolution, including consequential assumptions. Do not add an assumption ledger or a public clarification skill.
-- **Architecture maintenance:** `improve-codebase-architecture` owns codebase-wide discovery and selection. `/refactor` executes one selected behavior-preserving change. A survey-shaped `/refactor` request routes to `improve-codebase-architecture` without starting implementation. `maintain-project` may request `survey-only` and must stop before that skill's selection prompt.
+- **Architecture maintenance:** `improve-codebase-architecture` owns codebase-wide discovery and selection. `/simplify` executes selected behavior-preserving reductions. A survey-shaped `/simplify` request routes to `improve-codebase-architecture` without starting implementation. `maintain-project` may request `survey-only` and must stop before that skill's selection prompt.
 - **Project maintenance:** `maintain-project` owns cross-lane discovery, ranking, and reconciliation for architecture, verification, and build/tooling/documentation debt. A bare invocation audits and does not edit. Specialists keep their procedures. There is no debt ledger or consumer runtime.
 - **Control planes:** `poteto-mode`, `ask-matt`, `using-superpowers`, `setup-*` global routers, and Ponytail commands/hooks are not imported.
 - **Skill authoring:** `writing-for-agents` subsumes the earlier `writing-great-skills` concept. Do not ship both.

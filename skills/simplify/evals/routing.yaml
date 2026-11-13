@@ -1,0 +1,10 @@
+id: skill.simplify.routing-positive
+kind: routing
+skill: simplify
+description: "Explicit behavior-preserving reduction activates simplify."
+input:
+  prompt: "Use /simplify to remove the redundant auth adapter without changing behavior."
+expected:
+  skills:
+    required: [simplify]
+    forbidden: [develop]

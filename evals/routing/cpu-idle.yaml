@@ -7,7 +7,7 @@ expected:
   skills:
     required: [debug, diagnosing-bugs]
     optional: [observe, runtime-forensics]
-    forbidden: [develop, refactor]
+    forbidden: [develop, simplify]
   behaviors:
     - reproduce before patching
     - treat the symptom as runtime behavior, not a feature request

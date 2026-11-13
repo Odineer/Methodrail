@@ -21,7 +21,7 @@ export function staticVerificationContract(root: string): string[] {
   const lifecycle = readFileSync(join(root, "references/verification-lifecycle.md"), "utf8");
   const develop = readFileSync(join(root, "skills/develop/SKILL.md"), "utf8");
   const debug = readFileSync(join(root, "skills/debug/SKILL.md"), "utf8");
-  const refactor = readFileSync(join(root, "skills/refactor/SKILL.md"), "utf8");
+  const simplify = readFileSync(join(root, "skills/simplify/SKILL.md"), "utf8");
   const review = readFileSync(join(root, "skills/methodrail-review/SKILL.md"), "utf8");
   const investigate = readFileSync(join(root, "skills/investigate/SKILL.md"), "utf8");
   const verify = readFileSync(join(root, "skills/verify-change/SKILL.md"), "utf8");
@@ -61,7 +61,7 @@ export function staticVerificationContract(root: string): string[] {
 
   has(debug, /harness defect/, violations, "debug harness");
   has(debug, /product defect keeps its expected behavior/, violations, "debug oracle");
-  has(refactor, /dependent flows of a changed helper/, violations, "refactor dependents");
+  has(simplify, /dependent flows of a changed helper/, violations, "simplify dependents");
   has(review, /Do not invoke `create-verification-skill` or `maintain-verification-skill` unless the user asked for fixes/, violations, "review read-only");
   has(investigate, /Do not invoke `create-verification-skill` or `maintain-verification-skill`/, violations, "investigate read-only");
   has(verify, /Do not invoke `create-verification-skill` or start a `maintain-verification-skill` audit/, violations, "verify returns gap");
