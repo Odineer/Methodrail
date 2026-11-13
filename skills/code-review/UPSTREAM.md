@@ -8,7 +8,7 @@ Methodrail changes:
 - /methodrail-review remains the workflow entrypoint; this skill owns diff inspection
 - issue-tracker setup isolated; no setup-matt-pocock-skills requirement
 - Methodrail review-packet integration
-- subagents are conditional. Bounded review uses local passes. Isolated reviewers require a rigor justification. Host availability alone does not escalate. This replaces the upstream default that both upstream axes run as parallel sub-agents whenever the host supports them.
+- bounded reviews use local passes. Methodrail uses `swarm` for substantial independent read-only assignments and selects review independence through rigor.
 - Addy Osmani agent-skills composed at `6ca0cd7db39b41b1c37e26d335c507ee92382c6d`: test and check weakening from `skills/constraint-driven-development`; relevant correctness and verification effectiveness from `skills/code-review-and-quality`. Five public review axes, CONSTRAINTS.md, and the floor-guard script are not imported. Primary origin remains mattpocock/skills.
 - WIP review captures staged, unstaged, and untracked work, not only `<base>...HEAD`
 - Ponytail composed: unnecessary-complexity and redundant-comment checks; no "Lean already. Ship." verdict (DietrichGebert/ponytail `356918eba965ee1eac64bd3a7f0dd02108350de5`)

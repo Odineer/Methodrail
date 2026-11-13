@@ -30,7 +30,9 @@ plan proportionally
 ↓
 implement with canonical discipline
 ↓
-code-review when the change is substantive
+review each delegated slice as it returns
+↓
+code-review the substantive integrated change
 ↓
 repair material findings
 ↓
@@ -49,7 +51,7 @@ Match effort to [rigor](../../references/rigor.md). Do not activate the whole st
 
 **Large uncertain redesign:** `wayfinder` → `domain-modeling` → `how` → `architect` (design only: alternatives, recommendation, and unresolved questions; it must not implement) → `prototype` only for empirical claims → decision → implementation → `blast-radius` → `code-review` → repair material findings → `verify-change`. If rigor is high, name `interrogate` and wait for the user to invoke it. Review depth follows [rigor](../../references/rigor.md). Do not start `arena` because the host can run it.
 
-Do not load `wayfinder`, `architect`, `prototype`, `arena`, or `swarm` for routine work. Never load `interrogate` from this workflow.
+Keep `wayfinder`, `architect`, `prototype`, and `arena` off the routine path. Never load `interrogate` from this workflow.
 
 ## Workflow
 
@@ -57,10 +59,10 @@ Do not load `wayfinder`, `architect`, `prototype`, `arena`, or `swarm` for routi
 2. Classify uncertainty with the [decision frontier](../../references/decision-frontier.md), including the [human-decision rule](../../references/decision-frontier.md#consequential-assumptions). Resolve only currently actionable questions. Use the cheapest reliable method: deterministic tool, source/`how`, `observe`, `why`, `research`, `prototype`, `domain-modeling`, or a human. Ask one batch only when both conditions in that rule hold. Routine seams, helper names, and established conventions are not a batch.
 3. Define observable success and select existing proof before editing. Apply [Verification](#verification). When a multi-step implementation plan is warranted, pair each meaningful outcome with the evidence that will verify it. Reuse a check across steps where appropriate; do not introduce a separate test or approval for every step. A tiny edit does not acquire a spec document.
 4. Apply the [simplicity procedure](../../references/simplicity.md) before substantive implementation. Identify the existing owner, what can be reused, and what the change can retire. Keep mechanical edits on inspect → edit → check, with change-created cleanup after replacements or deletions.
-5. Implement in focused increments with `tdd` at agreed seams when that is the honest strategy. Prove each meaningful slice before starting a slice that depends on it. Follow established project patterns. Use `simplify` when the request is structural rather than a feature. Do not commit between slices unless the user asked.
+5. Implement in focused increments with `tdd` at agreed seams when that is the honest strategy. When at least two substantial slices have settled interfaces, disjoint source and verification ownership, and isolated writable workspaces, use [swarm's implementation procedure](../swarm/SKILL.md#implementation-slices) to run them in parallel. Review each returned patch as it arrives, then resolve material findings before integrating it. Run small, coupled, or already delegated work locally. Prove each meaningful slice before starting a slice that depends on it. Follow established project patterns. Use `simplify` when the request is structural rather than a feature. Do not commit between slices unless the user asked.
 6. If the work resolved or changed a project-specific term, ownership, lifecycle, or invariant, update the canonical glossary during this task through `domain-modeling`. If a new glossary was created, add its pointer to an existing `.methodrail/PROJECT.md`; do not create a second glossary or a project harness just to hold the pointer. Keep implementation details in code/docs where they belong. Offer a durable ADR only for a hard-to-reverse, surprising decision made among real alternatives; wait for approval before writing.
 7. Before reporting complete, inspect this task's delta. Each hunk should support the requested outcome, necessary supporting work, required verification or metadata, or [change-created cleanup](../../references/simplicity.md#change-created-cleanup). Remove only this agent's unrelated edits; do not revert other contributors' work.
-8. For a substantive change, run `code-review` on the task-owned delta before completion. Pass a [review packet](../../references/protocols/review-packet.md): the request, acceptance criteria, that delta, base and worktree state, applicable standards, verification evidence, and known deviations. Select depth from [rigor](../../references/rigor.md). Use `receiving-code-review` when received findings are disputed or materially ambiguous. Repair material findings, including demonstrated avoidable growth, inside this task. Do not start another lifecycle. Optional suggestions do not expand scope. Use `/methodrail-review` when the user requests a standalone review. An explicit review request still invokes methodrail-review even for a mechanical edit.
+8. For a substantive change, run `code-review` on the task-owned delta before completion. Pass a [review packet](../../references/protocols/review-packet.md): the request, acceptance criteria, that delta, base and worktree state, applicable standards, verification evidence, and known deviations. Select depth from [rigor](../../references/rigor.md). Reuse reviews for unchanged slices and inspect their interactions and any integration changes. Use `receiving-code-review` when received findings are disputed or materially ambiguous. Repair material findings, including demonstrated avoidable growth, inside this task. Do not start another lifecycle. Optional suggestions do not expand scope. Use `/methodrail-review` when the user requests a standalone review. An explicit review request still invokes methodrail-review even for a mechanical edit.
 9. Use `observe` and the project verification skill when the claim is behavioral. If the task adds, changes, or removes user-facing behavior that an existing feature map represents or should represent, including a behavior the map does not yet list, invoke `maintain-verification-skill` in task-scoped mode. Update the index and the affected entries. Do not start a full audit. Then finish with `verify-change` on the final relevant state. If later edits, including review repairs, cleanup, or maintenance, change relevant state, rerun the affected verification before claiming completion.
 10. This workflow emits one terminal [completion report](../../references/protocols/completion-report.md) for substantive work. Leaves return their results here. Summarize changed behavior, files, verification evidence, residual risk, and any durable knowledge worth proposing. Do not persist ordinary summaries. A mechanical task may use a concise claim plus its check.
 
@@ -89,7 +91,7 @@ Follow [verification lifecycle](../../references/verification-lifecycle.md).
 
 ## Done when
 
-Acceptance criteria are met, the substantive delta was reviewed, material findings were repaired or a concrete blocker remains, the task delta is scoped to the request and necessary supporting work, change-created leftovers are removed, and each completion claim has fresh relevant evidence or a clearly reported verification gap. Substantive work ends with one [completion report](../../references/protocols/completion-report.md) from this workflow.
+Acceptance criteria are met, each delegated implementation was reviewed before integration, the substantive integrated delta was reviewed, material findings were repaired or a concrete blocker remains, the task delta is scoped to the request and necessary supporting work, change-created leftovers are removed, and each completion claim has fresh relevant evidence or a clearly reported verification gap. Substantive work ends with one [completion report](../../references/protocols/completion-report.md) from this workflow.
 
 ## Neighbors
 
@@ -97,5 +99,5 @@ Acceptance criteria are met, the substantive delta was reviewed, material findin
 Usually follows:              investigate
 Often produces:               implementation; tdd cycle; verify-change
 Escalate to:                  how, architect, prototype, wayfinder, create-verification-skill, maintain-verification-skill
-Avoid combining automatically with: arena, swarm, interrogate
+Avoid combining automatically with: arena, interrogate
 ```

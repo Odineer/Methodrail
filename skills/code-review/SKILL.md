@@ -12,7 +12,7 @@ Review the requested range since a fixed point, including uncommitted work when 
 - **Spec**: does the code faithfully implement the originating issue, spec, or request?
 - **Maintainability**: does the change leave affected documentation accurate and avoid adding or worsening debt?
 
-Keep the axes distinct. For a bounded substantive change, run them as separate passes in the current context. Use isolated independent reviewers only when [rigor](../../references/rigor.md) selects that depth: the change is sensitive or consequential across a boundary, the host can isolate, and independence meaningfully reduces risk. Host support alone is not a reason. If the host cannot isolate, run separate local passes and say the review was not independent. An explicit request for a stronger mechanism is honored within its scope.
+Keep the axes distinct. Use local passes for bounded changes. Assign a separate reviewer when [rigor](../../references/rigor.md) or the user calls for independent review and the host supports it. Use the parallel procedure below for substantial independent assignments.
 
 `/methodrail-review` is the Methodrail workflow that may also invoke `blast-radius` and `verify-change`, and may name `interrogate` and wait. This skill performs the diff inspection. Do not load `interrogate` from this skill.
 
@@ -22,16 +22,16 @@ Give reviewers a [review packet](../../references/protocols/review-packet.md) wh
 
 ### 1. Pin the fixed point
 
-Whatever the user or the review packet said is the fixed point (commit SHA, branch, tag, `main`, `HEAD~5`). If neither specified one, resolve it from the repository. Ask only when the range is still ambiguous.
+Use the fixed point from the user or review packet. If neither specifies one, resolve it from the repository. Ask only when the range is still ambiguous.
 
-Capture the **union** of committed and working-tree changes:
+When the packet supplies an exact slice or task-owned delta, use that scope and its base. Read surrounding context for callers, contracts, and evidence. Otherwise capture the **union** of committed and working-tree changes:
 
 1. Committed range: `git diff <fixed-point>...HEAD` (three-dot, merge-base) and `git log <fixed-point>..HEAD --oneline`
 2. Staged: `git diff --cached`
 3. Unstaged tracked: `git diff`
 4. Untracked (non-ignored): `git status --short` and `git ls-files --others --exclude-standard`. Read those files; they do not appear in `git diff`.
 
-Confirm the ref resolves. Review that union only when it is non-empty. An empty committed range is not an empty review when staged, unstaged, or untracked files exist. If the union is empty, say so and stop. Isolated reviewers are a separate depth choice, not the default for a non-empty diff.
+Confirm the base resolves. If the requested scope is empty, say so and stop. An empty committed range is not an empty review when staged, unstaged, or untracked files exist.
 
 Do not treat `git diff <fixed-point>...HEAD` as the whole change. That command never includes the working tree.
 
@@ -53,6 +53,10 @@ Do not require `docs/agents/issue-tracker.md` or any Matt Pocock setup skill.
 Search the repo for every file that documents how code should be written. When `CODING_STANDARDS.md` or `CONTRIBUTING.md` exists, it must be on the list.
 
 ### 4. Review each axis
+
+The review owner uses [swarm](../swarm/SKILL.md) when two or more read-only review assignments have enough independent work to justify parallel passes, or when the user asks for parallel review and the scope supports it. Assign by axis, or by stable diff slice for a large axis. Give workers the same captured diff and [review packet](../../references/protocols/review-packet.md), including relevant working-tree changes. Each worker completes its assigned pass directly and returns its coverage, findings with path and line evidence, and gaps.
+
+The review owner covers shared contracts, interactions across slices, and any uncovered assignment. Reconcile findings into the three axes and report each issue once. Run the passes locally when the host lacks subagents. If the host cannot provide the requested independence, state that limitation. During per-slice implementation review, local passes can proceed while other workers finish.
 
 Scope security, performance, architecture, and test-effectiveness checks to the portions of the change they affect. Report each issue once, on the axis that best explains it.
 

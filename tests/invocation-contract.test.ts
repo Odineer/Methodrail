@@ -102,6 +102,23 @@ test("swarm partitions slices and arena competes on one artifact", () => {
   assert.match(arena, /partition different independent slices/);
 });
 
+test("writing workflows compose swarm through per-slice review before integration", () => {
+  for (const name of ["develop", "simplify", "maintain-project", "receiving-code-review"]) {
+    const skill = readFileSync(join(root, "skills", name, "SKILL.md"), "utf8");
+    assert.match(skill, /\.\.\/swarm\/SKILL\.md#implementation-slices/, name);
+  }
+  const swarm = readFileSync(join(root, "skills/swarm/SKILL.md"), "utf8");
+  const implementation = swarm.split("## Implementation slices")[1]?.split("## Neighbors")[0] ?? "";
+  assert.match(implementation, /As each worker finishes[\s\S]+code-review[\s\S]+before integrating/);
+  assert.match(implementation, /verification on the integrated state/);
+});
+
+test("code-review uses swarm for read-only review assignments", () => {
+  const skill = readFileSync(join(root, "skills/code-review/SKILL.md"), "utf8");
+  assert.match(skill, /\.\.\/swarm\/SKILL\.md\) when two or more read-only review assignments/);
+  assert.match(skill, /same captured diff and \[review packet\]/);
+});
+
 test("research returns findings in chat and does not write knowledge by default", () => {
   const research = readFileSync(join(root, "skills/research/SKILL.md"), "utf8");
   const investigate = readFileSync(join(root, "skills/investigate/SKILL.md"), "utf8");
