@@ -6,7 +6,7 @@ Lane detail for [maintain-project](../SKILL.md). This file does not replace spec
 
 | Lane | Look for | Reuse |
 |---|---|---|
-| Architecture | Demonstrated caller burden, repeated structural defects, leaky seams, cross-feature duplication, and unnecessary layers or dependencies with evidenced cost | `improve-codebase-architecture` in `survey-only` phase, `codebase-design`, then `refactor` for one selected behavior-preserving change |
+| Architecture | Demonstrated caller burden, repeated structural defects, leaky seams, cross-feature duplication, and unnecessary layers or dependencies with evidenced cost | `improve-codebase-architecture` in `survey-only` phase, `codebase-design`, then `simplify` for selected behavior-preserving reductions |
 | Verification | Stale recipes, broken owned helpers, map omissions, inadequate characterization of selected behavior, and drift in an existing formal check | `maintain-verification-skill` with an explicit action and coverage; `maintain-formal-verification-skill` inspect during audit; [verification lifecycle](../../../references/verification-lifecycle.md); [formal verification](../../../references/formal-verification.md); `verify-change` |
 | Build, tooling, and documentation | Broken canonical commands, recurring setup friction, incorrect CI wiring, stale operational instructions, contradictory pointers | Existing deterministic tools and bounded direct repairs. `debug` when a failure needs diagnosis |
 
@@ -25,6 +25,12 @@ Each actionable finding contains:
 7. A disposition: confirmed, needs investigation, rejected, deferred, resolved, or blocked, as fits the phase.
 
 Confirmed items enter the ranked report. Needs-investigation and speculative items stay out of the repair queue until evidence is enough.
+
+## Consolidation
+
+Look for duplicate logic, pass-through layers, and obsolete code, dependencies, scripts, or guidance across the scoped lanes. Trace callers, registrations, entry points, and supported contracts before calling an artifact obsolete. Check whether similar implementations intentionally behave differently.
+
+For each confirmed candidate, name exactly what can be removed or replaced, what observable behavior must survive, and the checks to run before and after. Record any gap that must be closed before editing. Rank by maintenance benefit and regression risk. Use line counts to describe the scope of a reduction.
 
 ## Architecture
 

@@ -38,7 +38,7 @@ For each check, give the outcome (`in sync`, `updated`, `bug`, `blocked`; update
 ## Neighbors
 
 ```text
-Usually follows:              develop, debug, refactor, or maintain-project when coverage is named
+Usually follows:              develop, debug, simplify, or maintain-project when coverage is named
 Often produces:               aligned formal guidance and a confirmed sync record
 Escalate product bugs to:     debug or develop
 Avoid combining automatically with: create-formal-verification-skill, product edits

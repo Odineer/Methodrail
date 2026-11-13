@@ -1,9 +1,0 @@
-id: routing.refactor-auth
-kind: routing
-description: Behavior-preserving structural work should route to refactor, not generic develop.
-input:
-  prompt: "Refactor auth service without changing behavior."
-expected:
-  skills:
-    required: [refactor]
-    forbidden: [develop]

@@ -1,0 +1,9 @@
+id: routing.simplify-auth
+kind: routing
+description: A selected behavior-preserving reduction routes to simplify.
+input:
+  prompt: "Use /simplify to remove the redundant auth adapter without changing behavior."
+expected:
+  skills:
+    required: [simplify]
+    forbidden: [develop]

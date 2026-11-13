@@ -12,33 +12,7 @@ Do not create a skill because advice sounds good. Create a skill because a **rec
 - How does it compose with existing capabilities?
 - How will we test that it improves behavior?
 
-Methodrail prefers evidence over NIH.
-
-```text
-Observed recurring agent failure
-        ↓
-Does Methodrail already solve it?
-        │
-        ├── yes → improve/eval existing capability
-        │
-        └── no
-             ↓
-Does proven upstream work solve it?
-        │
-        ├── yes → adopt/adapt
-        │
-        └── no → design a new skill
-             ↓
-write using writing-for-agents principles
-             ↓
-baseline behavior
-             ↓
-skill-enabled behavior
-             ↓
-pressure cases where relevant
-             ↓
-ship only when behavior improves
-```
+Methodrail prefers evidence over NIH. The ship ladder is [skill mechanics](skills/writing-for-agents/SKILL-MECHANICS.md#methodrail-evals).
 
 New skills must justify:
 

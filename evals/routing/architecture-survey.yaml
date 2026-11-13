@@ -1,12 +1,12 @@
 id: routing.architecture-survey
 kind: routing
-description: A codebase-wide architecture survey should route to improve-codebase-architecture, not refactor.
+description: A codebase-wide architecture survey should route to improve-codebase-architecture, not simplify.
 input:
   prompt: "Scan the whole codebase, rank the architectural hot spots, and tell me what we should improve first."
 expected:
   skills:
     required: [improve-codebase-architecture]
-    forbidden: [refactor]
+    forbidden: [simplify]
   behaviors:
     - treat the work as a portfolio survey, not a selected-target refactor
     - do not begin implementation during the hunt

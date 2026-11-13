@@ -87,7 +87,7 @@ Fidelity deviations for ketchup and the formal pair: no `bro`, no ketchup-video,
 
 | Skill | Purpose | Decision | Canonical Methodrail capability | Reason | Host requirements |
 |---|---|---|---|---|---|
-| ponytail | Reuse, native-capability, and necessity ladder for implementation | COMPOSE | `references/simplicity.md` via `develop`, `codebase-design`, `refactor` | Useful simplicity discipline without a competing workflow | portable |
+| ponytail | Reuse, native-capability, and necessity ladder for implementation | COMPOSE | `references/simplicity.md` via `develop`, `codebase-design`, `simplify` | Useful simplicity discipline without a competing workflow | portable |
 | ponytail-review | Diff review for unnecessary complexity | COMPOSE | inside `code-review` Maintainability | Review complexity within the requested diff | portable |
 | ponytail-audit | Repo-wide over-engineering survey | COMPOSE | inside `improve-codebase-architecture` | Survey owner already exists; rank by benefit and risk, not deleted lines | portable |
 | ponytail-debt / ponytail-gain / ponytail-help | Debt ledger, scoreboard, command help | SKIP | — | Markers, metrics, and host commands are out of scope | mixed |
@@ -99,7 +99,7 @@ Fidelity deviations for the composed skills: no intensity modes; no `ponytail:` 
 
 | Skill | Purpose | Decision | Canonical Methodrail capability | Reason | Host requirements |
 |---|---|---|---|---|---|
-| karpathy-guidelines | Surgical edits, assumptions, verifiable goals | COMPOSE | `references/simplicity.md` and `references/decision-frontier.md` via `develop`, `refactor`, `diagnosing-bugs`, `code-review` | Incremental cleanup, hunk-scope, and assumption handling without a competing workflow | portable |
+| karpathy-guidelines | Surgical edits, assumptions, verifiable goals | COMPOSE | `references/simplicity.md` and `references/decision-frontier.md` via `develop`, `simplify`, `diagnosing-bugs`, `code-review` | Incremental cleanup, hunk-scope, and assumption handling without a competing workflow | portable |
 | CLAUDE.md / CURSOR.md / always-on Cursor rule / plugin marketplace | Host installation and global activation | SKIP | Methodrail workflows | Competing control plane | host-specific |
 
 Fidelity deviations: no stop-when-unclear; no single-use-abstraction ban; no 200-to-50 rewrite metric; no skip of "impossible" failure paths; no assumption ledger; `verify-change` stays stronger than compact success-loop examples. Comparison: [karpathy-upstream-comparison.md](../docs/internal/karpathy-upstream-comparison.md).

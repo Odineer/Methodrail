@@ -6,7 +6,7 @@ input:
 expected:
   skills:
     required: [how]
-    forbidden: [architect, prototype, interrogate, refactor, wayfinder, arena, swarm]
+    forbidden: [architect, prototype, interrogate, simplify, wayfinder, arena, swarm]
   behaviors:
     - keep the rename mechanical
     - use how for the explanation

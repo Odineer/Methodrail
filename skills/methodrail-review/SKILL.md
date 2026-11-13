@@ -50,7 +50,7 @@ The requested change range was inspected in context, findings are evidence-backe
 ## Neighbors
 
 ```text
-Usually follows:              develop, debug, refactor
+Usually follows:              develop, debug, simplify
 Often produces:               findings; verification gaps
 Escalate to:                  code-review, blast-radius, verify-change
 Avoid combining automatically with: arena, swarm, interrogate

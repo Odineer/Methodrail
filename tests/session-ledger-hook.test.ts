@@ -8,7 +8,7 @@ import test from "node:test";
 import { parseLedger } from "../src/ledger/parse.js";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
-const script = join(root, "scripts/hooks/session-ledger.mjs");
+const script = join(root, "scripts/hooks/session-ledger.sh");
 
 function fire(event: string, payload: Record<string, unknown>, env: Record<string, string>) {
   const input = JSON.stringify({
@@ -20,7 +20,7 @@ function fire(event: string, payload: Record<string, unknown>, env: Record<strin
     workspace_roots: [env.WORKSPACE],
     ...payload,
   });
-  const result = spawnSync(process.execPath, [script], {
+  const result = spawnSync(script, [], {
     input,
     encoding: "utf8",
     env: { ...process.env, METHODRAIL_LEDGER: "", ...env },
@@ -109,7 +109,7 @@ test("hook appends one JSONL event per Cursor event and stores response bodies",
 });
 
 test("hook exits 0 with {} on garbage input", () => {
-  const result = spawnSync(process.execPath, [script], { input: "not json", encoding: "utf8" });
+  const result = spawnSync(script, [], { input: "not json", encoding: "utf8" });
   assert.equal(result.status, 0);
   assert.equal(result.stdout.trim(), "{}");
 });

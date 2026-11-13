@@ -1,10 +1,10 @@
-id: skill.refactor.routing-negative
+id: skill.simplify.routing-negative
 kind: routing
-skill: refactor
+skill: simplify
 description: "A codebase-wide architecture survey is not the focused refactor execution workflow."
 input:
   prompt: "Scan the whole codebase, rank the architectural hot spots, and tell me what we should improve first."
 expected:
   skills:
-    forbidden: [refactor]
+    forbidden: [simplify]
     required: [improve-codebase-architecture]

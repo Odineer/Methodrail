@@ -72,7 +72,7 @@ Point at `maintain-verification-skill` for keeping the map honest as the app cha
 ## Neighbors
 
 ```text
-Usually follows:              methodrail-init, develop, debug, refactor
+Usually follows:              methodrail-init, develop, debug, simplify
 Often produces:               project-local verify skill; feature map; CONTROL.md pointers
 Escalate to:                  maintain-verification-skill, writing-for-agents
 Avoid combining automatically with: how, architect

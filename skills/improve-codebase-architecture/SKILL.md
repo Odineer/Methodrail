@@ -14,7 +14,7 @@ Surface architectural friction. Ask two questions, in order:
 
 Call `codebase-design` for the vocabulary (**module**, **interface**, **depth**, **seam**, **adapter**, **leverage**, **locality**). Do not copy that glossary here. Use the project's canonical glossary for domain names.
 
-This skill owns portfolio-level discovery and selection across the codebase. `/refactor` is a downstream executor for one selected behavior-preserving change; it does not invoke or own this survey.
+This skill owns portfolio-level discovery and selection across the codebase. `/simplify` executes authorized reductions from this survey, including selected batches.
 
 ## Parent phase
 
@@ -90,7 +90,7 @@ After grilling, return a compact brief:
 - baseline verification route and missing characterization
 - related ADRs, typed notes, and feature-map entries
 - unresolved choices
-- route: `/refactor` for behavior-preserving work, `/develop` for intentional behavior change, `to-spec` / `to-tickets` for large independently landable work
+- route to `/simplify` when the selected change removes avoidable code or complexity while preserving behavior. Use `/develop` for intentional behavior changes and `to-spec` / `to-tickets` when larger structural work needs a delivery plan
 
 Log the selection in TSV only when `show-me-your-work` is already justified. Offer an ADR only through the three-part gate.
 
@@ -99,6 +99,6 @@ Log the selection in TSV only when `show-me-your-work` is already justified. Off
 ```text
 Vocabulary                    → codebase-design
 Chosen candidate              → grill-with-docs
-Behavior-preserving work      → /refactor
+Selected reductions           → /simplify
 Parent survey-only            → return candidates and stop before selection
 ```

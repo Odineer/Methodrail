@@ -1,0 +1,16 @@
+id: composition.review-repair-batch
+kind: composition
+description: Validated review findings use the appropriate repair workflows and integrated verification.
+input:
+  prompt: >-
+    Address the review batch. One report describes an intermittent scheduler bug.
+    Another identifies a missing notification required by the approved spec.
+    They use disjoint code and tests and the host offers isolated workspaces.
+    A third comment proposes dropping a supported legacy field.
+expected:
+  skills:
+    required: [receiving-code-review, debug, develop, swarm, verify-change]
+  behaviors:
+    - check the claims and retain the supported field
+    - delegate the independent authorized repairs with scoped checks
+    - verify the integrated result and account for each finding

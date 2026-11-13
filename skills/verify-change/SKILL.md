@@ -115,7 +115,7 @@ Always before any variation of success/completion claims, satisfaction, commit/P
 ## Neighbors
 
 ```text
-Usually follows:              develop, debug, refactor, tdd
+Usually follows:              develop, debug, simplify, tdd
 Often produces:               fresh evidence record; pass/fail status
 Escalate to:                  observe, project verify skill, performance, visual-parity
 Avoid combining automatically with: how, architect, wayfinder
