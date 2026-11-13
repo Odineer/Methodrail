@@ -43,13 +43,13 @@ When the request explicitly requires complex behavior, deliver that behavior. Do
 
 ## Comments
 
-Prefer clear names, straightforward control flow, and executable constraints (types, tests, assertions).
+Default to clear names, straightforward control flow, and executable constraints (types, tests, assertions). Add comments or docstrings only to record non-obvious rationale or constraints, document a public contract, or meet a tooling or legal requirement.
 
 Do not add comments that restate visible code, narrate ordinary operations, add decorative section labels, or explain confusing naming that should instead be improved. Do not add branded source markers or speculative TODOs.
 
-Retain a concise comment when it conveys information the code cannot reasonably express: a non-obvious reason, external constraint, compatibility workaround, units or domain assumptions, or a necessary invariant. Preserve license notices, tool/compiler directives, and required public documentation.
+When editing code, revisit the comments and docstrings that describe the affected behavior, including relevant prose outside the diff. Delete redundant prose and stale notes that have lost their purpose. Update prose that still carries a contract, constraint, or non-obvious reason. Preserve license notices and tool/compiler directives.
 
-Apply this to new and materially changed code. Review redundant comments in the requested diff. Do not sweep unrelated files or delete useful comments to meet a quota. Treat architecture-sketch placeholders and rationale comments by their context, not by blanket removal.
+Before removing a docstring, check whether API documentation, doctests, generated help, or runtime introspection rely on it. Keep cleanup scoped to the affected behavior or the selected audit findings. Use comment counts to locate candidates and verify removals by checking what readers and tools rely on.
 
 ## Done when
 

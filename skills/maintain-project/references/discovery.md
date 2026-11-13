@@ -30,6 +30,8 @@ Confirmed items enter the ranked report. Needs-investigation and speculative ite
 
 Look for duplicate logic, pass-through layers, and obsolete code, dependencies, scripts, or guidance across the scoped lanes. Trace callers, registrations, entry points, and supported contracts before calling an artifact obsolete. Check whether similar implementations intentionally behave differently.
 
+Include stale and redundant comments or docstrings in the scoped scan. Use the [comment rule](../../../references/simplicity.md#comments) to check reader and tooling needs before confirming a removal.
+
 For each confirmed candidate, name exactly what can be removed or replaced, what observable behavior must survive, and the checks to run before and after. Record any gap that must be closed before editing. Rank by maintenance benefit and regression risk. Use line counts to describe the scope of a reduction.
 
 ## Architecture
