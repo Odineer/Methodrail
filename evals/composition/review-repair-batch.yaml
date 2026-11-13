@@ -7,10 +7,12 @@ input:
     Another identifies a missing notification required by the approved spec.
     They use disjoint code and tests and the host offers isolated workspaces.
     A third comment proposes dropping a supported legacy field.
+    A fourth identifies a stale README example of an unrelated, stable API.
 expected:
   skills:
     required: [receiving-code-review, debug, develop, swarm, verify-change]
   behaviors:
     - check the claims and retain the supported field
     - delegate the independent authorized repairs with scoped checks
+    - correct the README example directly and check it against the current API
     - verify the integrated result and account for each finding

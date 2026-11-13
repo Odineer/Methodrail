@@ -1,0 +1,15 @@
+id: behavioral.receiving-code-review.assessment-only
+kind: behavioral
+skill: receiving-code-review
+description: A request to assess received findings keeps the worktree read-only even when a reviewer asks for a valid fix.
+input:
+  prompt: "Use receiving-code-review on REVIEW.md. Which comments are warranted?"
+fixture: evals/fixtures/receiving-code-review
+expected:
+  skills:
+    required: [receiving-code-review]
+    forbidden: [debug, develop, maintain-verification-skill, swarm]
+  behaviors:
+    - identify the explicit-zero defect and cite evidence for it
+    - show that the default-delay comment is stale and that the fallback is part of the supported version 1 contract
+    - report the decisions without editing files or delegating repairs

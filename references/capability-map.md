@@ -28,7 +28,7 @@ Canonical Methodrail surface. One owner per capability. Provenance is metadata, 
 | Baseline bug diagnosis | `diagnosing-bugs` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model/workflow invoked | `runtime-forensics`, `trace-forensics`, `performance` | `debug` |
 | Completion verification | `verify-change` | Superpowers-derived | model/workflow invoked | `observe`, project verify skill; consumes a formal result without creating or auditing one | all workflows |
 | Diff review: Standards, Spec, and Maintainability | `code-review` | Matt Pocock + Ponytail composed + Karpathy-inspired guidelines composed | model-invoked | `swarm` for substantial independent review assignments | `methodrail-review`, implementation workflows |
-| Assessment and repair of received review findings | `receiving-code-review` | Superpowers-derived | model/workflow invoked | `debug`, `develop`, `swarm` for independent slices, `verify-change` | humans; implementation workflows for disputed or ambiguous findings |
+| Assessment and requested repair of received review findings | `receiving-code-review` | Superpowers-derived | model/workflow invoked | `debug`, `develop`, task-scoped `maintain-verification-skill`, `swarm` for independent slices, `verify-change` | humans; implementation workflows for disputed or ambiguous findings |
 | Adversarial independent review | `interrogate` | pstack | explicit / high rigor | — | `methodrail-review` (suggested only) |
 | Competing candidates | `arena` | pstack | explicit | `verify-change` | `architect`, `blast-radius` |
 | Partitioned parallel work | `swarm` | pstack | explicit | `code-review` for returned implementation patches | humans, implementation and review workflows, large investigations |
