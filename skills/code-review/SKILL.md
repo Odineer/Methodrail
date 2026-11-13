@@ -88,7 +88,7 @@ For Standards and Spec, inspect tests and checks the diff changed:
 
 - A test change is acceptable when it follows an authorized requirement change or corrects a defective oracle.
 - Reject unjustified weakening of a still-valid expectation: removed assertions, skipped or deleted tests, a lowered threshold, or a new suppression whose only effect is to silence a failure.
-- A legitimate, evidenced suppression or deletion can stand. Say why.
+- Apply [test reuse and retirement](../../references/simplicity.md#test-reuse-and-retirement). Flag duplicate additions and tests the change supersedes. For a deletion, cite the authorized behavior removal or the surviving coverage that catches each still-supported failure.
 - Green tests do not close a requirement the tests do not exercise.
 
 ### 5. Return the axes

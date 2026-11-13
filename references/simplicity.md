@@ -33,6 +33,14 @@ Remove code, configuration, and dependencies that this change makes unused, afte
 
 Do not scan the repository for dead code, impose a removal quota, or delete another contributor's uncommitted work.
 
+## Test reuse and retirement
+
+Before adding a test, find the closest existing check. Extend it when it can catch the same failure at the right boundary. Add a case only for a named regression or coverage gap.
+
+When behavior changes or coverage is replaced, review the affected tests. Retire cases for intentionally removed behavior and cases whose still-supported failure modes are covered elsewhere. Identify the surviving assertions and the boundary they exercise. Two tests with similar assertions can catch different failures, such as a policy bug and an endpoint that fails to apply the policy.
+
+Remove newly unused fixtures and helpers in the same change after checking their consumers. For behavior-preserving cleanup, establish the baseline before editing and rerun the relevant checks after retirement. Preserve distinct safeguards and report any coverage gaps.
+
 ## Preserve
 
 Keep security, accessibility, error handling, public contracts, justified extension seams, and testability. Follow the project's testing approach. Do not replace it with a one-check or no-framework rule.

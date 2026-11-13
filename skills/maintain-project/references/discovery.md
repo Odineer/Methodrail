@@ -32,6 +32,8 @@ Look for duplicate logic, pass-through layers, and obsolete code, dependencies, 
 
 Include stale and redundant comments or docstrings in the scoped scan. Use the [comment rule](../../../references/simplicity.md#comments) to check reader and tooling needs before confirming a removal.
 
+Look for obsolete or duplicate tests and their fixtures and helpers. Use [test reuse and retirement](../../../references/simplicity.md#test-reuse-and-retirement) to name the surviving coverage and verification path for each proposed removal.
+
 For each confirmed candidate, name exactly what can be removed or replaced, what observable behavior must survive, and the checks to run before and after. Record any gap that must be closed before editing. Rank by maintenance benefit and regression risk. Use line counts to describe the scope of a reduction.
 
 ## Architecture

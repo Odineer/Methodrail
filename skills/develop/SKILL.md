@@ -72,6 +72,7 @@ Matt's `implement` skill is not a public Methodrail skill. `/develop` owns the l
 
 - Preserve unrelated user changes.
 - Apply the [comment rule](../../references/simplicity.md#comments) to new prose and existing comments or docstrings that describe the affected behavior.
+- Apply [test reuse and retirement](../../references/simplicity.md#test-reuse-and-retirement) when adding coverage or changing tested behavior.
 - Do not broaden a local request into an architectural rewrite.
 - Do not claim completion from code inspection alone.
 - Do not commit, push, deploy, or mutate production unless explicitly requested.

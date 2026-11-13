@@ -1,0 +1,18 @@
+id: behavioral.code-review.test-retirement
+kind: behavioral
+skill: code-review
+description: Review retires superseded coverage while preserving distinct failure checks.
+input:
+  prompt: >-
+    Review a PR that drops a supported legacy mode as authorized by the spec.
+    It adds a duplicate unit test for the surviving policy, leaves tests and
+    a fixture used only by legacy mode, and removes the only API test proving
+    the endpoint calls the policy.
+expected:
+  skills:
+    required: [code-review]
+  behaviors:
+    - identify the duplicate test and name the existing check to reuse
+    - retire the legacy cases and fixture after checking consumers
+    - preserve the API assertion because it catches a different failure
+    - name the relevant checks to rerun after cleanup

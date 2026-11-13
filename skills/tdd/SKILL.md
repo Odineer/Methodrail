@@ -35,6 +35,7 @@ Before writing any test, write down the seams under test. Give each proposed sea
 ## Rules of the loop
 
 - **Red before green.** Write the failing test first, then only enough code to pass it. Watch it fail for the expected reason.
+- Use [test reuse and retirement](../../references/simplicity.md#test-reuse-and-retirement) to choose whether to extend an existing check and identify coverage the slice supersedes.
 - **One slice at a time.** One seam, one test, one minimal implementation per cycle.
 - **Don't add speculative features.**
 - After green, `verify-change` before claiming the slice done.
