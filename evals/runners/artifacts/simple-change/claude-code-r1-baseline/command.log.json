@@ -1,0 +1,20 @@
+[
+  {
+    "command": "cd repo && ls -a && find . -type f -not -path './node_modules/*' | head -50",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": ".\n..\npackage.json\nsrc\n./package.json\n./src/button.js\n./src/button.test.js"
+  },
+  {
+    "command": "cat package.json src/button.test.js",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": "{\n  \"name\": \"simple-change\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"scripts\": {\n    \"test\": \"node --test src/button.test.js\"\n  }\n}\nimport assert from \"node:assert/strict\";\nimport test from \"node:test\";\nimport { buttonLabel } from \"./button.js\";\n\ntest(\"button label\", () => {\n  assert.equal(buttonLabel(), \"Create\");\n});"
+  },
+  {
+    "command": "npm test 2>&1 | tail -15",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "> test\n> node --test src/button.test.js\n\n✔ button label (0.535083ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 69.7715"
+  }
+]

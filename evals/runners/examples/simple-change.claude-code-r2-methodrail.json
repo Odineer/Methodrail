@@ -1,0 +1,60 @@
+{
+  "fixture_id": "simple-change",
+  "condition": "methodrail",
+  "host": "claude-code",
+  "model": "claude-opus-5-5",
+  "repeat": 2,
+  "started_at": "2026-11-16T02:12:17Z",
+  "ended_at": "2026-11-16T02:12:36Z",
+  "latency_ms": 18606,
+  "skills_invoked": [
+    "develop"
+  ],
+  "references_loaded": [
+    "skills/develop/SKILL.md",
+    "adapters/claude/CLAUDE.md"
+  ],
+  "tools_used": [
+    "bash",
+    "edit"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [
+    {
+      "command": "npm test 2>&1 | tail -10",
+      "phase": "verify",
+      "exit_status": 0
+    }
+  ],
+  "evidence": [
+    "/methodrail:develop expanded from skills/develop/SKILL.md; SessionStart hook injected adapters/claude/CLAUDE.md",
+    "grep -rn Save found only repo/src/button.js",
+    "Edited the string with the Edit tool",
+    "npm test: 1 of 1 passed"
+  ],
+  "outcome": "The button label now says \"Create\" instead of \"Save\". I changed only the returned string in `src/button.js:2`; nothing else in the code changed.",
+  "failure_modes": [],
+  "behaviors_observed": [
+    "inspect the current label",
+    "edit locally",
+    "run a cheap check if one exists"
+  ],
+  "notes": "Live Claude Code 2.1.325 via evals/runners/run-claude-code.sh. Prompt: /methodrail:develop Read TASK.md in the current directory and complete it.. Fresh copy of the fixture; --setting-sources project, --strict-mcp-config, --permission-mode acceptEdits, allowedTools Bash Read Edit Write Glob Grep Skill. The methodrail condition adds --plugin-dir <checkout>; nothing else differs. load-evidence.json: the session file showed the slash command expanding from the plugin's SKILL.md (the session file itself is not committed because it holds account details). develop kept the work to inspect, edit, test: no expensive operators, subagents, or other skills.",
+  "provenance": "live",
+  "capture": "runner_captured",
+  "artifacts": {
+    "overlay": "evals/runners/artifacts/simple-change/claude-code-r2-methodrail/overlay",
+    "command_log": "evals/runners/artifacts/simple-change/claude-code-r2-methodrail/command.log.json",
+    "answer": "evals/runners/artifacts/simple-change/claude-code-r2-methodrail/answer.md",
+    "transcript": "evals/runners/artifacts/simple-change/claude-code-r2-methodrail/TRANSCRIPT.jsonl"
+  },
+  "usage": {
+    "source": "native-report",
+    "scope": "complete-run",
+    "input_tokens": 131291,
+    "output_tokens": 745,
+    "cached_input_tokens": 117166,
+    "total_tokens": 132036,
+    "artifact": "evals/runners/artifacts/simple-change/claude-code-r2-methodrail/TRANSCRIPT.jsonl"
+  }
+}

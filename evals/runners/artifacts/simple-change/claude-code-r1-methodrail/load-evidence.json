@@ -1,0 +1,12 @@
+{
+  "session_start_hook": {
+    "exit_code": 0,
+    "additional_context_matches_adapter": true
+  },
+  "skill_load": {
+    "requested": "/methodrail:develop",
+    "command_name": null,
+    "base_directory": null,
+    "expanded_body_matches_skill_file": false
+  }
+}

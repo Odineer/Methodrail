@@ -1,0 +1,66 @@
+{
+  "fixture_id": "runtime-bug",
+  "condition": "baseline",
+  "host": "claude-code",
+  "model": "claude-opus-5-5",
+  "repeat": 1,
+  "started_at": "2026-11-16T02:10:17Z",
+  "ended_at": "2026-11-16T02:10:47Z",
+  "latency_ms": 29140,
+  "skills_invoked": [],
+  "references_loaded": [
+    ".methodrail/PROJECT.md",
+    ".agents/skills/verify-project/SKILL.md"
+  ],
+  "tools_used": [
+    "bash",
+    "write"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [
+    {
+      "command": "mkdir -p ../verify && cat > ../verify/repro.mjs <<'EOF'\nimport { landingPath } from \"../work/repo/src/session.js\";\nconst now = Date.now();\nconst cases = {\n  noSession: undefined,\n  noToken: {},\n  validMs: { token: \"t\", expiresAt: now + 60_000 },\n  expiredMs: { token: \"t\", expiresAt: now - 60_000 },\n  expiredIso: { token: \"t\", expiresAt: new Date(now - 60_000).toISOString() },\n  expiredDate: { token: \"t\", expiresAt: new Date(now - 60_000) },\n  validIso: { token: \"t\", expiresAt: new Date(now + 60_000).toISOString() },\n  garbageExpiry: { token: \"t\", expiresAt: \"not-a-date\" },\n  noExpiryField: { token: \"t\" },\n};\nconst expected = { noSession:\"/login\", noToken:\"/login\", validMs:\"/dashboard\", expiredMs:\"/login\", expiredIso:\"/login\", expiredDate:\"/login\", validIso:\"/dashboard\", garbageExpiry:\"/login\", noExpiryField:\"/dashboard\" };\nlet fail = 0;\nfor (const [k, s] of Object.entries(cases)) {\n  const got = landingPath(s); const ok = got === expected[k]; if (!ok) fail++;\n  console.log(`${ok ? \"PASS\" : \"FAIL\"} ${k.padEnd(14)} -> ${got} (expected ${expected[k]})`);\n}\nprocess.exit(fail ? 1 : 0);\nEOF\ncd .. && node verify/repro.mjs",
+      "phase": "repro",
+      "exit_status": 1
+    },
+    {
+      "command": "cd .. && node verify/repro.mjs",
+      "phase": "verify",
+      "exit_status": 0
+    }
+  ],
+  "evidence": [
+    "Read .methodrail/PROJECT.md and .agents/skills/verify-project/SKILL.md; no app exists to start",
+    "../verify/repro.mjs before the fix: expired timestamp and ISO sessions returned /dashboard (exit 1)",
+    "Root cause stated: landingPath checked token presence only",
+    "Same script after the fix: all six cases passed"
+  ],
+  "outcome": "Expired sessions now go to `/login` instead of the dashboard. I checked this by running the function before and after the fix, but not through the full app, because there isn't one to run.",
+  "failure_modes": [
+    "session.expired flag ignored: {token, expired: true} still lands on /dashboard",
+    "no regression test added to the repo; repro script written outside the working copy"
+  ],
+  "behaviors_observed": [
+    "use project verification for reproduction",
+    "distinguish source inference from runtime evidence",
+    "verify the fix"
+  ],
+  "notes": "Live Claude Code 2.1.325 via evals/runners/run-claude-code.sh. Prompt: Read TASK.md in the current directory and complete it.. Fresh copy of the fixture; --setting-sources project, --strict-mcp-config, --permission-mode acceptEdits, allowedTools Bash Read Edit Write Glob Grep Skill. The methodrail condition adds --plugin-dir <checkout>; nothing else differs. Wrote its repro script to ../verify outside the working copy (kept under outside-work/). Operator addition: PROJECT.md and verify-project were read through a find loop the collector cannot parse.",
+  "provenance": "live",
+  "capture": "runner_captured",
+  "artifacts": {
+    "overlay": "evals/runners/artifacts/runtime-bug/claude-code-r1-baseline/overlay",
+    "command_log": "evals/runners/artifacts/runtime-bug/claude-code-r1-baseline/command.log.json",
+    "answer": "evals/runners/artifacts/runtime-bug/claude-code-r1-baseline/answer.md",
+    "transcript": "evals/runners/artifacts/runtime-bug/claude-code-r1-baseline/TRANSCRIPT.jsonl"
+  },
+  "usage": {
+    "source": "native-report",
+    "scope": "complete-run",
+    "input_tokens": 124914,
+    "output_tokens": 2184,
+    "cached_input_tokens": 115245,
+    "total_tokens": 127098,
+    "artifact": "evals/runners/artifacts/runtime-bug/claude-code-r1-baseline/TRANSCRIPT.jsonl"
+  }
+}

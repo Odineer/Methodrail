@@ -1,0 +1,55 @@
+{
+  "fixture_id": "simple-change",
+  "condition": "baseline",
+  "host": "claude-code",
+  "model": "claude-opus-5-5",
+  "repeat": 2,
+  "started_at": "2026-11-16T02:12:16Z",
+  "ended_at": "2026-11-16T02:12:36Z",
+  "latency_ms": 18878,
+  "skills_invoked": [],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "bash",
+    "grep"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [
+    {
+      "command": "sed -i '' 's/return \"Save\";/return \"Create\";/' src/button.js && cat src/button.js && npm test 2>&1 | tail -10",
+      "phase": "verify",
+      "exit_status": 0
+    }
+  ],
+  "evidence": [
+    "Grep found return \"Save\" only in repo/src/button.js",
+    "Edited with sed -i and ran npm test in the same command",
+    "npm test: tests 1, pass 1, fail 0"
+  ],
+  "outcome": "The button label now says \"Create\" instead of \"Save\". The only change is the returned string in `repo/src/button.js:2`, so behavior is otherwise the same.",
+  "failure_modes": [],
+  "behaviors_observed": [
+    "inspect the current label",
+    "edit locally",
+    "run a cheap check if one exists"
+  ],
+  "notes": "Live Claude Code 2.1.325 via evals/runners/run-claude-code.sh. Prompt: Read TASK.md in the current directory and complete it.. Fresh copy of the fixture; --setting-sources project, --strict-mcp-config, --permission-mode acceptEdits, allowedTools Bash Read Edit Write Glob Grep Skill. The methodrail condition adds --plugin-dir <checkout>; nothing else differs. Operator correction: the npm test step ran after the sed edit in one shell command, so its phase is verify, not the collector's regression.",
+  "provenance": "live",
+  "capture": "runner_captured",
+  "artifacts": {
+    "overlay": "evals/runners/artifacts/simple-change/claude-code-r2-baseline/overlay",
+    "command_log": "evals/runners/artifacts/simple-change/claude-code-r2-baseline/command.log.json",
+    "answer": "evals/runners/artifacts/simple-change/claude-code-r2-baseline/answer.md",
+    "transcript": "evals/runners/artifacts/simple-change/claude-code-r2-baseline/TRANSCRIPT.jsonl"
+  },
+  "usage": {
+    "source": "native-report",
+    "scope": "complete-run",
+    "input_tokens": 102215,
+    "output_tokens": 794,
+    "cached_input_tokens": 94045,
+    "total_tokens": 103009,
+    "artifact": "evals/runners/artifacts/simple-change/claude-code-r2-baseline/TRANSCRIPT.jsonl"
+  }
+}

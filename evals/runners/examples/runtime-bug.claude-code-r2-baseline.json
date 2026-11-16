@@ -1,0 +1,66 @@
+{
+  "fixture_id": "runtime-bug",
+  "condition": "baseline",
+  "host": "claude-code",
+  "model": "claude-opus-5-5",
+  "repeat": 2,
+  "started_at": "2026-11-16T02:12:18Z",
+  "ended_at": "2026-11-16T02:12:51Z",
+  "latency_ms": 33186,
+  "skills_invoked": [],
+  "references_loaded": [
+    ".methodrail/PROJECT.md",
+    ".agents/skills/verify-project/SKILL.md"
+  ],
+  "tools_used": [
+    "bash",
+    "write"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [
+    {
+      "command": "mkdir -p ../verify && cat > ../verify/repro.mjs <<'EOF'\nconst { landingPath } = await import(process.argv[2]);\nconst now = Date.now();\nconst cases = {\n  none: [undefined, \"/login\"],\n  noToken: [{}, \"/login\"],\n  valid: [{ token: \"t\", expiresAt: now + 60_000 }, \"/dashboard\"],\n  expired: [{ token: \"t\", expiresAt: now - 60_000 }, \"/login\"],\n  expiredIso: [{ token: \"t\", expiresAt: new Date(now - 60_000).toISOString() }, \"/login\"],\n  noExpiry: [{ token: \"t\" }, \"/dashboard\"],\n};\nlet fail = 0;\nfor (const [name, [s, want]] of Object.entries(cases)) {\n  const got = landingPath(s);\n  const ok = got === want; if (!ok) fail++;\n  console.log(`${ok ? \"PASS\" : \"FAIL\"} ${name}: got ${got}, want ${want}`);\n}\nprocess.exit(fail ? 1 : 0);\nEOF\nnode ../verify/repro.mjs \"$PWD/repo/src/session.js\"; echo exit=$?",
+      "phase": "repro",
+      "exit_status": 0
+    },
+    {
+      "command": "node ../verify/repro.mjs \"$PWD/repo/src/session.js\"; echo exit=$?",
+      "phase": "verify",
+      "exit_status": 0
+    }
+  ],
+  "evidence": [
+    "Read .methodrail/PROJECT.md and .agents/skills/verify-project/SKILL.md; no app exists to start",
+    "../verify/repro.mjs before the fix: expired and expiredIso cases returned /dashboard",
+    "Root cause stated: landingPath never checked expiry",
+    "Same script after the fix: all six cases passed (exit 0)"
+  ],
+  "outcome": "Fixed. Expired sessions now go to `/login` instead of the dashboard.",
+  "failure_modes": [
+    "session.expired flag ignored: {token, expired: true} still lands on /dashboard",
+    "no regression test added to the repo; repro script written outside the working copy"
+  ],
+  "behaviors_observed": [
+    "use project verification for reproduction",
+    "distinguish source inference from runtime evidence",
+    "verify the fix"
+  ],
+  "notes": "Live Claude Code 2.1.325 via evals/runners/run-claude-code.sh. Prompt: Read TASK.md in the current directory and complete it.. Fresh copy of the fixture; --setting-sources project, --strict-mcp-config, --permission-mode acceptEdits, allowedTools Bash Read Edit Write Glob Grep Skill. The methodrail condition adds --plugin-dir <checkout>; nothing else differs. Wrote its repro script to ../verify outside the working copy (kept under outside-work/).",
+  "provenance": "live",
+  "capture": "runner_captured",
+  "artifacts": {
+    "overlay": "evals/runners/artifacts/runtime-bug/claude-code-r2-baseline/overlay",
+    "command_log": "evals/runners/artifacts/runtime-bug/claude-code-r2-baseline/command.log.json",
+    "answer": "evals/runners/artifacts/runtime-bug/claude-code-r2-baseline/answer.md",
+    "transcript": "evals/runners/artifacts/runtime-bug/claude-code-r2-baseline/TRANSCRIPT.jsonl"
+  },
+  "usage": {
+    "source": "native-report",
+    "scope": "complete-run",
+    "input_tokens": 144487,
+    "output_tokens": 1875,
+    "cached_input_tokens": 135611,
+    "total_tokens": 146362,
+    "artifact": "evals/runners/artifacts/runtime-bug/claude-code-r2-baseline/TRANSCRIPT.jsonl"
+  }
+}

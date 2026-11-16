@@ -18,7 +18,9 @@ function inferProvenance(value: Record<string, unknown>): Provenance {
   if (value.host === "constructed" || (typeof value.notes === "string" && /constructed/i.test(value.notes))) {
     return "constructed";
   }
-  if (value.host === "cursor" || value.host === "codex" || value.host === "claude") return "live";
+  if (value.host === "cursor" || value.host === "codex" || value.host === "claude" || value.host === "claude-code") {
+    return "live";
+  }
   return "constructed";
 }
 
