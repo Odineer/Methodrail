@@ -196,8 +196,10 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
+// The repository tracks no symlinks. A symlink is a local projection, such as
+// Codex's .agents/skills, and its links resolve from the wrong directory.
 function walk(root: string, predicate: (path: string) => boolean): string[] {
-  return walkFiles(root, predicate);
+  return walkFiles(root, predicate, { followSymlinks: false });
 }
 
 function issue(path: string, message: string): ValidationIssue {

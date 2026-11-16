@@ -20,16 +20,19 @@ function realpathOrNull(path: string): string | null {
 /**
  * List files under `root`. Directory and file symlinks that escape `root`'s
  * realpath, or that revisit a realpath already seen, are skipped.
+ * `followSymlinks: false` skips every symlink, so an alias that sorts first
+ * cannot claim a canonical path's realpath.
  */
 export function walkFiles(
   root: string,
   predicate: (path: string) => boolean,
-  options?: { skipNames?: Iterable<string> },
+  options?: { skipNames?: Iterable<string>; followSymlinks?: boolean },
 ): string[] {
   if (!existsSync(root)) return [];
   const rootReal = realpathOrNull(root);
   if (!rootReal) return [];
   const skip = new Set(options?.skipNames ?? DEFAULT_SKIP);
+  const followSymlinks = options?.followSymlinks ?? true;
   const files: string[] = [];
   const visited = new Set<string>();
 
@@ -53,6 +56,7 @@ export function walkFiles(
         continue;
       }
       if (lstat.isSymbolicLink()) {
+        if (!followSymlinks) continue;
         const real = realpathOrNull(path);
         if (!real || !pathInside(rootReal, real) || visited.has(real)) continue;
         let followed;

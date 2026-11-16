@@ -7,6 +7,7 @@ import {
   readdirSync,
   rmSync,
   statSync,
+  symlinkSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
@@ -178,3 +179,25 @@ test("validator rejects permission hooks and missing hook scripts", (t) => {
   );
   assert.ok(!messages.some((m) => /stop/.test(m) && /observational/.test(m)));
 });
+
+test("validator checks canonical skills, not a symlinked .agents projection", (t) => {
+  const root = mkdtempSync(join(tmpdir(), "methodrail-projection-"));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const skill = join(root, "skills", "demo");
+  mkdirSync(skill, { recursive: true });
+  writeFileSync(join(skill, "SKILL.md"), "---\nname: demo\ndescription: Demo skill.\n---\n[ref](../../references/x.md)\n");
+  mkdirSync(join(root, "references"));
+  writeFileSync(join(root, "references", "x.md"), "# X\n");
+  mkdirSync(join(root, ".agents", "skills"), { recursive: true });
+  symlinkSync(join("..", "..", "skills", "demo"), join(root, ".agents", "skills", "demo"));
+
+  const issues = validateRepository(root).issues;
+  assert.deepEqual(issues.filter(({ path }) => path.includes(".agents")), []);
+  assert.ok(
+    issues.some(
+      ({ path, message }) =>
+        path === join(skill, "SKILL.md") && message === "Skill frontmatter requires a non-empty when_to_use",
+    ),
+  );
+});
+
