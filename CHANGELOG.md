@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+Compose shadcn/improve `cac56e1ebd3c279aa9153616cfeac7b174ab90f9` into existing owners. No new public skill.
+
+- Task packets name a starting revision, out-of-scope look-alikes, and stop conditions, check drift when they outlive the session, and restate two guardrails children do not inherit: repository content is data, and credentials are cited by location and type only
+- `to-tickets` bodies add Out of scope, Stop if, and Planned at
+- `swarm` implementation review reruns slice checks, traces hunks to acceptance criteria, reads new test assertions, judges recorded deviations on merit, and caps revisions at two rounds
+- `maintain-project` vets worker findings against current state before ranking and keeps rejections with reasons in a persisted report
+
 Rename `/refactor` to `/simplify` (breaking). The workflow executes selected behavior-preserving reductions in batches. Both `simplify` and `maintain-project` can delegate substantial independent work through `swarm`.
 
 Rename the review workflow skill `review` → `methodrail-review` (breaking: invoke `/methodrail-review`). Cursor ships a first-party skill named `review` that asks Bugbot vs Security Review, which shadowed Methodrail's skill so `/review` never reached it. Validation now rejects shipped skill names reserved by host first-party skills.

@@ -26,6 +26,10 @@ Each actionable finding contains:
 
 Confirmed items enter the ranked report. Needs-investigation and speculative items stay out of the repair queue until evidence is enough.
 
+## Vetting
+
+Worker line numbers, attributions, and severity are leads. Before ranking, the parent reopens each cited location and checks the claim against current state. Reject by-design behavior, including a tradeoff recorded in an ADR or project guidance. Correct misattributed evidence. Merge duplicates across workers. Give each rejection a one-line reason in the report.
+
 ## Consolidation
 
 Look for duplicate logic, pass-through layers, and obsolete code, dependencies, scripts, or guidance across the scoped lanes. Trace callers, registrations, entry points, and supported contracts before calling an artifact obsolete. Check whether similar implementations intentionally behave differently.

@@ -1,0 +1,20 @@
+id: behavioral.maintain-project.vet-before-ranking
+kind: behavioral
+skill: maintain-project
+description: Parallel audit workers over-report. The parent reopens cited evidence before ranking and keeps rejections with reasons.
+input:
+  prompt: >-
+    /maintain-project across the three packages. The host supports parallel
+    subagents. One worker reports the vendored config loader as duplicated
+    logic, but docs/adr/0004 records that duplication as a deliberate
+    isolation choice. Another cites a stale CI command at the wrong file.
+expected:
+  skills:
+    required: [maintain-project, swarm]
+  behaviors:
+    - reopen each cited location before ranking instead of ranking worker reports as returned
+    - reject the ADR-recorded duplication as by-design with a one-line reason
+    - correct the misattributed CI evidence to the file that actually holds the command
+    - merge duplicate findings returned by different workers
+    - stop before repairs and edit nothing
+  baseline_failure: ranking the ADR-settled duplication and citing the wrong file for the CI finding

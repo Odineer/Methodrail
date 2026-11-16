@@ -121,6 +121,7 @@ Methodrail's value is careful selection and composition, not NIH. Major methodol
 - [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) — composed simplicity discipline (reuse, native capability, shared-owner fixes, comment judgment) inside existing skills; no Ponytail command or public skill
 - [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) — composed change-created cleanup, hunk-to-task scope, and consequential-assumption handling inside existing skills; community interpretation of Karpathy's observations, not Karpathy-authored skills; no public karpathy-guidelines skill
 - [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) — composed observable specs, ticket proof pointers, review of weakened checks, repository test commands, and selective context into existing owners; no public Addy skill, router, or lifecycle wrapper
+- [shadcn/improve](https://github.com/shadcn/improve) — composed stop conditions, planned-at drift checks, child-agent guardrails, evidence vetting before ranking, and delegated-patch review checks into existing owners; no public improve skill or plans backlog
 
 Licenses, commits, and notices: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Per-skill provenance: `skills/<name>/UPSTREAM.md`. Maintainer records: [upstreams/](upstreams/README.md).
 

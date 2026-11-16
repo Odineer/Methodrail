@@ -51,6 +51,11 @@ When composed, return the results to the workflow owner for its report.
 
 1. **Assign.** Give each worker a [task packet](../../references/protocols/task-packet.md) with the starting revision and relevant worktree state, owned source and verification paths, settled contracts, acceptance criteria, checks, and applicable workflow constraints. Use an isolated writable workspace per worker. Handle shared files, contracts that are still changing, and dependent slices in sequence. If isolation or subagents are unavailable, implement sequentially in the parent. Workers implement only the assigned slice and return its exact patch, including new files, with verification evidence and any blockers or deviations.
 2. **Review on return.** As each worker finishes, the parent inspects the actual patch and runs [code-review](../code-review/SKILL.md) against that slice's acceptance criteria and [review packet](../../references/protocols/review-packet.md). Other independent workers can keep running. The implementer's checks inform the review. The parent or a separate reviewer makes the review judgment. Use local passes for a bounded slice and follow [rigor](../../references/rigor.md) when independent review is warranted. Resolve material findings, review the affected edits, and rerun invalidated slice checks before integrating the patch or starting dependent work.
+   - Rerun the slice checks yourself; the worker's report is a claim.
+   - Trace every hunk to the slice's acceptance criteria. An out-of-slice hunk is a finding, however plausible.
+   - Read what each new test asserts. A test that passes without exercising the acceptance criterion proves nothing.
+   - Judge a deviation the worker recorded with its reason on merit. An unrecorded deviation is a finding.
+   - Send fixable findings back to the same worker. After two rounds, take the slice over in the parent or block it with the reason.
 3. **Integrate and verify.** The parent accounts for every assigned slice, takes over or reassigns a dropped slice when feasible, and reports unresolved blockers. Review interactions and integration edits, reuse reviews of unchanged patches, and run the owning workflow's final verification on the integrated state.
 
 ## Neighbors

@@ -2,7 +2,7 @@
 
 Classification of considered upstream skills. Decisions: **ADOPT** (substantially intact), **ADAPT** (meaningful Methodrail integration), **COMPOSE** (reused inside another canonical skill), **HOST-SPECIFIC** (not portable enough), **SKIP**.
 
-Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.yaml](../upstreams/pstack.yaml), [superpowers.yaml](../upstreams/superpowers.yaml), [ponytail.yaml](../upstreams/ponytail.yaml), [karpathy-guidelines.yaml](../upstreams/karpathy-guidelines.yaml), [addy-osmani.yaml](../upstreams/addy-osmani.yaml).
+Inspected revisions: [matt-pocock.yaml](../upstreams/matt-pocock.yaml), [pstack.yaml](../upstreams/pstack.yaml), [superpowers.yaml](../upstreams/superpowers.yaml), [ponytail.yaml](../upstreams/ponytail.yaml), [karpathy-guidelines.yaml](../upstreams/karpathy-guidelines.yaml), [addy-osmani.yaml](../upstreams/addy-osmani.yaml), [shadcn-improve.yaml](../upstreams/shadcn-improve.yaml).
 
 ## mattpocock/skills
 
@@ -137,3 +137,13 @@ Snapshot `6ca0cd7db39b41b1c37e26d335c507ee92382c6d` (reviewed 2026-10-10). MIT, 
 | shipping-and-launch | Launch specialist | SKIP | — | Deferred | — |
 
 Deviations: no five public review axes, no `CONSTRAINTS.md` or floor-guard script, no invented numeric thresholds, no `tasks/todo.md` requirement, no commit-per-slice rule, and no automatic catalog or browser-devtools workflow. Primary origins of adapted skills stay on their existing upstreams.
+
+## shadcn/improve
+
+Snapshot `cac56e1ebd3c279aa9153616cfeac7b174ab90f9` (reviewed 2026-11-16). MIT, Copyright (c) 2026 shadcn. One skill was present. COMPOSE stays report-only.
+
+| Skill | Purpose | Decision | Canonical Methodrail capability | Reason | Host requirements |
+|---|---|---|---|---|---|
+| improve | Read-only audit, executor-grade plans, dispatched execution, backlog reconcile | COMPOSE | `maintain-project`, `to-tickets`, `swarm`, task packet | Audit, survey, review, planning, and delegated execution already have owners. Stop conditions, drift stamps, child guardrails, evidence vetting, and patch-review checks were missing | portable |
+
+Deviations: no public `improve` skill, no `plans/` backlog by default, no pasted source excerpts in tickets, no hardcoded executor model (model routing keeps logical roles), no nine-category audit or effort levels (maintain-project v1 lanes stay), no direction or feature suggestions, and no issue publishing flag.

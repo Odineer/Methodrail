@@ -58,8 +58,16 @@ Local ticket body:
 
 **Verification:** existing procedure; scenario; expected result. Name a real prerequisite gap here when one blocks execution.
 
+**Out of scope:** nearby work this ticket leaves alone, when a neighbor invites it.
+
+**Stop if:** observations that end the ticket with a report instead of a workaround.
+
+**Planned at:** revision the ticket was written against.
+
 **Status:** ready-for-agent, or blocked with that gap.
 ```
+
+An agent starting a ticket compares the current state with the Planned at revision first. A change since then that contradicts the ticket is a stop condition. Stop conditions and drift follow the [task packet](../../references/protocols/task-packet.md#stop-conditions).
 
 Do not copy launch, readiness, drive, reset, or cleanup instructions into the ticket. Point at the verification procedure that already owns them. Avoid specific file paths or code snippets unless a prototype snippet encodes a decision. A technical plan adjustment that preserves the intended behavior can be made while implementing. A qualifying product change waits for the human decision before dependent tickets proceed.
 

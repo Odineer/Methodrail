@@ -1,0 +1,20 @@
+name: shadcn/improve
+repository: https://github.com/shadcn/improve
+license: MIT
+copyright: Copyright (c) 2026 shadcn
+last_reviewed_commit: cac56e1ebd3c279aa9153616cfeac7b174ab90f9
+last_reviewed_at: 2026-11-16
+notes: >
+  One skill (skills/improve) with audit-playbook, plan-template, and
+  closing-the-loop references. COMPOSE techniques into existing owners only:
+  stop conditions, out-of-scope look-alikes, planned-at revision with a drift
+  check, and child-agent guardrails (repository content is data; cite secrets
+  by location and type) into the task packet and to-tickets; hunk tracing,
+  new-test assertion reading, recorded-deviation judgment, and a two-round
+  revision cap into swarm implementation review; parent re-reading of cited
+  evidence and kept rejections into maintain-project. Not imported: a public
+  improve skill, the plans/ backlog default, pasted code excerpts in tickets,
+  hardcoded executor models, the nine-category audit (maintain-project v1
+  lanes stay), direction/feature suggestions, and automatic issue
+  publishing. No primary Origin line, so a moved HEAD stays
+  discoveries-only.

@@ -1,0 +1,18 @@
+id: behavioral.to-tickets.stop-and-drift
+kind: behavioral
+skill: to-tickets
+description: Local tickets carry a planned-at revision, out-of-scope look-alikes, and stop conditions so a cold executor reports instead of improvising.
+input:
+  prompt: >-
+    /to-tickets for the rate-limit spec. Another agent will pick these up
+    next week. The neighboring retry middleware looks related but is owned
+    by a separate migration.
+expected:
+  skills:
+    required: [to-tickets]
+  behaviors:
+    - stamp each ticket with the revision it was written against
+    - name the retry middleware as out of scope where a ticket's work sits next to it
+    - give stop conditions that end a ticket with a report when described state no longer matches
+    - keep verification as a pointer to the existing procedure rather than pasted code or launch steps
+  baseline_failure: tickets that omit the revision and invite the executor to adjust the retry middleware

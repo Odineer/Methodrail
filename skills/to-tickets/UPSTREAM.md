@@ -10,3 +10,4 @@ Methodrail changes:
 - Removed the unconditional granularity quiz. Routine cuts and dependency edges are chosen. Each ticket points at existing proof, the scenario, and the expected result.
 - Addy Osmani `skills/planning-and-task-breakdown` at `6ca0cd7db39b41b1c37e26d335c507ee92382c6d` composed for acceptance, dependencies, and explicit verification. The `tasks/todo.md` default and the overwrite quiz are not imported. Primary origin remains mattpocock/skills.
 - 2026-10-27: an existing source issue gets native sub-issues; Blocked by is omitted when native blocking edges are set. Local tickets keep Blocked by. Parent body stays unmodified unless asked.
+- shadcn/improve `skills/improve/references/plan-template.md` at `cac56e1ebd3c279aa9153616cfeac7b174ab90f9` composed for Out of scope, Stop if, and Planned at fields with a drift check. Pasted code excerpts, per-step command tables, and the `plans/` directory are not imported.
