@@ -522,6 +522,7 @@ function validateMethodrailStructure(root: string, skillPaths: string[]): Valida
 
   if (typeof packageJson.version === "string") {
     issues.push(...validateZcodeHost(root, packageJson.version));
+    issues.push(...validateClaudeHost(root, packageJson.version));
   }
 
   const lockPath = join(root, "package-lock.json");
@@ -819,13 +820,65 @@ function validateZcodeHost(root: string, packageVersion: string): ValidationIssu
     const events = hooks ? Object.keys(hooks) : [];
     if (!hooks || events.length !== 1 || events[0] !== "SessionStart") {
       issues.push(issue(hooksPath, "Z Code hooks must declare only SessionStart"));
-    } else if (!JSON.stringify(hooks).includes("zcode-session-start.sh")) {
-      issues.push(issue(hooksPath, "Z Code SessionStart must run scripts/hooks/zcode-session-start.sh"));
+    } else {
+      const serialized = JSON.stringify(hooks);
+      if (!serialized.includes("scripts/hooks/session-start.sh")) {
+        issues.push(issue(hooksPath, "SessionStart must run scripts/hooks/session-start.sh"));
+      }
+      // Claude Code auto-loads this file from the plugin root, so the command
+      // must resolve under either host's plugin-root variable.
+      if (!serialized.includes("${CLAUDE_PLUGIN_ROOT:-${ZCODE_PLUGIN_ROOT}}")) {
+        issues.push(issue(hooksPath, "SessionStart command must resolve ${CLAUDE_PLUGIN_ROOT:-${ZCODE_PLUGIN_ROOT}}"));
+      }
     }
-    const script = join(root, "scripts", "hooks", "zcode-session-start.sh");
-    if (!existsSync(script)) issues.push(issue(script, "Missing Z Code session hook"));
+    const script = join(root, "scripts", "hooks", "session-start.sh");
+    if (!existsSync(script)) issues.push(issue(script, "Missing session hook"));
   } catch (error) {
     issues.push(issue(hooksPath, `Z Code hooks.json is not valid JSON: ${(error as Error).message}`));
+  }
+  return issues;
+}
+
+function validateClaudeHost(root: string, packageVersion: string): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+  const pluginPath = join(root, ".claude-plugin", "plugin.json");
+  const marketPath = join(root, ".claude-plugin", "marketplace.json");
+  if (!existsSync(pluginPath)) return [issue(pluginPath, "Missing Claude Code plugin manifest")];
+  try {
+    const plugin: unknown = JSON.parse(readFileSync(pluginPath, "utf8"));
+    if (!isRecord(plugin)) {
+      issues.push(issue(pluginPath, "Claude Code plugin.json must contain a JSON object"));
+    } else {
+      if (plugin.name !== "methodrail") issues.push(issue(pluginPath, "Claude Code plugin name must be methodrail"));
+      if (plugin.version !== packageVersion) {
+        issues.push(issue(pluginPath, "Claude Code plugin and package versions must agree"));
+      }
+      // Default skills/ and hooks/hooks.json load automatically; a declared path
+      // would add a second skills tree or merge a second hook set.
+      for (const key of ["skills", "hooks", "commands", "agents"]) {
+        if (plugin[key] !== undefined) {
+          issues.push(issue(pluginPath, `Claude Code plugin must rely on the default ${key} location`));
+        }
+      }
+    }
+  } catch (error) {
+    issues.push(issue(pluginPath, `Claude Code plugin.json is not valid JSON: ${(error as Error).message}`));
+  }
+  if (!existsSync(marketPath)) {
+    issues.push(issue(marketPath, "Missing Claude Code marketplace.json"));
+    return issues;
+  }
+  try {
+    const market: unknown = JSON.parse(readFileSync(marketPath, "utf8"));
+    const entry =
+      isRecord(market) && Array.isArray(market.plugins) ? market.plugins.find((item) => isRecord(item)) : undefined;
+    if (!isRecord(market) || market.name !== "methodrail" || !isRecord(market.owner) || !isRecord(entry)) {
+      issues.push(issue(marketPath, "Claude Code marketplace.json must name methodrail, an owner, and a plugin"));
+    } else if (entry.name !== "methodrail" || entry.source !== "./" || entry.version !== packageVersion) {
+      issues.push(issue(marketPath, "Claude Code marketplace.json must point at this repository and match the package version"));
+    }
+  } catch (error) {
+    issues.push(issue(marketPath, `Claude Code marketplace.json is not valid JSON: ${(error as Error).message}`));
   }
   return issues;
 }

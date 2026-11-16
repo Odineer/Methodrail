@@ -14,6 +14,15 @@ Make the Z Code install first-class without changing other hosts.
 - `skills/writing-for-agents/SKILL-MECHANICS.md` documents `when_to_use` as portable trigger text for the existing invocation choice, not a second mechanism
 - Z Code adapter docs record the no-plugin-commands decision (Z Code already routes `/<skill-name>` to skills), the POSIX hook limitation (fails open on Windows), and that Z Code fit is conformance-tested, not behavior-validated
 
+Make the Claude Code install first-class without changing other hosts.
+
+- Claude Code plugin surface: `.claude-plugin/plugin.json` loads the default `skills/` tree, and `.claude-plugin/marketplace.json` catalogs it. Plugin skills are namespaced `methodrail:<name>`
+- `hooks/hooks.json` now serves both plugin hosts. Its command resolves `${CLAUDE_PLUGIN_ROOT:-${ZCODE_PLUGIN_ROOT}}`, and `scripts/hooks/session-start.sh` (renamed from `zcode-session-start.sh`) injects `adapters/claude/CLAUDE.md` on Claude Code and `adapters/zcode/AGENTS.md` otherwise
+- The projected Claude invariant names the `methodrail:` namespace, Claude Code's bundled `simplify` and `code-review`, and how a workflow loads an explicit skill the Skill tool refuses (`../<name>/SKILL.md`)
+- `references/host-capabilities.md` gains a Claude Code section: worktree-isolated subagents for swarm slices, enforced `disable-model-invocation`, bundled-name clashes, skill-local scripts, and the full-set symlink layout (`references/` and `templates/` beside `skills/`)
+- `refresh-model-routing` resolves its checker from the skill directory, and the policy checker accepts Claude's `[1m]` context suffix
+- Validation checks the Claude manifests, their versions, default component locations, and the dual-host hook command
+
 ## 0.10.0 — 2026-10-10
 
 Strengthen the existing lifecycle without adding public skills. Consequential human decisions are batched. Routine technical choices are not. Substantive delivery runs the canonical code review. Mechanical edits stay on the cheap path. Independent reviewers and arena are conditional. Wayfinder can resolve more than one unblocked technical decision in the current context. Specs and tickets point at existing verification. Composed work emits one owner completion report. Fresh evidence is still required after later edits.

@@ -4,8 +4,8 @@ The root `skills/` directory is Methodrail's source of truth. Z Code loads that
 tree from `.zcode-plugin/plugin.json`. Do not copy skill bodies into this
 adapter.
 
-`hooks/hooks.json` is the Z Code session hook. It injects the projected family
-invariant. Cursor's ledger stays in `hooks/cursor.json`. Z Code does not read
+`hooks/hooks.json` is the session hook, shared with Claude Code. It injects the
+projected family invariant for whichever host's plugin-root variable is set. Cursor's ledger stays in `hooks/cursor.json`. Z Code does not read
 `rules/*.mdc`.
 
 Change `references/methodrail-family-invariant.md` and run `npm run project-hosts`
@@ -51,6 +51,12 @@ Skills only, without the hook: symlink each `skills/<name>` directory into
 `~/.zcode/skills/` (or `.zcode/skills/` for one workspace) and append
 `adapters/zcode/AGENTS.md` to workspace `AGENTS.md` or `~/.zcode/AGENTS.md`.
 Do not paste that block again when the plugin hook is enabled.
+
+Also symlink `references/` and `templates/` to `~/.zcode/references` and
+`~/.zcode/templates` (or under `.zcode/` for one workspace). Skills link shared
+files as `../../references/<file>` and `../../templates/<file>`, which resolve
+next to the skill root — without those symlinks the repo-root links are dead.
+For a workspace-local skill root, point the symlinks back at this checkout.
 
 Z Code also discovers `~/.agents/skills/` and workspace `.agents/skills/`.
 Symlink into one root only: two roots create duplicate entries, and discovery

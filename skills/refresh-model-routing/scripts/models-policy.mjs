@@ -27,9 +27,14 @@ const AVAILABILITY = ["observed", "documented-only", "unknown"];
 const TOP_LEVEL = ["schema_version", "owner", "preference", "freshness_days", "roles", "pins", "hosts"];
 const ROLE_FIELDS = ["tier", "diversity", "capabilities"];
 const SECRET_KEY = /(api[_-]?key|access[_-]?token|password|secret|account[_-]?(id|identifier))/i;
-const CLAUDE_ALIAS = /^(haiku|sonnet|opus|opusplan|fable|best)$/i;
+const CLAUDE_ALIAS = /^(haiku|sonnet|opus|opusplan|fable|best)(\[1m\])?$/i;
 const CURSOR_SLUG = /^(grok-|composer-|gpt-)/i;
 const PARENT_ONLY = new Set(["auto", "balance", "opusplan", "default"]);
+
+// Claude's `[1m]` suffix selects a context window, not a different control.
+function baseControl(value) {
+  return typeof value === "string" ? value.replace(/\[1m\]$/i, "") : value;
+}
 
 function isRecord(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -167,7 +172,7 @@ function checkSelection(errors, hostName, value, where) {
     errors.push(`${where} requires a selection`);
     return;
   }
-  if (PARENT_ONLY.has(value)) errors.push(`${where} cannot use parent strategy '${value}'`);
+  if (PARENT_ONLY.has(baseControl(value))) errors.push(`${where} cannot use parent strategy '${value}'`);
   if (hostName === "claude" && CURSOR_SLUG.test(value)) errors.push(`${where} uses a Cursor slug on Claude`);
   if (hostName === "cursor" && CLAUDE_ALIAS.test(value)) errors.push(`${where} uses a Claude alias on Cursor`);
 }
@@ -190,7 +195,7 @@ function normalizeHost(name, raw, errors) {
   if (raw.writes_settings === true) errors.push(`hosts.${name} must not record a settings write`);
   const parent = raw.parent;
   if (name === "cursor" && parent !== "auto") errors.push("Cursor parent strategy must be auto");
-  if (name === "claude" && !["opusplan", "haiku", "sonnet", "opus", "fable", "default"].includes(parent)) {
+  if (name === "claude" && !["opusplan", "haiku", "sonnet", "opus", "fable", "default"].includes(baseControl(parent))) {
     errors.push(`Claude parent strategy '${String(parent)}' is not a Claude control`);
   }
   if (name !== "cursor" && name !== "claude" && parent !== "default") {
@@ -515,7 +520,7 @@ export function spawnMerelyToChangeModel() {
 }
 
 export function modelFamily(selection) {
-  if (selectionControl(selection) || PARENT_ONLY.has(selection)) return null;
+  if (selectionControl(selection) || PARENT_ONLY.has(baseControl(selection))) return null;
   if (CLAUDE_ALIAS.test(selection) || /^claude-/i.test(selection)) return "anthropic";
   if (/^gpt-/i.test(selection)) return "openai";
   if (/^grok-/i.test(selection)) return "xai";

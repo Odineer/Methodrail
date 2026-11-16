@@ -93,6 +93,10 @@ test("schema errors, foreign slugs, and secret keys fail closed", () => {
   assert.equal(validateModelPolicy(cursor.replace('selection: "inherit"', 'selection: "haiku"')).ok, false);
   const claude = serializeModelPolicy(withHost(policy(), "claude", hostOf(proposeDocumentedBinding("claude"))));
   assert.equal(validateModelPolicy(claude.replace('selection: "haiku"', 'selection: "grok-4"')).ok, false);
+  assert.equal(validateModelPolicy(claude.replace('selection: "haiku"', 'selection: "sonnet[1m]"')).ok, true);
+  assert.equal(validateModelPolicy(claude.replace('parent: "opusplan"', 'parent: "opusplan[1m]"')).ok, true);
+  assert.equal(validateModelPolicy(claude.replace('selection: "haiku"', 'selection: "opusplan[1m]"')).ok, false);
+  assert.equal(validateModelPolicy(cursor.replace('selection: "inherit"', 'selection: "opus[1m]"')).ok, false);
   assert.equal(validateModelPolicy(cursor.replace('fallback: "omit"', 'fallback: "guessed-slug"')).ok, false);
 });
 
