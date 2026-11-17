@@ -1,7 +1,7 @@
 ---
 name: to-spec
 description: "Turn resolved discussion into a durable implementation specification. No interview; synthesize what is already known. Use after grill-with-docs or when intent is already clear. Do not use to interrogate ambiguous requirements."
-when_to_use: Explicit request only, or an active workflow names it. Synthesizes already-resolved discussion into a durable specification; ambiguous requirements need grill-with-docs first.
+when_to_use: Explicit request only, or an active parent skill names it. Synthesizes already-resolved discussion into a durable specification; ambiguous requirements need grill-with-docs first.
 disable-model-invocation: true
 ---
 

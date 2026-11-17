@@ -1,0 +1,22 @@
+id: composition.swarm.patch-review-checks
+kind: composition
+description: Swarm implementation review distrusts worker reports, rejects out-of-slice hunks and vacuous tests, and caps revision rounds.
+input:
+  prompt: >-
+    Use /develop with swarm for two independent slices: CSV escaping in the
+    export formatter and row diagnostics in the import validator. The export
+    worker reports PASS, but its patch also reformats the shared logger and
+    adds a test that only asserts the formatter returns a string. The import
+    worker recorded one deviation with a reason: it kept an existing error
+    type instead of the suggested new one. The host supports parallel
+    subagents and isolated writable workspaces.
+expected:
+  skills:
+    required: [develop, swarm, code-review, verify-change]
+    forbidden: [arena, interrogate]
+  behaviors:
+    - rerun each slice's checks instead of accepting the worker's PASS
+    - flag the shared logger hunk as outside the export slice
+    - flag the export test as not exercising the escaping acceptance criterion
+    - accept the import worker's recorded deviation on merit when it preserves the acceptance criteria
+    - send fixable findings back to the same worker and take over or block after two rounds

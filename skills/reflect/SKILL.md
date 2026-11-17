@@ -17,7 +17,7 @@ skill candidate
 structural-enforcement candidate
 ```
 
-The note contract is the field list in step 4 plus the sections of the note itself (Claim / Evidence / Reuse / Rediscovery cost / Staleness). There is no separate lifecycle or enforcement reference; step 4's routing rules are the contract.
+A typed note follows the [note contract](../../references/knowledge/note-contract.md). The [knowledge lifecycle](../../references/knowledge/lifecycle.md) makes this skill the only writer of typed notes. Structural-enforcement candidates follow [structural enforcement](../../references/structural-enforcement.md). Step 4 lists what a proposal must include.
 
 ## Process
 
@@ -46,7 +46,7 @@ A knowledge candidate is earned only from this work's evidence. Ordinary impleme
 - proposed `kind`, `status`, and `lifecycle`
 - concise claim
 - evidence
-- `validated_at` (current Git SHA, or `unversioned:<reason>`)
+- `validated_at` (the full 40-character SHA of the current commit, or `unversioned:<reason>`)
 - `relevant_paths` and optional `scope` (only when the claim is path-bounded; do not invent scope)
 - `conflicts_with` or `superseded_by` when disputing or retiring
 - how a future task would reuse it
@@ -79,7 +79,7 @@ Show the full Accepted / Rejected / Backlog list. Wait for explicit approval bef
 1. Recheck that the evidence still supports the claim.
 2. Confirm that another canonical document does not already own the information.
 3. Confirm that structural enforcement is not the better destination.
-4. Apply the approved mutation as a typed note (frontmatter `kind`/`status`/`lifecycle`/`validated_at`/`relevant_paths`, then Claim / Evidence / Reuse / Rediscovery cost / Staleness sections; no template file exists). Default is exactly one typed note. A reciprocal dispute may update both notes and the PROJECT.md pointer set as one transaction.
+4. Apply the approved mutation as a typed note that meets the [note contract](../../references/knowledge/note-contract.md), starting from the [note template](../../templates/project/knowledge/note.md). Default is exactly one typed note. A reciprocal dispute may update both notes and the PROJECT.md pointer set as one transaction.
 5. Add or update the concise PROJECT.md pointer(s).
 6. Validate kind, status, lifecycle, evidence, index, size, and dispute/retirement sections. Report freshness and scope. An approved reconciliation updates evidence and `validated_at` in the same write.
 7. Verify that an unchanged rerun produces no diff.

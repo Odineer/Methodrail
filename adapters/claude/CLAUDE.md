@@ -16,4 +16,8 @@ Escalate rigor only when uncertainty or risk requires it. Simple work must stay 
 
 Preserve valuable learning without duplicating discoverable state. Propose durable notes only when rediscovery is expensive. Keep permanent context small.
 
-Use installed Methodrail skills from `.claude/skills/` only when their descriptions match the task.
+Use installed Methodrail skills only when their descriptions match the task.
+
+Under the plugin install, Methodrail skills are namespaced `methodrail:<name>`, and a skill named inside a Methodrail skill means that one. Claude Code's bundled `simplify` and `code-review` are different skills.
+
+The Skill tool cannot load a skill marked `disable-model-invocation: true`. When an active Methodrail skill names one, read `../<name>/SKILL.md` from the active skill's base directory.

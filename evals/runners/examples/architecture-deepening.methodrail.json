@@ -9,13 +9,13 @@
   "subagents_used": 0,
   "verification_steps": [],
   "evidence": ["orderIntake leaky callers", "ledger already deep", "no source edits"],
-  "outcome": "Classified the four modules and routed a characterization-ready intake brief to /refactor.",
+  "outcome": "Classified the four modules and routed a characterization-ready intake brief to /simplify.",
   "failure_modes": [],
   "behaviors_observed": [
     "classify pass-through, shallow, already-deep, and speculative modules",
     "recommend the shallow order intake module",
     "leave source unchanged",
-    "route behavior-preserving work to /refactor"
+    "route behavior-preserving work to /simplify"
   ],
   "notes": "constructed",
   "artifacts": {

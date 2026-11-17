@@ -188,3 +188,38 @@ SOFTWARE.
 ```
 
 Selected techniques from `spec-driven-development`, `constraint-driven-development`, `planning-and-task-breakdown`, `incremental-implementation`, `test-driven-development`, `context-engineering`, and `code-review-and-quality` are composed into existing Methodrail owners. The remaining skills at this snapshot are SKIP. No Addy skill, router, hook, or lifecycle wrapper is shipped.
+
+---
+
+## shadcn/improve
+
+- Repository: https://github.com/shadcn/improve
+- Reviewed commit: `cac56e1ebd3c279aa9153616cfeac7b174ab90f9`
+- Reviewed: 2026-11-16
+- License: MIT
+
+```
+MIT License
+
+Copyright (c) 2026 shadcn
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+Selected techniques from `skills/improve` and its plan-template and closing-the-loop references are composed into the task packet, `to-tickets`, `swarm`, and `maintain-project`. No `improve` skill, plans backlog, or issue publisher is shipped.

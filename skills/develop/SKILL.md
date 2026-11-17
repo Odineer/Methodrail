@@ -1,7 +1,7 @@
 ---
 name: develop
 description: Implement a requested feature from repository evidence through focused verification. Run only when explicitly requested. Do not use for behavior-preserving structural work; use simplify for that.
-when_to_use: Explicit request only (/develop), or an active workflow names it. Implements a requested feature; behavior-preserving structural work is simplify.
+when_to_use: Explicit request only (/develop), or an active parent skill names it. Implements a requested feature; behavior-preserving structural work is simplify.
 disable-model-invocation: true
 ---
 

@@ -1,0 +1,56 @@
+{
+  "fixture_id": "simple-change",
+  "condition": "baseline",
+  "host": "claude-code",
+  "model": "claude-opus-5-5",
+  "repeat": 1,
+  "started_at": "2026-11-16T02:10:17Z",
+  "ended_at": "2026-11-16T02:10:42Z",
+  "latency_ms": 24050,
+  "skills_invoked": [],
+  "references_loaded": [],
+  "tools_used": [
+    "read",
+    "grep",
+    "edit",
+    "bash"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [
+    {
+      "command": "npm test 2>&1 | tail -15",
+      "phase": "verify",
+      "exit_status": 0
+    }
+  ],
+  "evidence": [
+    "Grep found return \"Save\" only in repo/src/button.js",
+    "Edited the string with the Edit tool",
+    "npm test: tests 1, pass 1, fail 0"
+  ],
+  "outcome": "The button label now says \"Create\" instead of \"Save\". I changed the string returned by `buttonLabel()` in `repo/src/button.js:2` and nothing else, so behavior is the same.",
+  "failure_modes": [],
+  "behaviors_observed": [
+    "inspect the current label",
+    "edit locally",
+    "run a cheap check if one exists"
+  ],
+  "notes": "Live Claude Code 2.1.325 via evals/runners/run-claude-code.sh. Prompt: Read TASK.md in the current directory and complete it.. Fresh copy of the fixture; --setting-sources project, --strict-mcp-config, --permission-mode acceptEdits, allowedTools Bash Read Edit Write Glob Grep Skill. The methodrail condition adds --plugin-dir <checkout>; nothing else differs.",
+  "provenance": "live",
+  "capture": "runner_captured",
+  "artifacts": {
+    "overlay": "evals/runners/artifacts/simple-change/claude-code-r1-baseline/overlay",
+    "command_log": "evals/runners/artifacts/simple-change/claude-code-r1-baseline/command.log.json",
+    "answer": "evals/runners/artifacts/simple-change/claude-code-r1-baseline/answer.md",
+    "transcript": "evals/runners/artifacts/simple-change/claude-code-r1-baseline/TRANSCRIPT.jsonl"
+  },
+  "usage": {
+    "source": "native-report",
+    "scope": "complete-run",
+    "input_tokens": 163014,
+    "output_tokens": 964,
+    "cached_input_tokens": 154705,
+    "total_tokens": 163978,
+    "artifact": "evals/runners/artifacts/simple-change/claude-code-r1-baseline/TRANSCRIPT.jsonl"
+  }
+}

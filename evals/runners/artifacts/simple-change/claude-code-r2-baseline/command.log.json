@@ -1,0 +1,26 @@
+[
+  {
+    "command": "ls -la",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": "total 8\ndrwxr-xr-x@ 4 odin  wheel  128 Nov 15 20:12 .\ndrwxr-xr-x@ 5 odin  wheel  160 Nov 15 20:12 ..\n-rw-r--r--@ 1 odin  wheel   73 Nov 15 20:12 TASK.md\ndrwxr-xr-x@ 4 odin  wheel  128 Nov 15 20:12 repo"
+  },
+  {
+    "command": "cd repo && find . -type f -not -path './.git/*' | head -50",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": "./package.json\n./src/button.js\n./src/button.test.js"
+  },
+  {
+    "command": "cat src/button.js src/button.test.js package.json",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": "export function buttonLabel() {\n  return \"Save\";\n}\nimport assert from \"node:assert/strict\";\nimport test from \"node:test\";\nimport { buttonLabel } from \"./button.js\";\n\ntest(\"button label\", () => {\n  assert.equal(buttonLabel(), \"Create\");\n});\n{\n  \"name\": \"simple-change\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"scripts\": {\n    \"test\": \"node --test src/button.test.js\"\n  }\n}"
+  },
+  {
+    "command": "sed -i '' 's/return \"Save\";/return \"Create\";/' src/button.js && cat src/button.js && npm test 2>&1 | tail -10",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "export function buttonLabel() {\n  return \"Create\";\n}\n\n✔ button label (0.609542ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 74.42925"
+  }
+]

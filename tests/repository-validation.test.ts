@@ -7,6 +7,7 @@ import {
   readdirSync,
   rmSync,
   statSync,
+  symlinkSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
@@ -177,4 +178,48 @@ test("validator rejects permission hooks and missing hook scripts", (t) => {
     messages.join("\n"),
   );
   assert.ok(!messages.some((m) => /stop/.test(m) && /observational/.test(m)));
+});
+
+test("validator checks canonical skills, not a symlinked .agents projection", (t) => {
+  const root = mkdtempSync(join(tmpdir(), "methodrail-projection-"));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const skill = join(root, "skills", "demo");
+  mkdirSync(skill, { recursive: true });
+  writeFileSync(join(skill, "SKILL.md"), "---\nname: demo\ndescription: Demo skill.\n---\n[ref](../../references/x.md)\n");
+  mkdirSync(join(root, "references"));
+  writeFileSync(join(root, "references", "x.md"), "# X\n");
+  mkdirSync(join(root, ".agents", "skills"), { recursive: true });
+  symlinkSync(join("..", "..", "skills", "demo"), join(root, ".agents", "skills", "demo"));
+
+  const issues = validateRepository(root).issues;
+  assert.deepEqual(issues.filter(({ path }) => path.includes(".agents")), []);
+  assert.ok(
+    issues.some(
+      ({ path, message }) =>
+        path === join(skill, "SKILL.md") && message === "Skill frontmatter requires a non-empty when_to_use",
+    ),
+  );
+});
+
+
+test("validator rejects eval fixtures that name a skill with no SKILL.md", (t) => {
+  const root = mkdtempSync(join(tmpdir(), "methodrail-eval-names-"));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  mkdirSync(join(root, "skills", "demo"), { recursive: true });
+  writeFileSync(join(root, "skills", "demo", "SKILL.md"), "---\nname: demo\ndescription: Demo skill.\n---\n");
+  mkdirSync(join(root, "evals", "composition"), { recursive: true });
+  writeFileSync(
+    join(root, "evals", "composition", "case.yaml"),
+    "id: c\nkind: composition\ninput:\n  prompt: p\nexpected:\n  skills:\n    required: [demo, review]\n    forbidden: [refactor]\n",
+  );
+  mkdirSync(join(root, "evals", "fixtures", "case"), { recursive: true });
+  writeFileSync(join(root, "evals", "fixtures", "case", "expected.yaml"), "id: f\nrequired_skills: [demo, gone]\n");
+  mkdirSync(join(root, "evals", "baselines"), { recursive: true });
+  writeFileSync(join(root, "evals", "baselines", "old.yaml"), "id: b\nrequired_skills: [retired]\n");
+
+  const unknown = validateRepository(root)
+    .issues.map(({ message }) => /Eval names unknown skill "(.+)"/.exec(message)?.[1])
+    .filter(Boolean)
+    .sort();
+  assert.deepEqual(unknown, ["gone", "refactor", "review"]);
 });

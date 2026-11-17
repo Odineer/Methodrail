@@ -599,13 +599,14 @@ function gradeArchitectureDeepening(run: EvalRun, ctx: EvalContext): OutcomeGrad
       const deepenLedger = report.decisions.some((row) => /ledger/i.test(row.subject) && /deepen/i.test(row.disposition));
       top = deepenIntake && !deepenLedger;
     }
-    const brief = /\/refactor/i.test(answer) && /characterization|verification/i.test(answer);
+    // `/refactor` is the pre-rename name of `/simplify`; recorded live runs predate the rename.
+    const brief = /\/(simplify|refactor)\b/i.test(answer) && /characterization|verification/i.test(answer);
     const noCdn = !/cdn\.tailwindcss\.com|cdn\.jsdelivr\.net/i.test(answer);
     return gradeFrom([
       check("no-source-edit", noSourceEdit, noSourceEdit ? "survey did not edit source" : "source changed during survey"),
       check("classes", passThrough && deepen && preserve && reject, passThrough && deepen && preserve && reject ? "classified all four modules" : "missed delete/deepen/preserve/reject"),
       check("top", top, top ? "recommended the shallow intake module" : "recommended the already-deep module or missed intake"),
-      check("brief", brief, brief ? "verification-ready /refactor brief" : "missing characterization or /refactor route"),
+      check("brief", brief, brief ? "verification-ready /simplify brief" : "missing characterization or /simplify route"),
       check("portable-report", noCdn, noCdn ? "report usable without remote assets" : "report depends on a CDN"),
     ]);
   });

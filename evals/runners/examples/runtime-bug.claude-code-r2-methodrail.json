@@ -1,0 +1,81 @@
+{
+  "fixture_id": "runtime-bug",
+  "condition": "methodrail",
+  "host": "claude-code",
+  "model": "claude-opus-5-5",
+  "repeat": 2,
+  "started_at": "2026-11-16T02:12:16Z",
+  "ended_at": "2026-11-16T02:13:05Z",
+  "latency_ms": 48199,
+  "skills_invoked": [
+    "debug"
+  ],
+  "references_loaded": [
+    "skills/debug/SKILL.md",
+    "adapters/claude/CLAUDE.md",
+    ".methodrail/PROJECT.md",
+    ".agents/skills/verify-project/SKILL.md"
+  ],
+  "tools_used": [
+    "bash",
+    "write"
+  ],
+  "subagents_used": 0,
+  "verification_steps": [
+    {
+      "command": "node --version && node --input-type=module -e '\nimport { landingPath } from \"./repo/src/session.js\";\nconst now = Date.now();\nconst cases = {\n  none: undefined,\n  noToken: {},\n  valid: { token: \"t\", expiresAt: now + 60_000 },\n  expired: { token: \"t\", expiresAt: now - 60_000 },\n};\nfor (const [k, s] of Object.entries(cases)) console.log(k.padEnd(8), landingPath(s));\n' 2>&1",
+      "phase": "repro",
+      "exit_status": 0
+    },
+    {
+      "command": "cd <run>/work/repo && node --test test/ 2>&1 | grep -E '^(not )?ok|^# (pass|fail)'",
+      "phase": "regression",
+      "exit_status": 0
+    },
+    {
+      "command": "cd <run>/work/repo && node --test test/session.test.mjs 2>&1 | tail -30",
+      "phase": "regression",
+      "exit_status": 0
+    },
+    {
+      "command": "node --test test/session.test.mjs 2>&1 | grep -E '^[✔✖ℹ]'; echo '--- original repro ---'; node --input-type=module -e '\nimport { landingPath } from \"./src/session.js\";\nconst now = Date.now();\nconst cases = { none: undefined, noToken: {}, valid: { token: \"t\", expiresAt: now + 60_000 }, expired: { token: \"t\", expiresAt: now - 60_000 } };\nfor (const [k, s] of Object.entries(cases)) console.log(k.padEnd(8), landingPath(s));\n'",
+      "phase": "verify",
+      "exit_status": 0
+    }
+  ],
+  "evidence": [
+    "/methodrail:debug expanded from skills/debug/SKILL.md; SessionStart hook injected adapters/claude/CLAUDE.md",
+    "Direct landingPath capture before the fix: expired session returned /dashboard",
+    "Added repo/test/session.test.mjs; expired and expiry-less cases failed before the fix",
+    "After the fix: 4 of 4 tests pass and the direct capture returns /login for expired sessions"
+  ],
+  "outcome": "Fixed: expired sessions now go to `/login` instead of the dashboard. The fix is confirmed against a direct reproduction and a new regression test, not a running app. There is no app here to start.",
+  "failure_modes": [
+    "ISO-string expiresAt treated as invalid: a valid 2099 ISO session is sent to /login",
+    "the agent's own tests only used numeric timestamps, so they did not catch it"
+  ],
+  "behaviors_observed": [
+    "use project verification for reproduction",
+    "add regression evidence",
+    "distinguish source inference from runtime evidence",
+    "verify the fix"
+  ],
+  "notes": "Live Claude Code 2.1.325 via evals/runners/run-claude-code.sh. Prompt: /methodrail:debug Read TASK.md in the current directory and complete it.. Fresh copy of the fixture; --setting-sources project, --strict-mcp-config, --permission-mode acceptEdits, allowedTools Bash Read Edit Write Glob Grep Skill. The methodrail condition adds --plugin-dir <checkout>; nothing else differs. load-evidence.json: the session file showed the slash command expanding from the plugin's SKILL.md (the session file itself is not committed because it holds account details). No Skill tool call and no read of ../diagnosing-bugs/SKILL.md or ../verify-change/SKILL.md, so composition was not observed. Regression-phase exit statuses read 0 because the test output was piped through grep or tail; the captured output shows the red failures.",
+  "provenance": "live",
+  "capture": "runner_captured",
+  "artifacts": {
+    "overlay": "evals/runners/artifacts/runtime-bug/claude-code-r2-methodrail/overlay",
+    "command_log": "evals/runners/artifacts/runtime-bug/claude-code-r2-methodrail/command.log.json",
+    "answer": "evals/runners/artifacts/runtime-bug/claude-code-r2-methodrail/answer.md",
+    "transcript": "evals/runners/artifacts/runtime-bug/claude-code-r2-methodrail/TRANSCRIPT.jsonl"
+  },
+  "usage": {
+    "source": "native-report",
+    "scope": "complete-run",
+    "input_tokens": 182972,
+    "output_tokens": 3845,
+    "cached_input_tokens": 166981,
+    "total_tokens": 186817,
+    "artifact": "evals/runners/artifacts/runtime-bug/claude-code-r2-methodrail/TRANSCRIPT.jsonl"
+  }
+}

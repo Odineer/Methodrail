@@ -68,6 +68,23 @@ Prefer the native session tools when the build provides them: `ListSessions` to 
 
 Z Code persists full session transcripts in `~/.zcode/cli/db/db.sqlite`. Candidate sessions for a workspace: `select id from session where directory = '<absolute workspace path>' order by time_updated desc`. Several sessions can share one directory, and a concurrent session can be newer; take the newest whose first user text is this conversation's opening prompt, not blindly `limit 1`. Turns are `message` rows for that `session_id` in `sequence` order; the role is `json_extract(message.data, '$.role')` (user/assistant — there is no role column). Content blocks are `part` rows joined on `message_id`, ordered by `message.sequence, part.sequence` (`part.sequence` restarts within each message). The type is `json_extract(part.data, '$.type')`: `text` and `reasoning` carry their text in `data.text`; `tool` carries the tool name and full input and output in `data.state`; `step-start` and `step-finish` are boundary rows with no content. Query read-only (`sqlite3 'file:<path>?mode=ro'` …); never write the database while a session is live. Do not use `~/.zcode/cli/rollout/*.jsonl` as a transcript; those model-io files are partial debug captures.
 
+## Claude Code
+
+Claude Code loads this repository as a plugin through `.claude-plugin/plugin.json` (default `skills/` tree and `hooks/hooks.json`), or from symlinked skill directories under `~/.claude/skills/` or project `.claude/skills/`. Install from one surface only. Plugin skills are namespaced `methodrail:<name>`. The plugin session hook injects the projected invariant from `adapters/claude/CLAUDE.md`. A symlink install pastes that block into `CLAUDE.md` instead.
+
+| Cursor | Claude Code |
+| --- | --- |
+| Task tool, cloud agents | Agent tool subagents. `isolation: "worktree"` supplies the isolated writable workspace that [swarm implementation slices](../skills/swarm/SKILL.md#implementation-slices) require; without it, run the slices locally. |
+| AskQuestion | AskUserQuestion when the session offers it; otherwise ask in the conversation. |
+| Browser / CDP | Browser tools only when the session provides them. Otherwise use the repository CLI, tests, or headless harness, and record the gap. |
+| Model ids and `~/.cursor/rules/pstack-models.mdc` | Ignore them. Use Claude aliases per [model routing](model-routing.md), `inherit`, or omit `model`. |
+| `disable-model-invocation` | Enforced. The skill leaves Claude's listing and the Skill tool refuses it. A parent skill whose procedure names an explicit skill reads `../<name>/SKILL.md` from its own base directory ([parent composition](../skills/writing-for-agents/SKILL-MECHANICS.md#parent-composition)). |
+| Skill names | Claude Code bundles `simplify` and `code-review`. Under the plugin, bare names reach Claude Code's skills and Methodrail's are `methodrail:simplify` and `methodrail:code-review`. A symlink install shadows the bundled skills instead. |
+| Skill-local scripts | Resolve from the skill directory (`${CLAUDE_SKILL_DIR}`), not the project root. |
+| Session ledger | Cursor hook only (`hooks/cursor.json`). |
+
+Symlinked skills resolve shared links such as `../../references/<file>` next to the skill root. Link every skill, plus `references/` and `templates/`, into the same parent as the `skills/` root; a partial set breaks workflow composition and those links. The plugin install keeps that layout without extra links.
+
 ## Cursor
 
 Cursor ships first-party skills under reserved names (observed: `review`, its Bugbot/Security dispatcher). A plugin skill with the same name is shadowed and unreachable by that slash name, so shipped skill names must avoid host first-party names — hence `methodrail-review`, not `review`. Validation rejects the observed reserved names.

@@ -196,8 +196,10 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
+// The repository tracks no symlinks. A symlink is a local projection, such as
+// Codex's .agents/skills, and its links resolve from the wrong directory.
 function walk(root: string, predicate: (path: string) => boolean): string[] {
-  return walkFiles(root, predicate);
+  return walkFiles(root, predicate, { followSymlinks: false });
 }
 
 function issue(path: string, message: string): ValidationIssue {
@@ -522,6 +524,7 @@ function validateMethodrailStructure(root: string, skillPaths: string[]): Valida
 
   if (typeof packageJson.version === "string") {
     issues.push(...validateZcodeHost(root, packageJson.version));
+    issues.push(...validateClaudeHost(root, packageJson.version));
   }
 
   const lockPath = join(root, "package-lock.json");
@@ -581,6 +584,7 @@ function validateMethodrailStructure(root: string, skillPaths: string[]): Valida
     "upstreams/ponytail.yaml",
     "upstreams/karpathy-guidelines.yaml",
     "upstreams/addy-osmani.yaml",
+    "upstreams/shadcn-improve.yaml",
   ]) {
     const path = join(root, relativePath);
     if (!existsSync(path)) {
@@ -819,13 +823,65 @@ function validateZcodeHost(root: string, packageVersion: string): ValidationIssu
     const events = hooks ? Object.keys(hooks) : [];
     if (!hooks || events.length !== 1 || events[0] !== "SessionStart") {
       issues.push(issue(hooksPath, "Z Code hooks must declare only SessionStart"));
-    } else if (!JSON.stringify(hooks).includes("zcode-session-start.sh")) {
-      issues.push(issue(hooksPath, "Z Code SessionStart must run scripts/hooks/zcode-session-start.sh"));
+    } else {
+      const serialized = JSON.stringify(hooks);
+      if (!serialized.includes("scripts/hooks/session-start.sh")) {
+        issues.push(issue(hooksPath, "SessionStart must run scripts/hooks/session-start.sh"));
+      }
+      // Claude Code auto-loads this file from the plugin root, so the command
+      // must resolve under either host's plugin-root variable.
+      if (!serialized.includes("${CLAUDE_PLUGIN_ROOT:-${ZCODE_PLUGIN_ROOT}}")) {
+        issues.push(issue(hooksPath, "SessionStart command must resolve ${CLAUDE_PLUGIN_ROOT:-${ZCODE_PLUGIN_ROOT}}"));
+      }
     }
-    const script = join(root, "scripts", "hooks", "zcode-session-start.sh");
-    if (!existsSync(script)) issues.push(issue(script, "Missing Z Code session hook"));
+    const script = join(root, "scripts", "hooks", "session-start.sh");
+    if (!existsSync(script)) issues.push(issue(script, "Missing session hook"));
   } catch (error) {
     issues.push(issue(hooksPath, `Z Code hooks.json is not valid JSON: ${(error as Error).message}`));
+  }
+  return issues;
+}
+
+function validateClaudeHost(root: string, packageVersion: string): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+  const pluginPath = join(root, ".claude-plugin", "plugin.json");
+  const marketPath = join(root, ".claude-plugin", "marketplace.json");
+  if (!existsSync(pluginPath)) return [issue(pluginPath, "Missing Claude Code plugin manifest")];
+  try {
+    const plugin: unknown = JSON.parse(readFileSync(pluginPath, "utf8"));
+    if (!isRecord(plugin)) {
+      issues.push(issue(pluginPath, "Claude Code plugin.json must contain a JSON object"));
+    } else {
+      if (plugin.name !== "methodrail") issues.push(issue(pluginPath, "Claude Code plugin name must be methodrail"));
+      if (plugin.version !== packageVersion) {
+        issues.push(issue(pluginPath, "Claude Code plugin and package versions must agree"));
+      }
+      // Default skills/ and hooks/hooks.json load automatically; a declared path
+      // would add a second skills tree or merge a second hook set.
+      for (const key of ["skills", "hooks", "commands", "agents"]) {
+        if (plugin[key] !== undefined) {
+          issues.push(issue(pluginPath, `Claude Code plugin must rely on the default ${key} location`));
+        }
+      }
+    }
+  } catch (error) {
+    issues.push(issue(pluginPath, `Claude Code plugin.json is not valid JSON: ${(error as Error).message}`));
+  }
+  if (!existsSync(marketPath)) {
+    issues.push(issue(marketPath, "Missing Claude Code marketplace.json"));
+    return issues;
+  }
+  try {
+    const market: unknown = JSON.parse(readFileSync(marketPath, "utf8"));
+    const entry =
+      isRecord(market) && Array.isArray(market.plugins) ? market.plugins.find((item) => isRecord(item)) : undefined;
+    if (!isRecord(market) || market.name !== "methodrail" || !isRecord(market.owner) || !isRecord(entry)) {
+      issues.push(issue(marketPath, "Claude Code marketplace.json must name methodrail, an owner, and a plugin"));
+    } else if (entry.name !== "methodrail" || entry.source !== "./" || entry.version !== packageVersion) {
+      issues.push(issue(marketPath, "Claude Code marketplace.json must point at this repository and match the package version"));
+    }
+  } catch (error) {
+    issues.push(issue(marketPath, `Claude Code marketplace.json is not valid JSON: ${(error as Error).message}`));
   }
   return issues;
 }
@@ -919,6 +975,38 @@ function validateEvalHarness(root: string): ValidationIssue[] {
   return issues;
 }
 
+function namedSkills(fixture: Record<string, unknown>): unknown[] {
+  const lists: unknown[] = [fixture.required_skills, fixture.forbidden_skills];
+  const expected = fixture.expected;
+  if (isRecord(expected) && isRecord(expected.skills)) {
+    lists.push(expected.skills.required, expected.skills.forbidden, expected.skills.optional);
+  }
+  return lists.flatMap((list) => (Array.isArray(list) ? list : []));
+}
+
+// A retired or misspelled skill name in an eval makes a correct run score as a miss.
+function validateEvalSkillNames(root: string, skillPaths: string[]): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+  const known = new Set(skillPaths.map((path) => basename(dirname(path))));
+  const files = walk(root, (path) => path.endsWith(".yaml") || path.endsWith(".yml")).filter(
+    (path) => path.includes(`${sep}evals${sep}`) && !path.includes(`${sep}baselines${sep}`),
+  );
+  for (const path of files) {
+    try {
+      const fixture: unknown = parse(readFileSync(path, "utf8"));
+      if (!isRecord(fixture)) continue;
+      for (const name of namedSkills(fixture)) {
+        if (typeof name === "string" && !known.has(name)) {
+          issues.push(issue(path, `Eval names unknown skill "${name}"`));
+        }
+      }
+    } catch {
+      // Skill coverage validation reports malformed per-skill fixtures.
+    }
+  }
+  return issues;
+}
+
 export function validateRepository(root: string): ValidationResult {
   const absoluteRoot = resolve(root);
   const issues: ValidationIssue[] = [];
@@ -940,6 +1028,7 @@ export function validateRepository(root: string): ValidationResult {
   issues.push(...validateGlobalRules(absoluteRoot));
   issues.push(...validateMethodrailStructure(absoluteRoot, skillPaths));
   issues.push(...validateEvalIds(absoluteRoot));
+  issues.push(...validateEvalSkillNames(absoluteRoot, skillPaths));
   issues.sort((left, right) =>
     `${left.path}\0${left.message}`.localeCompare(`${right.path}\0${right.message}`),
   );

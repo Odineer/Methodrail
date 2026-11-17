@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 Keep one project model policy aligned with the work agents do and with the models this host can actually select. The policy lives at `.methodrail/MODELS.yaml`. Selection rules live in [model routing](../../references/model-routing.md). Field rules live in [schema](references/schema.md).
 
-The bundled checker is `scripts/models-policy.mjs` in this skill directory. Run it with `node`. It validates and plans. It does not write files, call models, or install an SDK.
+The bundled checker is `scripts/models-policy.mjs` in this skill directory. Run it with `node`, resolving the path from this skill directory (`${CLAUDE_SKILL_DIR}` on Claude Code), not the project root. It validates and plans. It does not write files, call models, or install an SDK.
 
 ## When
 

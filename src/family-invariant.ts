@@ -30,13 +30,21 @@ export function renderCursorRule(body: string): string {
   ].join("\n");
 }
 
+// Skills Claude Code bundles under the same names as shipped Methodrail skills.
+export const CLAUDE_BUNDLED_SKILL_NAMES = ["simplify", "code-review"] as const;
+
 export function renderClaude(body: string): string {
+  const bundled = CLAUDE_BUNDLED_SKILL_NAMES.map((name) => `\`${name}\``).join(" and ");
   return [
     "# Methodrail",
     "",
     body,
     "",
-    "Use installed Methodrail skills from `.claude/skills/` only when their descriptions match the task.",
+    "Use installed Methodrail skills only when their descriptions match the task.",
+    "",
+    `Under the plugin install, Methodrail skills are namespaced \`methodrail:<name>\`, and a skill named inside a Methodrail skill means that one. Claude Code's bundled ${bundled} are different skills.`,
+    "",
+    "The Skill tool cannot load a skill marked `disable-model-invocation: true`. When an active Methodrail skill names one, read `../<name>/SKILL.md` from the active skill's base directory.",
     "",
   ].join("\n");
 }

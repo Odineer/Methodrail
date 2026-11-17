@@ -5,5 +5,5 @@ expected_behaviors:
   - classify pass-through, shallow, already-deep, and speculative modules
   - recommend the shallow order intake module
   - leave source unchanged
-  - route behavior-preserving work to /refactor
+  - route behavior-preserving work to /simplify
 max_expensive_skills: 0

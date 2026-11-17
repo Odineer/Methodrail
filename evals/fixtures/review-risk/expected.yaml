@@ -1,5 +1,5 @@
 id: fixture.review-risk
-required_skills: [review, code-review]
+required_skills: [methodrail-review, code-review]
 forbidden_skills: [arena, swarm]
 expected_behaviors:
   - inspect the supplied evidence packet

@@ -1,6 +1,6 @@
 # Install Methodrail
 
-Methodrail is a Cursor plugin and a portable Agent Skills family. Consuming projects do not install an npm dependency, run a daemon, or use a Methodrail CLI. Z Code loads the same skills through `.zcode-plugin/plugin.json`.
+Methodrail is a Cursor plugin and a portable Agent Skills family. Consuming projects do not install an npm dependency, run a daemon, or use a Methodrail CLI. Claude Code and Z Code load the same skills through `.claude-plugin/plugin.json` and `.zcode-plugin/plugin.json`.
 
 Three supported installs:
 
@@ -40,9 +40,9 @@ Doctor must report `status: identical` (the plugin copy matches this checkout). 
 
 Reusable skills stay compatible with Agent Skills-oriented hosts. Do not copy skill bodies.
 
-- Claude Code: [adapters/claude/README.md](../adapters/claude/README.md) — expose selected skills through `.claude/skills/` and the projected invariant in `adapters/claude/CLAUDE.md`.
+- Claude Code: [adapters/claude/README.md](../adapters/claude/README.md) — `/plugin marketplace add Odineer/Methodrail`, then `/plugin install methodrail@methodrail`. Plugin skills are namespaced (`/methodrail:simplify`, since Claude Code bundles its own `simplify` and `code-review`). Or symlink every skill into `.claude/skills/` (plus `references/` and `templates/` beside it) and use `adapters/claude/CLAUDE.md`.
 - Codex: [adapters/codex/README.md](../adapters/codex/README.md) — expose selected skills through `.agents/skills/` and the projected invariant in `adapters/codex/AGENTS.md`.
-- Z Code: [adapters/zcode/README.md](../adapters/zcode/README.md) — install the plugin from `marketplace.json`, or symlink skills into `~/.zcode/skills/` and use `adapters/zcode/AGENTS.md`.
+- Z Code: [adapters/zcode/README.md](../adapters/zcode/README.md) — install the plugin from `marketplace.json`, or symlink skills into `~/.zcode/skills/` (plus `references/` and `templates/` beside that root, one skill root only) and use `adapters/zcode/AGENTS.md`.
 
 Change `references/methodrail-family-invariant.md` and run `npm run project-hosts` rather than editing those copies by hand.
 

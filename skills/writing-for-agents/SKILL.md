@@ -103,7 +103,7 @@ For every Methodrail rule, skill, and reference: does this sentence change likel
 ```text
 Usually follows:              methodrail-init, create-verification-skill, skill edits
 Often produces:               pointer-oriented agent docs
-Escalate to:                  skill-mechanics, evals
+Escalate to:                  SKILL-MECHANICS.md, the edited skill's evals/
 Avoid combining automatically with: wayfinder, architect, arena
 ```
 

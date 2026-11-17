@@ -1,0 +1,26 @@
+[
+  {
+    "command": "ls -la && cat TASK.md && ls .methodrail 2>/dev/null",
+    "phase": "other",
+    "exit_status": 1,
+    "stdout": "Exit code 1\ntotal 8\ndrwxr-xr-x@ 4 odin  wheel  128 Nov 15 20:10 .\ndrwxr-xr-x@ 5 odin  wheel  160 Nov 15 20:10 ..\n-rw-r--r--@ 1 odin  wheel   73 Nov 15 20:10 TASK.md\ndrwxr-xr-x@ 4 odin  wheel  128 Nov 15 20:10 repo\nChange the button label from \"Save\" to \"Create\". Do not change behavior."
+  },
+  {
+    "command": "cd <run>/work/repo && find . -type f -not -path '*/node_modules/*' | head -50; grep -rn \"Save\" . --exclude-dir=node_modules",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": "./package.json\n./src/button.js\n./src/button.test.js\n./src/button.js:2:  return \"Save\";"
+  },
+  {
+    "command": "cat package.json src/button.js src/button.test.js",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": "{\n  \"name\": \"simple-change\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"scripts\": {\n    \"test\": \"node --test src/button.test.js\"\n  }\n}\nexport function buttonLabel() {\n  return \"Save\";\n}\nimport assert from \"node:assert/strict\";\nimport test from \"node:test\";\nimport { buttonLabel } from \"./button.js\";\n\ntest(\"button label\", () => {\n  assert.equal(buttonLabel(), \"Create\");\n});"
+  },
+  {
+    "command": "npm test 2>&1 | tail -8",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "ℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 71.855416"
+  }
+]

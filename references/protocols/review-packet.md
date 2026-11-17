@@ -2,7 +2,7 @@
 
 A reviewer should receive relevant context directly rather than spend expensive model turns rediscovering deterministic facts.
 
-The `review` and `interrogate` skills should use this principle.
+The `methodrail-review`, `code-review`, and `interrogate` skills should use this principle.
 
 ## Suggested contents
 

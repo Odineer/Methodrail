@@ -1,0 +1,32 @@
+[
+  {
+    "command": "cat TASK.md; ls -la",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": "Expired sessions still open the dashboard. Users should be sent to login. Fix the bug with evidence, not source inference alone.\ntotal 8\ndrwxr-xr-x@ 6 odin  wheel  192 Nov 15 20:10 .\ndrwxr-xr-x@ 5 odin  wheel  160 Nov 15 20:10 ..\ndrwxr-xr-x@ 3 odin  wheel   96 Nov 15 20:10 .agents\ndrwxr-xr-x@ 3 odin  wheel   96 Nov 15 20:10 .methodrail\n-rw-r--r--@ 1 odin  wheel  129 Nov 15 20:10 TASK.md\ndrwxr-xr-x@ 3 odin  wheel   96 Nov 15 20:10 repo"
+  },
+  {
+    "command": "find . -type f -not -path '*/node_modules/*' | head -50; for f in $(find .agents .methodrail -type f); do echo \"== $f\"; cat \"$f\"; done",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": "./.methodrail/PROJECT.md\n./.agents/skills/verify-project/SKILL.md\n./TASK.md\n./repo/src/session.js\n== .agents/skills/verify-project/SKILL.md\n---\nname: verify-project\ndescription: Drive login and dashboard paths and capture whether expired sessions redirect.\n---\n\n# Verify project\n\nStart the app, open an expired session, capture the landing path, reset.\n== .methodrail/PROJECT.md\n# Project\n\nExpired sessions must not reach the dashboard.\n\n## Verification\n\nUse [verify-project](../.agents/skills/verify-project/SKILL.md)."
+  },
+  {
+    "command": "cat -n repo/src/session.js; ls -la repo",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": "     1\texport function landingPath(session) {\n     2\t  if (!session?.token) return \"/login\";\n     3\t  return \"/dashboard\";\n     4\t}\ntotal 0\ndrwxr-xr-x@ 3 odin  wheel   96 Nov 15 20:10 .\ndrwxr-xr-x@ 6 odin  wheel  192 Nov 15 20:10 ..\ndrwxr-xr-x@ 3 odin  wheel   96 Nov 15 20:10 src"
+  },
+  {
+    "command": "mkdir -p ../verify && cat > ../verify/repro.mjs <<'EOF'\nimport { landingPath } from \"../work/repo/src/session.js\";\nconst now = Date.now();\nconst cases = {\n  noSession: undefined,\n  noToken: {},\n  validMs: { token: \"t\", expiresAt: now + 60_000 },\n  expiredMs: { token: \"t\", expiresAt: now - 60_000 },\n  expiredIso: { token: \"t\", expiresAt: new Date(now - 60_000).toISOString() },\n  expiredDate: { token: \"t\", expiresAt: new Date(now - 60_000) },\n  validIso: { token: \"t\", expiresAt: new Date(now + 60_000).toISOString() },\n  garbageExpiry: { token: \"t\", expiresAt: \"not-a-date\" },\n  noExpiryField: { token: \"t\" },\n};\nconst expected = { noSession:\"/login\", noToken:\"/login\", validMs:\"/dashboard\", expiredMs:\"/login\", expiredIso:\"/login\", expiredDate:\"/login\", validIso:\"/dashboard\", garbageExpiry:\"/login\", noExpiryField:\"/dashboard\" };\nlet fail = 0;\nfor (const [k, s] of Object.entries(cases)) {\n  const got = landingPath(s); const ok = got === expected[k]; if (!ok) fail++;\n  console.log(`${ok ? \"PASS\" : \"FAIL\"} ${k.padEnd(14)} -> ${got} (expected ${expected[k]})`);\n}\nprocess.exit(fail ? 1 : 0);\nEOF\ncd .. && node verify/repro.mjs",
+    "phase": "repro",
+    "exit_status": 1,
+    "stdout": "Exit code 1\nPASS noSession      -> /login (expected /login)\nPASS noToken        -> /login (expected /login)\nPASS validMs        -> /dashboard (expected /dashboard)\nFAIL expiredMs      -> /dashboard (expected /login)\nFAIL expiredIso     -> /dashboard (expected /login)\nFAIL expiredDate    -> /dashboard (expected /login)\nPASS validIso       -> /dashboard (expected /dashboard)\nFAIL garbageExpiry  -> /dashboard (expected /login)\nPASS noExpiryField  -> /dashboard (expected /dashboard)"
+  },
+  {
+    "command": "cd .. && node verify/repro.mjs",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "PASS noSession      -> /login (expected /login)\nPASS noToken        -> /login (expected /login)\nPASS validMs        -> /dashboard (expected /dashboard)\nPASS expiredMs      -> /login (expected /login)\nPASS expiredIso     -> /login (expected /login)\nPASS expiredDate    -> /login (expected /login)\nPASS validIso       -> /dashboard (expected /dashboard)\nPASS garbageExpiry  -> /login (expected /login)\nPASS noExpiryField  -> /dashboard (expected /dashboard)\nShell cwd was reset to <run>/work"
+  }
+]

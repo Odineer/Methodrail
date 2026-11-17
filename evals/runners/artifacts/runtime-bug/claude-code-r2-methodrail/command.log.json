@@ -1,0 +1,38 @@
+[
+  {
+    "command": "cat TASK.md && find . -type f -not -path './node_modules/*' | head -50 && ls -la .methodrail 2>/dev/null",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": "Expired sessions still open the dashboard. Users should be sent to login. Fix the bug with evidence, not source inference alone.\n./.methodrail/PROJECT.md\n./.agents/skills/verify-project/SKILL.md\n./TASK.md\n./repo/src/session.js\ntotal 8\ndrwxr-xr-x@ 3 odin  wheel   96 Nov 15 20:12 .\ndrwxr-xr-x@ 6 odin  wheel  192 Nov 15 20:12 ..\n-rw-r--r--@ 1 odin  wheel  141 Nov 15 20:12 PROJECT.md"
+  },
+  {
+    "command": "cat .methodrail/PROJECT.md; echo ----; cat .agents/skills/verify-project/SKILL.md; echo ----; cat -n repo/src/session.js",
+    "phase": "other",
+    "exit_status": 0,
+    "stdout": "# Project\n\nExpired sessions must not reach the dashboard.\n\n## Verification\n\nUse [verify-project](../.agents/skills/verify-project/SKILL.md).\n----\n---\nname: verify-project\ndescription: Drive login and dashboard paths and capture whether expired sessions redirect.\n---\n\n# Verify project\n\nStart the app, open an expired session, capture the landing path, reset.\n----\n     1\texport function landingPath(session) {\n     2\t  if (!session?.token) return \"/login\";\n     3\t  return \"/dashboard\";\n     4\t}"
+  },
+  {
+    "command": "node --version && node --input-type=module -e '\nimport { landingPath } from \"./repo/src/session.js\";\nconst now = Date.now();\nconst cases = {\n  none: undefined,\n  noToken: {},\n  valid: { token: \"t\", expiresAt: now + 60_000 },\n  expired: { token: \"t\", expiresAt: now - 60_000 },\n};\nfor (const [k, s] of Object.entries(cases)) console.log(k.padEnd(8), landingPath(s));\n' 2>&1",
+    "phase": "repro",
+    "exit_status": 0,
+    "stdout": "v26.0.0\nnone     /login\nnoToken  /login\nvalid    /dashboard\nexpired  /dashboard"
+  },
+  {
+    "command": "cd <run>/work/repo && node --test test/ 2>&1 | grep -E '^(not )?ok|^# (pass|fail)'",
+    "phase": "regression",
+    "exit_status": 0,
+    "stdout": "(Bash completed with no output)"
+  },
+  {
+    "command": "cd <run>/work/repo && node --test test/session.test.mjs 2>&1 | tail -30",
+    "phase": "regression",
+    "exit_status": 0,
+    "stdout": "    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: '/dashboard',\n    expected: '/login',\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n\ntest at test/session.test.mjs:21:1\n✖ session without a valid expiry fails closed (0.077084ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  + actual - expected\n  \n  + '/dashboard'\n  - '/login'\n  \n      at TestContext.<anonymous> (file://<run>/work/repo/test/session.test.mjs:22:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)\n      at Test.postRun (node:internal/test_runner/test:1330:19)\n      at Test.run (node:internal/test_runner/test:1258:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: '/dashboard',\n    expected: '/login',\n    operator: 'strictEqual',\n    diff: 'simple'\n  }"
+  },
+  {
+    "command": "node --test test/session.test.mjs 2>&1 | grep -E '^[✔✖ℹ]'; echo '--- original repro ---'; node --input-type=module -e '\nimport { landingPath } from \"./src/session.js\";\nconst now = Date.now();\nconst cases = { none: undefined, noToken: {}, valid: { token: \"t\", expiresAt: now + 60_000 }, expired: { token: \"t\", expiresAt: now - 60_000 } };\nfor (const [k, s] of Object.entries(cases)) console.log(k.padEnd(8), landingPath(s));\n'",
+    "phase": "verify",
+    "exit_status": 0,
+    "stdout": "✔ no session or token goes to login (0.581916ms)\n✔ unexpired session reaches dashboard (0.060583ms)\n✔ expired session goes to login (0.0445ms)\n✔ session without a valid expiry fails closed (0.03925ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 72.908084\n--- original repro ---\nnone     /login\nnoToken  /login\nvalid    /dashboard\nexpired  /login"
+  }
+]

@@ -52,7 +52,7 @@ Retry count may explain duplicate charges.
 
 These can all be true at once. Mixing them produces false confidence: agents treat desired policy as implemented fact, or treat a one-run observation as an invariant.
 
-Keep records lightweight. Use the templates in `templates/project/` when a durable note is justified. Do not force a database schema.
+Keep records lightweight. When a durable typed note is justified, start from [note.md](../../templates/project/knowledge/note.md) and follow the [note contract](note-contract.md). The other files in `templates/project/knowledge/` describe legacy untyped notes; do not create new ones from them. Do not force a database schema.
 
 ## Typed notes vs records
 

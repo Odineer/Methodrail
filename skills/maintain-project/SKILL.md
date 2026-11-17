@@ -50,7 +50,7 @@ Match depth to [rigor](../../references/rigor.md). Load [simplicity](../../refer
 
 Frame scope, establish a baseline, discover proportionally, deduplicate, rank, and report. Execute a selected batch only when the request authorizes repair. Then verify and reconcile. Handoffs and evidence invalidation: [repair](references/repair.md).
 
-1. Start with project guidance and the canonical deterministic checks that match the scope. Reuse evidence that still matches relevant state. Inspect changed and current-work areas before deep structural exploration. Load a specialist reference only for the lane under examination. For substantial independent audit slices, use [swarm](../swarm/SKILL.md) with read-only task packets. Reconcile shared causes and rank the evidence in the parent. Keep small or coupled audits local.
+1. Start with project guidance and the canonical deterministic checks that match the scope. Reuse evidence that still matches relevant state. Inspect changed and current-work areas before deep structural exploration. Load a specialist reference only for the lane under examination. For substantial independent audit slices, use [swarm](../swarm/SKILL.md) with read-only task packets. [Vet](references/discovery.md#vetting) returned findings, reconcile shared causes, and rank the evidence in the parent. Keep small or coupled audits local.
 2. Include the [consolidation scan](references/discovery.md#consolidation) in the applicable lanes. Record findings with the [discovery](references/discovery.md) contract. Rank consolidation candidates by demonstrated maintenance benefit and regression risk. Use urgency, effort, and dependencies to order the work. Keep speculative hypotheses out of the repair queue.
 3. An audit ends with the ranked report and a top recommendation.
 4. When repair is authorized, revalidate the selected findings, then hand each item to its owner. Use [swarm's implementation procedure](../swarm/SKILL.md#implementation-slices) for substantial independent repairs. Review each returned patch before integration, then review and verify the combined changes in the parent.
@@ -60,7 +60,7 @@ A reproducible product defect found in these lanes is reported and may enter the
 
 ## Outputs
 
-Default output stays in chat. Use an existing project backlog artifact only when the user asks to persist it. Use existing handoff facilities for continuity. Typed knowledge writes stay with `reflect`. There is no mandatory debt ledger, source marker, standing-rule update, or automatic issue filing.
+Default output stays in chat. Use an existing project backlog artifact only when the user asks to persist it. A persisted report keeps rejected findings with their reasons, so a later audit skips them unless the evidence changed. Use existing handoff facilities for continuity. Typed knowledge writes stay with `reflect`. There is no mandatory debt ledger, source marker, standing-rule update, or automatic issue filing.
 
 Every report states inspected lanes, paths, and features; skipped areas; checks actually executed; and blockers. Partial coverage is not a project-wide clean claim. No findings is a valid result.
 

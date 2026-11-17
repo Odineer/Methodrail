@@ -51,6 +51,8 @@ To evaluate live agents:
 3. Record a JSON run for each condition (`evals/runners/examples/` is the schema).
 4. Compare. A longer Methodrail path can still win if it prevents an expensive miss.
 
+For Claude Code, `evals/runners/run-claude-code.sh <fixture> <baseline|methodrail> <dest> [skill]` runs `claude -p` on a fresh copy of the fixture. The methodrail condition loads this checkout with `--plugin-dir`. Then `node evals/runners/collect-claude-code-run.mjs <dest> <fixture> <condition> claude-code-r<n>-<condition>` writes the artifacts and a draft run. Fill in `evidence`, `behaviors_observed`, and `failure_modes` after reading the transcript. The standalone CLI must be logged in (`claude auth login`).
+
 ## Reports
 
 A comparison should answer: did Methodrail help, where, at what cost, and what extra complexity appeared. Track skill count, loaded references, subagents, verification steps, and latency when known. Do not optimize only for fewer actions.

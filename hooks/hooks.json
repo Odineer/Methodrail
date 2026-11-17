@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"${ZCODE_PLUGIN_ROOT}/scripts/hooks/zcode-session-start.sh\"",
+            "command": "\"${CLAUDE_PLUGIN_ROOT:-${ZCODE_PLUGIN_ROOT}}/scripts/hooks/session-start.sh\"",
             "timeout": 5
           }
         ]

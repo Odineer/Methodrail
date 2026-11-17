@@ -20,4 +20,4 @@ Quiet unused helper. No callers, no current-work evidence.
 
 ## Top recommendation
 
-Deepen orderIntake. Missing characterization for fromCart/fromApi/fromCli. Route to /refactor. Do not edit source during this survey.
+Deepen orderIntake. Missing characterization for fromCart/fromApi/fromCli. Route to /simplify. Do not edit source during this survey.
