@@ -1,7 +1,7 @@
 ---
 name: methodrail-review
 description: Review a change for correctness, requirement fit, maintainability, evidence, and regressions. Run only when explicitly requested.
-when_to_use: Explicit request only (/methodrail-review), or an active workflow names it. Reviews a delivered change for correctness, evidence, and regressions.
+when_to_use: Explicit request only (/methodrail-review), or an active parent skill names it. Reviews a delivered change for correctness, evidence, and regressions.
 disable-model-invocation: true
 ---
 

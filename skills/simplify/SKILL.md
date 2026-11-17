@@ -1,7 +1,7 @@
 ---
 name: simplify
 description: Reduce avoidable code and complexity in selected areas while preserving observable behavior. Use for a named simplification or a batch of selected findings. Run only when explicitly requested or called by a workflow.
-when_to_use: Explicit request only (/simplify), or an active workflow names it. Executes selected behavior-preserving reductions, including a batch.
+when_to_use: Explicit request only (/simplify), or an active parent skill names it. Executes selected behavior-preserving reductions, including a batch.
 disable-model-invocation: true
 ---
 

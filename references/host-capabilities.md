@@ -78,7 +78,7 @@ Claude Code loads this repository as a plugin through `.claude-plugin/plugin.jso
 | AskQuestion | AskUserQuestion when the session offers it; otherwise ask in the conversation. |
 | Browser / CDP | Browser tools only when the session provides them. Otherwise use the repository CLI, tests, or headless harness, and record the gap. |
 | Model ids and `~/.cursor/rules/pstack-models.mdc` | Ignore them. Use Claude aliases per [model routing](model-routing.md), `inherit`, or omit `model`. |
-| `disable-model-invocation` | Enforced. The skill leaves Claude's listing and the Skill tool refuses it. A workflow that names an explicit skill reads `../<name>/SKILL.md` from its own base directory. |
+| `disable-model-invocation` | Enforced. The skill leaves Claude's listing and the Skill tool refuses it. A parent skill whose procedure names an explicit skill reads `../<name>/SKILL.md` from its own base directory ([parent composition](../skills/writing-for-agents/SKILL-MECHANICS.md#parent-composition)). |
 | Skill names | Claude Code bundles `simplify` and `code-review`. Under the plugin, bare names reach Claude Code's skills and Methodrail's are `methodrail:simplify` and `methodrail:code-review`. A symlink install shadows the bundled skills instead. |
 | Skill-local scripts | Resolve from the skill directory (`${CLAUDE_SKILL_DIR}`), not the project root. |
 | Session ledger | Cursor hook only (`hooks/cursor.json`). |

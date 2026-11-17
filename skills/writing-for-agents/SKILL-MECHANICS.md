@@ -24,7 +24,7 @@ Methodrail already marks workflow entry skills and high-cost operators explicit.
 `when_to_use` is the portable trigger text for the same choice, because some hosts (Z Code) ignore `disable-model-invocation` while others (Cursor) ignore `when_to_use`. It restates the description; it is not a second mechanism and never flips a skill's invocation on a host that enforces `disable-model-invocation`.
 
 - Model-invoked skills restate their trigger branches and carve-outs there — hosts that truncate long descriptions still see them.
-- Explicit skills open with `Explicit request only`, then the named-entry and active-workflow conditions. Suggest-only skills open with `Suggest-only` and say to name it and wait.
+- Explicit skills open with `Explicit request only`, then the named-entry and active-parent conditions ([parent composition](#parent-composition)). Suggest-only skills open with `Suggest-only` and say to name it and wait.
 - The value never contains `: `, so flat `key: value` frontmatter parsers keep it whole.
 
 ### Parent composition
