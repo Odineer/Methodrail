@@ -975,6 +975,38 @@ function validateEvalHarness(root: string): ValidationIssue[] {
   return issues;
 }
 
+function namedSkills(fixture: Record<string, unknown>): unknown[] {
+  const lists: unknown[] = [fixture.required_skills, fixture.forbidden_skills];
+  const expected = fixture.expected;
+  if (isRecord(expected) && isRecord(expected.skills)) {
+    lists.push(expected.skills.required, expected.skills.forbidden, expected.skills.optional);
+  }
+  return lists.flatMap((list) => (Array.isArray(list) ? list : []));
+}
+
+// A retired or misspelled skill name in an eval makes a correct run score as a miss.
+function validateEvalSkillNames(root: string, skillPaths: string[]): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+  const known = new Set(skillPaths.map((path) => basename(dirname(path))));
+  const files = walk(root, (path) => path.endsWith(".yaml") || path.endsWith(".yml")).filter(
+    (path) => path.includes(`${sep}evals${sep}`) && !path.includes(`${sep}baselines${sep}`),
+  );
+  for (const path of files) {
+    try {
+      const fixture: unknown = parse(readFileSync(path, "utf8"));
+      if (!isRecord(fixture)) continue;
+      for (const name of namedSkills(fixture)) {
+        if (typeof name === "string" && !known.has(name)) {
+          issues.push(issue(path, `Eval names unknown skill "${name}"`));
+        }
+      }
+    } catch {
+      // Skill coverage validation reports malformed per-skill fixtures.
+    }
+  }
+  return issues;
+}
+
 export function validateRepository(root: string): ValidationResult {
   const absoluteRoot = resolve(root);
   const issues: ValidationIssue[] = [];
@@ -996,6 +1028,7 @@ export function validateRepository(root: string): ValidationResult {
   issues.push(...validateGlobalRules(absoluteRoot));
   issues.push(...validateMethodrailStructure(absoluteRoot, skillPaths));
   issues.push(...validateEvalIds(absoluteRoot));
+  issues.push(...validateEvalSkillNames(absoluteRoot, skillPaths));
   issues.sort((left, right) =>
     `${left.path}\0${left.message}`.localeCompare(`${right.path}\0${right.message}`),
   );

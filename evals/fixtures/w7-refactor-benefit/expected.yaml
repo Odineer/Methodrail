@@ -1,5 +1,5 @@
 id: fixture.w7-refactor-benefit
-required_skills: [refactor]
+required_skills: [simplify]
 forbidden_skills: []
 expected_behaviors:
   - remove the private target with packaging cost

@@ -106,7 +106,7 @@ A change can pass one axis and fail another. In a writing workflow the parent re
 ## Neighbors
 
 ```text
-Usually follows:              review, develop
+Usually follows:              methodrail-review, develop
 Often produces:               standards, spec, and maintainability reports
 Escalate to:                  blast-radius, verify-change
 Avoid combining automatically with: interrogate, arena

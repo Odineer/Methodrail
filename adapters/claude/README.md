@@ -68,5 +68,9 @@ before claiming a binding is available.
 ## Evidence
 
 Claude Code support is conformance-tested: manifests, the shared hook, and the
-projected invariant run under `npm run check`. No live Claude Code eval battery
-has run, so make no behavior-improvement claim from it.
+projected invariant run under `npm run check`. A first live pilot ran four
+paired runs (`simple-change` and `runtime-bug`, r1 and r2; traces in
+`evals/runners/examples/*.claude-code-*.json`). `simple-change` showed no gain
+in either run; `runtime-bug` helped in r1 and was incomplete in r2. That is too
+small for a behavior-improvement claim. Run new traces with
+`evals/runners/run-claude-code.sh` ([evals/README.md](../../evals/README.md)).

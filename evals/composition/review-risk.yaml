@@ -6,7 +6,7 @@ input:
   prompt: "Review this payment retry change. The author says tests passed."
 expected:
   skills:
-    required: [review, code-review]
+    required: [methodrail-review, code-review]
     forbidden: [arena, swarm]
   behaviors:
     - consume the review packet

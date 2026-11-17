@@ -201,3 +201,25 @@ test("validator checks canonical skills, not a symlinked .agents projection", (t
   );
 });
 
+
+test("validator rejects eval fixtures that name a skill with no SKILL.md", (t) => {
+  const root = mkdtempSync(join(tmpdir(), "methodrail-eval-names-"));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  mkdirSync(join(root, "skills", "demo"), { recursive: true });
+  writeFileSync(join(root, "skills", "demo", "SKILL.md"), "---\nname: demo\ndescription: Demo skill.\n---\n");
+  mkdirSync(join(root, "evals", "composition"), { recursive: true });
+  writeFileSync(
+    join(root, "evals", "composition", "case.yaml"),
+    "id: c\nkind: composition\ninput:\n  prompt: p\nexpected:\n  skills:\n    required: [demo, review]\n    forbidden: [refactor]\n",
+  );
+  mkdirSync(join(root, "evals", "fixtures", "case"), { recursive: true });
+  writeFileSync(join(root, "evals", "fixtures", "case", "expected.yaml"), "id: f\nrequired_skills: [demo, gone]\n");
+  mkdirSync(join(root, "evals", "baselines"), { recursive: true });
+  writeFileSync(join(root, "evals", "baselines", "old.yaml"), "id: b\nrequired_skills: [retired]\n");
+
+  const unknown = validateRepository(root)
+    .issues.map(({ message }) => /Eval names unknown skill "(.+)"/.exec(message)?.[1])
+    .filter(Boolean)
+    .sort();
+  assert.deepEqual(unknown, ["gone", "refactor", "review"]);
+});
