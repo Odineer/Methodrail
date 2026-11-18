@@ -12,7 +12,7 @@ methodrail-init
 investigate / develop / debug / simplify / methodrail-review
 ```
 
-Methodrail does not replace Cursor, Claude Code, Codex, or Z Code. They are the runtime. Methodrail supplies the engineering methodology and the project-specific context those agents should use.
+Methodrail does not replace Cursor, Claude Code, Codex, Z Code, or Kilo Code. They are the runtime. Methodrail supplies the engineering methodology and the project-specific context those agents should use.
 
 Methodrail:
 
@@ -24,7 +24,7 @@ Instead it **selects**, **adapts**, **composes**, **verifies**, and **maintains*
 
 Install it once. Run `/methodrail-init` in a repository. Methodrail inspects the project and creates a lightweight, project-specific AI harness for future agents.
 
-Supported installs (marketplace once listed, local plugin surfaces, Claude Code / Codex / Z Code): [docs/install.md](docs/install.md).
+Supported installs (marketplace once listed, local plugin surfaces, Claude Code / Codex / Z Code / Kilo Code): [docs/install.md](docs/install.md).
 
 ## Start in under a minute
 
@@ -62,7 +62,7 @@ Reload the window. Methodrail appears in **Cursor Customize**. The checkout stay
    └── evals
 ```
 
-Cursor, Claude Code, Codex, Z Code, and other native harnesses execute tools, manage context, and run agents. Methodrail defines how those agents should work.
+Cursor, Claude Code, Codex, Z Code, Kilo Code, and other native harnesses execute tools, manage context, and run agents. Methodrail defines how those agents should work.
 
 The Cursor plugin ships an observational hook that appends a session ledger under `~/.local/state/methodrail/sessions` only in repositories that already have a `.methodrail/` harness. It never writes inside the repository. The ledger records skill and reference paths, shell commands with exit codes, and final responses. Disable it with `METHODRAIL_LEDGER=0`, or relocate it with `METHODRAIL_LEDGER_DIR`.
 

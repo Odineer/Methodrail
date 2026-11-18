@@ -74,7 +74,7 @@ function hasHeading(source: string, heading: RegExp): boolean {
   return heading.test(source);
 }
 
-const NATIVE_SKILL = /^\.(?:agents|cursor|claude|zcode)\/skills\/[^/]+\/SKILL\.md$/i;
+const NATIVE_SKILL = /^\.(?:agents|cursor|claude|zcode|kilo|kilocode)\/skills\/[^/]+\/SKILL\.md$/i;
 
 /** Formal contract marker plus the three identifying sections. Property-testing guidance does not match. */
 export function isFormalVerificationContract(source: string): boolean {
@@ -102,13 +102,13 @@ function classifyFile(rel: string, absolute: string): DiscoveredArtifact | null 
     };
   }
   if (
-    /^\.(?:agents|cursor|claude|zcode)\/skills\/verify-[^/]+\/SKILL\.md$/i.test(rel) &&
+    /^\.(?:agents|cursor|claude|zcode|kilo|kilocode)\/skills\/verify-[^/]+\/SKILL\.md$/i.test(rel) &&
     /##\s+Launch/i.test(source)
   ) {
     return { path: rel, role: "verification-skill", evidence: "project-local verify skill with Launch" };
   }
   if (
-    /^\.(?:agents|cursor|claude|zcode)\/skills\/verify-[^/]+\/features\/.+\.md$/i.test(rel) &&
+    /^\.(?:agents|cursor|claude|zcode|kilo|kilocode)\/skills\/verify-[^/]+\/features\/.+\.md$/i.test(rel) &&
     hasHeading(source, /^##\s+Sub-features\s*$/m)
   ) {
     return { path: rel, role: "verification-map", evidence: "feature map with Sub-features heading" };
@@ -122,6 +122,7 @@ function classifyFile(rel: string, absolute: string): DiscoveredArtifact | null 
     /^\.claude\//.test(rel) ||
     /^\.codex\//.test(rel) ||
     /^\.zcode\//.test(rel) ||
+    /^\.kilo(?:code)?\//.test(rel) ||
     (/^\.agents\/skills\//.test(rel) && !/\/verify-[^/]+\//.test(rel))
   ) {
     return { path: rel, role: "host-instruction", evidence: "existing host instruction or unmanaged skill" };

@@ -36,13 +36,14 @@ npm run doctor
 
 Doctor must report `status: identical` (the plugin copy matches this checkout). Run `link-plugin` again after changing skills, rules, or hooks. `stale` means the copy drifted or is still made of symlinks. `missing` means nothing is installed. `rejected` means the plugin directory itself is a symlink to a checkout outside the local plugins folder. `linked` means this checkout is the plugin directory.
 
-## 3. Claude Code, Codex, and Z Code
+## 3. Claude Code, Codex, Z Code, and Kilo Code
 
 Reusable skills stay compatible with Agent Skills-oriented hosts. Do not copy skill bodies.
 
 - Claude Code: [adapters/claude/README.md](../adapters/claude/README.md) — `/plugin marketplace add Odineer/Methodrail`, then `/plugin install methodrail@methodrail`. Plugin skills are namespaced (`/methodrail:simplify`, since Claude Code bundles its own `simplify` and `code-review`). Or symlink every skill into `.claude/skills/` (plus `references/` and `templates/` beside it) and use `adapters/claude/CLAUDE.md`.
 - Codex: [adapters/codex/README.md](../adapters/codex/README.md) — expose selected skills through `.agents/skills/` and the projected invariant in `adapters/codex/AGENTS.md`.
 - Z Code: [adapters/zcode/README.md](../adapters/zcode/README.md) — install the plugin from `marketplace.json`, or symlink skills into `~/.zcode/skills/` (plus `references/` and `templates/` beside that root, one skill root only) and use `adapters/zcode/AGENTS.md`.
+- Kilo Code: [adapters/kilo/README.md](../adapters/kilo/README.md) — symlink every skill into `~/.kilo/skills/` (plus `references/` and `templates/` beside it, one skill root only) and put `adapters/kilo/methodrail.md` in `~/.kilo/rules/`. Kilo has no plugin bundle or session hook.
 
 Change `references/methodrail-family-invariant.md` and run `npm run project-hosts` rather than editing those copies by hand.
 

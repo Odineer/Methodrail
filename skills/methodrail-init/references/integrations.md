@@ -18,6 +18,10 @@ Use when `CLAUDE.md` is the established instruction surface. Add only the pointe
 
 Z Code reads workspace `AGENTS.md` and `~/.zcode/AGENTS.md`. It does not keep reading `CLAUDE.md`. Use the AGENTS.md pointer. Project skills live in `.zcode/skills/`. Do not copy Methodrail skill bodies there.
 
+## Kilo Code
+
+Kilo Code reads the first of `AGENTS.md`, `CLAUDE.md`, or `CONTEXT.md`, plus every file in `.kilo/rules/`. Use the AGENTS.md pointer, or a small `.kilo/rules/methodrail.md` pointer when the repository already keeps rules there. Project skills live in `.kilo/skills/`. Do not copy Methodrail skill bodies there.
+
 ## GitHub Copilot instructions
 
 Use when `.github/copilot-instructions.md` is already authoritative. Add only a concise pointer if that client can follow repository-local links in the intended environment.
@@ -32,6 +36,7 @@ Inspect existing AI instruction surfaces before adding a pointer:
 - `.claude/`
 - `.codex/`
 - `.zcode/`
+- `.kilo/` and legacy `.kilocode/`
 - `.github/copilot-instructions.md`
 
 Never overwrite them. Prefer the existing source of truth plus a thin Methodrail pointer. Detect contradictions; repository-specific instructions outrank generic Methodrail assumptions.

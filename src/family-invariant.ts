@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { EXPLICIT_SKILLS, SUGGEST_ONLY_SKILLS } from "./skill-invocation.js";
 
 export const INVARIANT_START = "<!-- methodrail-family-invariant:start -->";
 export const INVARIANT_END = "<!-- methodrail-family-invariant:end -->";
@@ -71,11 +72,30 @@ export function renderZcode(body: string): string {
   ].join("\n");
 }
 
+// Kilo Code reads only `name` and `description`, so the explicit-invocation
+// guard that other hosts take from frontmatter lives in the projected rule.
+export function renderKilo(body: string): string {
+  const suggestOnly = new Set<string>(SUGGEST_ONLY_SKILLS);
+  const explicit = [...EXPLICIT_SKILLS].filter((name) => !suggestOnly.has(name));
+  const list = (names: readonly string[]) => names.map((name) => `\`${name}\``).join(", ");
+  return [
+    "# Methodrail",
+    "",
+    body,
+    "",
+    "Use installed Methodrail skills only when their descriptions match the task.",
+    "",
+    `Kilo Code ignores \`disable-model-invocation\` and \`when_to_use\`. Load these Methodrail skills only when the user names them or an active Methodrail skill's procedure names them: ${list(explicit)}. Suggest ${list([...suggestOnly])} by name and wait for the user to ask for it.`,
+    "",
+  ].join("\n");
+}
+
 export function hostProjections(body: string): Record<string, string> {
   return {
     "rules/methodrail.mdc": renderCursorRule(body),
     "adapters/claude/CLAUDE.md": renderClaude(body),
     "adapters/codex/AGENTS.md": renderCodex(body),
     "adapters/zcode/AGENTS.md": renderZcode(body),
+    "adapters/kilo/methodrail.md": renderKilo(body),
   };
 }
