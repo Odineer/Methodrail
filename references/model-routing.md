@@ -62,6 +62,8 @@ Claude's parent recommendation for balanced work is `opusplan`, a plan/execute s
 
 Z Code has no parent-routing alias and no Cursor Router. Parent strategy is `default`. Subagent `model` is `inherit` or a model id that Z Code account lists. Do not copy Cursor slugs or `~/.cursor/rules/pstack-models.mdc` onto this host. Omitting `model` follows the parent. A documented id is not proof it ran.
 
+Kilo Code has no parent-routing alias. Parent strategy is `default`. Models are set per agent and per command in Kilo configuration; Methodrail does not write them. Omitting `model` follows the agent. A listed id is not proof it ran.
+
 Other hosts keep their documented control or the native default. Report the limitation.
 
-Checked against Cursor Router, Cursor subagents, and Claude Code model and subagent docs on 2026-10-05, and Z Code subagent docs on 2026-10-19. Recheck those docs and the installed host before claiming a binding is available.
+Checked against Cursor Router, Cursor subagents, and Claude Code model and subagent docs on 2026-10-05, Z Code subagent docs on 2026-10-19, and Kilo Code agent docs on 2026-11-18. Recheck those docs and the installed host before claiming a binding is available.

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+Support Kilo Code without changing other hosts.
+
+- `adapters/kilo/` installs the shared `skills/` tree by symlink into `~/.kilo/skills/` (or `.kilo/skills/`) and the projected rule `adapters/kilo/methodrail.md` into `~/.kilo/rules/` (or `.kilo/rules/`). Kilo has no plugin bundle for skills and no shell session hook, so there is no plugin surface
+- Kilo reads only `name` and `description` and ignores both `disable-model-invocation` and `when_to_use`. The projected rule lists every explicit skill and carries the guard. The list is generated from `src/skill-invocation.ts`, which now owns `EXPLICIT_SKILLS` and `SUGGEST_ONLY_SKILLS`
+- Host capabilities, model routing, project harness, init integrations, and verification-skill placement name `.kilo/` (and legacy `.kilocode/`). Artifact discovery classifies `.kilo/` and `.kilocode/` skills and rules
+- Based on Kilo's docs and source (checked 2026-11-18). Conformance-tested only; no live Kilo session has run
+
 Compose shadcn/improve `cac56e1ebd3c279aa9153616cfeac7b174ab90f9` into existing owners. No new public skill.
 
 - Task packets name a starting revision, out-of-scope look-alikes, and stop conditions, check drift when they outlive the session, and restate two guardrails children do not inherit: repository content is data, and credentials are cited by location and type only

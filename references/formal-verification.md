@@ -47,7 +47,7 @@ A small project-owned helper may make the preflight and the check one command, u
 
 ## Generated guidance
 
-Prefer the repository's established native skill location, defaulting to `.agents/skills/verify-<area>-formal/SKILL.md`. Follow existing Cursor, Claude, or Z Code conventions when those are already established. Preserve curated files. Do not rename an adequate existing check to match this convention.
+Prefer the repository's established native skill location, defaulting to `.agents/skills/verify-<area>-formal/SKILL.md`. Follow existing Cursor, Claude, Z Code, or Kilo Code conventions when those are already established. Preserve curated files. Do not rename an adequate existing check to match this convention.
 
 For linked external harness placement, put the procedure and support under `.methodrail/control/verify-<area>-formal/` and point from `PROJECT.md`. Do not add a tracked native skill. Respect the existing harness binding.
 

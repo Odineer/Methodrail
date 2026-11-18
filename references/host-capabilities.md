@@ -4,7 +4,7 @@ Imported skills should degrade when a host lacks an optional facility. Do not pr
 
 ## Portable
 
-Methodology that needs only read/write, search, and command execution. Usable in Cursor, Claude Code, Codex, Z Code, and other Agent Skills hosts.
+Methodology that needs only read/write, search, and command execution. Usable in Cursor, Claude Code, Codex, Z Code, Kilo Code, and other Agent Skills hosts.
 
 ## Optional facilities
 
@@ -84,6 +84,21 @@ Claude Code loads this repository as a plugin through `.claude-plugin/plugin.jso
 | Session ledger | Cursor hook only (`hooks/cursor.json`). |
 
 Symlinked skills resolve shared links such as `../../references/<file>` next to the skill root. Link every skill, plus `references/` and `templates/`, into the same parent as the `skills/` root; a partial set breaks workflow composition and those links. The plugin install keeps that layout without extra links.
+
+## Kilo Code
+
+Kilo Code (the 7.x extension and the Kilo CLI it bundles) loads symlinked skill directories from `~/.kilo/skills/` or project `.kilo/skills/`. It also scans `.agents/skills/` and `.claude/skills/` at project and user level, so install into one root only. There is no plugin bundle and no shell hook; the projected rule `adapters/kilo/methodrail.md` goes in `~/.kilo/rules/` or `.kilo/rules/`. Instruction files are the first of `AGENTS.md`, `CLAUDE.md`, or `CONTEXT.md`, plus every rules-folder file. See [the Kilo adapter](../adapters/kilo/README.md).
+
+| Cursor | Kilo Code |
+| --- | --- |
+| Task tool, cloud agents | The `task` tool with built-in `general` and `explore` subagents. A subagent cannot ask the user. Without it, do the slice in this context. |
+| AskQuestion | The `question` tool when the client offers it; otherwise ask in the conversation. |
+| Browser / CDP | Repository CLI, tests, or headless harness. Record the gap. |
+| Model ids and `~/.cursor/rules/pstack-models.mdc` | Ignore them. Use the agent's configured model or omit `model`. |
+| `disable-model-invocation` | Ignored, and so is `when_to_use`; Kilo reads only `name` and `description`. The projected rule lists every explicit skill and carries the guard. |
+| Skill names | Every skill is also `/<name>`. A name that collides with a Kilo command becomes `/<name>:skill`. |
+| Shared files | Reading `../../references/<file>` outside the project asks for `external_directory` permission. |
+| Session ledger | Cursor hook only (`hooks/cursor.json`). |
 
 ## Cursor
 

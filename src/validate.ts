@@ -4,9 +4,12 @@ import { pathToFileURL } from "node:url";
 import { parse } from "yaml";
 import { REQUIRED_COMPOSITION_FIXTURES } from "./eval/load.js";
 import { hostProjections, readCanonicalInvariant } from "./family-invariant.js";
+import { EXPLICIT_SKILLS, SUGGEST_ONLY_SKILLS } from "./skill-invocation.js";
 import { walkFiles } from "./fs-walk.js";
 import { evaluateRepositoryKnowledge } from "./knowledge/report.js";
 import { evaluateProjectMd, evaluateProjectMdFile } from "./project-md.js";
+
+export { EXPLICIT_SKILLS, SUGGEST_ONLY_SKILLS };
 
 export interface ValidationIssue {
   path: string;
@@ -78,46 +81,11 @@ export const WORKFLOW_SKILLS = [
   "maintain-project",
 ] as const;
 
-export const SUGGEST_ONLY_SKILLS = ["interrogate"] as const;
-
 // Cursor ships a first-party skill named `review` (its Bugbot/Security
 // dispatcher); a shipped skill with that name is shadowed there and
 // unreachable via `/review`, so the review workflow is `methodrail-review`.
 export const HOST_RESERVED_SKILL_NAMES = new Set(["review"]);
 
-export const EXPLICIT_SKILLS = new Set([
-  "methodrail-init",
-  "investigate",
-  "develop",
-  "debug",
-  "simplify",
-  "methodrail-review",
-  "prototype",
-  "grill-with-docs",
-  "wayfinder",
-  "architect",
-  "improve-codebase-architecture",
-  "interrogate",
-  "arena",
-  "swarm",
-  "to-spec",
-  "to-tickets",
-  "runtime-forensics",
-  "trace-forensics",
-  "performance",
-  "hillclimb",
-  "visual-parity",
-  "create-verification-skill",
-  "maintain-verification-skill",
-  "create-formal-verification-skill",
-  "maintain-formal-verification-skill",
-  "ketchup",
-  "show-me-your-work",
-  "reflect",
-  "handoff",
-  "refresh-model-routing",
-  "maintain-project",
-]);
 const REQUIRED_REFERENCES = [
   "references/rigor.md",
   "references/decision-frontier.md",
