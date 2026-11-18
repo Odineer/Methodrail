@@ -21,6 +21,12 @@ Make the Z Code install first-class without changing other hosts.
 - `skills/writing-for-agents/SKILL-MECHANICS.md` documents `when_to_use` as portable trigger text for the existing invocation choice, not a second mechanism
 - Z Code adapter docs record the no-plugin-commands decision (Z Code already routes `/<skill-name>` to skills), the POSIX hook limitation (fails open on Windows), and that Z Code fit is conformance-tested, not behavior-validated
 
+Grade `runtime-bug` only on its declared session contract.
+
+- The fixture's `landingPath` now declares `expiresAt` as an ISO-8601 string or epoch milliseconds. Before, the fixture never said how a session stores expiry, and the grader also required a `{ expired: true }` flag and ISO strings, so recorded outcomes depended on which format a run guessed
+- The grader passes a fix that sends `{}` to `/login` and handles at least one declared format both ways (past → `/login`, future → `/dashboard`). The flag-only constructed baseline still fails
+- Rescored: the four live Claude Code `runtime-bug` pairs are now neutral (were helped in r1, incomplete in r2). Cursor and Codex `runtime-bug` scores are unchanged, and v0.9 pilot fixtures are unaffected
+
 Make the Claude Code install first-class without changing other hosts.
 
 - Claude Code plugin surface: `.claude-plugin/plugin.json` loads the default `skills/` tree, and `.claude-plugin/marketplace.json` catalogs it. Plugin skills are namespaced `methodrail:<name>`

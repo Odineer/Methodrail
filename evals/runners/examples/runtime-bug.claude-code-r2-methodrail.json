@@ -51,8 +51,8 @@
   ],
   "outcome": "Fixed: expired sessions now go to `/login` instead of the dashboard. The fix is confirmed against a direct reproduction and a new regression test, not a running app. There is no app here to start.",
   "failure_modes": [
-    "ISO-string expiresAt treated as invalid: a valid 2099 ISO session is sent to /login",
-    "the agent's own tests only used numeric timestamps, so they did not catch it"
+    "accepts only numeric epoch-ms expiresAt, so a valid ISO-string session goes to /login; the fixture did not declare the format when this ran",
+    "the agent's own tests only used numeric timestamps, so they did not cover ISO strings"
   ],
   "behaviors_observed": [
     "use project verification for reproduction",

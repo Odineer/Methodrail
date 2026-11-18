@@ -37,7 +37,6 @@
   ],
   "outcome": "Expired sessions now go to `/login` instead of the dashboard. I checked this by running the function before and after the fix, but not through the full app, because there isn't one to run.",
   "failure_modes": [
-    "session.expired flag ignored: {token, expired: true} still lands on /dashboard",
     "no regression test added to the repo; repro script written outside the working copy"
   ],
   "behaviors_observed": [

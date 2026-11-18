@@ -159,24 +159,19 @@ test("simple-change: Claude Code stays inspect-edit-check in both repeats; compa
   }
 });
 
-test("runtime-bug: Claude Code is mixed across repeats and never composes the required leaf skills", () => {
+test("runtime-bug: Claude Code outcomes are neutral in both repeats and never compose the required leaf skills", () => {
   const expected = loadExpectationFile(join(root, "evals/fixtures/runtime-bug/expected.yaml"));
 
-  const r1 = compareScores(
-    scoreRun(claudeCode("runtime-bug", 1, "baseline"), expected, ctx),
-    scoreRun(claudeCode("runtime-bug", 1, "methodrail"), expected, ctx),
-  );
-  assert.equal(r1.empirical, "helped");
-  assert.equal(r1.baseline.passed, false);
-  assert.equal(r1.methodrail.passed, true);
-
-  const r2 = compareScores(
-    scoreRun(claudeCode("runtime-bug", 2, "baseline"), expected, ctx),
-    scoreRun(claudeCode("runtime-bug", 2, "methodrail"), expected, ctx),
-  );
-  assert.equal(r2.baseline.passed, false);
-  assert.equal(r2.methodrail.passed, false);
-  assert.equal(r2.empirical, "incomplete");
+  // These runs predate the fixture's declared expiresAt format; each fix handles one declared format.
+  for (const repeat of [1, 2]) {
+    const report = compareScores(
+      scoreRun(claudeCode("runtime-bug", repeat, "baseline"), expected, ctx),
+      scoreRun(claudeCode("runtime-bug", repeat, "methodrail"), expected, ctx),
+    );
+    assert.equal(report.baseline.passed, true);
+    assert.equal(report.methodrail.passed, true);
+    assert.equal(report.empirical, "neutral");
+  }
 
   for (const repeat of [1, 2]) {
     const methodrail = scoreRun(claudeCode("runtime-bug", repeat, "methodrail"), expected, ctx);

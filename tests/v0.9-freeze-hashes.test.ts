@@ -10,7 +10,8 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const FROZEN = [
   // v0.10 dispatches workflow fixtures before the unchanged v0.9 grader map.
   // The architecture-deepening brief also accepts /simplify, the renamed /refactor; recorded scores are unchanged.
-  ["src/eval/grade-outcome.ts", "d2b76bc5005aedc0ef0c85ec98b9b4d730b413e4760d0f2a91663000f511286c"],
+  // runtime-bug grades only the fixture's declared expiresAt formats; v0.9 pilot fixtures are unaffected.
+  ["src/eval/grade-outcome.ts", "b10fea1dd4e95a4494ba985aaa09b91289232e101fc441e28353f49e3af00a2b"],
   ["evals/release-policy.yaml", "6284bf5c651f91fe93efc79bfe6a23b985521c3f1075e58d8445b2d765b0a765"],
   ["evals/pilot-v0.9-project-artifact-interoperability.yaml", "c5c52983bc2b1786108ca6edc7c75f4f40de86db80a58c9870c228438451c2c3"],
   ["evals/fixtures/decision-ladder/task.md", "f39430740932809fcdc78c434cdadc4a3180f667b3543baaf18f895327ee9c6e"],
