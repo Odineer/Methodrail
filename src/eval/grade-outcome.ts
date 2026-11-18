@@ -127,20 +127,31 @@ function gradeRuntimeBug(run: EvalRun, ctx: EvalContext): OutcomeGrade {
   if (!overlay) return incompleteGrade("runtime-bug requires an overlay/patch artifact");
   return withWorktree(fixtureDir(ctx, "runtime-bug"), overlay, (root) => {
     const file = join(root, "repo/src/session.js");
+    // Grade only the fixture's declared contract: `expiresAt` as an ISO string or epoch milliseconds.
+    // Live runs recorded before that declaration had to guess one format, so either one passes.
     const driver = `
       import { landingPath } from ${JSON.stringify(file)};
-      const cases = [
-        [{}, "/login"],
-        [{ token: "x", expired: true }, "/login"],
-        [{ token: "x", expiresAt: "2000-01-01T00:00:00.000Z" }, "/login"],
-        [{ token: "x", expiresAt: "2099-01-01T00:00:00.000Z" }, "/dashboard"],
-      ];
-      let failed = [];
-      for (const [session, expected] of cases) {
-        const actual = landingPath(session);
-        if (actual !== expected) failed.push(JSON.stringify({ session, expected, actual }));
-      }
-      if (failed.length) {
+      const past = Date.parse("2000-01-01T00:00:00.000Z");
+      const future = Date.parse("2099-01-01T00:00:00.000Z");
+      const formats = {
+        iso: (ms) => new Date(ms).toISOString(),
+        epochMs: (ms) => ms,
+      };
+      const failed = [];
+      const anonymous = landingPath({});
+      if (anonymous !== "/login") failed.push(JSON.stringify({ session: {}, expected: "/login", actual: anonymous }));
+      const handled = Object.entries(formats).filter(([name, format]) => {
+        const cases = [
+          [{ token: "x", expiresAt: format(past) }, "/login"],
+          [{ token: "x", expiresAt: format(future) }, "/dashboard"],
+        ];
+        const misses = cases
+          .map(([session, expected]) => ({ session, expected, actual: landingPath(session) }))
+          .filter((c) => c.actual !== c.expected);
+        if (misses.length) failed.push(name + ": " + misses.map((m) => JSON.stringify(m)).join("; "));
+        return misses.length === 0;
+      });
+      if (anonymous !== "/login" || handled.length === 0) {
         console.error(failed.join("\\n"));
         process.exit(1);
       }
